@@ -45,7 +45,22 @@
         .cta-section { padding: 100px 0; text-align: center; }
         .cta-section h2 { font-size: 2.5rem; margin-bottom: 20px; }
         .cta-section p { color: var(--text-secondary); font-size: 1.125rem; max-width: 600px; margin: 0 auto 40px; }
+        .hero-content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-image { position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); }
+        .hero-image img { width: 100%; height: 400px; object-fit: cover; display: block; }
+        .hero-image-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); }
+        .hero-image-overlay span { color: #818cf8; font-size: 0.875rem; font-weight: 500; }
+        .showcase-section { padding: 100px 0; background: var(--bg-secondary); }
+        .showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+        .showcase-item { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3; cursor: pointer; }
+        .showcase-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .showcase-item:hover img { transform: scale(1.05); }
+        .showcase-item-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); }
+        .showcase-item-overlay h4 { color: #fff; font-size: 1rem; margin-bottom: 4px; }
+        .showcase-item-overlay p { color: rgba(255,255,255,0.7); font-size: 0.875rem; margin: 0; }
+        @media (max-width: 968px) { .hero-content-wrapper { grid-template-columns: 1fr; } .hero-image { order: -1; } .showcase-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .industry-hero h1 { font-size: 2.25rem; } .hero-stats { flex-direction: column; gap: 24px; } .solutions-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { .showcase-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -61,17 +76,27 @@
     <main>
         <section class="industry-hero">
             <div class="container">
-                <span class="industry-badge"><span>☁️</span> SaaS Development</span>
-                <h1>Build <span class="gradient-text">Scalable SaaS Products</span> That Grow</h1>
-                <p class="lead">From MVP to enterprise scale. We build multi-tenant platforms, subscription billing, and cloud-native applications that power recurring revenue businesses.</p>
-                <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
-                    <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
-                    <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="hero-stat"><div class="hero-stat-value">$1.5T</div><div class="hero-stat-label">Subscription economy by 2025</div></div>
-                    <div class="hero-stat"><div class="hero-stat-value">75%</div><div class="hero-stat-label">Choose SaaS over on-prem</div></div>
-                    <div class="hero-stat"><div class="hero-stat-value">99.9%</div><div class="hero-stat-label">Uptime SLA architecture</div></div>
+                <div class="hero-content-wrapper">
+                    <div class="hero-text">
+                        <span class="industry-badge"><span>☁️</span> SaaS Development</span>
+                        <h1>Build <span class="gradient-text">Scalable SaaS Products</span> That Grow</h1>
+                        <p class="lead">From MVP to enterprise scale. We build multi-tenant platforms, subscription billing, and cloud-native applications that power recurring revenue businesses.</p>
+                        <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                            <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat"><div class="hero-stat-value">$1.5T</div><div class="hero-stat-label">Subscription economy by 2025</div></div>
+                            <div class="hero-stat"><div class="hero-stat-value">75%</div><div class="hero-stat-label">Choose SaaS over on-prem</div></div>
+                            <div class="hero-stat"><div class="hero-stat-value">99.9%</div><div class="hero-stat-label">Uptime SLA architecture</div></div>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="SaaS dashboard analytics platform">
+                        <div class="hero-image-overlay">
+                            <span>SaaS Analytics Dashboard</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -189,6 +214,60 @@
                     <div class="usecase-card"><h3><span>📝</span> Project Management App</h3><p>Team collaboration platform with tasks, timelines, file sharing, and integrations.</p><span class="usecase-tag">Productivity SaaS</span></div>
                     <div class="usecase-card"><h3><span>🏪</span> Vertical SaaS MVP</h3><p>Industry-specific SaaS for niche markets - from dental practice management to restaurant ops.</p><span class="usecase-tag">Vertical SaaS</span></div>
                     <div class="usecase-card"><h3><span>🔄</span> Integration Platform</h3><p>iPaaS connecting business apps with workflow automation and data sync capabilities.</p><span class="usecase-tag">Platform SaaS</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="showcase-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Work</span>
+                    <h2>SaaS <span class="gradient-text">Project Showcase</span></h2>
+                    <p>Scalable software-as-a-service platforms we've built for growing businesses.</p>
+                </div>
+                <div class="showcase-grid">
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Business analytics dashboard">
+                        <div class="showcase-item-overlay">
+                            <h4>BI Analytics Platform</h4>
+                            <p>Multi-tenant data visualization</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80" alt="Project management tool">
+                        <div class="showcase-item-overlay">
+                            <h4>Project Management SaaS</h4>
+                            <p>Team collaboration platform</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=600&q=80" alt="Email marketing platform">
+                        <div class="showcase-item-overlay">
+                            <h4>Email Marketing Tool</h4>
+                            <p>Campaign automation system</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=600&q=80" alt="CRM system interface">
+                        <div class="showcase-item-overlay">
+                            <h4>CRM Platform</h4>
+                            <p>Sales pipeline management</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80" alt="Subscription billing dashboard">
+                        <div class="showcase-item-overlay">
+                            <h4>Billing Platform</h4>
+                            <p>Subscription management</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Help desk software">
+                        <div class="showcase-item-overlay">
+                            <h4>Help Desk SaaS</h4>
+                            <p>Customer support ticketing</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

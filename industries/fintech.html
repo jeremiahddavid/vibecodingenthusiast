@@ -26,6 +26,97 @@
             background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
             border-radius: 50%;
         }
+        .hero-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .hero-image {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+        .hero-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        .hero-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+        }
+        .hero-image-overlay span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        .hero-image-overlay p {
+            margin: 4px 0 0;
+            font-weight: 600;
+        }
+
+        .showcase-section {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .showcase-item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .showcase-item:hover img {
+            transform: scale(1.05);
+        }
+        .showcase-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 50%, rgba(0,0,0,0.85));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            color: white;
+        }
+        .showcase-item-overlay h4 {
+            font-size: 1.125rem;
+            margin-bottom: 4px;
+        }
+        .showcase-item-overlay p {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 968px) {
+            .hero-content-wrapper { grid-template-columns: 1fr; }
+            .hero-image { margin-top: 40px; }
+            .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .showcase-grid { grid-template-columns: 1fr; }
+        }
         .industry-badge {
             display: inline-flex;
             align-items: center;
@@ -276,27 +367,38 @@
         <!-- Hero -->
         <section class="industry-hero">
             <div class="container">
-                <span class="industry-badge">
-                    <span>💳</span> FinTech Solutions
-                </span>
-                <h1>Build the Future of <span class="gradient-text">Financial Technology</span></h1>
-                <p class="lead">From digital banking and payment processing to AI-powered fraud detection and blockchain solutions. We help FinTech startups and financial institutions build secure, compliant, and scalable software.</p>
-                <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
-                    <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
-                    <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <div class="hero-stat-value">$15T+</div>
-                        <div class="hero-stat-label">Digital payments by 2027</div>
+                <div class="hero-content-wrapper">
+                    <div class="hero-text">
+                        <span class="industry-badge">
+                            <span>💳</span> FinTech Solutions
+                        </span>
+                        <h1>Build the Future of <span class="gradient-text">Financial Technology</span></h1>
+                        <p class="lead">From digital banking and payment processing to AI-powered fraud detection and blockchain solutions. We help FinTech startups and financial institutions build secure, compliant, and scalable software.</p>
+                        <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                            <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">$15T+</div>
+                                <div class="hero-stat-label">Digital payments by 2027</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">75%</div>
+                                <div class="hero-stat-label">Banks investing in AI</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">PCI-DSS</div>
+                                <div class="hero-stat-label">Compliant solutions</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-value">75%</div>
-                        <div class="hero-stat-label">Banks investing in AI</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-value">PCI-DSS</div>
-                        <div class="hero-stat-label">Compliant solutions</div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80" alt="Mobile banking app interface showing financial dashboard">
+                        <div class="hero-image-overlay">
+                            <span>Featured Project</span>
+                            <p>Digital Banking Platform</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -468,6 +570,61 @@
                         <h3><span>📊</span> Investment Dashboard</h3>
                         <p>Robo-advisory platform with risk profiling, automated portfolio rebalancing, tax-loss harvesting, and performance reporting.</p>
                         <span class="usecase-tag">Web App + AI</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Showcase -->
+        <section class="showcase-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Work</span>
+                    <h2>FinTech Projects <span class="gradient-text">We've Delivered</span></h2>
+                    <p>Real solutions built for financial institutions and startups worldwide.</p>
+                </div>
+                <div class="showcase-grid">
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Financial analytics dashboard with charts and metrics">
+                        <div class="showcase-item-overlay">
+                            <h4>Trading Analytics Platform</h4>
+                            <p>Real-time market data visualization</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Business analytics on laptop screen">
+                        <div class="showcase-item-overlay">
+                            <h4>Investment Portfolio Manager</h4>
+                            <p>Robo-advisory wealth management</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="Person using mobile payment app">
+                        <div class="showcase-item-overlay">
+                            <h4>P2P Payment Application</h4>
+                            <p>Instant transfers & QR payments</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=600&q=80" alt="Cryptocurrency trading interface">
+                        <div class="showcase-item-overlay">
+                            <h4>Crypto Exchange Platform</h4>
+                            <p>Multi-asset trading solution</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80" alt="Financial documents and calculator">
+                        <div class="showcase-item-overlay">
+                            <h4>Loan Origination System</h4>
+                            <p>Automated credit decisioning</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=600&q=80" alt="Team working on financial software">
+                        <div class="showcase-item-overlay">
+                            <h4>Banking-as-a-Service API</h4>
+                            <p>White-label banking infrastructure</p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -12,6 +12,22 @@
     <style>
         .industry-hero { padding: 160px 0 100px; background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, transparent 50%); position: relative; overflow: hidden; }
         .industry-hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%); border-radius: 50%; }
+        .hero-content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-image { position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); }
+        .hero-image img { width: 100%; height: 400px; object-fit: cover; display: block; }
+        .hero-image-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; }
+        .hero-image-overlay span { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .hero-image-overlay p { margin: 4px 0 0; font-weight: 600; }
+        .showcase-section { padding: 100px 0; }
+        .showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+        .showcase-item { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3; }
+        .showcase-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .showcase-item:hover img { transform: scale(1.05); }
+        .showcase-item-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 50%, rgba(0,0,0,0.85)); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; color: white; }
+        .showcase-item-overlay h4 { font-size: 1.125rem; margin-bottom: 4px; }
+        .showcase-item-overlay p { font-size: 0.875rem; opacity: 0.8; }
+        @media (max-width: 968px) { .hero-content-wrapper { grid-template-columns: 1fr; } .hero-image { margin-top: 40px; } .showcase-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .showcase-grid { grid-template-columns: 1fr; } }
         .industry-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); padding: 8px 16px; border-radius: 50px; font-size: 0.875rem; color: #a855f7; margin-bottom: 24px; }
         .industry-hero h1 { font-size: 3.5rem; margin-bottom: 24px; max-width: 800px; }
         .industry-hero .lead { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin-bottom: 40px; }
@@ -61,17 +77,28 @@
     <main>
         <section class="industry-hero">
             <div class="container">
-                <span class="industry-badge"><span>🏠</span> PropTech Solutions</span>
-                <h1>Transform Real Estate with <span class="gradient-text">Smart Technology</span></h1>
-                <p class="lead">From property management systems and real estate CRMs to AI-powered valuation tools and virtual tour platforms. We help real estate companies modernize operations and close more deals.</p>
-                <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
-                    <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
-                    <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="hero-stat"><div class="hero-stat-value">$75B</div><div class="hero-stat-label">PropTech market by 2029</div></div>
-                    <div class="hero-stat"><div class="hero-stat-value">75%</div><div class="hero-stat-label">Efficiency improvement</div></div>
-                    <div class="hero-stat"><div class="hero-stat-value">AI-Driven</div><div class="hero-stat-label">Pricing optimization</div></div>
+                <div class="hero-content-wrapper">
+                    <div class="hero-text">
+                        <span class="industry-badge"><span>🏠</span> PropTech Solutions</span>
+                        <h1>Transform Real Estate with <span class="gradient-text">Smart Technology</span></h1>
+                        <p class="lead">From property management systems and real estate CRMs to AI-powered valuation tools and virtual tour platforms. We help real estate companies modernize operations and close more deals.</p>
+                        <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                            <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat"><div class="hero-stat-value">$75B</div><div class="hero-stat-label">PropTech market by 2029</div></div>
+                            <div class="hero-stat"><div class="hero-stat-value">75%</div><div class="hero-stat-label">Efficiency improvement</div></div>
+                            <div class="hero-stat"><div class="hero-stat-value">AI-Driven</div><div class="hero-stat-label">Pricing optimization</div></div>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="Modern real estate property listing platform">
+                        <div class="hero-image-overlay">
+                            <span>Featured Project</span>
+                            <p>Property Listing Platform</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -189,6 +216,60 @@
                     <div class="usecase-card"><h3><span>📊</span> Investment Analysis Tool</h3><p>Real estate investment platform with deal analysis, ROI projections, and portfolio tracking.</p><span class="usecase-tag">Analytics Platform</span></div>
                     <div class="usecase-card"><h3><span>🏨</span> Vacation Rental Platform</h3><p>Airbnb-style marketplace with dynamic pricing, booking management, and guest communication.</p><span class="usecase-tag">Marketplace</span></div>
                     <div class="usecase-card"><h3><span>🎯</span> Agent Productivity App</h3><p>Mobile app for agents with CRM, showing scheduler, and transaction tracking on the go.</p><span class="usecase-tag">Mobile App</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="showcase-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Work</span>
+                    <h2>Real Estate <span class="gradient-text">Project Showcase</span></h2>
+                    <p>Property technology platforms and solutions we've delivered.</p>
+                </div>
+                <div class="showcase-grid">
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80" alt="Property listing platform">
+                        <div class="showcase-item-overlay">
+                            <h4>Property Search Portal</h4>
+                            <p>MLS-integrated listings</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=600&q=80" alt="Real estate CRM">
+                        <div class="showcase-item-overlay">
+                            <h4>Agent CRM Platform</h4>
+                            <p>Lead & deal management</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Virtual home tour">
+                        <div class="showcase-item-overlay">
+                            <h4>3D Virtual Tours</h4>
+                            <p>Immersive property viewing</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="Commercial property dashboard">
+                        <div class="showcase-item-overlay">
+                            <h4>Commercial RE Platform</h4>
+                            <p>Investment analytics</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&q=80" alt="Property management system">
+                        <div class="showcase-item-overlay">
+                            <h4>Property Management</h4>
+                            <p>Multi-tenant operations</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Rental marketplace app">
+                        <div class="showcase-item-overlay">
+                            <h4>Vacation Rental App</h4>
+                            <p>Booking marketplace</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

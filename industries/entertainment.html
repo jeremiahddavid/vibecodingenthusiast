@@ -241,11 +241,26 @@
             margin: 0 auto 40px;
         }
 
+        .hero-content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-image { position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); }
+        .hero-image img { width: 100%; height: 400px; object-fit: cover; display: block; }
+        .hero-image-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); }
+        .hero-image-overlay span { color: #a855f7; font-size: 0.875rem; font-weight: 500; }
+        .showcase-section { padding: 100px 0; }
+        .showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+        .showcase-item { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3; cursor: pointer; }
+        .showcase-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .showcase-item:hover img { transform: scale(1.05); }
+        .showcase-item-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); }
+        .showcase-item-overlay h4 { color: #fff; font-size: 1rem; margin-bottom: 4px; }
+        .showcase-item-overlay p { color: rgba(255,255,255,0.7); font-size: 0.875rem; margin: 0; }
+        @media (max-width: 968px) { .hero-content-wrapper { grid-template-columns: 1fr; } .hero-image { order: -1; } .showcase-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
             .industry-hero h1 { font-size: 2.25rem; }
             .hero-stats { flex-direction: column; gap: 24px; }
             .solutions-grid { grid-template-columns: 1fr; }
         }
+        @media (max-width: 640px) { .showcase-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -276,27 +291,37 @@
         <!-- Hero -->
         <section class="industry-hero">
             <div class="container">
-                <span class="industry-badge">
-                    <span>🎬</span> Entertainment & Media
-                </span>
-                <h1>Power the Future of <span class="gradient-text">Digital Entertainment</span></h1>
-                <p class="lead">From OTT streaming platforms and gaming backends to AI-powered recommendations and content management. We help entertainment companies build engaging digital experiences that captivate millions of users.</p>
-                <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
-                    <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
-                    <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <div class="hero-stat-value">$500B+</div>
-                        <div class="hero-stat-label">Global streaming market by 2027</div>
+                <div class="hero-content-wrapper">
+                    <div class="hero-text">
+                        <span class="industry-badge">
+                            <span>🎬</span> Entertainment & Media
+                        </span>
+                        <h1>Power the Future of <span class="gradient-text">Digital Entertainment</span></h1>
+                        <p class="lead">From OTT streaming platforms and gaming backends to AI-powered recommendations and content management. We help entertainment companies build engaging digital experiences that captivate millions of users.</p>
+                        <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                            <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">$500B+</div>
+                                <div class="hero-stat-label">Global streaming market by 2027</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">80%</div>
+                                <div class="hero-stat-label">Content discovered via AI</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">4K/HDR</div>
+                                <div class="hero-stat-label">Premium streaming quality</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-value">80%</div>
-                        <div class="hero-stat-label">Content discovered via AI</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-value">4K/HDR</div>
-                        <div class="hero-stat-label">Premium streaming quality</div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=800&q=80" alt="Streaming platform interface">
+                        <div class="hero-image-overlay">
+                            <span>OTT Streaming Platform</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -468,6 +493,61 @@
                         <h3><span>📖</span> Digital Comics Platform</h3>
                         <p>Interactive comics reader with panel-by-panel navigation, guided view, offline reading, and creator monetization through subscriptions and tips.</p>
                         <span class="usecase-tag">Digital Publishing</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Showcase -->
+        <section class="showcase-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Work</span>
+                    <h2>Entertainment <span class="gradient-text">Project Showcase</span></h2>
+                    <p>Media and entertainment platforms we've built for global audiences.</p>
+                </div>
+                <div class="showcase-grid">
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=600&q=80" alt="Video streaming service">
+                        <div class="showcase-item-overlay">
+                            <h4>Video Streaming App</h4>
+                            <p>Multi-device OTT platform</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80" alt="Music streaming platform">
+                        <div class="showcase-item-overlay">
+                            <h4>Music Streaming Service</h4>
+                            <p>AI-curated playlists</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80" alt="Gaming platform">
+                        <div class="showcase-item-overlay">
+                            <h4>Gaming Backend</h4>
+                            <p>Multiplayer infrastructure</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=600&q=80" alt="Live sports streaming">
+                        <div class="showcase-item-overlay">
+                            <h4>Live Sports Platform</h4>
+                            <p>Low-latency streaming</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&q=80" alt="Podcast platform">
+                        <div class="showcase-item-overlay">
+                            <h4>Podcast Network</h4>
+                            <p>Creator monetization</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&q=80" alt="Content recommendation engine">
+                        <div class="showcase-item-overlay">
+                            <h4>Recommendation Engine</h4>
+                            <p>ML-powered discovery</p>
+                        </div>
                     </div>
                 </div>
             </div>

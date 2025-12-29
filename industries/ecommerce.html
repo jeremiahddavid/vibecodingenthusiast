@@ -12,6 +12,22 @@
     <style>
         .industry-hero { padding: 160px 0 100px; background: linear-gradient(135deg, rgba(251, 146, 60, 0.1) 0%, transparent 50%); position: relative; overflow: hidden; }
         .industry-hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(251, 146, 60, 0.15) 0%, transparent 70%); border-radius: 50%; }
+        .hero-content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-image { position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); }
+        .hero-image img { width: 100%; height: 400px; object-fit: cover; display: block; }
+        .hero-image-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; }
+        .hero-image-overlay span { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .hero-image-overlay p { margin: 4px 0 0; font-weight: 600; }
+        .showcase-section { padding: 100px 0; }
+        .showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+        .showcase-item { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3; }
+        .showcase-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .showcase-item:hover img { transform: scale(1.05); }
+        .showcase-item-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 50%, rgba(0,0,0,0.85)); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; color: white; }
+        .showcase-item-overlay h4 { font-size: 1.125rem; margin-bottom: 4px; }
+        .showcase-item-overlay p { font-size: 0.875rem; opacity: 0.8; }
+        @media (max-width: 968px) { .hero-content-wrapper { grid-template-columns: 1fr; } .hero-image { margin-top: 40px; } .showcase-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .showcase-grid { grid-template-columns: 1fr; } }
         .industry-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(251, 146, 60, 0.1); border: 1px solid rgba(251, 146, 60, 0.3); padding: 8px 16px; border-radius: 50px; font-size: 0.875rem; color: #fb923c; margin-bottom: 24px; }
         .industry-hero h1 { font-size: 3.5rem; margin-bottom: 24px; max-width: 800px; }
         .industry-hero .lead { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin-bottom: 40px; }
@@ -67,17 +83,28 @@
     <main>
         <section class="industry-hero">
             <div class="container">
-                <span class="industry-badge"><span>🛒</span> E-commerce Solutions</span>
-                <h1>Build <span class="gradient-text">E-commerce Experiences</span> That Convert</h1>
-                <p class="lead">From custom online stores and B2B marketplaces to inventory management and omnichannel solutions. We help retailers and brands sell more with technology.</p>
-                <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
-                    <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
-                    <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="hero-stat"><div class="hero-stat-value">$6.3T</div><div class="hero-stat-label">Global e-commerce by 2026</div></div>
-                    <div class="hero-stat"><div class="hero-stat-value">73%</div><div class="hero-stat-label">Cloud-based solutions</div></div>
-                    <div class="hero-stat"><div class="hero-stat-value">8%</div><div class="hero-stat-label">Avg. freight savings with TMS</div></div>
+                <div class="hero-content-wrapper">
+                    <div class="hero-text">
+                        <span class="industry-badge"><span>🛒</span> E-commerce Solutions</span>
+                        <h1>Build <span class="gradient-text">E-commerce Experiences</span> That Convert</h1>
+                        <p class="lead">From custom online stores and B2B marketplaces to inventory management and omnichannel solutions. We help retailers and brands sell more with technology.</p>
+                        <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                            <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat"><div class="hero-stat-value">$6.3T</div><div class="hero-stat-label">Global e-commerce by 2026</div></div>
+                            <div class="hero-stat"><div class="hero-stat-value">73%</div><div class="hero-stat-label">Mobile shoppers</div></div>
+                            <div class="hero-stat"><div class="hero-stat-value">15%</div><div class="hero-stat-label">Conversion boost</div></div>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="Person shopping on mobile e-commerce app">
+                        <div class="hero-image-overlay">
+                            <span>Featured Project</span>
+                            <p>Mobile Commerce Platform</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -195,6 +222,61 @@
                     <div class="usecase-card"><h3><span>🍔</span> Food Delivery Platform</h3><p>Multi-restaurant marketplace with real-time ordering, driver tracking, and kitchen display systems.</p><span class="usecase-tag">Marketplace</span></div>
                     <div class="usecase-card"><h3><span>📱</span> Mobile Commerce App</h3><p>Native iOS/Android shopping app with push notifications, Apple Pay, and AR product preview.</p><span class="usecase-tag">Mobile App</span></div>
                     <div class="usecase-card"><h3><span>🔄</span> Subscription Box Platform</h3><p>Subscription commerce with customizable boxes, billing management, and churn prediction.</p><span class="usecase-tag">Subscription Commerce</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Showcase -->
+        <section class="showcase-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Work</span>
+                    <h2>E-commerce Projects <span class="gradient-text">We've Delivered</span></h2>
+                    <p>Real solutions built for retailers and brands worldwide.</p>
+                </div>
+                <div class="showcase-grid">
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=600&q=80" alt="Modern fashion e-commerce store">
+                        <div class="showcase-item-overlay">
+                            <h4>Fashion Marketplace</h4>
+                            <p>Multi-vendor platform</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80" alt="Mobile shopping app interface">
+                        <div class="showcase-item-overlay">
+                            <h4>Mobile Commerce App</h4>
+                            <p>iOS & Android native</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1586880244406-556ebe35f282?w=600&q=80" alt="Warehouse inventory management">
+                        <div class="showcase-item-overlay">
+                            <h4>Inventory Management</h4>
+                            <p>Real-time stock sync</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Analytics dashboard showing sales data">
+                        <div class="showcase-item-overlay">
+                            <h4>Sales Analytics</h4>
+                            <p>AI-powered insights</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80" alt="Online shopping checkout process">
+                        <div class="showcase-item-overlay">
+                            <h4>Checkout Optimization</h4>
+                            <p>28% conversion boost</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80" alt="Retail store with POS system">
+                        <div class="showcase-item-overlay">
+                            <h4>Omnichannel POS</h4>
+                            <p>Unified retail experience</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

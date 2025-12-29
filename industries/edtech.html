@@ -12,6 +12,22 @@
     <style>
         .industry-hero { padding: 160px 0 100px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 50%); position: relative; overflow: hidden; }
         .industry-hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%); border-radius: 50%; }
+        .hero-content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-image { position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); }
+        .hero-image img { width: 100%; height: 400px; object-fit: cover; display: block; }
+        .hero-image-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; }
+        .hero-image-overlay span { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .hero-image-overlay p { margin: 4px 0 0; font-weight: 600; }
+        .showcase-section { padding: 100px 0; }
+        .showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+        .showcase-item { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3; }
+        .showcase-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .showcase-item:hover img { transform: scale(1.05); }
+        .showcase-item-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 50%, rgba(0,0,0,0.85)); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; color: white; }
+        .showcase-item-overlay h4 { font-size: 1.125rem; margin-bottom: 4px; }
+        .showcase-item-overlay p { font-size: 0.875rem; opacity: 0.8; }
+        @media (max-width: 968px) { .hero-content-wrapper { grid-template-columns: 1fr; } .hero-image { margin-top: 40px; } .showcase-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .showcase-grid { grid-template-columns: 1fr; } }
         .industry-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 8px 16px; border-radius: 50px; font-size: 0.875rem; color: #3b82f6; margin-bottom: 24px; }
         .industry-hero h1 { font-size: 3.5rem; margin-bottom: 24px; max-width: 800px; }
         .industry-hero .lead { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin-bottom: 40px; }
@@ -61,17 +77,28 @@
     <main>
         <section class="industry-hero">
             <div class="container">
-                <span class="industry-badge"><span>📚</span> EdTech Solutions</span>
-                <h1>Build the Future of <span class="gradient-text">Digital Learning</span></h1>
-                <p class="lead">From learning management systems and online course platforms to AI tutors and virtual classrooms. We help education companies and institutions transform learning experiences.</p>
-                <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
-                    <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
-                    <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="hero-stat"><div class="hero-stat-value">$400B+</div><div class="hero-stat-label">EdTech market by 2028</div></div>
-                    <div class="hero-stat"><div class="hero-stat-value">SCORM/xAPI</div><div class="hero-stat-label">Compliant content</div></div>
-                    <div class="hero-stat"><div class="hero-stat-value">AI-Powered</div><div class="hero-stat-label">Personalized learning</div></div>
+                <div class="hero-content-wrapper">
+                    <div class="hero-text">
+                        <span class="industry-badge"><span>📚</span> EdTech Solutions</span>
+                        <h1>Build the Future of <span class="gradient-text">Digital Learning</span></h1>
+                        <p class="lead">From learning management systems and online course platforms to AI tutors and virtual classrooms. We help education companies and institutions transform learning experiences.</p>
+                        <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                            <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat"><div class="hero-stat-value">$400B+</div><div class="hero-stat-label">EdTech market by 2028</div></div>
+                            <div class="hero-stat"><div class="hero-stat-value">SCORM/xAPI</div><div class="hero-stat-label">Compliant content</div></div>
+                            <div class="hero-stat"><div class="hero-stat-value">AI-Powered</div><div class="hero-stat-label">Personalized learning</div></div>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80" alt="Student learning on laptop with online course">
+                        <div class="hero-image-overlay">
+                            <span>Featured Project</span>
+                            <p>Learning Management System</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -189,6 +216,60 @@
                     <div class="usecase-card"><h3><span>🧮</span> STEM Learning Platform</h3><p>Interactive coding and math platform with live code execution, visualizations, and project-based learning.</p><span class="usecase-tag">Interactive Platform</span></div>
                     <div class="usecase-card"><h3><span>📜</span> Certification Platform</h3><p>Professional certification with proctored exams, digital badges, and credential verification.</p><span class="usecase-tag">Assessment Platform</span></div>
                     <div class="usecase-card"><h3><span>👶</span> Early Childhood App</h3><p>Engaging educational games for children with parent dashboards and age-appropriate content.</p><span class="usecase-tag">Kids App</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="showcase-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Work</span>
+                    <h2>EdTech <span class="gradient-text">Project Showcase</span></h2>
+                    <p>Real-world educational platforms and learning applications we've built.</p>
+                </div>
+                <div class="showcase-grid">
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80" alt="Collaborative learning platform">
+                        <div class="showcase-item-overlay">
+                            <h4>Group Learning Platform</h4>
+                            <p>Collaborative virtual classrooms</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?w=600&q=80" alt="Online course interface">
+                        <div class="showcase-item-overlay">
+                            <h4>Course Management LMS</h4>
+                            <p>Interactive video lessons</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80" alt="E-learning dashboard">
+                        <div class="showcase-item-overlay">
+                            <h4>Student Analytics Dashboard</h4>
+                            <p>Progress tracking system</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80" alt="Kids educational app">
+                        <div class="showcase-item-overlay">
+                            <h4>Kids Learning App</h4>
+                            <p>Gamified education for children</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80" alt="Exam preparation platform">
+                        <div class="showcase-item-overlay">
+                            <h4>Exam Prep Platform</h4>
+                            <p>Adaptive testing system</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=600&q=80" alt="Corporate training portal">
+                        <div class="showcase-item-overlay">
+                            <h4>Corporate Training Portal</h4>
+                            <p>Enterprise learning management</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
