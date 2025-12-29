@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service | Vibe Coding Enthusiast</title>
     <meta name="description" content="Terms of Service for Vibe Coding Enthusiast - Read the terms and conditions for using our services.">
-    <link rel="canonical" href="https://vibecodingenthusiast.com/terms">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/terms.html">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <style>
         .legal-page {
-            padding: 120px 0 80px;
-            min-height: 100vh;
+            padding: 140px 0 80px;
+            min-height: 70vh;
         }
         .legal-content {
             max-width: 800px;
@@ -43,28 +43,35 @@
         .legal-content a {
             color: var(--accent-primary);
         }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            transition: color 0.2s ease;
-        }
-        .back-link:hover {
-            color: var(--accent-primary);
-        }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#industries">Industries</a></li>
+                <li><a href="/#process">Process</a></li>
+                <li><a href="/#work">Work</a></li>
+                <li><a href="/#pricing">Pricing</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-primary">Start Project</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
     <main class="legal-page">
         <div class="container">
             <div class="legal-content">
-                <a href="/" class="back-link">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                    Back to Home
-                </a>
-
                 <h1>Terms of Service</h1>
                 <p class="last-updated">Last updated: December 29, 2025</p>
 
@@ -119,6 +126,64 @@
             </div>
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+                    </a>
+                    <p>Transforming ideas into powerful software. Senior developers, modern tech stack, global delivery.</p>
+                    <div class="footer-badges">
+                        <span class="badge">⭐ 4.9 Rating</span>
+                        <span class="badge">🌍 Worldwide</span>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/#services">Web Development</a></li>
+                        <li><a href="/#services">Mobile Apps</a></li>
+                        <li><a href="/#services">AI & Automation</a></li>
+                        <li><a href="/#services">Blockchain</a></li>
+                        <li><a href="/#services">MVP Development</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/#process">How We Work</a></li>
+                        <li><a href="/#work">Case Studies</a></li>
+                        <li><a href="/#pricing">Pricing</a></li>
+                        <li><a href="/#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Industries</h4>
+                    <ul>
+                        <li><a href="/#industries">FinTech</a></li>
+                        <li><a href="/#industries">HealthTech</a></li>
+                        <li><a href="/#industries">E-commerce</a></li>
+                        <li><a href="/#industries">SaaS</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vibe Coding Enthusiast. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <a href="/terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
