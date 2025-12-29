@@ -14,6 +14,10 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://vibecodingenthusiast.com/">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://vibecodingenthusiast.com/">
@@ -1080,7 +1084,12 @@
                         </div>
                     </div>
 
-                    <form class="contact-form" id="project-form">
+                    <form class="contact-form" id="project-form" action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="7c316080-04e3-4d5d-b3c9-1b80a0fa8743">
+                        <input type="hidden" name="subject" value="New Project Request - Vibe Coding Enthusiast">
+                        <input type="hidden" name="from_name" value="VibeCodingEnthusiast.com">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Your Name <span class="required">*</span></label>
@@ -1215,10 +1224,10 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2024 Vibe Coding Enthusiast. All rights reserved.</p>
+                <p>&copy; 2025 Vibe Coding Enthusiast. All rights reserved.</p>
                 <div class="footer-legal">
-                    <a href="/privacy">Privacy Policy</a>
-                    <a href="/terms">Terms of Service</a>
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <a href="/terms.html">Terms of Service</a>
                 </div>
             </div>
         </div>

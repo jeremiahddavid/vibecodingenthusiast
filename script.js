@@ -291,31 +291,31 @@ function initFormHandling() {
 
         // Collect form data
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
 
-        // Simulate form submission (replace with actual endpoint)
-        setTimeout(() => {
-            showNotification('success', 'Project request submitted! We\'ll get back to you within 24 hours.');
-            form.reset();
+        // Submit to Web3Forms
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                showNotification('success', 'Project request submitted! We\'ll get back to you within 24 hours.');
+                form.reset();
+            } else {
+                showNotification('error', 'Something went wrong. Please try again or email us directly.');
+                console.error('Form error:', result);
+            }
+        })
+        .catch(error => {
+            showNotification('error', 'Network error. Please check your connection and try again.');
+            console.error('Submit error:', error);
+        })
+        .finally(() => {
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
-
-            // Scroll to top of form
             form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-            // Log data (for development)
-            console.log('Form submitted:', data);
-        }, 1500);
-
-        // For actual implementation:
-        // fetch('/api/submit', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(data)
-        // })
-        // .then(response => response.json())
-        // .then(result => { ... })
-        // .catch(error => { ... });
+        });
     });
 }
 
