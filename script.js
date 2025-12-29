@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
     initCounterAnimations();
     initFAQAccordion();
+    initConsultationBooking();
 });
 
 // ===================================
@@ -739,5 +740,374 @@ function copyToClipboard(text) {
         document.execCommand('copy');
         document.body.removeChild(textarea);
         showNotification('success', 'Copied to clipboard!');
+    }
+}
+
+// ===================================
+// Consultation Booking System
+// ===================================
+
+// Booking state
+const bookingState = {
+    tier: null,
+    tierName: null,
+    duration: null,
+    price: null,
+    calBookingId: null,
+    scheduledTime: null,
+    attendeeName: null,
+    attendeeEmail: null
+};
+
+// Cal.com configuration - UPDATE THESE WITH YOUR ACTUAL VALUES
+const CAL_CONFIG = {
+    username: 'YOUR_CAL_USERNAME', // Replace with your Cal.com username
+    eventTypes: {
+        quick: 'quick-call',       // 10 min event slug
+        standard: 'strategy-session', // 30 min event slug
+        deep: 'deep-dive'          // 60 min event slug
+    },
+    theme: 'dark',
+    brandColor: '#6366f1'
+};
+
+// Slot hold timer
+let slotHoldTimer = null;
+
+function initConsultationBooking() {
+    const consultationSection = document.getElementById('consultation');
+    if (!consultationSection) return;
+
+    // Initialize tier selection buttons
+    document.querySelectorAll('.select-tier-btn').forEach(btn => {
+        btn.addEventListener('click', handleTierSelection);
+    });
+
+    // Initialize back buttons
+    document.querySelectorAll('.back-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const targetStep = parseInt(e.currentTarget.dataset.target);
+            goToStep(targetStep);
+        });
+    });
+
+    // Preload Cal.com script
+    loadCalEmbed();
+}
+
+function handleTierSelection(e) {
+    const card = e.currentTarget.closest('.tier-card');
+
+    // Update booking state
+    bookingState.tier = card.dataset.tier;
+    bookingState.tierName = card.querySelector('h3').textContent;
+    bookingState.duration = parseInt(card.dataset.duration);
+    bookingState.price = parseInt(card.dataset.price);
+
+    // Update visual selection
+    document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+
+    // Update calendar header badge
+    document.getElementById('selected-tier-name').textContent = bookingState.tierName;
+    document.getElementById('selected-tier-price').textContent = `$${bookingState.price}`;
+
+    // Update payment summary
+    document.getElementById('summary-tier').textContent = bookingState.tierName;
+    document.getElementById('summary-duration').textContent = `${bookingState.duration} minutes`;
+    document.getElementById('summary-total').textContent = `$${bookingState.price}`;
+
+    // Load Cal.com embed for selected tier
+    renderCalEmbed(bookingState.tier);
+
+    // Move to calendar step
+    goToStep(2);
+}
+
+function goToStep(stepNumber) {
+    // Hide all steps
+    document.querySelectorAll('.booking-step').forEach(step => {
+        step.classList.add('hidden');
+    });
+
+    // Show target step
+    const targetStep = document.querySelector(`.booking-step[data-step="${stepNumber}"]`);
+    if (targetStep) {
+        targetStep.classList.remove('hidden');
+    }
+
+    // Update progress indicators
+    document.querySelectorAll('.progress-step').forEach((step) => {
+        const stepNum = parseInt(step.dataset.step);
+        step.classList.remove('active', 'completed');
+
+        if (stepNum < stepNumber) {
+            step.classList.add('completed');
+        } else if (stepNum === stepNumber) {
+            step.classList.add('active');
+        }
+    });
+
+    // Update progress lines
+    const progressLines = document.querySelectorAll('.progress-line');
+    progressLines.forEach((line, index) => {
+        if (index < stepNumber - 1) {
+            line.classList.add('completed');
+        } else {
+            line.classList.remove('completed');
+        }
+    });
+
+    // Scroll to consultation section
+    document.getElementById('consultation').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+}
+
+// ===================================
+// Cal.com Integration
+// ===================================
+
+function loadCalEmbed() {
+    return new Promise((resolve, reject) => {
+        if (window.Cal) {
+            resolve();
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = 'https://app.cal.com/embed/embed.js';
+        script.async = true;
+        script.onload = () => {
+            // Initialize Cal with namespace
+            if (window.Cal) {
+                Cal('init', 'consultation', {
+                    origin: 'https://app.cal.com'
+                });
+            }
+            resolve();
+        };
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
+function renderCalEmbed(tier) {
+    const container = document.getElementById('cal-embed-container');
+    const eventType = CAL_CONFIG.eventTypes[tier];
+
+    // Show loading state
+    container.innerHTML = `
+        <div class="cal-loading">
+            <div class="loading-spinner"></div>
+            <p>Loading available times...</p>
+        </div>
+    `;
+
+    // Wait for Cal to be loaded
+    loadCalEmbed().then(() => {
+        if (!window.Cal) {
+            container.innerHTML = `
+                <div class="cal-loading">
+                    <p>Unable to load calendar. Please refresh the page.</p>
+                </div>
+            `;
+            return;
+        }
+
+        // Clear container
+        container.innerHTML = '';
+
+        // Create embed target
+        const embedDiv = document.createElement('div');
+        embedDiv.id = 'cal-inline-embed';
+        embedDiv.style.width = '100%';
+        embedDiv.style.height = '100%';
+        embedDiv.style.minHeight = '500px';
+        container.appendChild(embedDiv);
+
+        // Initialize the inline embed
+        Cal.ns.consultation('inline', {
+            elementOrSelector: '#cal-inline-embed',
+            calLink: `${CAL_CONFIG.username}/${eventType}`,
+            config: {
+                theme: CAL_CONFIG.theme,
+                styles: {
+                    branding: {
+                        brandColor: CAL_CONFIG.brandColor
+                    }
+                }
+            }
+        });
+
+        // Listen for booking completion
+        Cal.ns.consultation('on', {
+            action: 'bookingSuccessful',
+            callback: (e) => {
+                handleCalBookingComplete(e.detail);
+            }
+        });
+    }).catch(() => {
+        container.innerHTML = `
+            <div class="cal-loading">
+                <p>Calendar unavailable. Please <a href="#contact">contact us directly</a>.</p>
+            </div>
+        `;
+    });
+}
+
+function handleCalBookingComplete(bookingData) {
+    // Store booking data
+    bookingState.calBookingId = bookingData.uid || 'pending';
+    bookingState.scheduledTime = bookingData.startTime;
+    bookingState.attendeeName = bookingData.attendees?.[0]?.name || '';
+    bookingState.attendeeEmail = bookingData.attendees?.[0]?.email || '';
+
+    // Format and display date/time
+    if (bookingData.startTime) {
+        const datetime = new Date(bookingData.startTime);
+        const formattedDate = datetime.toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit'
+        });
+        document.getElementById('summary-datetime').textContent = formattedDate;
+    }
+
+    // Move to payment step
+    goToStep(3);
+
+    // Start slot hold timer (15 minutes)
+    startSlotHoldTimer();
+
+    // Initialize Razorpay button for this tier
+    initRazorpayButton();
+}
+
+// ===================================
+// Razorpay Integration
+// ===================================
+
+function initRazorpayButton() {
+    const container = document.getElementById('razorpay-button-container');
+
+    // Clear existing content
+    container.innerHTML = '';
+
+    // Create a pay button
+    const payBtn = document.createElement('button');
+    payBtn.className = 'btn btn-primary btn-lg btn-block';
+    payBtn.innerHTML = `
+        <span>Pay $${bookingState.price}</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+    `;
+    payBtn.addEventListener('click', handlePayment);
+    container.appendChild(payBtn);
+
+    // Add note about Razorpay setup
+    const setupNote = document.createElement('p');
+    setupNote.style.cssText = 'text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 12px;';
+    setupNote.innerHTML = `
+        <strong>Note:</strong> Configure your Razorpay Payment Button ID in the code to enable payments.
+    `;
+    container.appendChild(setupNote);
+}
+
+function handlePayment() {
+    // For now, simulate payment success for demo purposes
+    // In production, you would integrate Razorpay Payment Button here
+
+    // Show loading state
+    const payBtn = document.querySelector('#razorpay-button-container .btn');
+    const originalContent = payBtn.innerHTML;
+    payBtn.innerHTML = '<span class="loading-spinner"></span> Processing...';
+    payBtn.disabled = true;
+
+    // Simulate payment processing
+    setTimeout(() => {
+        // In production, this would be called by Razorpay's success callback
+        handlePaymentSuccess({
+            razorpay_payment_id: 'demo_' + Date.now()
+        });
+    }, 2000);
+}
+
+function handlePaymentSuccess(response) {
+    // Clear slot hold timer
+    clearSlotHoldTimer();
+
+    // Update confirmation details
+    document.getElementById('confirm-tier').textContent = bookingState.tierName;
+    document.getElementById('confirm-datetime').textContent =
+        document.getElementById('summary-datetime').textContent;
+    document.getElementById('confirm-payment-id').textContent =
+        response.razorpay_payment_id.substring(0, 15) + '...';
+
+    // Send confirmation email via Web3Forms
+    sendConfirmationEmail(response.razorpay_payment_id);
+
+    // Move to confirmation step
+    goToStep(4);
+
+    // Show success notification
+    showNotification('success', 'Booking confirmed! Check your email for details.');
+}
+
+// ===================================
+// Email & Timer Utilities
+// ===================================
+
+async function sendConfirmationEmail(paymentId) {
+    const formData = new FormData();
+    formData.append('access_key', '7c316080-04e3-4d5d-b3c9-1b80a0fa8743');
+    formData.append('subject', `Consultation Booking Confirmed - ${bookingState.tierName}`);
+    formData.append('from_name', 'VibeCodingEnthusiast.com');
+
+    formData.append('message', `
+New Consultation Booking!
+
+Customer: ${bookingState.attendeeName}
+Email: ${bookingState.attendeeEmail}
+Consultation: ${bookingState.tierName}
+Duration: ${bookingState.duration} minutes
+Date & Time: ${document.getElementById('summary-datetime').textContent}
+Amount Paid: $${bookingState.price}
+Payment ID: ${paymentId}
+
+The customer will receive a calendar invite with the meeting link.
+    `);
+
+    try {
+        await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData
+        });
+    } catch (error) {
+        console.error('Email sending failed:', error);
+        // Non-blocking - booking is still confirmed
+    }
+}
+
+function startSlotHoldTimer() {
+    const HOLD_DURATION = 15 * 60 * 1000; // 15 minutes
+
+    clearSlotHoldTimer();
+
+    slotHoldTimer = setTimeout(() => {
+        showNotification('error', 'Your time slot hold has expired. Please select a new time.');
+        goToStep(2);
+    }, HOLD_DURATION);
+}
+
+function clearSlotHoldTimer() {
+    if (slotHoldTimer) {
+        clearTimeout(slotHoldTimer);
+        slotHoldTimer = null;
     }
 }
