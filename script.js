@@ -192,7 +192,7 @@ function initHeaderScroll() {
 // Service Category Filters
 // ===================================
 function initServiceFilters() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
+    const filterBtns = document.querySelectorAll('.category-tab');
     const serviceCards = document.querySelectorAll('.service-card');
 
     if (!filterBtns.length || !serviceCards.length) return;

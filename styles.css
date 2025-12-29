@@ -769,33 +769,50 @@ ul, ol {
 
 .industries-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
 }
 
 .industry-card {
     display: block;
-    padding: 28px;
     background: var(--bg-card);
     border: 1px solid var(--border-primary);
     border-radius: var(--radius-lg);
     transition: all var(--transition-base);
     text-decoration: none;
     color: inherit;
+    overflow: hidden;
 }
 
 .industry-card:hover {
     border-color: var(--border-accent);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
 }
 
 .industry-card:hover .industry-link {
     color: var(--accent-primary);
 }
 
-.industry-icon {
-    font-size: 2.5rem;
-    margin-bottom: 16px;
+.industry-card:hover .industry-image img {
+    transform: scale(1.05);
+}
+
+.industry-image {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+}
+
+.industry-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.industry-content {
+    padding: 24px;
 }
 
 .industry-card h3 {
@@ -921,20 +938,19 @@ ul, ol {
 
 .case-image {
     position: relative;
+    overflow: hidden;
 }
 
-.case-placeholder {
-    aspect-ratio: 16/9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem;
+.case-image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
 }
 
-.gradient-1 { background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(168, 85, 247, 0.2) 100%); }
-.gradient-2 { background: linear-gradient(135deg, rgba(6, 182, 212, 0.3) 0%, rgba(99, 102, 241, 0.2) 100%); }
-.gradient-3 { background: linear-gradient(135deg, rgba(244, 114, 182, 0.3) 0%, rgba(168, 85, 247, 0.2) 100%); }
-.gradient-4 { background: linear-gradient(135deg, rgba(251, 191, 36, 0.3) 0%, rgba(244, 114, 182, 0.2) 100%); }
+.case-study:hover .case-image img {
+    transform: scale(1.05);
+}
 
 .case-category {
     position: absolute;
@@ -1052,13 +1068,9 @@ ul, ol {
 .author-avatar {
     width: 48px;
     height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--gradient-primary);
     border-radius: 50%;
-    font-size: 0.9rem;
-    font-weight: 600;
+    object-fit: cover;
+    border: 2px solid var(--border-accent);
 }
 
 .author-info {
