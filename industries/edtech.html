@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdTech Software Development | LMS, Online Learning & Educational Apps | Vibe Coding Enthusiast</title>
+    <meta name="description" content="Custom EdTech development services. We build learning management systems, online course platforms, educational apps, and AI-powered tutoring solutions.">
+    <meta name="keywords" content="edtech development, LMS, learning management system, online learning, e-learning platform, educational app, virtual classroom">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/industries/edtech.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .industry-hero { padding: 160px 0 100px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 50%); position: relative; overflow: hidden; }
+        .industry-hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%); border-radius: 50%; }
+        .industry-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 8px 16px; border-radius: 50px; font-size: 0.875rem; color: #3b82f6; margin-bottom: 24px; }
+        .industry-hero h1 { font-size: 3.5rem; margin-bottom: 24px; max-width: 800px; }
+        .industry-hero .lead { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin-bottom: 40px; }
+        .hero-stats { display: flex; gap: 48px; margin-top: 48px; }
+        .hero-stat { text-align: left; }
+        .hero-stat-value { font-size: 2.5rem; font-weight: 700; color: #3b82f6; }
+        .hero-stat-label { color: var(--text-muted); font-size: 0.875rem; }
+        .challenges-section { padding: 100px 0; }
+        .challenges-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 48px; }
+        .challenge-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; }
+        .challenge-card .icon { width: 48px; height: 48px; background: rgba(59, 130, 246, 0.1); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
+        .challenge-card h3 { font-size: 1.25rem; margin-bottom: 12px; }
+        .challenge-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        .solutions-section { padding: 100px 0; background: var(--bg-secondary); }
+        .solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px; margin-top: 48px; }
+        .solution-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 40px; transition: all 0.3s ease; }
+        .solution-card:hover { border-color: #3b82f6; transform: translateY(-4px); }
+        .solution-card .icon { width: 56px; height: 56px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(129, 140, 248, 0.2)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.75rem; margin-bottom: 24px; }
+        .solution-card h3 { font-size: 1.375rem; margin-bottom: 16px; }
+        .solution-card p { color: var(--text-secondary); margin-bottom: 24px; line-height: 1.7; }
+        .solution-features { list-style: none; padding: 0; margin: 0; }
+        .solution-features li { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; color: var(--text-secondary); font-size: 0.9rem; }
+        .solution-features li::before { content: '✓'; color: #3b82f6; font-weight: 600; }
+        .usecases-section { padding: 100px 0; }
+        .usecases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 48px; }
+        .usecase-card { background: linear-gradient(135deg, var(--bg-card), transparent); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; display: flex; flex-direction: column; }
+        .usecase-card h3 { font-size: 1.125rem; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+        .usecase-card h3 span { font-size: 1.5rem; }
+        .usecase-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; flex: 1; }
+        .usecase-tag { display: inline-block; background: rgba(129, 140, 248, 0.1); color: var(--accent-primary); padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; margin-top: 16px; }
+        .cta-section { padding: 100px 0; text-align: center; }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .cta-section p { color: var(--text-secondary); font-size: 1.125rem; max-width: 600px; margin: 0 auto 40px; }
+        @media (max-width: 768px) { .industry-hero h1 { font-size: 2.25rem; } .hero-stats { flex-direction: column; gap: 24px; } .solutions-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span></a>
+            <ul class="nav-links"><li><a href="/#services">Services</a></li><li><a href="/#industries">Industries</a></li><li><a href="/#process">Process</a></li><li><a href="/#work">Work</a></li><li><a href="/#pricing">Pricing</a></li></ul>
+            <div class="nav-actions"><a href="/#contact" class="btn btn-primary">Start Project</a></div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="industry-hero">
+            <div class="container">
+                <span class="industry-badge"><span>📚</span> EdTech Solutions</span>
+                <h1>Build the Future of <span class="gradient-text">Digital Learning</span></h1>
+                <p class="lead">From learning management systems and online course platforms to AI tutors and virtual classrooms. We help education companies and institutions transform learning experiences.</p>
+                <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                    <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat"><div class="hero-stat-value">$400B+</div><div class="hero-stat-label">EdTech market by 2028</div></div>
+                    <div class="hero-stat"><div class="hero-stat-value">SCORM/xAPI</div><div class="hero-stat-label">Compliant content</div></div>
+                    <div class="hero-stat"><div class="hero-stat-value">AI-Powered</div><div class="hero-stat-label">Personalized learning</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="challenges-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Industry Challenges</span>
+                    <h2>Problems We Solve for <span class="gradient-text">Education Companies</span></h2>
+                </div>
+                <div class="challenges-grid">
+                    <div class="challenge-card"><div class="icon">👥</div><h3>Learner Engagement</h3><p>Course completion rates average just 5-15% for online courses. Keeping learners motivated is the #1 challenge in EdTech.</p></div>
+                    <div class="challenge-card"><div class="icon">🎯</div><h3>Personalized Learning</h3><p>One-size-fits-all doesn't work. Students need adaptive content that matches their pace, style, and knowledge gaps.</p></div>
+                    <div class="challenge-card"><div class="icon">📊</div><h3>Progress Tracking</h3><p>Instructors need visibility into student progress. Analytics and reporting are often inadequate or hard to use.</p></div>
+                    <div class="challenge-card"><div class="icon">📱</div><h3>Multi-Device Access</h3><p>Learners expect seamless experiences across desktop, tablet, and mobile with offline access for on-the-go learning.</p></div>
+                    <div class="challenge-card"><div class="icon">🔌</div><h3>System Integration</h3><p>Connecting with SIS, HR systems, video platforms, and existing LMS infrastructure requires careful integration.</p></div>
+                    <div class="challenge-card"><div class="icon">♿</div><h3>Accessibility</h3><p>WCAG compliance, closed captions, screen reader support - accessibility is both a legal requirement and ethical imperative.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="solutions-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Solutions</span>
+                    <h2>EdTech Software <span class="gradient-text">We Build</span></h2>
+                </div>
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <div class="icon">🎓</div>
+                        <h3>Learning Management Systems</h3>
+                        <p>Custom LMS platforms for schools, corporations, and course creators with complete learning lifecycle management.</p>
+                        <ul class="solution-features">
+                            <li>Course creation & management</li>
+                            <li>User roles & permissions</li>
+                            <li>Progress tracking & certificates</li>
+                            <li>SCORM/xAPI/LTI compliance</li>
+                            <li>Gamification & badges</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">💻</div>
+                        <h3>Online Course Platforms</h3>
+                        <p>Marketplaces and platforms for selling courses with creator tools and student experiences.</p>
+                        <ul class="solution-features">
+                            <li>Course marketplace with payments</li>
+                            <li>Video hosting & streaming</li>
+                            <li>Drip content & scheduling</li>
+                            <li>Community & discussions</li>
+                            <li>Creator analytics & payouts</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📹</div>
+                        <h3>Virtual Classrooms</h3>
+                        <p>Real-time learning environments with video, collaboration, and interactive features.</p>
+                        <ul class="solution-features">
+                            <li>Live video conferencing</li>
+                            <li>Interactive whiteboard</li>
+                            <li>Screen sharing & recording</li>
+                            <li>Breakout rooms</li>
+                            <li>Hand raising & polls</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">🤖</div>
+                        <h3>AI Tutoring Systems</h3>
+                        <p>Intelligent tutoring with adaptive learning paths, automated feedback, and personalized content.</p>
+                        <ul class="solution-features">
+                            <li>Adaptive learning algorithms</li>
+                            <li>AI-powered Q&A assistants</li>
+                            <li>Automated essay grading</li>
+                            <li>Knowledge gap analysis</li>
+                            <li>Personalized recommendations</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📱</div>
+                        <h3>Educational Mobile Apps</h3>
+                        <p>Native and cross-platform mobile learning apps with offline support and push notifications.</p>
+                        <ul class="solution-features">
+                            <li>iOS & Android native apps</li>
+                            <li>Offline content access</li>
+                            <li>Push notification reminders</li>
+                            <li>Microlearning modules</li>
+                            <li>Spaced repetition systems</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📝</div>
+                        <h3>Assessment & Testing</h3>
+                        <p>Comprehensive assessment platforms with proctoring, question banks, and detailed analytics.</p>
+                        <ul class="solution-features">
+                            <li>Question bank management</li>
+                            <li>Multiple assessment types</li>
+                            <li>AI proctoring & integrity</li>
+                            <li>Certification management</li>
+                            <li>Detailed score analytics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="usecases-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Use Cases</span>
+                    <h2>What We Can <span class="gradient-text">Build For You</span></h2>
+                </div>
+                <div class="usecases-grid">
+                    <div class="usecase-card"><h3><span>🏫</span> K-12 Learning Platform</h3><p>Complete digital learning environment with curriculum management, parent portals, and grade books for school districts.</p><span class="usecase-tag">Full Platform</span></div>
+                    <div class="usecase-card"><h3><span>🎯</span> Corporate Training LMS</h3><p>Employee training platform with compliance tracking, skill assessments, and HR system integration.</p><span class="usecase-tag">Enterprise LMS</span></div>
+                    <div class="usecase-card"><h3><span>🌐</span> Language Learning App</h3><p>Mobile-first language learning with speech recognition, spaced repetition, and gamified progress.</p><span class="usecase-tag">Mobile App + AI</span></div>
+                    <div class="usecase-card"><h3><span>🧮</span> STEM Learning Platform</h3><p>Interactive coding and math platform with live code execution, visualizations, and project-based learning.</p><span class="usecase-tag">Interactive Platform</span></div>
+                    <div class="usecase-card"><h3><span>📜</span> Certification Platform</h3><p>Professional certification with proctored exams, digital badges, and credential verification.</p><span class="usecase-tag">Assessment Platform</span></div>
+                    <div class="usecase-card"><h3><span>👶</span> Early Childhood App</h3><p>Engaging educational games for children with parent dashboards and age-appropriate content.</p><span class="usecase-tag">Kids App</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Build Your <span class="gradient-text">EdTech Solution</span>?</h2>
+                <p>Let's create engaging learning experiences that drive outcomes and delight users.</p>
+                <a href="/#contact" class="btn btn-primary btn-lg">Get Free Consultation</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="/" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span></a><p>Transforming ideas into powerful software.</p></div>
+                <div class="footer-links"><h4>Industries</h4><ul><li><a href="/industries/fintech.html">FinTech</a></li><li><a href="/industries/healthtech.html">HealthTech</a></li><li><a href="/industries/ecommerce.html">E-commerce</a></li><li><a href="/industries/edtech.html">EdTech</a></li></ul></div>
+                <div class="footer-links"><h4>More Industries</h4><ul><li><a href="/industries/realestate.html">Real Estate</a></li><li><a href="/industries/saas.html">SaaS</a></li><li><a href="/industries/logistics.html">Logistics</a></li><li><a href="/industries/entertainment.html">Entertainment</a></li></ul></div>
+                <div class="footer-links"><h4>Company</h4><ul><li><a href="/#services">Services</a></li><li><a href="/#process">Process</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#contact">Contact</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Vibe Coding Enthusiast. All rights reserved.</p><div class="footer-legal"><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div></div>
+        </div>
+    </footer>
+    <script src="/script.js"></script>
+</body>
+</html>

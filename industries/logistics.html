@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistics & Supply Chain Software Development | TMS, Fleet & Warehouse Solutions | Vibe Coding Enthusiast</title>
+    <meta name="description" content="Custom logistics software development services. We build transportation management systems (TMS), fleet tracking, warehouse management (WMS), and supply chain optimization platforms.">
+    <meta name="keywords" content="logistics software, supply chain management, TMS development, fleet management, warehouse management system, route optimization, last-mile delivery">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/industries/logistics.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .industry-hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        .industry-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .industry-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: #f97316;
+            margin-bottom: 24px;
+        }
+        .industry-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+        .industry-hero .lead {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 48px;
+        }
+        .hero-stat {
+            text-align: left;
+        }
+        .hero-stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f97316;
+        }
+        .hero-stat-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .challenges-section {
+            padding: 100px 0;
+        }
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .challenge-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+        }
+        .challenge-card .icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .challenge-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+        .challenge-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .solutions-section {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .solution-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        .solution-card:hover {
+            border-color: #f97316;
+            transform: translateY(-4px);
+        }
+        .solution-card .icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(129, 140, 248, 0.2));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+        }
+        .solution-card h3 {
+            font-size: 1.375rem;
+            margin-bottom: 16px;
+        }
+        .solution-card p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+        .solution-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .solution-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .solution-features li::before {
+            content: '\2713';
+            color: #f97316;
+            font-weight: 600;
+        }
+
+        .usecases-section {
+            padding: 100px 0;
+        }
+        .usecases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .usecase-card {
+            background: linear-gradient(135deg, var(--bg-card), transparent);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+        .usecase-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .usecase-card h3 span {
+            font-size: 1.5rem;
+        }
+        .usecase-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            flex: 1;
+        }
+        .usecase-tag {
+            display: inline-block;
+            background: rgba(129, 140, 248, 0.1);
+            color: var(--accent-primary);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            margin-top: 16px;
+        }
+
+        .tech-stack-section {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+        }
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .tech-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        @media (max-width: 768px) {
+            .industry-hero h1 { font-size: 2.25rem; }
+            .hero-stats { flex-direction: column; gap: 24px; }
+            .solutions-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#industries">Industries</a></li>
+                <li><a href="/#process">Process</a></li>
+                <li><a href="/#work">Work</a></li>
+                <li><a href="/#pricing">Pricing</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-primary">Start Project</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="industry-hero">
+            <div class="container">
+                <span class="industry-badge">
+                    <span>🚚</span> Logistics & Supply Chain
+                </span>
+                <h1>Optimize Your <span class="gradient-text">Supply Chain Operations</span></h1>
+                <p class="lead">From transportation management and fleet tracking to warehouse automation and last-mile delivery. We help logistics companies build intelligent systems that reduce costs, improve visibility, and scale globally.</p>
+                <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                    <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">$12.6B</div>
+                        <div class="hero-stat-label">Logistics software market by 2027</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">30%</div>
+                        <div class="hero-stat-label">Cost reduction with optimization</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">Real-Time</div>
+                        <div class="hero-stat-label">Visibility & tracking</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenges -->
+        <section class="challenges-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Industry Challenges</span>
+                    <h2>Problems We Solve for <span class="gradient-text">Logistics Companies</span></h2>
+                    <p>The logistics industry faces complex operational challenges that require intelligent software solutions.</p>
+                </div>
+                <div class="challenges-grid">
+                    <div class="challenge-card">
+                        <div class="icon">🗺️</div>
+                        <h3>Route Optimization</h3>
+                        <p>Fuel costs account for 30% of operating expenses. Inefficient routing wastes time, money, and increases carbon footprint across the fleet.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">👁️</div>
+                        <h3>Real-Time Visibility</h3>
+                        <p>Customers demand package tracking at every step. Lack of visibility leads to customer complaints, missed deliveries, and support overhead.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">📦</div>
+                        <h3>Inventory Management</h3>
+                        <p>Stockouts cost retailers $1 trillion annually. Balancing inventory across multiple warehouses while minimizing carrying costs is complex.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">🏭</div>
+                        <h3>Warehouse Efficiency</h3>
+                        <p>Manual warehouse operations lead to errors, slow fulfillment, and high labor costs. Picking optimization can improve efficiency by 25%.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">🚛</div>
+                        <h3>Last-Mile Delivery</h3>
+                        <p>Last-mile accounts for 53% of total shipping costs. E-commerce growth has made fast, affordable delivery a competitive necessity.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">🔗</div>
+                        <h3>Supply Chain Disruptions</h3>
+                        <p>Global disruptions require agile response. Companies need real-time supplier data, alternative routing, and demand forecasting to adapt quickly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions -->
+        <section class="solutions-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Solutions</span>
+                    <h2>Logistics Software <span class="gradient-text">We Build</span></h2>
+                    <p>End-to-end supply chain solutions that connect your entire operation from supplier to customer.</p>
+                </div>
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <div class="icon">🚚</div>
+                        <h3>Transportation Management (TMS)</h3>
+                        <p>Comprehensive TMS platforms that optimize shipping operations, reduce costs, and improve carrier performance.</p>
+                        <ul class="solution-features">
+                            <li>Multi-modal shipment planning</li>
+                            <li>Carrier rate management & bidding</li>
+                            <li>Load optimization & consolidation</li>
+                            <li>Freight audit & payment automation</li>
+                            <li>Dock scheduling & yard management</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📍</div>
+                        <h3>Fleet Management & Tracking</h3>
+                        <p>Real-time fleet visibility with GPS tracking, driver management, and predictive maintenance to maximize uptime.</p>
+                        <ul class="solution-features">
+                            <li>Real-time GPS tracking & geofencing</li>
+                            <li>Driver behavior monitoring</li>
+                            <li>Fuel management & reporting</li>
+                            <li>Vehicle maintenance scheduling</li>
+                            <li>ELD compliance & HOS tracking</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">🏢</div>
+                        <h3>Warehouse Management (WMS)</h3>
+                        <p>Automate warehouse operations with intelligent WMS that optimizes space, labor, and inventory accuracy.</p>
+                        <ul class="solution-features">
+                            <li>Inventory tracking & cycle counting</li>
+                            <li>Pick/pack/ship optimization</li>
+                            <li>Barcode & RFID integration</li>
+                            <li>Slotting optimization</li>
+                            <li>Returns processing (RMA)</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">🗺️</div>
+                        <h3>Route Optimization</h3>
+                        <p>AI-powered routing that reduces fuel costs, improves delivery times, and handles dynamic constraints.</p>
+                        <ul class="solution-features">
+                            <li>Multi-stop route optimization</li>
+                            <li>Real-time traffic integration</li>
+                            <li>Time window & capacity constraints</li>
+                            <li>Dynamic re-routing</li>
+                            <li>Proof of delivery capture</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📱</div>
+                        <h3>Last-Mile Delivery Platform</h3>
+                        <p>Complete last-mile solutions from dispatch to doorstep with customer communication and driver apps.</p>
+                        <ul class="solution-features">
+                            <li>Delivery dispatch & assignment</li>
+                            <li>Driver mobile application</li>
+                            <li>Customer tracking & notifications</li>
+                            <li>Photo/signature capture</li>
+                            <li>Failed delivery management</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📊</div>
+                        <h3>Supply Chain Analytics</h3>
+                        <p>Data-driven insights that predict demand, identify bottlenecks, and optimize your entire supply chain.</p>
+                        <ul class="solution-features">
+                            <li>Demand forecasting with ML</li>
+                            <li>Supplier performance tracking</li>
+                            <li>Cost analysis & optimization</li>
+                            <li>Risk monitoring & alerts</li>
+                            <li>Carbon footprint tracking</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section class="usecases-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Use Cases</span>
+                    <h2>What We Can <span class="gradient-text">Build For You</span></h2>
+                    <p>Real-world logistics applications we've developed for supply chain companies.</p>
+                </div>
+                <div class="usecases-grid">
+                    <div class="usecase-card">
+                        <h3><span>🚛</span> Freight Marketplace</h3>
+                        <p>Digital freight platform connecting shippers with carriers. Load posting, bidding, real-time tracking, and automated payments for the trucking industry.</p>
+                        <span class="usecase-tag">Web + Mobile Platform</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>📦</span> Multi-Warehouse WMS</h3>
+                        <p>Enterprise warehouse system managing 5+ facilities with inventory sync, cross-docking, wave planning, and labor management across locations.</p>
+                        <span class="usecase-tag">Enterprise WMS</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🛵</span> On-Demand Delivery App</h3>
+                        <p>Uber-style delivery platform for local businesses. Customer ordering, driver assignment, real-time tracking, and automated dispatch.</p>
+                        <span class="usecase-tag">Full Stack + Mobile</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🗺️</span> Fleet Route Optimizer</h3>
+                        <p>AI routing engine processing 10,000+ daily stops. Reduced fuel costs 22% and improved on-time delivery by 35% for regional carrier.</p>
+                        <span class="usecase-tag">AI + Optimization</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>📋</span> Supplier Portal</h3>
+                        <p>B2B platform for supplier management. Purchase orders, ASN processing, invoice matching, and supplier scorecards for manufacturing company.</p>
+                        <span class="usecase-tag">B2B Portal</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>📊</span> Control Tower Dashboard</h3>
+                        <p>Real-time supply chain visibility across 200+ carriers and 50 warehouses. Exception management, KPI tracking, and predictive alerts.</p>
+                        <span class="usecase-tag">Analytics Dashboard</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="tech-stack-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Technologies We Use</h2>
+                    <p>Robust tech stack for high-performance logistics systems.</p>
+                </div>
+                <div class="tech-grid">
+                    <span class="tech-item">Node.js</span>
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">Go</span>
+                    <span class="tech-item">React</span>
+                    <span class="tech-item">React Native</span>
+                    <span class="tech-item">Flutter</span>
+                    <span class="tech-item">PostgreSQL</span>
+                    <span class="tech-item">MongoDB</span>
+                    <span class="tech-item">Redis</span>
+                    <span class="tech-item">Kafka</span>
+                    <span class="tech-item">Google Maps API</span>
+                    <span class="tech-item">HERE Maps</span>
+                    <span class="tech-item">AWS</span>
+                    <span class="tech-item">IoT Sensors</span>
+                    <span class="tech-item">TensorFlow</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Optimize Your <span class="gradient-text">Supply Chain</span>?</h2>
+                <p>Let's discuss your logistics challenges and build software that moves your business forward.</p>
+                <a href="/#contact" class="btn btn-primary btn-lg">Get Free Consultation</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+                    </a>
+                    <p>Transforming ideas into powerful software. Senior developers, modern tech stack, global delivery.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Industries</h4>
+                    <ul>
+                        <li><a href="/industries/fintech.html">FinTech</a></li>
+                        <li><a href="/industries/healthtech.html">HealthTech</a></li>
+                        <li><a href="/industries/ecommerce.html">E-commerce</a></li>
+                        <li><a href="/industries/edtech.html">EdTech</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>More Industries</h4>
+                    <ul>
+                        <li><a href="/industries/realestate.html">Real Estate</a></li>
+                        <li><a href="/industries/saas.html">SaaS</a></li>
+                        <li><a href="/industries/logistics.html">Logistics</a></li>
+                        <li><a href="/industries/entertainment.html">Entertainment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/#services">Services</a></li>
+                        <li><a href="/#process">Process</a></li>
+                        <li><a href="/#pricing">Pricing</a></li>
+                        <li><a href="/#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vibe Coding Enthusiast. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <a href="/terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>

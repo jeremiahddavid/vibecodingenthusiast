@@ -774,16 +774,23 @@ ul, ol {
 }
 
 .industry-card {
+    display: block;
     padding: 28px;
     background: var(--bg-card);
     border: 1px solid var(--border-primary);
     border-radius: var(--radius-lg);
     transition: all var(--transition-base);
+    text-decoration: none;
+    color: inherit;
 }
 
 .industry-card:hover {
     border-color: var(--border-accent);
     transform: translateY(-2px);
+}
+
+.industry-card:hover .industry-link {
+    color: var(--accent-primary);
 }
 
 .industry-icon {
@@ -801,6 +808,15 @@ ul, ol {
     font-size: 0.9rem;
     color: var(--text-secondary);
     line-height: 1.6;
+}
+
+.industry-link {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color var(--transition-base);
 }
 
 /* ============================================

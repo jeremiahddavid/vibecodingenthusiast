@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate & PropTech Development | Property Management & CRM | Vibe Coding Enthusiast</title>
+    <meta name="description" content="Custom PropTech software development. We build property management systems, real estate CRMs, listing platforms, and AI-powered valuation tools.">
+    <meta name="keywords" content="proptech development, real estate software, property management, real estate CRM, MLS integration, property valuation">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/industries/realestate.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .industry-hero { padding: 160px 0 100px; background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, transparent 50%); position: relative; overflow: hidden; }
+        .industry-hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%); border-radius: 50%; }
+        .industry-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); padding: 8px 16px; border-radius: 50px; font-size: 0.875rem; color: #a855f7; margin-bottom: 24px; }
+        .industry-hero h1 { font-size: 3.5rem; margin-bottom: 24px; max-width: 800px; }
+        .industry-hero .lead { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin-bottom: 40px; }
+        .hero-stats { display: flex; gap: 48px; margin-top: 48px; }
+        .hero-stat { text-align: left; }
+        .hero-stat-value { font-size: 2.5rem; font-weight: 700; color: #a855f7; }
+        .hero-stat-label { color: var(--text-muted); font-size: 0.875rem; }
+        .challenges-section { padding: 100px 0; }
+        .challenges-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 48px; }
+        .challenge-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; }
+        .challenge-card .icon { width: 48px; height: 48px; background: rgba(168, 85, 247, 0.1); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
+        .challenge-card h3 { font-size: 1.25rem; margin-bottom: 12px; }
+        .challenge-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        .solutions-section { padding: 100px 0; background: var(--bg-secondary); }
+        .solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px; margin-top: 48px; }
+        .solution-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 40px; transition: all 0.3s ease; }
+        .solution-card:hover { border-color: #a855f7; transform: translateY(-4px); }
+        .solution-card .icon { width: 56px; height: 56px; background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(129, 140, 248, 0.2)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.75rem; margin-bottom: 24px; }
+        .solution-card h3 { font-size: 1.375rem; margin-bottom: 16px; }
+        .solution-card p { color: var(--text-secondary); margin-bottom: 24px; line-height: 1.7; }
+        .solution-features { list-style: none; padding: 0; margin: 0; }
+        .solution-features li { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; color: var(--text-secondary); font-size: 0.9rem; }
+        .solution-features li::before { content: '✓'; color: #a855f7; font-weight: 600; }
+        .usecases-section { padding: 100px 0; }
+        .usecases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 48px; }
+        .usecase-card { background: linear-gradient(135deg, var(--bg-card), transparent); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; display: flex; flex-direction: column; }
+        .usecase-card h3 { font-size: 1.125rem; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+        .usecase-card h3 span { font-size: 1.5rem; }
+        .usecase-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; flex: 1; }
+        .usecase-tag { display: inline-block; background: rgba(129, 140, 248, 0.1); color: var(--accent-primary); padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; margin-top: 16px; }
+        .cta-section { padding: 100px 0; text-align: center; }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .cta-section p { color: var(--text-secondary); font-size: 1.125rem; max-width: 600px; margin: 0 auto 40px; }
+        @media (max-width: 768px) { .industry-hero h1 { font-size: 2.25rem; } .hero-stats { flex-direction: column; gap: 24px; } .solutions-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span></a>
+            <ul class="nav-links"><li><a href="/#services">Services</a></li><li><a href="/#industries">Industries</a></li><li><a href="/#process">Process</a></li><li><a href="/#work">Work</a></li><li><a href="/#pricing">Pricing</a></li></ul>
+            <div class="nav-actions"><a href="/#contact" class="btn btn-primary">Start Project</a></div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="industry-hero">
+            <div class="container">
+                <span class="industry-badge"><span>🏠</span> PropTech Solutions</span>
+                <h1>Transform Real Estate with <span class="gradient-text">Smart Technology</span></h1>
+                <p class="lead">From property management systems and real estate CRMs to AI-powered valuation tools and virtual tour platforms. We help real estate companies modernize operations and close more deals.</p>
+                <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                    <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat"><div class="hero-stat-value">$75B</div><div class="hero-stat-label">PropTech market by 2029</div></div>
+                    <div class="hero-stat"><div class="hero-stat-value">75%</div><div class="hero-stat-label">Efficiency improvement</div></div>
+                    <div class="hero-stat"><div class="hero-stat-value">AI-Driven</div><div class="hero-stat-label">Pricing optimization</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="challenges-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Industry Challenges</span>
+                    <h2>Problems We Solve for <span class="gradient-text">Real Estate Companies</span></h2>
+                </div>
+                <div class="challenges-grid">
+                    <div class="challenge-card"><div class="icon">📊</div><h3>Data Fragmentation</h3><p>Property data scattered across MLS, spreadsheets, and multiple systems. No single source of truth for listings and transactions.</p></div>
+                    <div class="challenge-card"><div class="icon">📱</div><h3>Digital Buyer Expectations</h3><p>Buyers expect virtual tours, instant information, and mobile-first experiences. Traditional brokerages struggle to keep up.</p></div>
+                    <div class="challenge-card"><div class="icon">📋</div><h3>Property Management Complexity</h3><p>Managing maintenance, rent collection, tenant communication, and compliance across multiple properties is overwhelming.</p></div>
+                    <div class="challenge-card"><div class="icon">💰</div><h3>Pricing & Valuation</h3><p>Static pricing models leave money on the table. Dynamic pricing can increase rental income by 10-15%.</p></div>
+                    <div class="challenge-card"><div class="icon">🔗</div><h3>Lead Management</h3><p>Agents juggle leads from multiple sources. Without proper CRM, qualified leads fall through the cracks.</p></div>
+                    <div class="challenge-card"><div class="icon">📝</div><h3>Transaction Complexity</h3><p>Real estate transactions involve dozens of documents, multiple parties, and strict timelines. Manual processes cause delays.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="solutions-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Solutions</span>
+                    <h2>PropTech Software <span class="gradient-text">We Build</span></h2>
+                </div>
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <div class="icon">🏢</div>
+                        <h3>Property Management Systems</h3>
+                        <p>All-in-one platforms for landlords and property managers to streamline operations.</p>
+                        <ul class="solution-features">
+                            <li>Rent collection & accounting</li>
+                            <li>Maintenance request management</li>
+                            <li>Tenant screening & onboarding</li>
+                            <li>Lease management & renewals</li>
+                            <li>Owner reporting & portals</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📇</div>
+                        <h3>Real Estate CRM</h3>
+                        <p>Custom CRM solutions for brokerages and agents to manage leads and close deals faster.</p>
+                        <ul class="solution-features">
+                            <li>Lead capture & distribution</li>
+                            <li>Deal pipeline management</li>
+                            <li>Automated follow-ups & drip campaigns</li>
+                            <li>Transaction coordination</li>
+                            <li>Commission tracking</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">🏠</div>
+                        <h3>Listing & Marketplace Platforms</h3>
+                        <p>Property search portals and marketplaces with advanced search and matching.</p>
+                        <ul class="solution-features">
+                            <li>MLS/IDX integration</li>
+                            <li>Advanced search & filters</li>
+                            <li>Map-based property search</li>
+                            <li>Saved searches & alerts</li>
+                            <li>Lead generation forms</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">🎥</div>
+                        <h3>Virtual Tour & 3D Platforms</h3>
+                        <p>Immersive property viewing experiences with virtual tours and 3D walkthroughs.</p>
+                        <ul class="solution-features">
+                            <li>360° virtual tours</li>
+                            <li>3D floor plans</li>
+                            <li>AR furniture staging</li>
+                            <li>Video tour creation</li>
+                            <li>Live virtual showings</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">🤖</div>
+                        <h3>AI Valuation & Analytics</h3>
+                        <p>Machine learning models for property valuation, market analysis, and investment insights.</p>
+                        <ul class="solution-features">
+                            <li>Automated property valuation (AVM)</li>
+                            <li>Dynamic pricing engines</li>
+                            <li>Market trend analysis</li>
+                            <li>Investment ROI calculators</li>
+                            <li>Predictive analytics</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📄</div>
+                        <h3>Transaction Management</h3>
+                        <p>Digital transaction platforms for paperless closings and document management.</p>
+                        <ul class="solution-features">
+                            <li>E-signature integration</li>
+                            <li>Document management</li>
+                            <li>Task & deadline tracking</li>
+                            <li>Compliance checklists</li>
+                            <li>Party collaboration portals</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="usecases-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Use Cases</span>
+                    <h2>What We Can <span class="gradient-text">Build For You</span></h2>
+                </div>
+                <div class="usecases-grid">
+                    <div class="usecase-card"><h3><span>🏘️</span> Multi-Family Property Platform</h3><p>Property management system for 5,000+ units with maintenance, tenant portals, and owner reporting.</p><span class="usecase-tag">Enterprise Platform</span></div>
+                    <div class="usecase-card"><h3><span>🏢</span> Commercial Real Estate CRM</h3><p>Deal management platform for commercial brokers with pipeline tracking and commission calculations.</p><span class="usecase-tag">CRM Platform</span></div>
+                    <div class="usecase-card"><h3><span>🔍</span> Property Search Portal</h3><p>Regional MLS-connected search platform with map view, saved searches, and agent matching.</p><span class="usecase-tag">Consumer Platform</span></div>
+                    <div class="usecase-card"><h3><span>📊</span> Investment Analysis Tool</h3><p>Real estate investment platform with deal analysis, ROI projections, and portfolio tracking.</p><span class="usecase-tag">Analytics Platform</span></div>
+                    <div class="usecase-card"><h3><span>🏨</span> Vacation Rental Platform</h3><p>Airbnb-style marketplace with dynamic pricing, booking management, and guest communication.</p><span class="usecase-tag">Marketplace</span></div>
+                    <div class="usecase-card"><h3><span>🎯</span> Agent Productivity App</h3><p>Mobile app for agents with CRM, showing scheduler, and transaction tracking on the go.</p><span class="usecase-tag">Mobile App</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Build Your <span class="gradient-text">PropTech Solution</span>?</h2>
+                <p>Let's create real estate technology that closes more deals and delights clients.</p>
+                <a href="/#contact" class="btn btn-primary btn-lg">Get Free Consultation</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="/" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span></a><p>Transforming ideas into powerful software.</p></div>
+                <div class="footer-links"><h4>Industries</h4><ul><li><a href="/industries/fintech.html">FinTech</a></li><li><a href="/industries/healthtech.html">HealthTech</a></li><li><a href="/industries/ecommerce.html">E-commerce</a></li><li><a href="/industries/edtech.html">EdTech</a></li></ul></div>
+                <div class="footer-links"><h4>More Industries</h4><ul><li><a href="/industries/realestate.html">Real Estate</a></li><li><a href="/industries/saas.html">SaaS</a></li><li><a href="/industries/logistics.html">Logistics</a></li><li><a href="/industries/entertainment.html">Entertainment</a></li></ul></div>
+                <div class="footer-links"><h4>Company</h4><ul><li><a href="/#services">Services</a></li><li><a href="/#process">Process</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#contact">Contact</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Vibe Coding Enthusiast. All rights reserved.</p><div class="footer-legal"><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div></div>
+        </div>
+    </footer>
+    <script src="/script.js"></script>
+</body>
+</html>

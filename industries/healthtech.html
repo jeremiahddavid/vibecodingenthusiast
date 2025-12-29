@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthTech Software Development | Telemedicine, EHR & Patient Management | Vibe Coding Enthusiast</title>
+    <meta name="description" content="Custom HealthTech software development. We build HIPAA-compliant telemedicine platforms, EHR systems, patient portals, and AI-powered diagnostic tools.">
+    <meta name="keywords" content="healthtech development, telemedicine platform, EHR software, patient portal, HIPAA compliant, medical software, healthcare AI">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/industries/healthtech.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .industry-hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        .industry-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .industry-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: #ef4444;
+            margin-bottom: 24px;
+        }
+        .industry-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+        .industry-hero .lead {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 48px;
+        }
+        .hero-stat {
+            text-align: left;
+        }
+        .hero-stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ef4444;
+        }
+        .hero-stat-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .challenges-section { padding: 100px 0; }
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .challenge-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+        }
+        .challenge-card .icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .challenge-card h3 { font-size: 1.25rem; margin-bottom: 12px; }
+        .challenge-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+
+        .solutions-section { padding: 100px 0; background: var(--bg-secondary); }
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .solution-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        .solution-card:hover { border-color: #ef4444; transform: translateY(-4px); }
+        .solution-card .icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(129, 140, 248, 0.2));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+        }
+        .solution-card h3 { font-size: 1.375rem; margin-bottom: 16px; }
+        .solution-card p { color: var(--text-secondary); margin-bottom: 24px; line-height: 1.7; }
+        .solution-features { list-style: none; padding: 0; margin: 0; }
+        .solution-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .solution-features li::before { content: '✓'; color: #ef4444; font-weight: 600; }
+
+        .usecases-section { padding: 100px 0; }
+        .usecases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .usecase-card {
+            background: linear-gradient(135deg, var(--bg-card), transparent);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+        .usecase-card h3 { font-size: 1.125rem; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+        .usecase-card h3 span { font-size: 1.5rem; }
+        .usecase-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; flex: 1; }
+        .usecase-tag {
+            display: inline-block;
+            background: rgba(129, 140, 248, 0.1);
+            color: var(--accent-primary);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            margin-top: 16px;
+        }
+
+        .compliance-section { padding: 80px 0; background: var(--bg-secondary); }
+        .compliance-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .compliance-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 24px 32px;
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+        .compliance-item .badge { font-size: 2rem; margin-bottom: 8px; display: block; }
+        .compliance-item .name { font-weight: 600; color: var(--text-primary); }
+        .compliance-item .desc { font-size: 0.8rem; color: var(--text-muted); }
+
+        .cta-section { padding: 100px 0; text-align: center; }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .cta-section p { color: var(--text-secondary); font-size: 1.125rem; max-width: 600px; margin: 0 auto 40px; }
+
+        @media (max-width: 768px) {
+            .industry-hero h1 { font-size: 2.25rem; }
+            .hero-stats { flex-direction: column; gap: 24px; }
+            .solutions-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#industries">Industries</a></li>
+                <li><a href="/#process">Process</a></li>
+                <li><a href="/#work">Work</a></li>
+                <li><a href="/#pricing">Pricing</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-primary">Start Project</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="industry-hero">
+            <div class="container">
+                <span class="industry-badge"><span>🏥</span> HealthTech Solutions</span>
+                <h1>Transform Healthcare with <span class="gradient-text">Digital Innovation</span></h1>
+                <p class="lead">HIPAA-compliant telemedicine platforms, EHR systems, patient portals, and AI-powered diagnostics. We help healthcare organizations deliver better patient outcomes through technology.</p>
+                <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                    <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">$280B+</div>
+                        <div class="hero-stat-label">Digital health market by 2028</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">HIPAA</div>
+                        <div class="hero-stat-label">Compliant development</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">HL7/FHIR</div>
+                        <div class="hero-stat-label">Interoperability standards</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="challenges-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Industry Challenges</span>
+                    <h2>Problems We Solve for <span class="gradient-text">Healthcare Organizations</span></h2>
+                </div>
+                <div class="challenges-grid">
+                    <div class="challenge-card">
+                        <div class="icon">🔐</div>
+                        <h3>HIPAA Compliance</h3>
+                        <p>Protecting PHI (Protected Health Information) requires specialized security measures, encryption, access controls, and audit trails.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">🔗</div>
+                        <h3>EHR Integration</h3>
+                        <p>Connecting with Epic, Cerner, and other EHR systems through HL7 FHIR APIs while maintaining data integrity and security.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">👥</div>
+                        <h3>Patient Engagement</h3>
+                        <p>Low patient portal adoption rates (under 40%) and poor user experiences lead to missed appointments and incomplete care.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">📊</div>
+                        <h3>Data Silos</h3>
+                        <p>Patient data scattered across systems prevents holistic care. Interoperability remains healthcare's biggest technical challenge.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">⏱️</div>
+                        <h3>Clinical Workflow Efficiency</h3>
+                        <p>Physicians spend 2 hours on EHR tasks for every 1 hour of patient care. Administrative burden leads to burnout.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">🏠</div>
+                        <h3>Remote Care Delivery</h3>
+                        <p>Telemedicine adoption requires reliable video, remote monitoring, and seamless integration with clinical workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="solutions-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Solutions</span>
+                    <h2>HealthTech Software <span class="gradient-text">We Build</span></h2>
+                </div>
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <div class="icon">📹</div>
+                        <h3>Telemedicine Platforms</h3>
+                        <p>HIPAA-compliant virtual care solutions with HD video, waiting rooms, and seamless EHR integration.</p>
+                        <ul class="solution-features">
+                            <li>Secure video consultations</li>
+                            <li>Virtual waiting rooms & scheduling</li>
+                            <li>E-prescribing integration</li>
+                            <li>Multi-provider support</li>
+                            <li>Mobile apps for iOS & Android</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📋</div>
+                        <h3>EHR/EMR Systems</h3>
+                        <p>Custom electronic health record solutions designed for specialty practices and healthcare networks.</p>
+                        <ul class="solution-features">
+                            <li>Clinical documentation & charting</li>
+                            <li>HL7 FHIR API development</li>
+                            <li>Order entry & lab integration</li>
+                            <li>Billing & coding integration</li>
+                            <li>Population health analytics</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">👤</div>
+                        <h3>Patient Portals & Apps</h3>
+                        <p>Engaging patient-facing applications that improve communication and care coordination.</p>
+                        <ul class="solution-features">
+                            <li>Appointment scheduling</li>
+                            <li>Secure messaging</li>
+                            <li>Medical record access</li>
+                            <li>Bill pay & insurance</li>
+                            <li>Health tracking & wearable sync</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">🤖</div>
+                        <h3>AI Diagnostic Tools</h3>
+                        <p>Machine learning models for medical imaging analysis, clinical decision support, and predictive analytics.</p>
+                        <ul class="solution-features">
+                            <li>Medical image analysis (radiology, pathology)</li>
+                            <li>Clinical decision support systems</li>
+                            <li>Predictive risk modeling</li>
+                            <li>NLP for clinical notes</li>
+                            <li>FDA compliance support</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📡</div>
+                        <h3>Remote Patient Monitoring</h3>
+                        <p>IoT platforms for continuous monitoring of chronic conditions with real-time alerts.</p>
+                        <ul class="solution-features">
+                            <li>Vital signs monitoring (BP, glucose, SpO2)</li>
+                            <li>Wearable device integration</li>
+                            <li>Alert & escalation systems</li>
+                            <li>Care team dashboards</li>
+                            <li>Chronic disease management</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">🏢</div>
+                        <h3>Practice Management</h3>
+                        <p>Comprehensive solutions for healthcare operations, from scheduling to revenue cycle.</p>
+                        <ul class="solution-features">
+                            <li>Appointment & resource scheduling</li>
+                            <li>Revenue cycle management</li>
+                            <li>Insurance verification</li>
+                            <li>Claims processing</li>
+                            <li>Analytics & reporting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="usecases-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Use Cases</span>
+                    <h2>What We Can <span class="gradient-text">Build For You</span></h2>
+                </div>
+                <div class="usecases-grid">
+                    <div class="usecase-card">
+                        <h3><span>🩺</span> Virtual Care Platform</h3>
+                        <p>End-to-end telemedicine solution with patient apps, provider dashboards, video consultations, and EHR integration. Serving 50K+ monthly consultations.</p>
+                        <span class="usecase-tag">Full Platform</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>💊</span> Medication Management App</h3>
+                        <p>Patient app with medication reminders, refill tracking, drug interaction checking, and pharmacy integration.</p>
+                        <span class="usecase-tag">Mobile App</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🔬</span> Lab Results Portal</h3>
+                        <p>Secure patient portal for viewing lab results with trend visualization, reference ranges, and provider messaging.</p>
+                        <span class="usecase-tag">Web + Mobile</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🫀</span> Cardiac Monitoring System</h3>
+                        <p>Remote patient monitoring for cardiac patients with wearable integration, arrhythmia detection, and clinical alerts.</p>
+                        <span class="usecase-tag">IoT + AI</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🧠</span> Mental Health Platform</h3>
+                        <p>Digital therapy platform with mood tracking, CBT exercises, therapist matching, and video sessions.</p>
+                        <span class="usecase-tag">Web + Mobile</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>📊</span> Clinical Trial Management</h3>
+                        <p>Platform for managing clinical trials with patient recruitment, data collection, and regulatory compliance.</p>
+                        <span class="usecase-tag">Enterprise Platform</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="compliance-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Compliance & Certifications</h2>
+                    <p>We build healthcare software that meets the strictest regulatory requirements.</p>
+                </div>
+                <div class="compliance-grid">
+                    <div class="compliance-item">
+                        <span class="badge">🔒</span>
+                        <div class="name">HIPAA</div>
+                        <div class="desc">Protected Health Information</div>
+                    </div>
+                    <div class="compliance-item">
+                        <span class="badge">🏥</span>
+                        <div class="name">HL7 FHIR</div>
+                        <div class="desc">Healthcare Interoperability</div>
+                    </div>
+                    <div class="compliance-item">
+                        <span class="badge">✅</span>
+                        <div class="name">SOC 2</div>
+                        <div class="desc">Security & Availability</div>
+                    </div>
+                    <div class="compliance-item">
+                        <span class="badge">🌍</span>
+                        <div class="name">GDPR</div>
+                        <div class="desc">EU Data Protection</div>
+                    </div>
+                    <div class="compliance-item">
+                        <span class="badge">📋</span>
+                        <div class="name">FDA</div>
+                        <div class="desc">Medical Device Software</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Build Your <span class="gradient-text">HealthTech Solution</span>?</h2>
+                <p>Let's create HIPAA-compliant healthcare software that improves patient outcomes.</p>
+                <a href="/#contact" class="btn btn-primary btn-lg">Get Free Consultation</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+                    </a>
+                    <p>Transforming ideas into powerful software.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Industries</h4>
+                    <ul>
+                        <li><a href="/industries/fintech.html">FinTech</a></li>
+                        <li><a href="/industries/healthtech.html">HealthTech</a></li>
+                        <li><a href="/industries/ecommerce.html">E-commerce</a></li>
+                        <li><a href="/industries/edtech.html">EdTech</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>More Industries</h4>
+                    <ul>
+                        <li><a href="/industries/realestate.html">Real Estate</a></li>
+                        <li><a href="/industries/saas.html">SaaS</a></li>
+                        <li><a href="/industries/logistics.html">Logistics</a></li>
+                        <li><a href="/industries/entertainment.html">Entertainment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/#services">Services</a></li>
+                        <li><a href="/#process">Process</a></li>
+                        <li><a href="/#pricing">Pricing</a></li>
+                        <li><a href="/#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vibe Coding Enthusiast. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <a href="/terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
