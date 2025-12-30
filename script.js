@@ -13,7 +13,48 @@ document.addEventListener('DOMContentLoaded', function() {
     initCounterAnimations();
     initFAQAccordion();
     initConsultationBooking();
+    initBackToTop();
 });
+
+// ===================================
+// Back to Top Button
+// ===================================
+function initBackToTop() {
+    const backToTopBtn = document.getElementById('backToTop');
+    if (!backToTopBtn) return;
+
+    // Show/hide button based on scroll position
+    const toggleButton = () => {
+        if (window.scrollY > 500) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    };
+
+    // Throttle scroll event for performance
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                toggleButton();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    // Scroll to top on click
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Initial check
+    toggleButton();
+}
 
 // ===================================
 // Mobile Menu

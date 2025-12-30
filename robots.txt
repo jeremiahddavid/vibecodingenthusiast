@@ -3,8 +3,25 @@
 User-agent: *
 Allow: /
 
-# Sitemap
+# Disallow crawling of non-content files
+Disallow: /*.json$
+Disallow: /*.xml$
+
+# Allow sitemap
+Allow: /sitemap.xml
+
+# Sitemap location
 Sitemap: https://vibecodingenthusiast.com/sitemap.xml
 
-# Crawl-delay (optional, for polite crawling)
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
 Crawl-delay: 1
