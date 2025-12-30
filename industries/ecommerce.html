@@ -7,6 +7,20 @@
     <meta name="description" content="Custom e-commerce development services. We build online stores, marketplaces, inventory management systems, and omnichannel retail solutions that scale.">
     <meta name="keywords" content="ecommerce development, online store, marketplace, inventory management, omnichannel, shopify, woocommerce, headless commerce">
     <link rel="canonical" href="https://vibecodingenthusiast.com/industries/ecommerce.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="E-commerce Software Development | Online Stores, Marketplaces & Inventory | Vibe Coding Enthusiast">
+    <meta property="og:description" content="Custom e-commerce development. Online stores, marketplaces, and omnichannel retail solutions.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/og-image.svg">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/industries/ecommerce.html">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="E-commerce Development | Vibe Coding Enthusiast">
+    <meta name="twitter:description" content="Online stores, marketplaces, and inventory management.">
+    <meta name="twitter:image" content="https://vibecodingenthusiast.com/og-image.svg">
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/styles.css">
     <style>
@@ -62,6 +76,16 @@
         .cta-section h2 { font-size: 2.5rem; margin-bottom: 20px; }
         .cta-section p { color: var(--text-secondary); font-size: 1.125rem; max-width: 600px; margin: 0 auto 40px; }
         @media (max-width: 768px) { .industry-hero h1 { font-size: 2.25rem; } .hero-stats { flex-direction: column; gap: 24px; } .solutions-grid { grid-template-columns: 1fr; } }
+        .tech-stack-section { padding: 100px 0; background: var(--bg-secondary); }
+        .tech-categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 48px; }
+        .tech-category { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; }
+        .tech-category h3 { font-size: 1.125rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+        .tech-category h3::before { content: ''; width: 8px; height: 8px; background: #fb923c; border-radius: 50%; }
+        .tech-list { display: flex; flex-direction: column; gap: 12px; }
+        .tech-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--bg-secondary); border-radius: var(--radius-md); font-size: 0.9rem; color: var(--text-secondary); transition: all 0.2s ease; }
+        .tech-item:hover { background: rgba(251, 146, 60, 0.1); color: var(--text-primary); }
+        @media (max-width: 1024px) { .tech-categories { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .tech-categories { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -275,6 +299,54 @@
                         <div class="showcase-item-overlay">
                             <h4>Omnichannel POS</h4>
                             <p>Unified retail experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tech-stack-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Technology</span>
+                    <h2>Our <span class="gradient-text">Tech Stack</span></h2>
+                    <p>Modern technologies for building high-performance e-commerce platforms.</p>
+                </div>
+                <div class="tech-categories">
+                    <div class="tech-category">
+                        <h3>Frontend</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">React / Next.js</div>
+                            <div class="tech-item">Vue.js / Nuxt.js</div>
+                            <div class="tech-item">TypeScript</div>
+                            <div class="tech-item">React Native Mobile</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Backend</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">Node.js / Express</div>
+                            <div class="tech-item">Python / Django</div>
+                            <div class="tech-item">GraphQL APIs</div>
+                            <div class="tech-item">Microservices</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Infrastructure</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">AWS / Google Cloud</div>
+                            <div class="tech-item">Docker & Kubernetes</div>
+                            <div class="tech-item">CDN / Edge Caching</div>
+                            <div class="tech-item">Redis / Elasticsearch</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Integrations</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">Stripe / PayPal / Square</div>
+                            <div class="tech-item">Shopify / BigCommerce</div>
+                            <div class="tech-item">SAP / NetSuite ERP</div>
+                            <div class="tech-item">FedEx / UPS Shipping</div>
                         </div>
                     </div>
                 </div>

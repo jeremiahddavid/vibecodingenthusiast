@@ -7,6 +7,20 @@
     <meta name="description" content="Custom HealthTech software development. We build HIPAA-compliant telemedicine platforms, EHR systems, patient portals, and AI-powered diagnostic tools.">
     <meta name="keywords" content="healthtech development, telemedicine platform, EHR software, patient portal, HIPAA compliant, medical software, healthcare AI">
     <link rel="canonical" href="https://vibecodingenthusiast.com/industries/healthtech.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="HealthTech Software Development | Telemedicine, EHR & Patient Management | Vibe Coding Enthusiast">
+    <meta property="og:description" content="Custom HealthTech software development. HIPAA-compliant telemedicine, EHR systems, and AI-powered diagnostics.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/og-image.svg">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/industries/healthtech.html">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HealthTech Software Development | Vibe Coding Enthusiast">
+    <meta name="twitter:description" content="HIPAA-compliant telemedicine, EHR systems, and AI diagnostics.">
+    <meta name="twitter:image" content="https://vibecodingenthusiast.com/og-image.svg">
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/styles.css">
     <style>
@@ -254,6 +268,16 @@
             .hero-stats { flex-direction: column; gap: 24px; }
             .solutions-grid { grid-template-columns: 1fr; }
         }
+        .tech-stack-section { padding: 100px 0; }
+        .tech-categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 48px; }
+        .tech-category { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; }
+        .tech-category h3 { font-size: 1.125rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+        .tech-category h3::before { content: ''; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; }
+        .tech-list { display: flex; flex-direction: column; gap: 12px; }
+        .tech-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--bg-secondary); border-radius: var(--radius-md); font-size: 0.9rem; color: var(--text-secondary); transition: all 0.2s ease; }
+        .tech-item:hover { background: rgba(239, 68, 68, 0.1); color: var(--text-primary); }
+        @media (max-width: 1024px) { .tech-categories { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .tech-categories { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -568,6 +592,54 @@
                         <span class="badge">📋</span>
                         <div class="name">FDA</div>
                         <div class="desc">Medical Device Software</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tech-stack-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Technology</span>
+                    <h2>Our <span class="gradient-text">Tech Stack</span></h2>
+                    <p>HIPAA-compliant technologies for building secure healthcare solutions.</p>
+                </div>
+                <div class="tech-categories">
+                    <div class="tech-category">
+                        <h3>Frontend</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">React / Next.js</div>
+                            <div class="tech-item">Vue.js / Nuxt.js</div>
+                            <div class="tech-item">TypeScript</div>
+                            <div class="tech-item">React Native Mobile</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Backend</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">Node.js / Express</div>
+                            <div class="tech-item">Python / Django</div>
+                            <div class="tech-item">HIPAA-Compliant APIs</div>
+                            <div class="tech-item">Microservices</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Infrastructure</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">AWS HIPAA / GCP</div>
+                            <div class="tech-item">HIPAA Hosting</div>
+                            <div class="tech-item">Encrypted Databases</div>
+                            <div class="tech-item">Audit Logging</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Integrations</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">HL7 FHIR APIs</div>
+                            <div class="tech-item">Epic / Cerner EHR</div>
+                            <div class="tech-item">Twilio / WebRTC</div>
+                            <div class="tech-item">Stripe / Insurance</div>
+                        </div>
                     </div>
                 </div>
             </div>

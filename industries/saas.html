@@ -7,6 +7,19 @@
     <meta name="description" content="Custom SaaS development services. We build multi-tenant platforms, subscription billing systems, and scalable cloud applications for B2B and B2C.">
     <meta name="keywords" content="saas development, subscription platform, multi-tenant architecture, billing system, B2B SaaS, cloud application">
     <link rel="canonical" href="https://vibecodingenthusiast.com/industries/saas.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SaaS Development | Subscription Platforms & Multi-Tenant Apps | Vibe Coding Enthusiast">
+    <meta property="og:description" content="Custom SaaS development services. Multi-tenant platforms, subscription billing systems, and scalable cloud applications.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/og-image.svg">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/industries/saas.html">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SaaS Development | Vibe Coding Enthusiast">
+    <meta name="twitter:description" content="Custom SaaS development services. Multi-tenant platforms, subscription billing, and scalable cloud apps.">
+    <meta name="twitter:image" content="https://vibecodingenthusiast.com/og-image.svg">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/styles.css">
     <style>
@@ -61,6 +74,14 @@
         @media (max-width: 968px) { .hero-content-wrapper { grid-template-columns: 1fr; } .hero-image { order: -1; } .showcase-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .industry-hero h1 { font-size: 2.25rem; } .hero-stats { flex-direction: column; gap: 24px; } .solutions-grid { grid-template-columns: 1fr; } }
         @media (max-width: 640px) { .showcase-grid { grid-template-columns: 1fr; } }
+        .tech-stack-section { padding: 100px 0; background: var(--bg-secondary); }
+        .tech-categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 48px; }
+        .tech-category h3 { font-size: 1rem; font-weight: 600; color: #818cf8; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .tech-list { display: flex; flex-direction: column; gap: 12px; }
+        .tech-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.875rem; transition: all 0.2s ease; }
+        .tech-item:hover { border-color: #818cf8; transform: translateX(4px); }
+        @media (max-width: 1024px) { .tech-categories { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .tech-categories { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -266,6 +287,54 @@
                         <div class="showcase-item-overlay">
                             <h4>Help Desk SaaS</h4>
                             <p>Customer support ticketing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tech-stack-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Technology</span>
+                    <h2>Our <span class="gradient-text">Tech Stack</span></h2>
+                    <p>Modern technologies for building scalable SaaS platforms.</p>
+                </div>
+                <div class="tech-categories">
+                    <div class="tech-category">
+                        <h3>Frontend</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">React / Next.js</div>
+                            <div class="tech-item">Vue.js / Nuxt</div>
+                            <div class="tech-item">TypeScript</div>
+                            <div class="tech-item">Tailwind CSS</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Backend</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">Node.js / NestJS</div>
+                            <div class="tech-item">Python / FastAPI</div>
+                            <div class="tech-item">GraphQL / REST</div>
+                            <div class="tech-item">Microservices</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Infrastructure</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">AWS / GCP / Azure</div>
+                            <div class="tech-item">Docker / Kubernetes</div>
+                            <div class="tech-item">PostgreSQL / Redis</div>
+                            <div class="tech-item">Terraform / Pulumi</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Integrations</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">Stripe / Chargebee</div>
+                            <div class="tech-item">Auth0 / Clerk</div>
+                            <div class="tech-item">Segment / Mixpanel</div>
+                            <div class="tech-item">Intercom / Zendesk</div>
                         </div>
                     </div>
                 </div>

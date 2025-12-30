@@ -7,6 +7,20 @@
     <meta name="description" content="Custom EdTech development services. We build learning management systems, online course platforms, educational apps, and AI-powered tutoring solutions.">
     <meta name="keywords" content="edtech development, LMS, learning management system, online learning, e-learning platform, educational app, virtual classroom">
     <link rel="canonical" href="https://vibecodingenthusiast.com/industries/edtech.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="EdTech Software Development | LMS, Online Learning & Educational Apps | Vibe Coding Enthusiast">
+    <meta property="og:description" content="Custom EdTech development. Learning management systems, online courses, and AI-powered tutoring.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/og-image.svg">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/industries/edtech.html">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="EdTech Software Development | Vibe Coding Enthusiast">
+    <meta name="twitter:description" content="LMS platforms, e-learning, virtual classrooms, and AI tutoring.">
+    <meta name="twitter:image" content="https://vibecodingenthusiast.com/og-image.svg">
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/styles.css">
     <style>
@@ -62,6 +76,16 @@
         .cta-section h2 { font-size: 2.5rem; margin-bottom: 20px; }
         .cta-section p { color: var(--text-secondary); font-size: 1.125rem; max-width: 600px; margin: 0 auto 40px; }
         @media (max-width: 768px) { .industry-hero h1 { font-size: 2.25rem; } .hero-stats { flex-direction: column; gap: 24px; } .solutions-grid { grid-template-columns: 1fr; } }
+        .tech-stack-section { padding: 100px 0; background: var(--bg-secondary); }
+        .tech-categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 48px; }
+        .tech-category { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; }
+        .tech-category h3 { font-size: 1.125rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+        .tech-category h3::before { content: ''; width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; }
+        .tech-list { display: flex; flex-direction: column; gap: 12px; }
+        .tech-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--bg-secondary); border-radius: var(--radius-md); font-size: 0.9rem; color: var(--text-secondary); transition: all 0.2s ease; }
+        .tech-item:hover { background: rgba(59, 130, 246, 0.1); color: var(--text-primary); }
+        @media (max-width: 1024px) { .tech-categories { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .tech-categories { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -268,6 +292,54 @@
                         <div class="showcase-item-overlay">
                             <h4>Corporate Training Portal</h4>
                             <p>Enterprise learning management</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tech-stack-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Technology</span>
+                    <h2>Our <span class="gradient-text">Tech Stack</span></h2>
+                    <p>Modern technologies for building engaging educational platforms.</p>
+                </div>
+                <div class="tech-categories">
+                    <div class="tech-category">
+                        <h3>Frontend</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">React / Next.js</div>
+                            <div class="tech-item">Vue.js / Nuxt.js</div>
+                            <div class="tech-item">TypeScript</div>
+                            <div class="tech-item">Progressive Web Apps</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Backend</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">Node.js / Express</div>
+                            <div class="tech-item">Python / Django</div>
+                            <div class="tech-item">GraphQL APIs</div>
+                            <div class="tech-item">WebSocket Real-time</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Infrastructure</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">AWS / Google Cloud</div>
+                            <div class="tech-item">Docker & Kubernetes</div>
+                            <div class="tech-item">CDN / Media Streaming</div>
+                            <div class="tech-item">Redis Caching</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h3>Integrations</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">SCORM / xAPI / LTI</div>
+                            <div class="tech-item">Zoom / Twilio Video</div>
+                            <div class="tech-item">Stripe / PayPal</div>
+                            <div class="tech-item">OAuth / SSO</div>
                         </div>
                     </div>
                 </div>
