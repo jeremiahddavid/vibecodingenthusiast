@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty & Salon Software Development | Spa, Salon & Wellness Solutions | Vibe Coding Enthusiast</title>
+    <meta name="description" content="Custom software for salons, spas, and beauty businesses. Appointment booking, client management, POS integration, and loyalty programs for beauty professionals.">
+    <meta name="keywords" content="salon software, spa booking system, beauty app development, appointment scheduling, salon management, beauty business software">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/industries/beauty.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .industry-hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        .industry-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .hero-image {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+        .hero-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        .hero-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+        }
+        .hero-image-overlay span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        .hero-image-overlay p {
+            margin: 4px 0 0;
+            font-weight: 600;
+        }
+
+        .showcase-section {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .showcase-item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .showcase-item:hover img {
+            transform: scale(1.05);
+        }
+        .showcase-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 50%, rgba(0,0,0,0.85));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            color: white;
+        }
+        .showcase-item-overlay h4 {
+            font-size: 1.125rem;
+            margin-bottom: 4px;
+        }
+        .showcase-item-overlay p {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 968px) {
+            .hero-content-wrapper { grid-template-columns: 1fr; }
+            .hero-image { margin-top: 40px; }
+            .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .showcase-grid { grid-template-columns: 1fr; }
+        }
+        .industry-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: #ec4899;
+            margin-bottom: 24px;
+        }
+        .industry-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+        .industry-hero .lead {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 48px;
+        }
+        .hero-stat {
+            text-align: left;
+        }
+        .hero-stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ec4899;
+        }
+        .hero-stat-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .challenges-section {
+            padding: 100px 0;
+        }
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .challenge-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+        }
+        .challenge-card .icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .challenge-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+        .challenge-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .solutions-section {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .solution-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        .solution-card:hover {
+            border-color: #ec4899;
+            transform: translateY(-4px);
+        }
+        .solution-card .icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(168, 85, 247, 0.2));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+        }
+        .solution-card h3 {
+            font-size: 1.375rem;
+            margin-bottom: 16px;
+        }
+        .solution-card p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+        .solution-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .solution-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .solution-features li::before {
+            content: '✓';
+            color: #ec4899;
+            font-weight: 600;
+        }
+
+        .usecases-section {
+            padding: 100px 0;
+        }
+        .usecases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .usecase-card {
+            background: linear-gradient(135deg, var(--bg-card), transparent);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+        .usecase-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .usecase-card h3 span {
+            font-size: 1.5rem;
+        }
+        .usecase-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            flex: 1;
+        }
+        .usecase-tag {
+            display: inline-block;
+            background: rgba(236, 72, 153, 0.1);
+            color: #ec4899;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            margin-top: 16px;
+        }
+
+        .tech-stack-section {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+        }
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .tech-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        @media (max-width: 768px) {
+            .industry-hero h1 { font-size: 2.25rem; }
+            .hero-stats { flex-direction: column; gap: 24px; }
+            .solutions-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#industries">Industries</a></li>
+                <li><a href="/#process">Process</a></li>
+                <li><a href="/#work">Work</a></li>
+                <li><a href="/#pricing">Pricing</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-primary">Start Project</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="industry-hero">
+            <div class="container">
+                <div class="hero-content-wrapper">
+                    <div class="hero-text">
+                        <span class="industry-badge">
+                            <span>💅</span> Beauty & Salon Solutions
+                        </span>
+                        <h1>Software for <span class="gradient-text">Beauty & Wellness</span></h1>
+                        <p class="lead">From appointment booking and client management to POS integration and loyalty programs. We help salons, spas, and beauty professionals deliver exceptional client experiences and grow their business.</p>
+                        <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                            <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">$128B</div>
+                                <div class="hero-stat-label">Global salon market</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">70%</div>
+                                <div class="hero-stat-label">Book online preference</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">35%</div>
+                                <div class="hero-stat-label">Revenue from rebooking</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80" alt="Modern beauty salon interior with styling stations">
+                        <div class="hero-image-overlay">
+                            <span>Featured Project</span>
+                            <p>Salon Management Platform</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenges -->
+        <section class="challenges-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Industry Challenges</span>
+                    <h2>Problems We Solve for <span class="gradient-text">Beauty Businesses</span></h2>
+                    <p>Salons and spas face unique challenges in booking management, client retention, and business growth.</p>
+                </div>
+                <div class="challenges-grid">
+                    <div class="challenge-card">
+                        <div class="icon">📞</div>
+                        <h3>Phone Tag & No-Shows</h3>
+                        <p>Answering booking calls during busy appointments is impossible. No-shows cost the average salon $67,000 annually in lost revenue.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">📅</div>
+                        <h3>Schedule Chaos</h3>
+                        <p>Managing multiple stylists, services of varying lengths, and client preferences in paper books or basic spreadsheets leads to errors.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">👥</div>
+                        <h3>Client Retention</h3>
+                        <p>Without tracking client history, preferences, and rebooking patterns, building lasting relationships becomes guesswork.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">💰</div>
+                        <h3>Payment & Tips</h3>
+                        <p>Handling multiple payment methods, splitting tickets, tracking tips, and managing commissions is time-consuming and error-prone.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">📦</div>
+                        <h3>Retail & Inventory</h3>
+                        <p>Tracking product sales, managing inventory, and knowing what to reorder requires systems most salons don't have.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">📊</div>
+                        <h3>Business Insights</h3>
+                        <p>Understanding which services are profitable, which stylists are booked solid, and where revenue leaks occur is nearly impossible.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions -->
+        <section class="solutions-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Solutions</span>
+                    <h2>Beauty Software <span class="gradient-text">We Build</span></h2>
+                    <p>End-to-end technology solutions designed for salons, spas, and beauty professionals.</p>
+                </div>
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <div class="icon">📱</div>
+                        <h3>Online Booking System</h3>
+                        <p>Let clients book 24/7 from your website, app, or social media—reducing phone calls and filling your schedule automatically.</p>
+                        <ul class="solution-features">
+                            <li>Real-time availability</li>
+                            <li>Service & stylist selection</li>
+                            <li>Automated confirmations & reminders</li>
+                            <li>Deposit & cancellation policies</li>
+                            <li>Waitlist management</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">👤</div>
+                        <h3>Client Management (CRM)</h3>
+                        <p>Know every client's history, preferences, formulas, and notes—delivering personalized service that builds loyalty.</p>
+                        <ul class="solution-features">
+                            <li>Complete service history</li>
+                            <li>Color formulas & notes</li>
+                            <li>Preferences & allergies</li>
+                            <li>Before/after photos</li>
+                            <li>Birthday & anniversary tracking</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">💳</div>
+                        <h3>POS & Payments</h3>
+                        <p>Fast checkout with integrated payments, tip handling, and automatic commission tracking for your team.</p>
+                        <ul class="solution-features">
+                            <li>Credit card & mobile payments</li>
+                            <li>Split tickets & multiple payments</li>
+                            <li>Tip distribution</li>
+                            <li>Gift card management</li>
+                            <li>Commission calculation</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">⭐</div>
+                        <h3>Loyalty & Marketing</h3>
+                        <p>Reward loyal clients, send targeted campaigns, and encourage rebooking with automated marketing tools.</p>
+                        <ul class="solution-features">
+                            <li>Points & rewards program</li>
+                            <li>Referral incentives</li>
+                            <li>Email & SMS campaigns</li>
+                            <li>Review requests</li>
+                            <li>Rebooking reminders</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">👩‍💼</div>
+                        <h3>Staff Management</h3>
+                        <p>Schedule your team, track performance, manage commissions, and empower stylists with their own apps.</p>
+                        <ul class="solution-features">
+                            <li>Staff scheduling</li>
+                            <li>Commission & payroll</li>
+                            <li>Performance dashboards</li>
+                            <li>Stylist mobile app</li>
+                            <li>Time clock & attendance</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📦</div>
+                        <h3>Inventory & Retail</h3>
+                        <p>Track product usage, manage retail inventory, and know exactly what to reorder and when.</p>
+                        <ul class="solution-features">
+                            <li>Product tracking</li>
+                            <li>Back-bar usage</li>
+                            <li>Retail inventory</li>
+                            <li>Low stock alerts</li>
+                            <li>Supplier management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section class="usecases-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Use Cases</span>
+                    <h2>What We Can <span class="gradient-text">Build For You</span></h2>
+                    <p>Real-world applications for beauty businesses of all sizes.</p>
+                </div>
+                <div class="usecases-grid">
+                    <div class="usecase-card">
+                        <h3><span>💇</span> Salon Booking App</h3>
+                        <p>Branded mobile app for your salon with online booking, stylist profiles, service menu, loyalty points, and push notifications for appointments.</p>
+                        <span class="usecase-tag">iOS + Android App</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🧖</span> Spa Management Platform</h3>
+                        <p>Complete spa solution with room scheduling, treatment packages, membership management, and integration with hotel or resort systems.</p>
+                        <span class="usecase-tag">Full Platform</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>💅</span> Nail Salon System</h3>
+                        <p>Walk-in queue management, quick booking for nail services, polish inventory tracking, and customer loyalty for nail salons.</p>
+                        <span class="usecase-tag">Web + Tablet App</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🏢</span> Multi-Location Chain</h3>
+                        <p>Centralized management for salon chains with cross-location booking, unified reporting, and franchise management tools.</p>
+                        <span class="usecase-tag">Enterprise Platform</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🎨</span> Freelance Stylist App</h3>
+                        <p>Mobile-first booking and client management for independent stylists, booth renters, and mobile beauty professionals.</p>
+                        <span class="usecase-tag">Mobile App</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>💄</span> Beauty Marketplace</h3>
+                        <p>Platform connecting clients with beauty professionals—like Uber for hair, makeup, and beauty services on-demand.</p>
+                        <span class="usecase-tag">Marketplace Platform</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Showcase -->
+        <section class="showcase-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Work</span>
+                    <h2>Beauty Projects <span class="gradient-text">We've Delivered</span></h2>
+                    <p>Real solutions built for salons, spas, and beauty brands.</p>
+                </div>
+                <div class="showcase-grid">
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80" alt="Hair salon styling station">
+                        <div class="showcase-item-overlay">
+                            <h4>Salon Chain Booking App</h4>
+                            <p>50+ location management</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&q=80" alt="Spa treatment room">
+                        <div class="showcase-item-overlay">
+                            <h4>Luxury Spa Platform</h4>
+                            <p>Booking & membership system</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80" alt="Nail salon manicure">
+                        <div class="showcase-item-overlay">
+                            <h4>Nail Salon POS</h4>
+                            <p>Queue & payment system</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80" alt="Makeup artist at work">
+                        <div class="showcase-item-overlay">
+                            <h4>Makeup Artist Marketplace</h4>
+                            <p>On-demand beauty booking</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80" alt="Barber shop interior">
+                        <div class="showcase-item-overlay">
+                            <h4>Barbershop App</h4>
+                            <p>Walk-in queue management</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=600&q=80" alt="Beauty products display">
+                        <div class="showcase-item-overlay">
+                            <h4>Retail & Inventory System</h4>
+                            <p>Product tracking for salons</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="tech-stack-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Technologies We Use</h2>
+                    <p>Modern tech stack for beauty and salon applications.</p>
+                </div>
+                <div class="tech-grid">
+                    <span class="tech-item">React Native</span>
+                    <span class="tech-item">Flutter</span>
+                    <span class="tech-item">React</span>
+                    <span class="tech-item">Next.js</span>
+                    <span class="tech-item">Node.js</span>
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">PostgreSQL</span>
+                    <span class="tech-item">Firebase</span>
+                    <span class="tech-item">Stripe</span>
+                    <span class="tech-item">Square</span>
+                    <span class="tech-item">Twilio</span>
+                    <span class="tech-item">SendGrid</span>
+                    <span class="tech-item">AWS</span>
+                    <span class="tech-item">Google Calendar</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Elevate Your <span class="gradient-text">Beauty Business</span>?</h2>
+                <p>Let's discuss how technology can streamline your operations, delight clients, and grow your revenue.</p>
+                <a href="/#contact" class="btn btn-primary btn-lg">Get Free Consultation</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+                    </a>
+                    <p>Transforming ideas into powerful software. Senior developers, modern tech stack, global delivery.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Industries</h4>
+                    <ul>
+                        <li><a href="/industries/fintech.html">FinTech</a></li>
+                        <li><a href="/industries/healthtech.html">HealthTech</a></li>
+                        <li><a href="/industries/hospitality.html">Hospitality</a></li>
+                        <li><a href="/industries/beauty.html">Beauty</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>More Industries</h4>
+                    <ul>
+                        <li><a href="/industries/construction.html">Construction</a></li>
+                        <li><a href="/industries/travel.html">Travel</a></li>
+                        <li><a href="/industries/professional.html">Professional Services</a></li>
+                        <li><a href="/industries/saas.html">SaaS</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/#services">Services</a></li>
+                        <li><a href="/#process">Process</a></li>
+                        <li><a href="/#pricing">Pricing</a></li>
+                        <li><a href="/#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vibe Coding Enthusiast. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <a href="/terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
