@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non-Profit & Church Software Development | Donation, Member & Event Solutions | Vibe Coding Enthusiast</title>
+    <meta name="description" content="Custom software for churches, NGOs, and non-profits. Online donation platforms, member management, event systems, volunteer coordination, and mobile apps.">
+    <meta name="keywords" content="church software, nonprofit app development, donation platform, member management, NGO software, volunteer management, church app">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/industries/nonprofit.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .industry-hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        .industry-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .hero-image {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+        .hero-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        .hero-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+        }
+        .hero-image-overlay span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        .hero-image-overlay p {
+            margin: 4px 0 0;
+            font-weight: 600;
+        }
+
+        .showcase-section {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .showcase-item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .showcase-item:hover img {
+            transform: scale(1.05);
+        }
+        .showcase-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 50%, rgba(0,0,0,0.85));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            color: white;
+        }
+        .showcase-item-overlay h4 {
+            font-size: 1.125rem;
+            margin-bottom: 4px;
+        }
+        .showcase-item-overlay p {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 968px) {
+            .hero-content-wrapper { grid-template-columns: 1fr; }
+            .hero-image { margin-top: 40px; }
+            .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .showcase-grid { grid-template-columns: 1fr; }
+        }
+        .industry-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: #8b5cf6;
+            margin-bottom: 24px;
+        }
+        .industry-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+        .industry-hero .lead {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 48px;
+        }
+        .hero-stat {
+            text-align: left;
+        }
+        .hero-stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #8b5cf6;
+        }
+        .hero-stat-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .challenges-section {
+            padding: 100px 0;
+        }
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .challenge-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+        }
+        .challenge-card .icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .challenge-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+        .challenge-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .solutions-section {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .solution-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        .solution-card:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-4px);
+        }
+        .solution-card .icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+        }
+        .solution-card h3 {
+            font-size: 1.375rem;
+            margin-bottom: 16px;
+        }
+        .solution-card p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+        .solution-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .solution-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .solution-features li::before {
+            content: '✓';
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+
+        .usecases-section {
+            padding: 100px 0;
+        }
+        .usecases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .usecase-card {
+            background: linear-gradient(135deg, var(--bg-card), transparent);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+        .usecase-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .usecase-card h3 span {
+            font-size: 1.5rem;
+        }
+        .usecase-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            flex: 1;
+        }
+        .usecase-tag {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            margin-top: 16px;
+        }
+
+        .tech-stack-section {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+        }
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .tech-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        @media (max-width: 768px) {
+            .industry-hero h1 { font-size: 2.25rem; }
+            .hero-stats { flex-direction: column; gap: 24px; }
+            .solutions-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#industries">Industries</a></li>
+                <li><a href="/#process">Process</a></li>
+                <li><a href="/#work">Work</a></li>
+                <li><a href="/#pricing">Pricing</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-primary">Start Project</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="industry-hero">
+            <div class="container">
+                <div class="hero-content-wrapper">
+                    <div class="hero-text">
+                        <span class="industry-badge">
+                            <span>🙏</span> Non-Profit Solutions
+                        </span>
+                        <h1>Technology for <span class="gradient-text">Churches & Non-Profits</span></h1>
+                        <p class="lead">From online giving and member management to event registration and volunteer coordination. We help churches, NGOs, and charities amplify their impact through purpose-built software.</p>
+                        <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                            <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">73%</div>
+                                <div class="hero-stat-label">Prefer online giving</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">2.5x</div>
+                                <div class="hero-stat-label">More engagement with apps</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">40%</div>
+                                <div class="hero-stat-label">Admin time saved</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800&q=80" alt="Church community gathering with people raising hands">
+                        <div class="hero-image-overlay">
+                            <span>Featured Project</span>
+                            <p>Church Community Platform</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenges -->
+        <section class="challenges-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Industry Challenges</span>
+                    <h2>Problems We Solve for <span class="gradient-text">Non-Profit Organizations</span></h2>
+                    <p>Churches and non-profits face unique challenges in engaging their communities and managing operations efficiently.</p>
+                </div>
+                <div class="challenges-grid">
+                    <div class="challenge-card">
+                        <div class="icon">💸</div>
+                        <h3>Donation Friction</h3>
+                        <p>Cash-only giving is declining. Without easy online and mobile giving options, you're leaving donations on the table.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">👥</div>
+                        <h3>Member Engagement</h3>
+                        <p>Keeping track of members, their involvement, and nurturing new visitors into active participants requires dedicated tools.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">📅</div>
+                        <h3>Event Coordination</h3>
+                        <p>Managing registrations, volunteers, and communications for services, classes, and special events is overwhelming with spreadsheets.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">🤝</div>
+                        <h3>Volunteer Management</h3>
+                        <p>Recruiting, scheduling, and communicating with volunteers across multiple ministries or programs creates administrative burden.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">📢</div>
+                        <h3>Communication Gaps</h3>
+                        <p>Reaching the right people with the right message—whether announcements, prayer requests, or updates—through their preferred channels.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">📊</div>
+                        <h3>Reporting & Compliance</h3>
+                        <p>Tracking donations for tax receipts, grant reporting, and demonstrating impact to stakeholders requires organized data.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions -->
+        <section class="solutions-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Solutions</span>
+                    <h2>Non-Profit Software <span class="gradient-text">We Build</span></h2>
+                    <p>Purpose-built technology solutions designed for churches, NGOs, and charitable organizations.</p>
+                </div>
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <div class="icon">💳</div>
+                        <h3>Online Donation Platform</h3>
+                        <p>Make giving easy with modern payment options that work on any device, increasing generosity and recurring gifts.</p>
+                        <ul class="solution-features">
+                            <li>One-time & recurring donations</li>
+                            <li>Multiple fund/campaign support</li>
+                            <li>Text-to-give functionality</li>
+                            <li>Automatic tax receipts</li>
+                            <li>Donor portal & giving history</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">👥</div>
+                        <h3>Member Management System</h3>
+                        <p>Know your community with a comprehensive database that tracks engagement, groups, and spiritual growth.</p>
+                        <ul class="solution-features">
+                            <li>Member profiles & families</li>
+                            <li>Groups & ministry tracking</li>
+                            <li>Attendance monitoring</li>
+                            <li>Visitor follow-up workflows</li>
+                            <li>Custom fields & tags</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📱</div>
+                        <h3>Church / Organization App</h3>
+                        <p>Stay connected with your community through a branded mobile app that puts everything in one place.</p>
+                        <ul class="solution-features">
+                            <li>Sermon library & livestream</li>
+                            <li>Event calendar & registration</li>
+                            <li>In-app giving</li>
+                            <li>Push notifications</li>
+                            <li>Prayer requests & community</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📅</div>
+                        <h3>Event Management System</h3>
+                        <p>Streamline registration, check-in, and coordination for services, classes, camps, and special events.</p>
+                        <ul class="solution-features">
+                            <li>Online registration & payments</li>
+                            <li>Capacity management</li>
+                            <li>Check-in kiosks</li>
+                            <li>Child safety tags</li>
+                            <li>Automated reminders</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">🤝</div>
+                        <h3>Volunteer Coordination</h3>
+                        <p>Recruit, schedule, and appreciate volunteers with tools that make serving easy and rewarding.</p>
+                        <ul class="solution-features">
+                            <li>Volunteer signup & applications</li>
+                            <li>Shift scheduling</li>
+                            <li>Automatic reminders</li>
+                            <li>Hour tracking</li>
+                            <li>Background check integration</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📧</div>
+                        <h3>Communication Platform</h3>
+                        <p>Reach your community through email, SMS, and push notifications with targeted, personalized messaging.</p>
+                        <ul class="solution-features">
+                            <li>Email campaigns & newsletters</li>
+                            <li>SMS/text messaging</li>
+                            <li>Segmented audiences</li>
+                            <li>Prayer request management</li>
+                            <li>Automated workflows</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section class="usecases-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Use Cases</span>
+                    <h2>What We Can <span class="gradient-text">Build For You</span></h2>
+                    <p>Real-world applications for churches, NGOs, and non-profit organizations.</p>
+                </div>
+                <div class="usecases-grid">
+                    <div class="usecase-card">
+                        <h3><span>⛪</span> Church Mobile App</h3>
+                        <p>All-in-one app with sermon archive, event calendar, online giving, prayer wall, group finder, and push notifications. Your church in their pocket.</p>
+                        <span class="usecase-tag">iOS + Android App</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>💝</span> Donation Campaign Platform</h3>
+                        <p>Fundraising platform with campaign pages, progress thermometers, peer-to-peer fundraising, and social sharing for capital campaigns or missions.</p>
+                        <span class="usecase-tag">Web Platform</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>📺</span> Livestream Integration</h3>
+                        <p>Custom streaming page with YouTube/Facebook Live integration, real-time chat, online giving overlay, and sermon archives.</p>
+                        <span class="usecase-tag">Web + Integration</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>👶</span> Children's Check-In System</h3>
+                        <p>Secure check-in kiosks with parent notifications, allergy alerts, authorized pickup management, and capacity tracking for nursery and kids' ministry.</p>
+                        <span class="usecase-tag">Kiosk + Mobile</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🌍</span> NGO Impact Dashboard</h3>
+                        <p>Track and visualize your organization's impact with donor-facing dashboards showing projects, beneficiaries, and outcomes.</p>
+                        <span class="usecase-tag">Web Dashboard</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>📚</span> Online Courses & Discipleship</h3>
+                        <p>Learning management system for Bible studies, membership classes, leadership training, and small group curriculum.</p>
+                        <span class="usecase-tag">LMS Platform</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Showcase -->
+        <section class="showcase-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Work</span>
+                    <h2>Non-Profit Projects <span class="gradient-text">We've Delivered</span></h2>
+                    <p>Real solutions built for churches and charitable organizations.</p>
+                </div>
+                <div class="showcase-grid">
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=600&q=80" alt="Person reading Bible during church service">
+                        <div class="showcase-item-overlay">
+                            <h4>Church Community App</h4>
+                            <p>Sermons, events & giving</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=600&q=80" alt="Hands holding donation box">
+                        <div class="showcase-item-overlay">
+                            <h4>Online Giving Platform</h4>
+                            <p>Recurring donations & campaigns</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80" alt="Volunteers working together">
+                        <div class="showcase-item-overlay">
+                            <h4>Volunteer Management System</h4>
+                            <p>Scheduling & coordination</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=600&q=80" alt="Children in Sunday school classroom">
+                        <div class="showcase-item-overlay">
+                            <h4>Kids Check-In System</h4>
+                            <p>Secure child safety solution</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?w=600&q=80" alt="Person livestreaming church service">
+                        <div class="showcase-item-overlay">
+                            <h4>Livestream Platform</h4>
+                            <p>Online worship experience</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80" alt="NGO humanitarian aid distribution">
+                        <div class="showcase-item-overlay">
+                            <h4>NGO Impact Tracker</h4>
+                            <p>Donor reporting dashboard</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="tech-stack-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Technologies We Use</h2>
+                    <p>Reliable, secure tech stack for non-profit applications.</p>
+                </div>
+                <div class="tech-grid">
+                    <span class="tech-item">React Native</span>
+                    <span class="tech-item">Flutter</span>
+                    <span class="tech-item">React</span>
+                    <span class="tech-item">Next.js</span>
+                    <span class="tech-item">Node.js</span>
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">PostgreSQL</span>
+                    <span class="tech-item">Firebase</span>
+                    <span class="tech-item">Stripe</span>
+                    <span class="tech-item">PayPal</span>
+                    <span class="tech-item">Twilio</span>
+                    <span class="tech-item">SendGrid</span>
+                    <span class="tech-item">AWS</span>
+                    <span class="tech-item">YouTube API</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Amplify Your <span class="gradient-text">Ministry's Impact</span>?</h2>
+                <p>Let's discuss how technology can help you engage your community and advance your mission.</p>
+                <a href="/#contact" class="btn btn-primary btn-lg">Get Free Consultation</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+                    </a>
+                    <p>Transforming ideas into powerful software. Senior developers, modern tech stack, global delivery.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Industries</h4>
+                    <ul>
+                        <li><a href="/industries/fintech.html">FinTech</a></li>
+                        <li><a href="/industries/healthtech.html">HealthTech</a></li>
+                        <li><a href="/industries/hospitality.html">Hospitality</a></li>
+                        <li><a href="/industries/ecommerce.html">E-commerce</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>More Industries</h4>
+                    <ul>
+                        <li><a href="/industries/nonprofit.html">Non-Profits</a></li>
+                        <li><a href="/industries/fitness.html">Fitness</a></li>
+                        <li><a href="/industries/legal.html">Legal</a></li>
+                        <li><a href="/industries/saas.html">SaaS</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/#services">Services</a></li>
+                        <li><a href="/#process">Process</a></li>
+                        <li><a href="/#pricing">Pricing</a></li>
+                        <li><a href="/#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vibe Coding Enthusiast. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <a href="/terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness & Wellness Software Development | Gym, Studio & Health App Solutions | Vibe Coding Enthusiast</title>
+    <meta name="description" content="Custom software for gyms, fitness studios, and wellness businesses. Membership management, class booking, workout tracking, and mobile fitness apps.">
+    <meta name="keywords" content="fitness app development, gym management software, wellness app, class booking system, workout tracker, personal training app, fitness studio software">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/industries/fitness.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .industry-hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        .industry-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .hero-image {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+        .hero-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        .hero-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+        }
+        .hero-image-overlay span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        .hero-image-overlay p {
+            margin: 4px 0 0;
+            font-weight: 600;
+        }
+
+        .showcase-section {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .showcase-item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .showcase-item:hover img {
+            transform: scale(1.05);
+        }
+        .showcase-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 50%, rgba(0,0,0,0.85));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            color: white;
+        }
+        .showcase-item-overlay h4 {
+            font-size: 1.125rem;
+            margin-bottom: 4px;
+        }
+        .showcase-item-overlay p {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 968px) {
+            .hero-content-wrapper { grid-template-columns: 1fr; }
+            .hero-image { margin-top: 40px; }
+            .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .showcase-grid { grid-template-columns: 1fr; }
+        }
+        .industry-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: #22c55e;
+            margin-bottom: 24px;
+        }
+        .industry-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+        .industry-hero .lead {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 48px;
+        }
+        .hero-stat {
+            text-align: left;
+        }
+        .hero-stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #22c55e;
+        }
+        .hero-stat-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .challenges-section {
+            padding: 100px 0;
+        }
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .challenge-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+        }
+        .challenge-card .icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .challenge-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+        .challenge-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .solutions-section {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .solution-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        .solution-card:hover {
+            border-color: #22c55e;
+            transform: translateY(-4px);
+        }
+        .solution-card .icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(6, 182, 212, 0.2));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+        }
+        .solution-card h3 {
+            font-size: 1.375rem;
+            margin-bottom: 16px;
+        }
+        .solution-card p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+        .solution-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .solution-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .solution-features li::before {
+            content: '✓';
+            color: #22c55e;
+            font-weight: 600;
+        }
+
+        .usecases-section {
+            padding: 100px 0;
+        }
+        .usecases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .usecase-card {
+            background: linear-gradient(135deg, var(--bg-card), transparent);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+        .usecase-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .usecase-card h3 span {
+            font-size: 1.5rem;
+        }
+        .usecase-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            flex: 1;
+        }
+        .usecase-tag {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            margin-top: 16px;
+        }
+
+        .tech-stack-section {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+        }
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .tech-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        @media (max-width: 768px) {
+            .industry-hero h1 { font-size: 2.25rem; }
+            .hero-stats { flex-direction: column; gap: 24px; }
+            .solutions-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#industries">Industries</a></li>
+                <li><a href="/#process">Process</a></li>
+                <li><a href="/#work">Work</a></li>
+                <li><a href="/#pricing">Pricing</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-primary">Start Project</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="industry-hero">
+            <div class="container">
+                <div class="hero-content-wrapper">
+                    <div class="hero-text">
+                        <span class="industry-badge">
+                            <span>💪</span> Fitness & Wellness Solutions
+                        </span>
+                        <h1>Software That Powers <span class="gradient-text">Fitness & Wellness</span></h1>
+                        <p class="lead">From gym management and class booking to workout tracking and nutrition apps. We help fitness businesses and wellness brands build engaging digital experiences that keep members coming back.</p>
+                        <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                            <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">$96B</div>
+                                <div class="hero-stat-label">Global fitness market</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">80%</div>
+                                <div class="hero-stat-label">Prefer app-based booking</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">4x</div>
+                                <div class="hero-stat-label">Higher retention with apps</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80" alt="Modern gym interior with fitness equipment">
+                        <div class="hero-image-overlay">
+                            <span>Featured Project</span>
+                            <p>Gym Management Platform</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenges -->
+        <section class="challenges-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Industry Challenges</span>
+                    <h2>Problems We Solve for <span class="gradient-text">Fitness Businesses</span></h2>
+                    <p>The fitness industry faces unique challenges in member retention, operational efficiency, and digital engagement.</p>
+                </div>
+                <div class="challenges-grid">
+                    <div class="challenge-card">
+                        <div class="icon">📉</div>
+                        <h3>Member Retention</h3>
+                        <p>50% of new gym members quit within 6 months. Without engagement tools and progress tracking, motivation fades fast.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">📅</div>
+                        <h3>Class & Booking Management</h3>
+                        <p>Phone calls, walk-ins, and multiple booking systems create chaos. No-shows waste instructor time and frustrate waitlisted members.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">💳</div>
+                        <h3>Payment & Membership Complexity</h3>
+                        <p>Managing memberships, packages, freezes, and recurring payments across multiple pricing tiers is an administrative nightmare.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">👨‍🏫</div>
+                        <h3>Trainer Utilization</h3>
+                        <p>Scheduling personal training sessions, tracking client progress, and managing trainer availability eats up valuable time.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">📱</div>
+                        <h3>Digital Experience Gap</h3>
+                        <p>Members expect mobile apps for booking, workouts, and community—but building one is expensive and time-consuming.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">📊</div>
+                        <h3>Data & Insights</h3>
+                        <p>Understanding member behavior, class popularity, and business performance requires data that's scattered across multiple systems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions -->
+        <section class="solutions-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Solutions</span>
+                    <h2>Fitness Software <span class="gradient-text">We Build</span></h2>
+                    <p>End-to-end technology solutions designed for gyms, studios, trainers, and wellness brands.</p>
+                </div>
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <div class="icon">🏋️</div>
+                        <h3>Gym Management System</h3>
+                        <p>All-in-one platform for managing memberships, access control, billing, and operations from a single dashboard.</p>
+                        <ul class="solution-features">
+                            <li>Membership management & CRM</li>
+                            <li>Automated billing & invoicing</li>
+                            <li>Access control integration</li>
+                            <li>Staff scheduling & payroll</li>
+                            <li>Multi-location support</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📅</div>
+                        <h3>Class Booking System</h3>
+                        <p>Seamless booking experience for members with smart waitlists, reminders, and capacity management.</p>
+                        <ul class="solution-features">
+                            <li>Real-time class schedules</li>
+                            <li>Mobile booking & check-in</li>
+                            <li>Waitlist management</li>
+                            <li>Automated reminders</li>
+                            <li>Cancellation policies</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📱</div>
+                        <h3>Member Mobile App</h3>
+                        <p>Branded mobile app that keeps members engaged with bookings, workouts, progress tracking, and community features.</p>
+                        <ul class="solution-features">
+                            <li>Class booking & schedules</li>
+                            <li>Workout logging & history</li>
+                            <li>Progress photos & measurements</li>
+                            <li>Push notifications</li>
+                            <li>In-app purchases</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">💪</div>
+                        <h3>Workout & Training Apps</h3>
+                        <p>Custom workout apps with exercise libraries, training programs, and progress tracking for trainers or direct-to-consumer.</p>
+                        <ul class="solution-features">
+                            <li>Exercise video library</li>
+                            <li>Custom workout builder</li>
+                            <li>Training program templates</li>
+                            <li>Rep/set tracking</li>
+                            <li>AI-powered recommendations</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">👨‍🏫</div>
+                        <h3>Personal Training Platform</h3>
+                        <p>Tools for trainers to manage clients, deliver programs, track progress, and communicate—in-person or online.</p>
+                        <ul class="solution-features">
+                            <li>Client management & onboarding</li>
+                            <li>Program delivery & tracking</li>
+                            <li>In-app messaging</li>
+                            <li>Session scheduling</li>
+                            <li>Payment processing</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">🥗</div>
+                        <h3>Nutrition & Wellness Apps</h3>
+                        <p>Track nutrition, habits, sleep, and overall wellness with apps that complement fitness goals.</p>
+                        <ul class="solution-features">
+                            <li>Food logging & macros</li>
+                            <li>Meal planning</li>
+                            <li>Habit tracking</li>
+                            <li>Wearable integrations</li>
+                            <li>Coach dashboards</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section class="usecases-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Use Cases</span>
+                    <h2>What We Can <span class="gradient-text">Build For You</span></h2>
+                    <p>Real-world applications for fitness businesses of all types.</p>
+                </div>
+                <div class="usecases-grid">
+                    <div class="usecase-card">
+                        <h3><span>🏢</span> Multi-Gym Management</h3>
+                        <p>Unified platform for gym chains with centralized member database, cross-location access, franchise reporting, and corporate wellness programs.</p>
+                        <span class="usecase-tag">Enterprise Platform</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🧘</span> Yoga/Pilates Studio App</h3>
+                        <p>Beautiful booking app for boutique studios with class packages, series passes, intro offers, and seamless Mindbody or custom integration.</p>
+                        <span class="usecase-tag">Mobile + Web App</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🏃</span> Running/Cycling Community</h3>
+                        <p>Social fitness app with GPS tracking, challenges, leaderboards, group events, and Strava-like activity feeds for your brand.</p>
+                        <span class="usecase-tag">Mobile App + Social</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🎯</span> Online Coaching Platform</h3>
+                        <p>Deliver training programs, nutrition plans, and coaching remotely with video calls, messaging, and progress tracking built-in.</p>
+                        <span class="usecase-tag">Full Platform</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🥊</span> Martial Arts/Boxing Gym</h3>
+                        <p>Belt/rank progression tracking, class scheduling, tournament registration, and family account management for martial arts schools.</p>
+                        <span class="usecase-tag">Web + Mobile</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>⌚</span> Wearable Integration App</h3>
+                        <p>Sync data from Apple Watch, Fitbit, Garmin, and Whoop into a unified dashboard with insights and coaching recommendations.</p>
+                        <span class="usecase-tag">Mobile + API</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Showcase -->
+        <section class="showcase-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Work</span>
+                    <h2>Fitness Projects <span class="gradient-text">We've Delivered</span></h2>
+                    <p>Real solutions built for gyms, studios, and wellness brands.</p>
+                </div>
+                <div class="showcase-grid">
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80" alt="People in fitness class at gym">
+                        <div class="showcase-item-overlay">
+                            <h4>Boutique Fitness Chain App</h4>
+                            <p>Booking for 25+ locations</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="Woman doing yoga pose">
+                        <div class="showcase-item-overlay">
+                            <h4>Yoga Studio Platform</h4>
+                            <p>Classes, workshops & retreats</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c149a?w=600&q=80" alt="Personal trainer with client">
+                        <div class="showcase-item-overlay">
+                            <h4>PT Client Management</h4>
+                            <p>Programs & progress tracking</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&q=80" alt="Runner using fitness app">
+                        <div class="showcase-item-overlay">
+                            <h4>Running Community App</h4>
+                            <p>GPS tracking & challenges</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=600&q=80" alt="CrossFit gym workout">
+                        <div class="showcase-item-overlay">
+                            <h4>CrossFit Box Software</h4>
+                            <p>WOD tracking & leaderboards</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="Healthy meal prep food">
+                        <div class="showcase-item-overlay">
+                            <h4>Nutrition Tracking App</h4>
+                            <p>Meal planning & macros</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="tech-stack-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Technologies We Use</h2>
+                    <p>Modern tech stack for fitness and wellness applications.</p>
+                </div>
+                <div class="tech-grid">
+                    <span class="tech-item">React Native</span>
+                    <span class="tech-item">Flutter</span>
+                    <span class="tech-item">Swift</span>
+                    <span class="tech-item">Kotlin</span>
+                    <span class="tech-item">React</span>
+                    <span class="tech-item">Node.js</span>
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">PostgreSQL</span>
+                    <span class="tech-item">Firebase</span>
+                    <span class="tech-item">Stripe</span>
+                    <span class="tech-item">HealthKit</span>
+                    <span class="tech-item">Google Fit</span>
+                    <span class="tech-item">AWS</span>
+                    <span class="tech-item">Twilio</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Your <span class="gradient-text">Fitness Business</span>?</h2>
+                <p>Let's discuss how technology can boost member retention, streamline operations, and grow your brand.</p>
+                <a href="/#contact" class="btn btn-primary btn-lg">Get Free Consultation</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+                    </a>
+                    <p>Transforming ideas into powerful software. Senior developers, modern tech stack, global delivery.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Industries</h4>
+                    <ul>
+                        <li><a href="/industries/fintech.html">FinTech</a></li>
+                        <li><a href="/industries/healthtech.html">HealthTech</a></li>
+                        <li><a href="/industries/hospitality.html">Hospitality</a></li>
+                        <li><a href="/industries/ecommerce.html">E-commerce</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>More Industries</h4>
+                    <ul>
+                        <li><a href="/industries/nonprofit.html">Non-Profits</a></li>
+                        <li><a href="/industries/fitness.html">Fitness</a></li>
+                        <li><a href="/industries/legal.html">Legal</a></li>
+                        <li><a href="/industries/saas.html">SaaS</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/#services">Services</a></li>
+                        <li><a href="/#process">Process</a></li>
+                        <li><a href="/#pricing">Pricing</a></li>
+                        <li><a href="/#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vibe Coding Enthusiast. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <a href="/terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>

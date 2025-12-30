@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitality Software Development | Restaurant, Cafe & Hotel Solutions | Vibe Coding Enthusiast</title>
+    <meta name="description" content="Custom software for restaurants, cafes, and hotels. Online ordering systems, table reservations, POS integration, loyalty apps, and kitchen management solutions.">
+    <meta name="keywords" content="restaurant software, cafe app development, hotel management system, online ordering, table reservation, POS integration, hospitality tech">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/industries/hospitality.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .industry-hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        .industry-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .hero-image {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+        .hero-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        .hero-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+        }
+        .hero-image-overlay span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        .hero-image-overlay p {
+            margin: 4px 0 0;
+            font-weight: 600;
+        }
+
+        .showcase-section {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .showcase-item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .showcase-item:hover img {
+            transform: scale(1.05);
+        }
+        .showcase-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 50%, rgba(0,0,0,0.85));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            color: white;
+        }
+        .showcase-item-overlay h4 {
+            font-size: 1.125rem;
+            margin-bottom: 4px;
+        }
+        .showcase-item-overlay p {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 968px) {
+            .hero-content-wrapper { grid-template-columns: 1fr; }
+            .hero-image { margin-top: 40px; }
+            .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .showcase-grid { grid-template-columns: 1fr; }
+        }
+        .industry-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: #f97316;
+            margin-bottom: 24px;
+        }
+        .industry-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+        .industry-hero .lead {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 48px;
+        }
+        .hero-stat {
+            text-align: left;
+        }
+        .hero-stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f97316;
+        }
+        .hero-stat-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .challenges-section {
+            padding: 100px 0;
+        }
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .challenge-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+        }
+        .challenge-card .icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .challenge-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+        .challenge-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .solutions-section {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .solution-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        .solution-card:hover {
+            border-color: #f97316;
+            transform: translateY(-4px);
+        }
+        .solution-card .icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(251, 191, 36, 0.2));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+        }
+        .solution-card h3 {
+            font-size: 1.375rem;
+            margin-bottom: 16px;
+        }
+        .solution-card p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+        .solution-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .solution-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .solution-features li::before {
+            content: '✓';
+            color: #f97316;
+            font-weight: 600;
+        }
+
+        .usecases-section {
+            padding: 100px 0;
+        }
+        .usecases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .usecase-card {
+            background: linear-gradient(135deg, var(--bg-card), transparent);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+        .usecase-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .usecase-card h3 span {
+            font-size: 1.5rem;
+        }
+        .usecase-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            flex: 1;
+        }
+        .usecase-tag {
+            display: inline-block;
+            background: rgba(249, 115, 22, 0.1);
+            color: #f97316;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            margin-top: 16px;
+        }
+
+        .tech-stack-section {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+        }
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .tech-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        @media (max-width: 768px) {
+            .industry-hero h1 { font-size: 2.25rem; }
+            .hero-stats { flex-direction: column; gap: 24px; }
+            .solutions-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#industries">Industries</a></li>
+                <li><a href="/#process">Process</a></li>
+                <li><a href="/#work">Work</a></li>
+                <li><a href="/#pricing">Pricing</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-primary">Start Project</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="industry-hero">
+            <div class="container">
+                <div class="hero-content-wrapper">
+                    <div class="hero-text">
+                        <span class="industry-badge">
+                            <span>🍽️</span> Hospitality Solutions
+                        </span>
+                        <h1>Digital Solutions for <span class="gradient-text">Restaurants & Hospitality</span></h1>
+                        <p class="lead">From online ordering and table reservations to kitchen management and loyalty programs. We help restaurants, cafes, and hotels deliver exceptional guest experiences through technology.</p>
+                        <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <a href="/#contact" class="btn btn-primary btn-lg">Discuss Your Project</a>
+                            <a href="/#work" class="btn btn-ghost btn-lg">View Case Studies</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">67%</div>
+                                <div class="hero-stat-label">Prefer online ordering</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">30%</div>
+                                <div class="hero-stat-label">Revenue boost with apps</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">24/7</div>
+                                <div class="hero-stat-label">Booking availability</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Modern restaurant interior with elegant dining setup">
+                        <div class="hero-image-overlay">
+                            <span>Featured Project</span>
+                            <p>Restaurant Management Platform</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenges -->
+        <section class="challenges-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Industry Challenges</span>
+                    <h2>Problems We Solve for <span class="gradient-text">Hospitality Businesses</span></h2>
+                    <p>The hospitality industry faces unique operational challenges that technology can solve.</p>
+                </div>
+                <div class="challenges-grid">
+                    <div class="challenge-card">
+                        <div class="icon">📱</div>
+                        <h3>Fragmented Ordering Channels</h3>
+                        <p>Managing orders from walk-ins, phone calls, website, and multiple delivery apps creates chaos and errors in the kitchen.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">📅</div>
+                        <h3>Reservation Management</h3>
+                        <p>No-shows, overbooking, and manual scheduling waste tables and staff time. Guests expect instant confirmation.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">🍳</div>
+                        <h3>Kitchen Coordination</h3>
+                        <p>Keeping kitchen staff synced with front-of-house, managing ticket times, and ensuring order accuracy under pressure.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">📊</div>
+                        <h3>Inventory & Waste</h3>
+                        <p>Food waste costs restaurants 4-10% of revenue. Without real-time inventory tracking, over-ordering and spoilage pile up.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">💳</div>
+                        <h3>Payment Friction</h3>
+                        <p>Long waits for checks, split bill headaches, and tip calculations frustrate guests and slow table turnover.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="icon">🔄</div>
+                        <h3>Customer Retention</h3>
+                        <p>80% of revenue comes from 20% of customers, but most restaurants lack tools to identify and reward loyal guests.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions -->
+        <section class="solutions-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Solutions</span>
+                    <h2>Hospitality Software <span class="gradient-text">We Build</span></h2>
+                    <p>End-to-end technology solutions designed for restaurants, cafes, bars, and hotels.</p>
+                </div>
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <div class="icon">📲</div>
+                        <h3>Online Ordering Systems</h3>
+                        <p>Custom branded ordering apps and websites that put you in control—no third-party commissions eating your margins.</p>
+                        <ul class="solution-features">
+                            <li>Mobile app (iOS & Android)</li>
+                            <li>Web ordering portal</li>
+                            <li>Real-time menu management</li>
+                            <li>Delivery zone & fee configuration</li>
+                            <li>Integration with delivery partners</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📅</div>
+                        <h3>Table Reservation System</h3>
+                        <p>Smart booking platform that maximizes table utilization while giving guests a seamless reservation experience.</p>
+                        <ul class="solution-features">
+                            <li>Real-time availability display</li>
+                            <li>Automated confirmation & reminders</li>
+                            <li>Waitlist management</li>
+                            <li>Guest preferences & history</li>
+                            <li>No-show protection with deposits</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">🖥️</div>
+                        <h3>POS & Payment Integration</h3>
+                        <p>Connect all your systems for unified order management, payments, and reporting across all channels.</p>
+                        <ul class="solution-features">
+                            <li>Square, Toast, Clover integration</li>
+                            <li>QR code table ordering</li>
+                            <li>Split bills & tip management</li>
+                            <li>Contactless payments</li>
+                            <li>Real-time sales reporting</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">👨‍🍳</div>
+                        <h3>Kitchen Display System</h3>
+                        <p>Digital ticket management that keeps your kitchen running smoothly during the busiest rushes.</p>
+                        <ul class="solution-features">
+                            <li>Order queue prioritization</li>
+                            <li>Prep time tracking</li>
+                            <li>Station-based routing</li>
+                            <li>Bump screen functionality</li>
+                            <li>Performance analytics</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">⭐</div>
+                        <h3>Loyalty & Rewards Programs</h3>
+                        <p>Turn first-time visitors into regulars with engaging loyalty programs that drive repeat business.</p>
+                        <ul class="solution-features">
+                            <li>Points & rewards system</li>
+                            <li>Digital stamp cards</li>
+                            <li>Birthday & anniversary perks</li>
+                            <li>Referral programs</li>
+                            <li>Targeted promotions</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📦</div>
+                        <h3>Inventory Management</h3>
+                        <p>Track ingredients in real-time, reduce waste, and automate reordering to keep your kitchen stocked.</p>
+                        <ul class="solution-features">
+                            <li>Real-time stock tracking</li>
+                            <li>Recipe costing</li>
+                            <li>Waste logging & analysis</li>
+                            <li>Supplier management</li>
+                            <li>Auto-reorder alerts</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section class="usecases-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Use Cases</span>
+                    <h2>What We Can <span class="gradient-text">Build For You</span></h2>
+                    <p>Real-world applications for hospitality businesses of all sizes.</p>
+                </div>
+                <div class="usecases-grid">
+                    <div class="usecase-card">
+                        <h3><span>🍕</span> Restaurant Ordering App</h3>
+                        <p>Custom mobile app with menu browsing, customization options, saved favorites, order tracking, and in-app payments. Reduce third-party fees by 30%.</p>
+                        <span class="usecase-tag">Mobile App + Backend</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>☕</span> Cafe Loyalty Platform</h3>
+                        <p>Digital punch card system with QR scanning, reward tiers, push notifications for nearby customers, and integration with your POS.</p>
+                        <span class="usecase-tag">Web + Mobile + POS</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🏨</span> Hotel Booking Engine</h3>
+                        <p>Direct booking platform with room availability, rate management, upsells, and integration with channel managers like Booking.com and Expedia.</p>
+                        <span class="usecase-tag">Full Stack + Integration</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🍸</span> Bar Tab System</h3>
+                        <p>Open/close tabs digitally, split checks between guests, integrate with POS, and enable contactless payment when ready to leave.</p>
+                        <span class="usecase-tag">Mobile + POS Integration</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>🚚</span> Delivery Management</h3>
+                        <p>Unified dashboard for DoorDash, UberEats, and direct orders. Auto-accept rules, driver tracking, and delivery zone optimization.</p>
+                        <span class="usecase-tag">Integration Platform</span>
+                    </div>
+                    <div class="usecase-card">
+                        <h3><span>👥</span> Staff Scheduling App</h3>
+                        <p>Shift management with availability tracking, swap requests, labor cost forecasting, and automated schedule generation based on predicted demand.</p>
+                        <span class="usecase-tag">Web App + Mobile</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Showcase -->
+        <section class="showcase-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Our Work</span>
+                    <h2>Hospitality Projects <span class="gradient-text">We've Delivered</span></h2>
+                    <p>Real solutions built for restaurants, cafes, and hotels.</p>
+                </div>
+                <div class="showcase-grid">
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Restaurant interior with modern ambiance">
+                        <div class="showcase-item-overlay">
+                            <h4>Multi-Location Restaurant App</h4>
+                            <p>Ordering & loyalty for 12 locations</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80" alt="Coffee shop counter with barista">
+                        <div class="showcase-item-overlay">
+                            <h4>Cafe Chain Loyalty System</h4>
+                            <p>50K+ active members</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="Luxury hotel pool and exterior">
+                        <div class="showcase-item-overlay">
+                            <h4>Boutique Hotel Booking</h4>
+                            <p>Direct booking platform</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Fine dining restaurant table setting">
+                        <div class="showcase-item-overlay">
+                            <h4>Fine Dining Reservation System</h4>
+                            <p>Waitlist & table management</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&q=80" alt="Fast food kitchen with order screens">
+                        <div class="showcase-item-overlay">
+                            <h4>Kitchen Display System</h4>
+                            <p>Real-time order management</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&q=80" alt="Food delivery on smartphone">
+                        <div class="showcase-item-overlay">
+                            <h4>Delivery Aggregator Dashboard</h4>
+                            <p>Unified multi-platform orders</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="tech-stack-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Technologies We Use</h2>
+                    <p>Modern tech stack for hospitality applications.</p>
+                </div>
+                <div class="tech-grid">
+                    <span class="tech-item">React Native</span>
+                    <span class="tech-item">Flutter</span>
+                    <span class="tech-item">Node.js</span>
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">React</span>
+                    <span class="tech-item">Next.js</span>
+                    <span class="tech-item">PostgreSQL</span>
+                    <span class="tech-item">Firebase</span>
+                    <span class="tech-item">Stripe</span>
+                    <span class="tech-item">Square API</span>
+                    <span class="tech-item">Toast API</span>
+                    <span class="tech-item">AWS</span>
+                    <span class="tech-item">Twilio</span>
+                    <span class="tech-item">SendGrid</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Modernize Your <span class="gradient-text">Restaurant or Hotel</span>?</h2>
+                <p>Let's discuss how technology can increase your revenue, reduce costs, and delight your guests.</p>
+                <a href="/#contact" class="btn btn-primary btn-lg">Get Free Consultation</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+                    </a>
+                    <p>Transforming ideas into powerful software. Senior developers, modern tech stack, global delivery.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Industries</h4>
+                    <ul>
+                        <li><a href="/industries/fintech.html">FinTech</a></li>
+                        <li><a href="/industries/healthtech.html">HealthTech</a></li>
+                        <li><a href="/industries/hospitality.html">Hospitality</a></li>
+                        <li><a href="/industries/ecommerce.html">E-commerce</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>More Industries</h4>
+                    <ul>
+                        <li><a href="/industries/nonprofit.html">Non-Profits</a></li>
+                        <li><a href="/industries/fitness.html">Fitness</a></li>
+                        <li><a href="/industries/legal.html">Legal</a></li>
+                        <li><a href="/industries/saas.html">SaaS</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/#services">Services</a></li>
+                        <li><a href="/#process">Process</a></li>
+                        <li><a href="/#pricing">Pricing</a></li>
+                        <li><a href="/#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vibe Coding Enthusiast. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <a href="/terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
