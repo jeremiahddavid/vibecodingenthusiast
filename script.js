@@ -104,6 +104,10 @@ function initMobileMenu() {
             flex-direction: column;
             padding: 32px 24px;
             gap: 8px;
+            list-style: none;
+        }
+        .mobile-nav li {
+            list-style: none;
         }
         .mobile-nav a {
             display: block;
