@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>Build an AI Donor Insights Dashboard | AI Build Guides | Vibe Coding Enthusiast</title>
+    <meta name="title" content="Build an AI Donor Insights Dashboard | AI Build Guides | Vibe Coding Enthusiast">
+    <meta name="description" content="Build a donor analytics dashboard with AI-powered insights for nonprofits. Learn to create donation tracking, trend analysis, and automated reports using Next.js, Supabase, and Claude API.">
+    <meta name="keywords" content="donor dashboard, nonprofit software, AI analytics, donation tracking, Claude API, Supabase, Next.js, nonprofit technology, ai development, vibe coding, build guide, tutorial">
+    <meta name="author" content="Vibe Coding Enthusiast">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/guides/nonprofit-donor-dashboard.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/guides/nonprofit-donor-dashboard.html">
+    <meta property="og:title" content="Build an AI Donor Insights Dashboard | AI Build Guides">
+    <meta property="og:description" content="Build a donor analytics dashboard with AI-powered insights for nonprofits. Learn to create donation tracking, trend analysis, and automated reports using Next.js, Supabase, and Claude API.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/guides/images/nonprofit-donor-dashboard-og.png">
+    <meta property="og:site_name" content="Vibe Coding Enthusiast">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2025-01-14">
+    <meta property="article:modified_time" content="2025-01-14">
+    <meta property="article:author" content="Vibe Coding Enthusiast">
+    <meta property="article:section" content="AI Build Guides">
+    <meta property="article:tag" content="Nonprofit">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://vibecodingenthusiast.com/guides/nonprofit-donor-dashboard.html">
+    <meta name="twitter:title" content="Build an AI Donor Insights Dashboard | AI Build Guides">
+    <meta name="twitter:description" content="Build a donor analytics dashboard with AI-powered insights for nonprofits. Learn to create donation tracking, trend analysis, and automated reports using Next.js, Supabase, and Claude API.">
+    <meta name="twitter:image" content="https://vibecodingenthusiast.com/guides/images/nonprofit-donor-dashboard-og.png">
+    <meta name="twitter:creator" content="@vibecodingenthusiast">
+
+    <!-- Schema.org JSON-LD for TechArticle -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Build an AI Donor Insights Dashboard",
+        "description": "Build a donor analytics dashboard with AI-powered insights for nonprofits. Learn to create donation tracking, trend analysis, and automated reports using Next.js, Supabase, and Claude API.",
+        "image": "https://vibecodingenthusiast.com/guides/images/nonprofit-donor-dashboard-og.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "url": "https://vibecodingenthusiast.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vibecodingenthusiast.com/favicon.png"
+            }
+        },
+        "datePublished": "2025-01-14",
+        "dateModified": "2025-01-14",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://vibecodingenthusiast.com/guides/nonprofit-donor-dashboard.html"
+        },
+        "articleSection": "AI Build Guides",
+        "keywords": "donor dashboard, nonprofit software, AI analytics, donation tracking, Claude API, Supabase, Next.js",
+        "proficiencyLevel": "Beginner",
+        "dependencies": "Next.js 14, Supabase, Claude API, Recharts, Vercel",
+        "timeRequired": "PT180M"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <!-- Guide-Specific Styles -->
+    <style>
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-green));
+            z-index: 1001;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .breadcrumb a:hover {
+            color: var(--accent-primary);
+        }
+        .breadcrumb-separator {
+            color: var(--text-muted);
+        }
+        .breadcrumb-current {
+            color: var(--text-primary);
+        }
+
+        /* Guide Meta Badges */
+        .guide-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .badge-beginner {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .badge-intermediate {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .badge-advanced {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .badge-time {
+            background: rgba(129, 140, 248, 0.15);
+            color: var(--accent-primary);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+        }
+        .badge-time svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Article Title */
+        .article-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            max-width: 900px;
+        }
+        .article-header .lead {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 700px;
+            margin-bottom: 28px;
+        }
+
+        /* Share Buttons in Header */
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .share-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+        .share-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Article Layout - Main Content with Sidebar */
+        .article-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        @media (max-width: 1100px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+        @media (max-width: 1100px) {
+            .toc-sidebar {
+                position: static;
+                background: var(--bg-card);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-lg);
+                padding: 24px;
+            }
+        }
+        .toc-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+        .toc-list a {
+            display: block;
+            padding: 8px 12px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            transition: all 0.2s ease;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        .toc-list a:hover {
+            color: var(--text-primary);
+            background: rgba(129, 140, 248, 0.08);
+        }
+        .toc-list a.active {
+            color: var(--accent-primary);
+            border-left-color: var(--accent-primary);
+            background: rgba(129, 140, 248, 0.1);
+        }
+        .toc-list .toc-h3 {
+            padding-left: 24px;
+            font-size: 0.8125rem;
+        }
+
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+        }
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+        .article-content h2:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        .article-content h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        .article-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .article-content ul,
+        .article-content ol {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Tech Stack Table */
+        .tech-stack-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0 32px;
+            font-size: 0.9rem;
+        }
+        .tech-stack-table thead {
+            background: var(--bg-secondary);
+        }
+        .tech-stack-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+        }
+        .tech-stack-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        .tech-stack-table tbody tr:hover {
+            background: rgba(129, 140, 248, 0.04);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            position: relative;
+            margin: 24px 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: #1a1b26;
+            border: 1px solid var(--border-color);
+        }
+        .code-block pre {
+            margin: 0;
+            padding: 20px 24px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.7;
+            color: #c0caf5;
+        }
+        .code-block code {
+            font-family: inherit;
+        }
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .code-lang {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #a9b1d6;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .code-copy-btn {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-sm);
+            color: #a9b1d6;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .code-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        .code-copy-btn.copied {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.4);
+            color: #10b981;
+        }
+
+        /* Code Syntax Highlighting */
+        .code-block .keyword { color: #bb9af7; }
+        .code-block .string { color: #9ece6a; }
+        .code-block .comment { color: #565f89; font-style: italic; }
+        .code-block .function { color: #7aa2f7; }
+        .code-block .variable { color: #c0caf5; }
+        .code-block .property { color: #73daca; }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 20px 24px;
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+            border-left: 4px solid;
+        }
+        .callout-tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+        }
+        .callout-tip .callout-title { color: #10b981; }
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: #f59e0b;
+        }
+        .callout-warning .callout-title { color: #f59e0b; }
+        .callout-info {
+            background: rgba(129, 140, 248, 0.1);
+            border-color: var(--accent-primary);
+        }
+        .callout-info .callout-title { color: var(--accent-primary); }
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .callout p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Share Section at Bottom */
+        .share-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 32px 0;
+            margin-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+        .share-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Related Guides */
+        .related-guides {
+            margin-top: 64px;
+            padding-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+        .related-guides-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .related-guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .related-guide-card {
+            display: block;
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .related-guide-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .related-guide-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .related-guide-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            margin-top: 64px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(129, 140, 248, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+        .newsletter-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            margin-top: 0;
+        }
+        .newsletter-section > p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            padding: 14px 18px;
+            font-size: 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .newsletter-form input[type="email"]:focus {
+            border-color: var(--accent-primary);
+        }
+        .newsletter-form input[type="email"]::placeholder {
+            color: var(--text-muted);
+        }
+        .newsletter-form button {
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .newsletter-form button:hover {
+            background: #6366f1;
+            transform: translateY(-1px);
+        }
+        @media (max-width: 520px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .newsletter-form button {
+                width: 100%;
+            }
+        }
+
+        /* Image styling */
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Anchor links */
+        .article-content h2 .anchor-link,
+        .article-content h3 .anchor-link {
+            opacity: 0;
+            margin-left: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        .article-content h2:hover .anchor-link,
+        .article-content h3:hover .anchor-link {
+            opacity: 1;
+        }
+        .article-content h2 .anchor-link:hover,
+        .article-content h3 .anchor-link:hover {
+            color: var(--accent-primary);
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="readingProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container" role="navigation" aria-label="Main navigation">
+            <a href="/" class="logo" aria-label="Vibe Coding Enthusiast - Home">
+                <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/paths/">Paths</a></li>
+                <li><a href="/learn/">Learn</a></li>
+                <li><a href="/tools/">Tools</a></li>
+                <li><a href="/stacks/">Stacks</a></li>
+                <li><a href="/#about">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/guides/" class="btn btn-primary">Explore Guides</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <!-- Breadcrumb Navigation -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <a href="/guides/">Guides</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <span class="breadcrumb-current" aria-current="page">AI Donor Insights Dashboard</span>
+                </nav>
+
+                <!-- Guide Meta Badges -->
+                <div class="guide-meta">
+                    <span class="badge badge-beginner">Beginner</span>
+                    <span class="badge badge-time">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        ~3 hours
+                    </span>
+                </div>
+
+                <!-- Title -->
+                <h1 class="gradient-text">Build an AI Donor Insights Dashboard</h1>
+
+                <!-- Description -->
+                <p class="lead">Create a powerful donor analytics dashboard with AI-powered insights. Track donations, analyze giving trends, predict donor behavior, and generate automated reports - all designed for churches, NGOs, and nonprofit organizations.</p>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons" role="group" aria-label="Share this guide">
+                    <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content with TOC Sidebar -->
+        <div class="article-layout">
+            <!-- Table of Contents Sidebar -->
+            <aside class="toc-sidebar" aria-label="Table of contents">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list" id="tocList">
+                    <noscript>
+                        <li><a href="#overview">What We're Building</a></li>
+                        <li><a href="#prerequisites">Prerequisites</a></li>
+                        <li><a href="#tech-stack">Tech Stack</a></li>
+                        <li><a href="#ai-workflow">AI Agent Workflow</a></li>
+                        <li><a href="#build-steps">Build Steps</a></li>
+                        <li><a href="#common-issues">Common Issues</a></li>
+                        <li><a href="#next-steps">Next Steps</a></li>
+                    </noscript>
+                </ul>
+            </aside>
+
+            <!-- Article Content -->
+            <article class="article-content">
+                <!-- Section: What We're Building -->
+                <h2 id="overview">What We're Building</h2>
+                <p>In this guide, you'll build a complete donor insights dashboard that helps nonprofits understand their giving patterns and make data-driven decisions. The dashboard will feature:</p>
+                <ul>
+                    <li><strong>Real-time donation tracking</strong> - View incoming donations as they happen</li>
+                    <li><strong>Interactive data visualizations</strong> - Charts showing donation trends, campaign performance, and donor segments</li>
+                    <li><strong>AI-powered insights</strong> - Claude analyzes your donor data to identify trends, predict lapsed donors, and suggest engagement strategies</li>
+                    <li><strong>Automated report generation</strong> - Create PDF reports for board meetings and stakeholders</li>
+                    <li><strong>Email summary automation</strong> - Weekly digest emails with key metrics and AI recommendations</li>
+                </ul>
+                <p>This dashboard addresses a major nonprofit challenge: 73% of donors prefer online giving, yet many organizations lack the tools to analyze their donor base effectively. By the end of this guide, you'll have a production-ready dashboard that can help increase donor retention and optimize fundraising campaigns.</p>
+
+                <!-- Section: Prerequisites -->
+                <h2 id="prerequisites">Prerequisites</h2>
+                <p>Before starting this guide, make sure you have the following:</p>
+                <ul>
+                    <li><strong>Node.js 18+</strong> installed on your machine</li>
+                    <li><strong>A Supabase account</strong> (free tier works perfectly)</li>
+                    <li><strong>A Claude API key</strong> from Anthropic</li>
+                    <li><strong>A Vercel account</strong> for deployment (free tier)</li>
+                    <li>Basic familiarity with React and TypeScript (beginner level is fine)</li>
+                </ul>
+
+                <!-- Section: Tech Stack -->
+                <h2 id="tech-stack">Tech Stack Specification</h2>
+                <p>Here's the technology stack we'll use for this build:</p>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Layer</th>
+                            <th scope="col">Technology</th>
+                            <th scope="col">Why This Choice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frontend</td>
+                            <td>Next.js 14, Recharts</td>
+                            <td>Server components for fast loading, Recharts for beautiful donation visualizations</td>
+                        </tr>
+                        <tr>
+                            <td>Backend</td>
+                            <td>Supabase Edge Functions</td>
+                            <td>Simple serverless functions, no server management, generous free tier</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>Supabase (PostgreSQL)</td>
+                            <td>Built-in auth, real-time subscriptions, row-level security for donor data</td>
+                        </tr>
+                        <tr>
+                            <td>AI/API</td>
+                            <td>Claude API</td>
+                            <td>Best-in-class reasoning for donor trend analysis and natural language insights</td>
+                        </tr>
+                        <tr>
+                            <td>Hosting</td>
+                            <td>Vercel</td>
+                            <td>Free hosting, automatic deployments, excellent Next.js integration</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Section: AI Agent Workflow -->
+                <h2 id="ai-workflow">AI Agent Workflow</h2>
+                <p>Here's how to leverage AI tools throughout this build to maximize productivity:</p>
+
+                <h3 id="ai-scaffolding">Project Scaffolding with Claude Code</h3>
+                <p>Use Claude Code to scaffold the entire project structure, including the database schema, API routes, and React components. This saves hours of boilerplate setup.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Prompt</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Example prompt for Claude Code</span>
+Create a Next.js 14 donor dashboard with:
+- Supabase integration for donor/donation data
+- Dashboard page with donation charts using Recharts
+- API route for Claude AI insights generation
+- TypeScript throughout
+- Tailwind CSS styling</code></pre>
+                </div>
+
+                <h3 id="ai-ui">UI Generation with v0.dev</h3>
+                <p>Use v0.dev to generate the dashboard UI components. Describe the nonprofit-focused interface you need, and it will create production-ready React components with Tailwind styling.</p>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Pro Tip
+                    </div>
+                    <p>When prompting v0.dev, mention "nonprofit dashboard" and "donation metrics" to get more relevant card layouts and color schemes. Request dark mode support since many dashboard users prefer it.</p>
+                </div>
+
+                <h3 id="ai-debugging">Development with Cursor</h3>
+                <p>Cursor's AI-powered autocomplete understands your Supabase schema and can generate type-safe queries. Use Cmd+K to ask questions about integrating Claude API or fixing TypeScript errors.</p>
+
+                <!-- Section: Build Steps -->
+                <h2 id="build-steps">Step-by-Step Build Guide</h2>
+
+                <h3 id="phase-1">Phase 1: Dashboard Layout Setup</h3>
+                <p>Start by creating the Next.js project and setting up the basic dashboard structure with navigation, sidebar, and main content area.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Terminal</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Create new Next.js project</span>
+npx create-next-app@latest donor-dashboard --typescript --tailwind --eslint --app
+
+<span class="comment"># Navigate to project</span>
+cd donor-dashboard
+
+<span class="comment"># Install dependencies</span>
+npm install @supabase/supabase-js recharts @anthropic-ai/sdk date-fns
+
+<span class="comment"># Install dev dependencies</span>
+npm install -D @types/recharts</code></pre>
+                </div>
+
+                <p>Create the dashboard layout component that will wrap all dashboard pages:</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript - app/dashboard/layout.tsx</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="keyword">export default function</span> <span class="function">DashboardLayout</span>({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  <span class="keyword">return</span> (
+    &lt;div className=<span class="string">"flex min-h-screen bg-gray-950"</span>&gt;
+      <span class="comment">{/* Sidebar */}</span>
+      &lt;aside className=<span class="string">"w-64 border-r border-gray-800 p-6"</span>&gt;
+        &lt;div className=<span class="string">"mb-8"</span>&gt;
+          &lt;h1 className=<span class="string">"text-xl font-bold text-white"</span>&gt;
+            Donor Insights
+          &lt;/h1&gt;
+          &lt;p className=<span class="string">"text-sm text-gray-400"</span>&gt;AI-Powered Analytics&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;nav className=<span class="string">"space-y-2"</span>&gt;
+          &lt;NavLink href=<span class="string">"/dashboard"</span> icon=<span class="string">"chart"</span>&gt;Overview&lt;/NavLink&gt;
+          &lt;NavLink href=<span class="string">"/dashboard/donors"</span> icon=<span class="string">"users"</span>&gt;Donors&lt;/NavLink&gt;
+          &lt;NavLink href=<span class="string">"/dashboard/campaigns"</span> icon=<span class="string">"target"</span>&gt;Campaigns&lt;/NavLink&gt;
+          &lt;NavLink href=<span class="string">"/dashboard/insights"</span> icon=<span class="string">"sparkles"</span>&gt;AI Insights&lt;/NavLink&gt;
+          &lt;NavLink href=<span class="string">"/dashboard/reports"</span> icon=<span class="string">"file"</span>&gt;Reports&lt;/NavLink&gt;
+        &lt;/nav&gt;
+      &lt;/aside&gt;
+
+      <span class="comment">{/* Main content */}</span>
+      &lt;main className=<span class="string">"flex-1 p-8"</span>&gt;
+        {children}
+      &lt;/main&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+                </div>
+
+                <h3 id="phase-2">Phase 2: Donor Database Schema</h3>
+                <p>Set up the Supabase database with tables for donors, donations, and campaigns. This schema supports tracking donation history, recurring gifts, and campaign attribution.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">SQL - Supabase SQL Editor</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment">-- Donors table</span>
+<span class="keyword">CREATE TABLE</span> donors (
+  id UUID <span class="keyword">DEFAULT</span> gen_random_uuid() <span class="keyword">PRIMARY KEY</span>,
+  email TEXT <span class="keyword">UNIQUE NOT NULL</span>,
+  first_name TEXT <span class="keyword">NOT NULL</span>,
+  last_name TEXT <span class="keyword">NOT NULL</span>,
+  phone TEXT,
+  address JSONB,
+  first_donation_date TIMESTAMPTZ,
+  last_donation_date TIMESTAMPTZ,
+  total_donated DECIMAL(10,2) <span class="keyword">DEFAULT</span> 0,
+  donation_count INTEGER <span class="keyword">DEFAULT</span> 0,
+  is_recurring BOOLEAN <span class="keyword">DEFAULT</span> false,
+  donor_tier TEXT <span class="keyword">DEFAULT</span> <span class="string">'standard'</span>, <span class="comment">-- standard, silver, gold, platinum</span>
+  tags TEXT[],
+  notes TEXT,
+  created_at TIMESTAMPTZ <span class="keyword">DEFAULT</span> now(),
+  updated_at TIMESTAMPTZ <span class="keyword">DEFAULT</span> now()
+);
+
+<span class="comment">-- Campaigns table</span>
+<span class="keyword">CREATE TABLE</span> campaigns (
+  id UUID <span class="keyword">DEFAULT</span> gen_random_uuid() <span class="keyword">PRIMARY KEY</span>,
+  name TEXT <span class="keyword">NOT NULL</span>,
+  description TEXT,
+  goal_amount DECIMAL(10,2),
+  raised_amount DECIMAL(10,2) <span class="keyword">DEFAULT</span> 0,
+  start_date TIMESTAMPTZ <span class="keyword">NOT NULL</span>,
+  end_date TIMESTAMPTZ,
+  status TEXT <span class="keyword">DEFAULT</span> <span class="string">'active'</span>, <span class="comment">-- active, completed, paused</span>
+  created_at TIMESTAMPTZ <span class="keyword">DEFAULT</span> now()
+);
+
+<span class="comment">-- Donations table</span>
+<span class="keyword">CREATE TABLE</span> donations (
+  id UUID <span class="keyword">DEFAULT</span> gen_random_uuid() <span class="keyword">PRIMARY KEY</span>,
+  donor_id UUID <span class="keyword">REFERENCES</span> donors(id) <span class="keyword">ON DELETE SET NULL</span>,
+  campaign_id UUID <span class="keyword">REFERENCES</span> campaigns(id) <span class="keyword">ON DELETE SET NULL</span>,
+  amount DECIMAL(10,2) <span class="keyword">NOT NULL</span>,
+  currency TEXT <span class="keyword">DEFAULT</span> <span class="string">'USD'</span>,
+  payment_method TEXT, <span class="comment">-- card, bank, check, cash</span>
+  is_recurring BOOLEAN <span class="keyword">DEFAULT</span> false,
+  recurring_frequency TEXT, <span class="comment">-- weekly, monthly, yearly</span>
+  status TEXT <span class="keyword">DEFAULT</span> <span class="string">'completed'</span>, <span class="comment">-- pending, completed, refunded</span>
+  notes TEXT,
+  donated_at TIMESTAMPTZ <span class="keyword">DEFAULT</span> now(),
+  created_at TIMESTAMPTZ <span class="keyword">DEFAULT</span> now()
+);
+
+<span class="comment">-- Create indexes for performance</span>
+<span class="keyword">CREATE INDEX</span> idx_donations_donor_id <span class="keyword">ON</span> donations(donor_id);
+<span class="keyword">CREATE INDEX</span> idx_donations_campaign_id <span class="keyword">ON</span> donations(campaign_id);
+<span class="keyword">CREATE INDEX</span> idx_donations_donated_at <span class="keyword">ON</span> donations(donated_at);
+<span class="keyword">CREATE INDEX</span> idx_donors_last_donation <span class="keyword">ON</span> donors(last_donation_date);</code></pre>
+                </div>
+
+                <h3 id="phase-3">Phase 3: Data Visualization Components</h3>
+                <p>Build the chart components using Recharts to display donation trends, campaign progress, and donor segments. These visualizations help nonprofit staff quickly understand their fundraising performance.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript - components/DonationTrendChart.tsx</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="string">'use client'</span>
+
+<span class="keyword">import</span> {
+  AreaChart, Area, XAxis, YAxis, CartesianGrid,
+  Tooltip, ResponsiveContainer
+} <span class="keyword">from</span> <span class="string">'recharts'</span>
+<span class="keyword">import</span> { format } <span class="keyword">from</span> <span class="string">'date-fns'</span>
+
+<span class="keyword">interface</span> DonationData {
+  date: <span class="property">string</span>
+  amount: <span class="property">number</span>
+  count: <span class="property">number</span>
+}
+
+<span class="keyword">interface</span> Props {
+  data: DonationData[]
+  timeRange: <span class="string">'7d'</span> | <span class="string">'30d'</span> | <span class="string">'90d'</span> | <span class="string">'1y'</span>
+}
+
+<span class="keyword">export function</span> <span class="function">DonationTrendChart</span>({ data, timeRange }: Props) {
+  <span class="keyword">const</span> formatDate = (dateStr: <span class="property">string</span>) =&gt; {
+    <span class="keyword">const</span> date = <span class="keyword">new</span> Date(dateStr)
+    <span class="keyword">return</span> timeRange === <span class="string">'7d'</span>
+      ? format(date, <span class="string">'EEE'</span>)
+      : format(date, <span class="string">'MMM d'</span>)
+  }
+
+  <span class="keyword">const</span> formatCurrency = (value: <span class="property">number</span>) =&gt;
+    <span class="keyword">new</span> Intl.NumberFormat(<span class="string">'en-US'</span>, {
+      style: <span class="string">'currency'</span>,
+      currency: <span class="string">'USD'</span>,
+      minimumFractionDigits: 0,
+    }).format(value)
+
+  <span class="keyword">return</span> (
+    &lt;div className=<span class="string">"bg-gray-900 rounded-xl p-6 border border-gray-800"</span>&gt;
+      &lt;div className=<span class="string">"flex justify-between items-center mb-6"</span>&gt;
+        &lt;div&gt;
+          &lt;h3 className=<span class="string">"text-lg font-semibold text-white"</span>&gt;
+            Donation Trends
+          &lt;/h3&gt;
+          &lt;p className=<span class="string">"text-sm text-gray-400"</span>&gt;
+            Total donations over time
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;TimeRangeSelector value={timeRange} /&gt;
+      &lt;/div&gt;
+
+      &lt;ResponsiveContainer width=<span class="string">"100%"</span> height={300}&gt;
+        &lt;AreaChart data={data}&gt;
+          &lt;defs&gt;
+            &lt;linearGradient id=<span class="string">"donationGradient"</span> x1=<span class="string">"0"</span> y1=<span class="string">"0"</span> x2=<span class="string">"0"</span> y2=<span class="string">"1"</span>&gt;
+              &lt;stop offset=<span class="string">"5%"</span> stopColor=<span class="string">"#8b5cf6"</span> stopOpacity={0.3}/&gt;
+              &lt;stop offset=<span class="string">"95%"</span> stopColor=<span class="string">"#8b5cf6"</span> stopOpacity={0}/&gt;
+            &lt;/linearGradient&gt;
+          &lt;/defs&gt;
+          &lt;CartesianGrid strokeDasharray=<span class="string">"3 3"</span> stroke=<span class="string">"#374151"</span> /&gt;
+          &lt;XAxis
+            dataKey=<span class="string">"date"</span>
+            tickFormatter={formatDate}
+            stroke=<span class="string">"#9ca3af"</span>
+            fontSize={12}
+          /&gt;
+          &lt;YAxis
+            tickFormatter={formatCurrency}
+            stroke=<span class="string">"#9ca3af"</span>
+            fontSize={12}
+          /&gt;
+          &lt;Tooltip
+            content={&lt;CustomTooltip /&gt;}
+            cursor={{ stroke: <span class="string">'#8b5cf6'</span>, strokeWidth: 1 }}
+          /&gt;
+          &lt;Area
+            type=<span class="string">"monotone"</span>
+            dataKey=<span class="string">"amount"</span>
+            stroke=<span class="string">"#8b5cf6"</span>
+            strokeWidth={2}
+            fill=<span class="string">"url(#donationGradient)"</span>
+          /&gt;
+        &lt;/AreaChart&gt;
+      &lt;/ResponsiveContainer&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+                </div>
+
+                <h3 id="phase-4">Phase 4: AI Insight Generation</h3>
+                <p>This is the core of the dashboard - using Claude to analyze donor data and generate actionable insights. The AI identifies patterns humans might miss, such as donors at risk of lapsing or optimal times for outreach.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript - app/api/insights/route.ts</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="keyword">import</span> Anthropic <span class="keyword">from</span> <span class="string">'@anthropic-ai/sdk'</span>
+<span class="keyword">import</span> { createClient } <span class="keyword">from</span> <span class="string">'@supabase/supabase-js'</span>
+<span class="keyword">import</span> { NextResponse } <span class="keyword">from</span> <span class="string">'next/server'</span>
+
+<span class="keyword">const</span> anthropic = <span class="keyword">new</span> Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY!,
+})
+
+<span class="keyword">const</span> supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_KEY!
+)
+
+<span class="keyword">export async function</span> <span class="function">POST</span>(request: Request) {
+  <span class="keyword">try</span> {
+    <span class="keyword">const</span> { insightType } = <span class="keyword">await</span> request.json()
+
+    <span class="comment">// Fetch donor data for analysis</span>
+    <span class="keyword">const</span> { data: donors } = <span class="keyword">await</span> supabase
+      .from(<span class="string">'donors'</span>)
+      .select(<span class="string">`
+        *,
+        donations (
+          amount,
+          donated_at,
+          campaign_id,
+          is_recurring
+        )
+      `</span>)
+      .order(<span class="string">'total_donated'</span>, { ascending: false })
+      .limit(500)
+
+    <span class="comment">// Fetch recent donation trends</span>
+    <span class="keyword">const</span> { data: recentDonations } = <span class="keyword">await</span> supabase
+      .from(<span class="string">'donations'</span>)
+      .select(<span class="string">'amount, donated_at, is_recurring'</span>)
+      .gte(<span class="string">'donated_at'</span>, <span class="keyword">new</span> Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString())
+      .order(<span class="string">'donated_at'</span>, { ascending: false })
+
+    <span class="comment">// Build context for Claude</span>
+    <span class="keyword">const</span> donorSummary = {
+      totalDonors: donors?.length || 0,
+      totalRaised: donors?.reduce((sum, d) =&gt; sum + (d.total_donated || 0), 0),
+      recurringDonors: donors?.filter(d =&gt; d.is_recurring).length || 0,
+      avgDonation: recentDonations?.length
+        ? recentDonations.reduce((sum, d) =&gt; sum + d.amount, 0) / recentDonations.length
+        : 0,
+      <span class="comment">// Donors who haven't given in 60+ days</span>
+      atRiskDonors: donors?.filter(d =&gt; {
+        <span class="keyword">if</span> (!d.last_donation_date) <span class="keyword">return</span> false
+        <span class="keyword">const</span> daysSince = (Date.now() - <span class="keyword">new</span> Date(d.last_donation_date).getTime()) / (1000 * 60 * 60 * 24)
+        <span class="keyword">return</span> daysSince &gt; 60 && d.donation_count &gt; 1
+      }).length || 0,
+    }
+
+    <span class="comment">// Generate insights with Claude</span>
+    <span class="keyword">const</span> message = <span class="keyword">await</span> anthropic.messages.create({
+      model: <span class="string">'claude-sonnet-4-20250514'</span>,
+      max_tokens: 1024,
+      messages: [{
+        role: <span class="string">'user'</span>,
+        content: <span class="string">`You are an AI analyst for a nonprofit donor management system.
+Analyze this donor data and provide actionable insights.
+
+Donor Summary:
+- Total Donors: ${donorSummary.totalDonors}
+- Total Raised (all time): $${donorSummary.totalRaised.toLocaleString()}
+- Recurring Donors: ${donorSummary.recurringDonors}
+- Average Recent Donation: $${donorSummary.avgDonation.toFixed(2)}
+- At-Risk Donors (60+ days inactive): ${donorSummary.atRiskDonors}
+
+Recent Donation Data (last 90 days):
+${JSON.stringify(recentDonations?.slice(0, 50), null, 2)}
+
+Top Donor Profiles:
+${JSON.stringify(donors?.slice(0, 20).map(d => ({
+  totalDonated: d.total_donated,
+  donationCount: d.donation_count,
+  isRecurring: d.is_recurring,
+  tier: d.donor_tier,
+  daysSinceLastDonation: d.last_donation_date
+    ? Math.floor((Date.now() - new Date(d.last_donation_date).getTime()) / (1000 * 60 * 60 * 24))
+    : null
+})), null, 2)}
+
+Insight Type Requested: ${insightType}
+
+Based on this data, provide:
+1. Key Insight: One paragraph summary of the most important finding
+2. Trend Analysis: What patterns do you see in donation behavior?
+3. At-Risk Alert: Specific recommendations for re-engaging lapsed donors
+4. Growth Opportunity: One actionable suggestion to increase donations
+5. Predicted Outcome: What might happen in the next 30 days based on trends?
+
+Format your response as JSON with these exact keys:
+{
+  "keyInsight": "...",
+  "trendAnalysis": "...",
+  "atRiskAlert": "...",
+  "growthOpportunity": "...",
+  "predictedOutcome": "...",
+  "confidenceScore": 0.0-1.0
+}`</span>
+      }]
+    })
+
+    <span class="comment">// Parse Claude's response</span>
+    <span class="keyword">const</span> responseText = message.content[0].type === <span class="string">'text'</span>
+      ? message.content[0].text
+      : <span class="string">''</span>
+
+    <span class="comment">// Extract JSON from response</span>
+    <span class="keyword">const</span> jsonMatch = responseText.match(/\{[\s\S]*\}/)
+    <span class="keyword">const</span> insights = jsonMatch ? JSON.parse(jsonMatch[0]) : null
+
+    <span class="keyword">return</span> NextResponse.json({
+      success: true,
+      insights,
+      summary: donorSummary,
+      generatedAt: <span class="keyword">new</span> Date().toISOString()
+    })
+
+  } <span class="keyword">catch</span> (error) {
+    console.error(<span class="string">'Insight generation error:'</span>, error)
+    <span class="keyword">return</span> NextResponse.json(
+      { success: false, error: <span class="string">'Failed to generate insights'</span> },
+      { status: 500 }
+    )
+  }
+}</code></pre>
+                </div>
+
+                <div class="callout callout-info">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                        How the AI Insights Work
+                    </div>
+                    <p>Claude analyzes donation patterns, identifies at-risk donors (those who haven't given in 60+ days but have a history of giving), and provides personalized re-engagement strategies. The confidence score helps you prioritize which insights to act on first.</p>
+                </div>
+
+                <h3 id="phase-5">Phase 5: Report Generation Feature</h3>
+                <p>Create a report generation feature that compiles donation data, AI insights, and visualizations into a downloadable PDF for board meetings and stakeholder updates.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript - lib/generateReport.ts</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="keyword">import</span> { jsPDF } <span class="keyword">from</span> <span class="string">'jspdf'</span>
+<span class="keyword">import</span> { format } <span class="keyword">from</span> <span class="string">'date-fns'</span>
+
+<span class="keyword">interface</span> ReportData {
+  summary: {
+    totalDonors: <span class="property">number</span>
+    totalRaised: <span class="property">number</span>
+    recurringDonors: <span class="property">number</span>
+    newDonorsThisMonth: <span class="property">number</span>
+  }
+  insights: {
+    keyInsight: <span class="property">string</span>
+    trendAnalysis: <span class="property">string</span>
+    growthOpportunity: <span class="property">string</span>
+  }
+  topDonors: Array&lt;{
+    name: <span class="property">string</span>
+    totalDonated: <span class="property">number</span>
+  }&gt;
+}
+
+<span class="keyword">export async function</span> <span class="function">generateDonorReport</span>(data: ReportData): Promise&lt;Blob&gt; {
+  <span class="keyword">const</span> doc = <span class="keyword">new</span> jsPDF()
+  <span class="keyword">const</span> pageWidth = doc.internal.pageSize.getWidth()
+
+  <span class="comment">// Header</span>
+  doc.setFontSize(24)
+  doc.setTextColor(139, 92, 246) <span class="comment">// Purple accent</span>
+  doc.text(<span class="string">'Donor Insights Report'</span>, pageWidth / 2, 30, { align: <span class="string">'center'</span> })
+
+  doc.setFontSize(12)
+  doc.setTextColor(100)
+  doc.text(format(<span class="keyword">new</span> Date(), <span class="string">'MMMM d, yyyy'</span>), pageWidth / 2, 40, { align: <span class="string">'center'</span> })
+
+  <span class="comment">// Summary Section</span>
+  doc.setFontSize(16)
+  doc.setTextColor(0)
+  doc.text(<span class="string">'Summary'</span>, 20, 60)
+
+  doc.setFontSize(11)
+  doc.setTextColor(60)
+  <span class="keyword">const</span> summaryLines = [
+    <span class="string">`Total Donors: ${data.summary.totalDonors.toLocaleString()}`</span>,
+    <span class="string">`Total Raised: $${data.summary.totalRaised.toLocaleString()}`</span>,
+    <span class="string">`Recurring Donors: ${data.summary.recurringDonors}`</span>,
+    <span class="string">`New Donors This Month: ${data.summary.newDonorsThisMonth}`</span>,
+  ]
+  summaryLines.forEach((line, i) =&gt; {
+    doc.text(line, 25, 72 + (i * 8))
+  })
+
+  <span class="comment">// AI Insights Section</span>
+  doc.setFontSize(16)
+  doc.setTextColor(0)
+  doc.text(<span class="string">'AI-Powered Insights'</span>, 20, 115)
+
+  doc.setFontSize(11)
+  doc.setTextColor(60)
+
+  <span class="keyword">const</span> insightY = 127
+  doc.setFont(<span class="string">'helvetica'</span>, <span class="string">'bold'</span>)
+  doc.text(<span class="string">'Key Finding:'</span>, 25, insightY)
+  doc.setFont(<span class="string">'helvetica'</span>, <span class="string">'normal'</span>)
+  <span class="keyword">const</span> keyInsightLines = doc.splitTextToSize(data.insights.keyInsight, pageWidth - 50)
+  doc.text(keyInsightLines, 25, insightY + 8)
+
+  <span class="comment">// Continue with more sections...</span>
+
+  <span class="keyword">return</span> doc.output(<span class="string">'blob'</span>)
+}</code></pre>
+                </div>
+
+                <h3 id="phase-6">Phase 6: Email Summary Automation</h3>
+                <p>Set up automated weekly email digests that send AI-generated insights to nonprofit staff. This uses Supabase Edge Functions with a cron trigger.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript - supabase/functions/weekly-digest/index.ts</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="keyword">import</span> { serve } <span class="keyword">from</span> <span class="string">'https://deno.land/std@0.168.0/http/server.ts'</span>
+<span class="keyword">import</span> { createClient } <span class="keyword">from</span> <span class="string">'https://esm.sh/@supabase/supabase-js@2'</span>
+<span class="keyword">import</span> Anthropic <span class="keyword">from</span> <span class="string">'https://esm.sh/@anthropic-ai/sdk'</span>
+
+<span class="keyword">const</span> anthropic = <span class="keyword">new</span> Anthropic({
+  apiKey: Deno.env.get(<span class="string">'ANTHROPIC_API_KEY'</span>)!,
+})
+
+serve(<span class="keyword">async</span> (req) =&gt; {
+  <span class="keyword">const</span> supabase = createClient(
+    Deno.env.get(<span class="string">'SUPABASE_URL'</span>)!,
+    Deno.env.get(<span class="string">'SUPABASE_SERVICE_ROLE_KEY'</span>)!
+  )
+
+  <span class="comment">// Get last 7 days of donations</span>
+  <span class="keyword">const</span> weekAgo = <span class="keyword">new</span> Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+
+  <span class="keyword">const</span> { data: weeklyDonations } = <span class="keyword">await</span> supabase
+    .from(<span class="string">'donations'</span>)
+    .select(<span class="string">'amount, donated_at, donor_id'</span>)
+    .gte(<span class="string">'donated_at'</span>, weekAgo.toISOString())
+
+  <span class="keyword">const</span> totalThisWeek = weeklyDonations?.reduce((sum, d) =&gt; sum + d.amount, 0) || 0
+  <span class="keyword">const</span> donationCount = weeklyDonations?.length || 0
+  <span class="keyword">const</span> uniqueDonors = <span class="keyword">new</span> Set(weeklyDonations?.map(d =&gt; d.donor_id)).size
+
+  <span class="comment">// Generate AI summary</span>
+  <span class="keyword">const</span> message = <span class="keyword">await</span> anthropic.messages.create({
+    model: <span class="string">'claude-sonnet-4-20250514'</span>,
+    max_tokens: 512,
+    messages: [{
+      role: <span class="string">'user'</span>,
+      content: <span class="string">`Write a brief, encouraging weekly donation summary email for nonprofit staff.
+
+This week's stats:
+- Total raised: $${totalThisWeek.toLocaleString()}
+- Number of donations: ${donationCount}
+- Unique donors: ${uniqueDonors}
+
+Write 2-3 short paragraphs highlighting the positive impact. Include one specific
+action item for the coming week. Keep the tone warm and mission-focused.`</span>
+    }]
+  })
+
+  <span class="keyword">const</span> emailContent = message.content[0].type === <span class="string">'text'</span>
+    ? message.content[0].text
+    : <span class="string">''</span>
+
+  <span class="comment">// Send email via your preferred service (Resend, SendGrid, etc.)</span>
+  <span class="keyword">await</span> fetch(<span class="string">'https://api.resend.com/emails'</span>, {
+    method: <span class="string">'POST'</span>,
+    headers: {
+      <span class="string">'Authorization'</span>: <span class="string">`Bearer ${Deno.env.get('RESEND_API_KEY')}`</span>,
+      <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>,
+    },
+    body: JSON.stringify({
+      from: <span class="string">'insights@yournonprofit.org'</span>,
+      to: [<span class="string">'staff@yournonprofit.org'</span>],
+      subject: <span class="string">`Weekly Donor Digest: $${totalThisWeek.toLocaleString()} raised!`</span>,
+      html: <span class="string">`
+        &lt;div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;"&gt;
+          &lt;h1 style="color: #8b5cf6;"&gt;Weekly Donor Insights&lt;/h1&gt;
+          &lt;div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;"&gt;
+            &lt;p style="margin: 0; font-size: 24px; font-weight: bold;"&gt;$${totalThisWeek.toLocaleString()}&lt;/p&gt;
+            &lt;p style="margin: 4px 0 0; color: #666;"&gt;raised this week from ${uniqueDonors} donors&lt;/p&gt;
+          &lt;/div&gt;
+          ${emailContent.split('\n').map(p =&gt; <span class="string">`&lt;p&gt;${p}&lt;/p&gt;`</span>).join('')}
+          &lt;p style="margin-top: 30px; color: #666; font-size: 12px;"&gt;
+            Generated by AI Donor Insights Dashboard
+          &lt;/p&gt;
+        &lt;/div&gt;
+      `</span>
+    })
+  })
+
+  <span class="keyword">return new</span> Response(JSON.stringify({ success: true }), {
+    headers: { <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span> }
+  })
+})</code></pre>
+                </div>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Scheduling the Digest
+                    </div>
+                    <p>In Supabase, go to Database > Extensions and enable pg_cron. Then create a cron job: <code>SELECT cron.schedule('weekly-digest', '0 9 * * 1', 'SELECT net.http_post(...)')</code> to run every Monday at 9 AM.</p>
+                </div>
+
+                <!-- Section: Common Issues -->
+                <h2 id="common-issues">Common Issues & Solutions</h2>
+                <p>Here are some common issues you might encounter and how to solve them:</p>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Claude API Rate Limits
+                    </div>
+                    <p>If you hit rate limits during insight generation, implement caching. Store generated insights in Supabase with a timestamp and only regenerate if the cache is older than 1 hour. This also reduces API costs.</p>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Supabase Row Level Security
+                    </div>
+                    <p>Remember to configure RLS policies on your donor tables. Use the service role key only in server-side code (API routes, Edge Functions). Never expose it to the client.</p>
+                </div>
+
+                <p>Other common issues include:</p>
+                <ul>
+                    <li><strong>Recharts not rendering</strong> - Make sure to add <code>'use client'</code> directive to chart components</li>
+                    <li><strong>TypeScript errors with Supabase</strong> - Generate types with <code>supabase gen types typescript</code></li>
+                    <li><strong>Edge Function cold starts</strong> - First request may be slow; consider a keep-warm ping</li>
+                </ul>
+
+                <!-- Section: Next Steps -->
+                <h2 id="next-steps">Next Steps</h2>
+                <p>Congratulations on building your AI Donor Insights Dashboard! Here are some ways to extend it:</p>
+
+                <ul>
+                    <li><strong>Add Stripe integration</strong> - Connect to Stripe webhooks for real-time donation tracking</li>
+                    <li><strong>Donor segmentation</strong> - Use Claude to automatically categorize donors into engagement segments</li>
+                    <li><strong>Predictive giving</strong> - Build a model to predict which donors are likely to give during year-end campaigns</li>
+                    <li><strong>Mobile app</strong> - Create a React Native companion app for on-the-go insights</li>
+                    <li><strong>Multi-org support</strong> - Add organization-level isolation for SaaS deployment</li>
+                </ul>
+
+                <p>For more nonprofit technology solutions, check out our <a href="/industries/nonprofit.html">Non-Profit Solutions page</a> or <a href="/#contact">get in touch</a> for custom development.</p>
+
+                <!-- Share Section -->
+                <div class="share-section">
+                    <span class="share-label">Share this guide:</span>
+                    <div class="share-buttons" role="group" aria-label="Share this guide">
+                        <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="email" title="Share via email" aria-label="Share via email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Related Guides -->
+                <div class="related-guides">
+                    <h3 class="related-guides-title">Related Guides</h3>
+                    <div class="related-guides-grid">
+                        <a href="/guides/fintech-ai-dashboard.html" class="related-guide-card">
+                            <h4>Build an AI Financial Dashboard</h4>
+                            <p>Create expense tracking with AI categorization</p>
+                        </a>
+                        <a href="/guides/healthtech-patient-portal.html" class="related-guide-card">
+                            <h4>Build a Patient Portal</h4>
+                            <p>HIPAA-compliant portal with AI triage</p>
+                        </a>
+                        <a href="/guides/ecommerce-ai-recommender.html" class="related-guide-card">
+                            <h4>AI Product Recommender</h4>
+                            <p>Personalized recommendations with Claude</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Follow Section -->
+                <div class="follow-section">
+                    <h3>Follow the Vibe Coding Enthusiast</h3>
+                    <p>Get more AI build guides, tool tips, and project ideas from JD.</p>
+                    <div class="social-follow-buttons">
+                        <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" class="social-follow-btn linkedin">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            Follow on LinkedIn
+                        </a>
+                        <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" class="social-follow-btn twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            Follow on X
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+        <footer class="footer">
+    <div class="container">
+        <div class="footer-simple">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                    <span>Vibe Coding Enthusiast</span>
+                </a>
+                <p>Free guides for building with AI</p>
+            </div>
+
+            <nav class="footer-nav">
+                <a href="/guides/">Guides</a>
+                <span class="footer-dot">·</span>
+                <a href="/paths/">Paths</a>
+                <span class="footer-dot">·</span>
+                <a href="/learn/">Learn</a>
+                <span class="footer-dot">·</span>
+                <a href="/tools/">Tools</a>
+                <span class="footer-dot">·</span>
+                <a href="/stacks/">Stacks</a>
+                <span class="footer-dot">·</span>
+                <a href="/#about">About</a>
+            </nav>
+
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" aria-label="Follow on LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" aria-label="Follow on X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Vibe Coding Enthusiast</p>
+            <div class="footer-legal">
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="/script.js"></script>
+
+    <!-- Guide-Specific JavaScript -->
+    <script>
+        // Reading Progress Bar
+        (function() {
+            const progressBar = document.getElementById('readingProgress');
+            const article = document.querySelector('.article-content');
+
+            if (progressBar && article) {
+                window.addEventListener('scroll', function() {
+                    const articleTop = article.offsetTop;
+                    const articleHeight = article.offsetHeight;
+                    const windowHeight = window.innerHeight;
+                    const scrollTop = window.scrollY;
+
+                    const progress = Math.min(100, Math.max(0,
+                        ((scrollTop - articleTop + windowHeight * 0.3) / articleHeight) * 100
+                    ));
+
+                    progressBar.style.width = progress + '%';
+                    progressBar.setAttribute('aria-valuenow', Math.round(progress));
+                });
+            }
+        })();
+
+        // Generate Table of Contents
+        (function() {
+            const article = document.querySelector('.article-content');
+            const tocList = document.getElementById('tocList');
+
+            if (article && tocList) {
+                const headings = article.querySelectorAll('h2, h3');
+                let tocHTML = '';
+
+                headings.forEach(function(heading) {
+                    const id = heading.getAttribute('id');
+                    const text = heading.textContent.replace(/#/g, '').trim();
+                    const level = heading.tagName.toLowerCase();
+                    const className = level === 'h3' ? 'toc-h3' : '';
+
+                    if (id) {
+                        tocHTML += '<li><a href="#' + id + '" class="' + className + '">' + text + '</a></li>';
+
+                        // Add anchor link to heading
+                        const anchor = document.createElement('a');
+                        anchor.href = '#' + id;
+                        anchor.className = 'anchor-link';
+                        anchor.setAttribute('aria-label', 'Link to ' + text);
+                        anchor.textContent = '#';
+                        heading.appendChild(anchor);
+                    }
+                });
+
+                tocList.innerHTML = tocHTML;
+
+                // Highlight active TOC item on scroll
+                const tocLinks = tocList.querySelectorAll('a');
+
+                function updateActiveTOC() {
+                    const scrollPos = window.scrollY + 120;
+
+                    headings.forEach(function(heading, index) {
+                        const id = heading.getAttribute('id');
+                        const headingTop = heading.offsetTop;
+                        const nextHeading = headings[index + 1];
+                        const nextTop = nextHeading ? nextHeading.offsetTop : document.body.scrollHeight;
+
+                        if (scrollPos >= headingTop && scrollPos < nextTop) {
+                            tocLinks.forEach(function(link) {
+                                link.classList.remove('active');
+                                if (link.getAttribute('href') === '#' + id) {
+                                    link.classList.add('active');
+                                }
+                            });
+                        }
+                    });
+                }
+
+                window.addEventListener('scroll', updateActiveTOC);
+                updateActiveTOC();
+            }
+        })();
+
+        // Copy Code Button
+        (function() {
+            const copyButtons = document.querySelectorAll('.code-copy-btn');
+
+            copyButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const codeBlock = this.closest('.code-block');
+                    const code = codeBlock.querySelector('code');
+                    const text = code.textContent;
+
+                    navigator.clipboard.writeText(text).then(function() {
+                        button.textContent = 'Copied!';
+                        button.classList.add('copied');
+
+                        setTimeout(function() {
+                            button.textContent = 'Copy';
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(function(err) {
+                        console.error('Failed to copy:', err);
+                    });
+                });
+            });
+        })();
+
+        // Share Buttons
+        (function() {
+            const shareButtons = document.querySelectorAll('.share-btn');
+            const pageTitle = document.title;
+            const pageUrl = window.location.href;
+
+            shareButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const shareType = this.getAttribute('data-share');
+                    let shareUrl = '';
+
+                    switch(shareType) {
+                        case 'twitter':
+                            shareUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(pageTitle) + '&url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'linkedin':
+                            shareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'copy':
+                            navigator.clipboard.writeText(pageUrl).then(function() {
+                                // Show feedback
+                                const originalTitle = button.getAttribute('title');
+                                button.setAttribute('title', 'Link copied!');
+                                setTimeout(function() {
+                                    button.setAttribute('title', originalTitle);
+                                }, 2000);
+                            });
+                            break;
+                        case 'email':
+                            shareUrl = 'mailto:?subject=' + encodeURIComponent(pageTitle) + '&body=' + encodeURIComponent('Check out this guide: ' + pageUrl);
+                            window.location.href = shareUrl;
+                            break;
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

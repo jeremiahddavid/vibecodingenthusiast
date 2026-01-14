@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
+  <defs>
+    <linearGradient id="bgV3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="sparkle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="200" rx="20" fill="url(#bgV3)"/>
+  
+  <!-- Main Icon: Light bulb + code (representing ideas) -->
+  <g transform="translate(70, 100)">
+    <!-- Light bulb glow -->
+    <ellipse cx="0" cy="-5" rx="45" ry="50" fill="#fbbf24" opacity="0.15" filter="url(#softGlow)">
+      <animate attributeName="opacity" values="0.15;0.25;0.15" dur="2s" repeatCount="indefinite"/>
+    </ellipse>
+    
+    <!-- Light bulb shape -->
+    <path d="M -20,-40 Q -30,-20 -30,0 Q -30,15 -25,25 L -15,35 L 15,35 L 25,25 Q 30,15 30,0 Q 30,-20 20,-40 Q 10,-50 0,-52 Q -10,-50 -20,-40 Z" 
+          fill="#fbbf24" stroke="#ffffff" stroke-width="2.5" opacity="0.95"/>
+    
+    <!-- Filament inside bulb (code symbol) -->
+    <text x="0" y="-5" font-family="'Courier New', monospace" font-size="28" font-weight="bold" fill="#6366f1" text-anchor="middle">
+      &lt;/&gt;
+    </text>
+    
+    <!-- Light bulb base -->
+    <rect x="-12" y="35" width="24" height="8" rx="2" fill="#e5e7eb" stroke="#ffffff" stroke-width="1.5"/>
+    <rect x="-10" y="43" width="20" height="6" rx="1" fill="#d1d5db"/>
+    
+    <!-- Sparkle lines emanating from bulb (inspiration) -->
+    <line x1="-45" y1="-35" x2="-55" y2="-45" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="1.5s" repeatCount="indefinite"/>
+    </line>
+    <line x1="45" y1="-35" x2="55" y2="-45" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="1.7s" repeatCount="indefinite"/>
+    </line>
+    <line x1="-50" y1="0" x2="-65" y2="0" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0.3;0.7" dur="1.9s" repeatCount="indefinite"/>
+    </line>
+    <line x1="50" y1="0" x2="65" y2="0" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2.1s" repeatCount="indefinite"/>
+    </line>
+  </g>
+  
+  <!-- Text Section -->
+  <g>
+    <text x="170" y="85" font-family="'Poppins', 'SF Pro Display', 'Segoe UI', Arial, sans-serif" font-size="48" font-weight="700" fill="#ffffff" letter-spacing="-1">
+      VIBE CODING
+    </text>
+    <text x="170" y="130" font-family="'Poppins', 'SF Pro Display', 'Segoe UI', Arial, sans-serif" font-size="32" font-weight="500" fill="#ffffff" opacity="0.9" letter-spacing="2">
+      ENTHUSIAST
+    </text>
+  </g>
+  
+  <!-- Tagline / Mission statement -->
+  <text x="170" y="160" font-family="'Inter', 'SF Pro Text', 'Segoe UI', Arial, sans-serif" font-size="16" font-weight="400" fill="#ffffff" opacity="0.7" letter-spacing="0.5">
+    Free Ideas • Content • Inspiration
+  </text>
+  
+  <!-- Decorative sparkles (representing creativity and ideas) -->
+  <g opacity="0.8">
+    <path d="M 720,45 L 724,55 L 734,59 L 724,63 L 720,73 L 716,63 L 706,59 L 716,55 Z" fill="#fbbf24">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="1.8s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 745,85 L 747,91 L 753,93 L 747,95 L 745,101 L 743,95 L 737,93 L 743,91 Z" fill="#fde68a">
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="2.2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 755,125 L 758,133 L 766,136 L 758,139 L 755,147 L 752,139 L 744,136 L 752,133 Z" fill="#fbbf24">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Floating particles (representing free flowing ideas) -->
+  <circle cx="650" cy="50" r="3" fill="#fde68a" opacity="0.6">
+    <animate attributeName="cy" values="50;45;50" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="680" cy="70" r="2.5" fill="#fbbf24" opacity="0.5">
+    <animate attributeName="cy" values="70;65;70" dur="3.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="3.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="710" cy="100" r="2" fill="#fde68a" opacity="0.7">
+    <animate attributeName="cy" values="100;95;100" dur="2.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2.8s" repeatCount="indefinite"/>
+  </circle>
+</svg>

@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initFAQAccordion();
     initConsultationBooking();
     initBackToTop();
+    initArticleFeatures();
 });
 
 // ===================================
@@ -786,6 +787,7 @@ function copyToClipboard(text) {
 
 // ===================================
 // Consultation Booking System
+// SimplyBook.me Integration
 // ===================================
 
 // Booking state
@@ -793,27 +795,33 @@ const bookingState = {
     tier: null,
     tierName: null,
     duration: null,
-    price: null,
-    calBookingId: null,
-    scheduledTime: null,
-    attendeeName: null,
-    attendeeEmail: null
+    price: null
 };
 
-// Cal.com configuration - UPDATE THESE WITH YOUR ACTUAL VALUES
-const CAL_CONFIG = {
-    username: 'YOUR_CAL_USERNAME', // Replace with your Cal.com username
-    eventTypes: {
-        quick: 'quick-call',       // 10 min event slug
-        standard: 'strategy-session', // 30 min event slug
-        deep: 'deep-dive'          // 60 min event slug
+// SimplyBook.me configuration - UPDATE THESE WITH YOUR ACTUAL VALUES
+const SIMPLYBOOK_CONFIG = {
+    // Your SimplyBook.me company URL (e.g., 'your-company' for your-company.simplybook.me)
+    companyUrl: 'YOUR_COMPANY_NAME',
+
+    // Service IDs for each tier (get these from your SimplyBook.me dashboard)
+    // After creating services, check the service ID in the URL when editing
+    serviceIds: {
+        quick: '1',      // Quick Call - 10 min - $100
+        standard: '2',   // Strategy Session - 30 min - $300
+        deep: '3'        // Deep Dive - 60 min - $500
     },
-    theme: 'dark',
-    brandColor: '#6366f1'
+
+    // Theme settings to match your site
+    theme: {
+        primaryColor: '#6366f1',
+        backgroundColor: '#1c1c22',
+        textColor: '#fafafa',
+        secondaryTextColor: '#a1a1aa'
+    }
 };
 
-// Slot hold timer
-let slotHoldTimer = null;
+// Track if widget script is loaded
+let simplybookScriptLoaded = false;
 
 function initConsultationBooking() {
     const consultationSection = document.getElementById('consultation');
@@ -832,8 +840,8 @@ function initConsultationBooking() {
         });
     });
 
-    // Preload Cal.com script
-    loadCalEmbed();
+    // Preload SimplyBook.me widget script
+    loadSimplyBookScript();
 }
 
 function handleTierSelection(e) {
@@ -849,19 +857,14 @@ function handleTierSelection(e) {
     document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
 
-    // Update calendar header badge
+    // Update booking header badge
     document.getElementById('selected-tier-name').textContent = bookingState.tierName;
     document.getElementById('selected-tier-price').textContent = `$${bookingState.price}`;
 
-    // Update payment summary
-    document.getElementById('summary-tier').textContent = bookingState.tierName;
-    document.getElementById('summary-duration').textContent = `${bookingState.duration} minutes`;
-    document.getElementById('summary-total').textContent = `$${bookingState.price}`;
+    // Load SimplyBook.me widget for selected tier
+    renderSimplyBookWidget(bookingState.tier);
 
-    // Load Cal.com embed for selected tier
-    renderCalEmbed(bookingState.tier);
-
-    // Move to calendar step
+    // Move to booking step
     goToStep(2);
 }
 
@@ -907,26 +910,21 @@ function goToStep(stepNumber) {
 }
 
 // ===================================
-// Cal.com Integration
+// SimplyBook.me Integration
 // ===================================
 
-function loadCalEmbed() {
+function loadSimplyBookScript() {
     return new Promise((resolve, reject) => {
-        if (window.Cal) {
+        if (simplybookScriptLoaded) {
             resolve();
             return;
         }
 
         const script = document.createElement('script');
-        script.src = 'https://app.cal.com/embed/embed.js';
+        script.src = '//simplybook.me/v2/widget/widget.js';
         script.async = true;
         script.onload = () => {
-            // Initialize Cal with namespace
-            if (window.Cal) {
-                Cal('init', 'consultation', {
-                    origin: 'https://app.cal.com'
-                });
-            }
+            simplybookScriptLoaded = true;
             resolve();
         };
         script.onerror = reject;
@@ -934,24 +932,24 @@ function loadCalEmbed() {
     });
 }
 
-function renderCalEmbed(tier) {
-    const container = document.getElementById('cal-embed-container');
-    const eventType = CAL_CONFIG.eventTypes[tier];
+function renderSimplyBookWidget(tier) {
+    const container = document.getElementById('simplybook-widget-container');
+    const serviceId = SIMPLYBOOK_CONFIG.serviceIds[tier];
 
     // Show loading state
     container.innerHTML = `
-        <div class="cal-loading">
+        <div class="widget-loading">
             <div class="loading-spinner"></div>
-            <p>Loading available times...</p>
+            <p>Loading booking widget...</p>
         </div>
     `;
 
-    // Wait for Cal to be loaded
-    loadCalEmbed().then(() => {
-        if (!window.Cal) {
+    // Wait for script to load
+    loadSimplyBookScript().then(() => {
+        if (typeof SimplybookWidget === 'undefined') {
             container.innerHTML = `
-                <div class="cal-loading">
-                    <p>Unable to load calendar. Please refresh the page.</p>
+                <div class="widget-loading">
+                    <p>Unable to load booking widget. Please refresh the page.</p>
                 </div>
             `;
             return;
@@ -960,195 +958,320 @@ function renderCalEmbed(tier) {
         // Clear container
         container.innerHTML = '';
 
-        // Create embed target
-        const embedDiv = document.createElement('div');
-        embedDiv.id = 'cal-inline-embed';
-        embedDiv.style.width = '100%';
-        embedDiv.style.height = '100%';
-        embedDiv.style.minHeight = '500px';
-        container.appendChild(embedDiv);
+        // Create widget container
+        const widgetDiv = document.createElement('div');
+        widgetDiv.id = 'simplybook-widget';
+        container.appendChild(widgetDiv);
 
-        // Initialize the inline embed
-        Cal.ns.consultation('inline', {
-            elementOrSelector: '#cal-inline-embed',
-            calLink: `${CAL_CONFIG.username}/${eventType}`,
-            config: {
-                theme: CAL_CONFIG.theme,
-                styles: {
-                    branding: {
-                        brandColor: CAL_CONFIG.brandColor
+        // Initialize SimplyBook.me widget
+        try {
+            new SimplybookWidget({
+                widget_type: 'iframe',
+                url: `https://${SIMPLYBOOK_CONFIG.companyUrl}.simplybook.me`,
+                theme: 'dark',
+                theme_settings: {
+                    timeline_hide_unavailable: '1',
+                    hide_past_days: '1',
+                    sb_base_color: SIMPLYBOOK_CONFIG.theme.primaryColor,
+                    display_item_mode: 'block',
+                    body_bg_color: SIMPLYBOOK_CONFIG.theme.backgroundColor,
+                    sb_review_image: '',
+                    dark_font_color: SIMPLYBOOK_CONFIG.theme.textColor,
+                    light_font_color: SIMPLYBOOK_CONFIG.theme.secondaryTextColor,
+                    sb_company_label_color: SIMPLYBOOK_CONFIG.theme.textColor,
+                    hide_img_mode: '0',
+                    sb_busy: SIMPLYBOOK_CONFIG.theme.backgroundColor,
+                    sb_available: SIMPLYBOOK_CONFIG.theme.primaryColor
+                },
+                timeline: 'modern',
+                datepicker: 'top_calendar',
+                is_rtl: false,
+                app_config: {
+                    // Pre-select the service based on tier
+                    predefined: {
+                        service: serviceId
                     }
-                }
-            }
-        });
-
-        // Listen for booking completion
-        Cal.ns.consultation('on', {
-            action: 'bookingSuccessful',
-            callback: (e) => {
-                handleCalBookingComplete(e.detail);
-            }
-        });
+                },
+                container_id: 'simplybook-widget'
+            });
+        } catch (error) {
+            console.error('SimplyBook widget error:', error);
+            container.innerHTML = `
+                <div class="widget-loading">
+                    <p>Booking widget unavailable. Please <a href="#contact">contact us directly</a>.</p>
+                </div>
+            `;
+        }
     }).catch(() => {
         container.innerHTML = `
-            <div class="cal-loading">
-                <p>Calendar unavailable. Please <a href="#contact">contact us directly</a>.</p>
+            <div class="widget-loading">
+                <p>Unable to load booking system. Please <a href="#contact">contact us directly</a>.</p>
             </div>
         `;
     });
 }
 
-function handleCalBookingComplete(bookingData) {
-    // Store booking data
-    bookingState.calBookingId = bookingData.uid || 'pending';
-    bookingState.scheduledTime = bookingData.startTime;
-    bookingState.attendeeName = bookingData.attendees?.[0]?.name || '';
-    bookingState.attendeeEmail = bookingData.attendees?.[0]?.email || '';
+// ===================================
+// Article/Guide Features
+// ===================================
 
-    // Format and display date/time
-    if (bookingData.startTime) {
-        const datetime = new Date(bookingData.startTime);
-        const formattedDate = datetime.toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: '2-digit'
-        });
-        document.getElementById('summary-datetime').textContent = formattedDate;
+// Reading Progress Bar
+function initReadingProgress() {
+    const progressBar = document.querySelector('.reading-progress');
+    if (!progressBar) return;
+
+    let ticking = false;
+
+    function updateProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = Math.min(progress, 100) + '%';
+        ticking = false;
     }
 
-    // Move to payment step
-    goToStep(3);
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateProgress);
+            ticking = true;
+        }
+    });
 
-    // Start slot hold timer (15 minutes)
-    startSlotHoldTimer();
-
-    // Initialize Razorpay button for this tier
-    initRazorpayButton();
+    updateProgress();
 }
 
-// ===================================
-// Razorpay Integration
-// ===================================
+// Copy Code Functionality
+function initCodeCopy() {
+    const codeBlocks = document.querySelectorAll('.code-block');
 
-function initRazorpayButton() {
-    const container = document.getElementById('razorpay-button-container');
+    codeBlocks.forEach(block => {
+        const copyBtn = block.querySelector('.code-copy-btn');
+        const code = block.querySelector('code');
 
-    // Clear existing content
-    container.innerHTML = '';
+        if (!copyBtn || !code) return;
 
-    // Create a pay button
-    const payBtn = document.createElement('button');
-    payBtn.className = 'btn btn-primary btn-lg btn-block';
-    payBtn.innerHTML = `
-        <span>Pay $${bookingState.price}</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-    `;
-    payBtn.addEventListener('click', handlePayment);
-    container.appendChild(payBtn);
+        copyBtn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(code.textContent);
+                copyBtn.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
 
-    // Add note about Razorpay setup
-    const setupNote = document.createElement('p');
-    setupNote.style.cssText = 'text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 12px;';
-    setupNote.innerHTML = `
-        <strong>Note:</strong> Configure your Razorpay Payment Button ID in the code to enable payments.
-    `;
-    container.appendChild(setupNote);
-}
-
-function handlePayment() {
-    // For now, simulate payment success for demo purposes
-    // In production, you would integrate Razorpay Payment Button here
-
-    // Show loading state
-    const payBtn = document.querySelector('#razorpay-button-container .btn');
-    const originalContent = payBtn.innerHTML;
-    payBtn.innerHTML = '<span class="loading-spinner"></span> Processing...';
-    payBtn.disabled = true;
-
-    // Simulate payment processing
-    setTimeout(() => {
-        // In production, this would be called by Razorpay's success callback
-        handlePaymentSuccess({
-            razorpay_payment_id: 'demo_' + Date.now()
+                setTimeout(() => {
+                    copyBtn.textContent = 'Copy';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                copyBtn.textContent = 'Error';
+                setTimeout(() => {
+                    copyBtn.textContent = 'Copy';
+                }, 2000);
+            }
         });
-    }, 2000);
+    });
 }
 
-function handlePaymentSuccess(response) {
-    // Clear slot hold timer
-    clearSlotHoldTimer();
+// Table of Contents with Scroll Spy
+function initTableOfContents() {
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const headings = document.querySelectorAll('.article-content h2, .article-content h3');
 
-    // Update confirmation details
-    document.getElementById('confirm-tier').textContent = bookingState.tierName;
-    document.getElementById('confirm-datetime').textContent =
-        document.getElementById('summary-datetime').textContent;
-    document.getElementById('confirm-payment-id').textContent =
-        response.razorpay_payment_id.substring(0, 15) + '...';
+    if (!tocLinks.length || !headings.length) return;
 
-    // Send confirmation email via Web3Forms
-    sendConfirmationEmail(response.razorpay_payment_id);
+    const observerOptions = {
+        rootMargin: '-100px 0px -66%',
+        threshold: 0
+    };
 
-    // Move to confirmation step
-    goToStep(4);
+    let currentActive = null;
 
-    // Show success notification
-    showNotification('success', 'Booking confirmed! Check your email for details.');
-}
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
 
-// ===================================
-// Email & Timer Utilities
-// ===================================
+                if (currentActive) {
+                    currentActive.classList.remove('active');
+                }
 
-async function sendConfirmationEmail(paymentId) {
-    const formData = new FormData();
-    formData.append('access_key', '7c316080-04e3-4d5d-b3c9-1b80a0fa8743');
-    formData.append('subject', `Consultation Booking Confirmed - ${bookingState.tierName}`);
-    formData.append('from_name', 'VibeCodingEnthusiast.com');
-
-    formData.append('message', `
-New Consultation Booking!
-
-Customer: ${bookingState.attendeeName}
-Email: ${bookingState.attendeeEmail}
-Consultation: ${bookingState.tierName}
-Duration: ${bookingState.duration} minutes
-Date & Time: ${document.getElementById('summary-datetime').textContent}
-Amount Paid: $${bookingState.price}
-Payment ID: ${paymentId}
-
-The customer will receive a calendar invite with the meeting link.
-    `);
-
-    try {
-        await fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            body: formData
+                const newActive = document.querySelector(`.toc-list a[href="#${id}"]`);
+                if (newActive) {
+                    newActive.classList.add('active');
+                    currentActive = newActive;
+                }
+            }
         });
-    } catch (error) {
-        console.error('Email sending failed:', error);
-        // Non-blocking - booking is still confirmed
+    }, observerOptions);
+
+    headings.forEach(heading => {
+        if (heading.id) {
+            observer.observe(heading);
+        }
+    });
+
+    // Smooth scroll for TOC links
+    tocLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').slice(1);
+            const target = document.getElementById(targetId);
+
+            if (target) {
+                const headerOffset = 100;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// Share Buttons Functionality
+function initShareButtons() {
+    const shareButtons = document.querySelectorAll('.share-btn');
+
+    shareButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const shareType = btn.dataset.share;
+            const pageUrl = encodeURIComponent(window.location.href);
+            const pageTitle = encodeURIComponent(document.title);
+
+            let shareUrl = '';
+
+            switch (shareType) {
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+                    window.open(shareUrl, '_blank', 'width=550,height=420');
+                    break;
+
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+                    window.open(shareUrl, '_blank', 'width=550,height=420');
+                    break;
+
+                case 'copy':
+                    navigator.clipboard.writeText(window.location.href).then(() => {
+                        const originalHTML = btn.innerHTML;
+                        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+                        setTimeout(() => {
+                            btn.innerHTML = originalHTML;
+                        }, 2000);
+                    });
+                    break;
+
+                case 'email':
+                    shareUrl = `mailto:?subject=${pageTitle}&body=Check out this guide: ${decodeURIComponent(pageUrl)}`;
+                    window.location.href = shareUrl;
+                    break;
+            }
+        });
+    });
+}
+
+// Bookmarks - Save for Later
+function initBookmarks() {
+    const bookmarkBtn = document.querySelector('.bookmark-btn');
+    if (!bookmarkBtn) return;
+
+    const pageId = window.location.pathname;
+    const storageKey = 'vce_bookmarks';
+
+    // Get existing bookmarks
+    function getBookmarks() {
+        const stored = localStorage.getItem(storageKey);
+        return stored ? JSON.parse(stored) : [];
     }
+
+    // Check if current page is bookmarked
+    function isBookmarked() {
+        const bookmarks = getBookmarks();
+        return bookmarks.some(b => b.id === pageId);
+    }
+
+    // Update button state
+    function updateButtonState() {
+        if (isBookmarked()) {
+            bookmarkBtn.classList.add('bookmarked');
+            bookmarkBtn.setAttribute('title', 'Remove bookmark');
+        } else {
+            bookmarkBtn.classList.remove('bookmarked');
+            bookmarkBtn.setAttribute('title', 'Save for later');
+        }
+    }
+
+    // Toggle bookmark
+    bookmarkBtn.addEventListener('click', () => {
+        let bookmarks = getBookmarks();
+
+        if (isBookmarked()) {
+            bookmarks = bookmarks.filter(b => b.id !== pageId);
+        } else {
+            bookmarks.push({
+                id: pageId,
+                title: document.title,
+                url: window.location.href,
+                savedAt: new Date().toISOString()
+            });
+        }
+
+        localStorage.setItem(storageKey, JSON.stringify(bookmarks));
+        updateButtonState();
+    });
+
+    updateButtonState();
 }
 
-function startSlotHoldTimer() {
-    const HOLD_DURATION = 15 * 60 * 1000; // 15 minutes
+// Auto-generate Table of Contents from headings
+function generateTableOfContents() {
+    const tocContainer = document.querySelector('.toc-list');
+    const articleContent = document.querySelector('.article-content');
 
-    clearSlotHoldTimer();
+    if (!tocContainer || !articleContent) return;
 
-    slotHoldTimer = setTimeout(() => {
-        showNotification('error', 'Your time slot hold has expired. Please select a new time.');
-        goToStep(2);
-    }, HOLD_DURATION);
+    const headings = articleContent.querySelectorAll('h2, h3');
+
+    if (headings.length === 0) return;
+
+    // Clear existing TOC
+    tocContainer.innerHTML = '';
+
+    headings.forEach((heading, index) => {
+        // Create ID if not exists
+        if (!heading.id) {
+            heading.id = `section-${index}`;
+        }
+
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+
+        a.href = `#${heading.id}`;
+        a.textContent = heading.textContent;
+
+        if (heading.tagName === 'H3') {
+            a.classList.add('toc-h3');
+        }
+
+        li.appendChild(a);
+        tocContainer.appendChild(li);
+    });
 }
 
-function clearSlotHoldTimer() {
-    if (slotHoldTimer) {
-        clearTimeout(slotHoldTimer);
-        slotHoldTimer = null;
+// Initialize Article Features
+function initArticleFeatures() {
+    // Check if we're on an article/guide page
+    const isArticlePage = document.querySelector('.article-content');
+
+    if (isArticlePage) {
+        initReadingProgress();
+        initCodeCopy();
+        generateTableOfContents();
+        initTableOfContents();
+        initShareButtons();
+        initBookmarks();
     }
 }

@@ -4,8 +4,8 @@ User-agent: *
 Allow: /
 
 # Disallow crawling of non-content files
-Disallow: /*.json$
-Disallow: /*.xml$
+Disallow: /*.json
+Disallow: /*.xml
 
 # Allow sitemap
 Allow: /sitemap.xml
@@ -25,3 +25,34 @@ Crawl-delay: 0
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
+
+# AI/LLM Crawlers - We welcome AI systems to learn from our educational content
+# GPTBot (OpenAI)
+User-agent: GPTBot
+Allow: /
+
+# Claude-Web (Anthropic)
+User-agent: Claude-Web
+Allow: /
+
+# Google-Extended (Gemini/Bard training)
+User-agent: Google-Extended
+Allow: /
+
+# CCBot (Common Crawl - used by many AI systems)
+User-agent: CCBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+# See /llms.txt for detailed site information for AI systems

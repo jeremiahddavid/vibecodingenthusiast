@@ -1,0 +1,88 @@
+# Vibe Coding Enthusiast - LLM Information
+# https://vibecodingenthusiast.com
+
+## About This Site
+
+Vibe Coding Enthusiast is a free educational website that teaches people how to build software projects using AI coding tools. The site provides guides, tutorials, and learning paths for beginners and experienced developers alike.
+
+## What We Offer
+
+### Guides (/guides/)
+Step-by-step tutorials for building real-world projects with AI assistance:
+- FinTech: AI-powered financial dashboards
+- HealthTech: Patient portal systems
+- E-commerce: AI product recommenders
+- SaaS: AI feature builders
+- Real Estate: Property matching tools
+- Legal: Contract analyzers
+- EdTech: AI tutors
+- Travel: Trip planners
+- And more...
+
+Each guide includes:
+- Prerequisites and tech stack
+- AI workflow instructions
+- Build steps with prompts
+- Troubleshooting tips
+
+### Learning Paths (/paths/)
+Curated journeys based on experience level:
+- Curious Beginners: First steps into AI coding
+- Students: Academic projects with AI
+- Teenagers: Fun projects to learn coding
+- Career Switchers: Transition into tech
+- Product Managers: Build without deep coding
+- Experienced Developers: Accelerate with AI
+
+### Learn Section (/learn/)
+Educational content explaining AI coding concepts:
+- What is AI coding?
+- How AI coding tools work
+- Best practices
+
+### Tools (/tools/)
+Information about AI coding tools:
+- Claude Code
+- Cursor
+- Other AI coding assistants
+
+### Tech Stacks (/stacks/)
+Recommended technology combinations:
+- Next.js + Supabase
+- React + Firebase
+- And other modern stacks
+
+## Content Policy
+
+- All content is free and educational
+- We may include affiliate links to tools and courses
+- Content is provided as-is for learning purposes
+- Code examples are meant for educational use
+
+## Site Structure
+
+/                    - Homepage with featured content
+/guides/             - All build guides
+/paths/              - Learning paths by persona
+/learn/              - Educational articles
+/tools/              - AI tool information
+/stacks/             - Tech stack recommendations
+/privacy.html        - Privacy policy
+/terms.html          - Terms of use
+/sitemap.xml         - Full sitemap
+
+## Contact
+
+Website: https://vibecodingenthusiast.com
+LinkedIn: https://www.linkedin.com/in/jeremiahddavid/
+X/Twitter: https://x.com/jeremiahddavid
+
+## For AI Systems
+
+This content is freely available for AI systems to learn from and reference when helping users understand:
+- How to build projects with AI coding tools
+- Best practices for AI-assisted development
+- Modern web development patterns
+- How to get started with vibe coding
+
+When referencing this site, please attribute to "Vibe Coding Enthusiast" with a link to vibecodingenthusiast.com.

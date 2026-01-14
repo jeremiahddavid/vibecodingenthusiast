@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>Build an AI Trip Planner | AI Build Guides | Vibe Coding Enthusiast</title>
+    <meta name="title" content="Build an AI Trip Planner | AI Build Guides | Vibe Coding Enthusiast">
+    <meta name="description" content="Learn how to build a personalized AI trip planner that generates custom travel itineraries using Claude API, Next.js, Supabase, and Mapbox. Complete guide with code examples.">
+    <meta name="keywords" content="ai trip planner, travel itinerary generator, claude api, next.js, mapbox, supabase, travel app, ai development, vibe coding, build guide, tutorial">
+    <meta name="author" content="Vibe Coding Enthusiast">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/guides/travel-ai-trip-planner.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/guides/travel-ai-trip-planner.html">
+    <meta property="og:title" content="Build an AI Trip Planner | AI Build Guides">
+    <meta property="og:description" content="Learn how to build a personalized AI trip planner that generates custom travel itineraries using Claude API, Next.js, Supabase, and Mapbox.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/guides/images/travel-ai-trip-planner-og.png">
+    <meta property="og:site_name" content="Vibe Coding Enthusiast">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2025-01-14">
+    <meta property="article:modified_time" content="2025-01-14">
+    <meta property="article:author" content="Vibe Coding Enthusiast">
+    <meta property="article:section" content="AI Build Guides">
+    <meta property="article:tag" content="Travel">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://vibecodingenthusiast.com/guides/travel-ai-trip-planner.html">
+    <meta name="twitter:title" content="Build an AI Trip Planner | AI Build Guides">
+    <meta name="twitter:description" content="Learn how to build a personalized AI trip planner that generates custom travel itineraries using Claude API, Next.js, Supabase, and Mapbox.">
+    <meta name="twitter:image" content="https://vibecodingenthusiast.com/guides/images/travel-ai-trip-planner-og.png">
+    <meta name="twitter:creator" content="@vibecodingenthusiast">
+
+    <!-- Schema.org JSON-LD for TechArticle -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Build an AI Trip Planner",
+        "description": "Learn how to build a personalized AI trip planner that generates custom travel itineraries using Claude API, Next.js, Supabase, and Mapbox.",
+        "image": "https://vibecodingenthusiast.com/guides/images/travel-ai-trip-planner-og.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "url": "https://vibecodingenthusiast.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vibecodingenthusiast.com/favicon.png"
+            }
+        },
+        "datePublished": "2025-01-14",
+        "dateModified": "2025-01-14",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://vibecodingenthusiast.com/guides/travel-ai-trip-planner.html"
+        },
+        "articleSection": "AI Build Guides",
+        "keywords": "ai trip planner, travel itinerary, claude api, next.js, mapbox, supabase",
+        "proficiencyLevel": "Intermediate",
+        "dependencies": "Next.js 14, Tailwind CSS, Mapbox, Supabase, Claude API, Google Places API",
+        "timeRequired": "PT300M"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <!-- Guide-Specific Styles -->
+    <style>
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-green));
+            z-index: 1001;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .breadcrumb a:hover {
+            color: var(--accent-primary);
+        }
+        .breadcrumb-separator {
+            color: var(--text-muted);
+        }
+        .breadcrumb-current {
+            color: var(--text-primary);
+        }
+
+        /* Guide Meta Badges */
+        .guide-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .badge-beginner {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .badge-intermediate {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .badge-advanced {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .badge-time {
+            background: rgba(129, 140, 248, 0.15);
+            color: var(--accent-primary);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+        }
+        .badge-time svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Article Title */
+        .article-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            max-width: 900px;
+        }
+        .article-header .lead {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 700px;
+            margin-bottom: 28px;
+        }
+
+        /* Share Buttons in Header */
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .share-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+        .share-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Article Layout - Main Content with Sidebar */
+        .article-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        @media (max-width: 1100px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+        @media (max-width: 1100px) {
+            .toc-sidebar {
+                position: static;
+                background: var(--bg-card);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-lg);
+                padding: 24px;
+            }
+        }
+        .toc-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+        .toc-list a {
+            display: block;
+            padding: 8px 12px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            transition: all 0.2s ease;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        .toc-list a:hover {
+            color: var(--text-primary);
+            background: rgba(129, 140, 248, 0.08);
+        }
+        .toc-list a.active {
+            color: var(--accent-primary);
+            border-left-color: var(--accent-primary);
+            background: rgba(129, 140, 248, 0.1);
+        }
+        .toc-list .toc-h3 {
+            padding-left: 24px;
+            font-size: 0.8125rem;
+        }
+
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+        }
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+        .article-content h2:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        .article-content h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        .article-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .article-content ul,
+        .article-content ol {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Tech Stack Table */
+        .tech-stack-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0 32px;
+            font-size: 0.9rem;
+        }
+        .tech-stack-table thead {
+            background: var(--bg-secondary);
+        }
+        .tech-stack-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+        }
+        .tech-stack-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        .tech-stack-table tbody tr:hover {
+            background: rgba(129, 140, 248, 0.04);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            position: relative;
+            margin: 24px 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: #1a1b26;
+            border: 1px solid var(--border-color);
+        }
+        .code-block pre {
+            margin: 0;
+            padding: 20px 24px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.7;
+            color: #c0caf5;
+        }
+        .code-block code {
+            font-family: inherit;
+        }
+        .code-copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-sm);
+            color: #a9b1d6;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .code-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        .code-copy-btn.copied {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.4);
+            color: #10b981;
+        }
+
+        /* Code Syntax Highlighting */
+        .code-block .keyword { color: #bb9af7; }
+        .code-block .string { color: #9ece6a; }
+        .code-block .comment { color: #565f89; font-style: italic; }
+        .code-block .function { color: #7aa2f7; }
+        .code-block .variable { color: #c0caf5; }
+        .code-block .property { color: #73daca; }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 20px 24px;
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+            border-left: 4px solid;
+        }
+        .callout-tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+        }
+        .callout-tip .callout-title { color: #10b981; }
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: #f59e0b;
+        }
+        .callout-warning .callout-title { color: #f59e0b; }
+        .callout-info {
+            background: rgba(129, 140, 248, 0.1);
+            border-color: var(--accent-primary);
+        }
+        .callout-info .callout-title { color: var(--accent-primary); }
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .callout p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Share Section at Bottom */
+        .share-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 32px 0;
+            margin-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+        .share-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Related Guides */
+        .related-guides {
+            margin-top: 64px;
+            padding-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+        .related-guides-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .related-guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .related-guide-card {
+            display: block;
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .related-guide-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .related-guide-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .related-guide-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            margin-top: 64px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(129, 140, 248, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+        .newsletter-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            margin-top: 0;
+        }
+        .newsletter-section > p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            padding: 14px 18px;
+            font-size: 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .newsletter-form input[type="email"]:focus {
+            border-color: var(--accent-primary);
+        }
+        .newsletter-form input[type="email"]::placeholder {
+            color: var(--text-muted);
+        }
+        .newsletter-form button {
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .newsletter-form button:hover {
+            background: #6366f1;
+            transform: translateY(-1px);
+        }
+        @media (max-width: 520px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .newsletter-form button {
+                width: 100%;
+            }
+        }
+
+        /* Image styling */
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Anchor links */
+        .article-content h2 .anchor-link,
+        .article-content h3 .anchor-link {
+            opacity: 0;
+            margin-left: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        .article-content h2:hover .anchor-link,
+        .article-content h3:hover .anchor-link {
+            opacity: 1;
+        }
+        .article-content h2 .anchor-link:hover,
+        .article-content h3 .anchor-link:hover {
+            color: var(--accent-primary);
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="readingProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container" role="navigation" aria-label="Main navigation">
+            <a href="/" class="logo" aria-label="Vibe Coding Enthusiast - Home">
+                <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/paths/">Paths</a></li>
+                <li><a href="/learn/">Learn</a></li>
+                <li><a href="/tools/">Tools</a></li>
+                <li><a href="/stacks/">Stacks</a></li>
+                <li><a href="/#about">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/guides/" class="btn btn-primary">Explore Guides</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <!-- Breadcrumb Navigation -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <a href="/guides/">Guides</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <span class="breadcrumb-current" aria-current="page">AI Trip Planner</span>
+                </nav>
+
+                <!-- Guide Meta Badges -->
+                <div class="guide-meta">
+                    <span class="badge badge-intermediate">Intermediate</span>
+                    <span class="badge badge-time">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        ~5 hours
+                    </span>
+                </div>
+
+                <!-- Title -->
+                <h1 class="gradient-text">Build an AI Trip Planner</h1>
+
+                <!-- Description -->
+                <p class="lead">Create a personalized travel itinerary generator that uses AI to craft perfect day-by-day trip plans with interactive maps, budget tracking, and real destination data from Google Places and Booking.com.</p>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons" role="group" aria-label="Share this guide">
+                    <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content with TOC Sidebar -->
+        <div class="article-layout">
+            <!-- Table of Contents Sidebar -->
+            <aside class="toc-sidebar" aria-label="Table of contents">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list" id="tocList">
+                    <noscript>
+                        <li><a href="#overview">What We're Building</a></li>
+                        <li><a href="#prerequisites">Prerequisites</a></li>
+                        <li><a href="#tech-stack">Tech Stack</a></li>
+                        <li><a href="#ai-workflow">AI Agent Workflow</a></li>
+                        <li><a href="#build-steps">Build Steps</a></li>
+                        <li><a href="#common-issues">Common Issues</a></li>
+                        <li><a href="#next-steps">Next Steps</a></li>
+                    </noscript>
+                </ul>
+            </aside>
+
+            <!-- Article Content -->
+            <article class="article-content">
+                <!-- Section: What We're Building -->
+                <h2 id="overview">What We're Building</h2>
+                <p>In this guide, you'll build an AI-powered trip planner that generates personalized travel itineraries based on user preferences. The app will collect trip details (destination, dates, budget, interests), use Claude API to generate intelligent day-by-day itineraries, display routes on interactive Mapbox maps, and track budget allocations across activities.</p>
+
+                <p>Key features include:</p>
+                <ul>
+                    <li><strong>Smart Preferences Form</strong> - Collect destination, travel dates, budget, interests, and travel style</li>
+                    <li><strong>AI Itinerary Generation</strong> - Claude generates detailed day-by-day plans with timing, locations, and tips</li>
+                    <li><strong>Interactive Map Visualization</strong> - See your entire trip route with Mapbox markers and directions</li>
+                    <li><strong>Real Destination Data</strong> - Pull actual places, ratings, and photos from Google Places API</li>
+                    <li><strong>Budget Tracking</strong> - Monitor spending across accommodations, activities, food, and transport</li>
+                    <li><strong>Save and Share Trips</strong> - Store itineraries in Supabase and share with travel companions</li>
+                </ul>
+
+                <!-- Section: Prerequisites -->
+                <h2 id="prerequisites">Prerequisites</h2>
+                <p>Before starting this guide, make sure you have the following:</p>
+                <ul>
+                    <li>Node.js 18+ and npm/yarn installed</li>
+                    <li>Basic knowledge of React/Next.js and TypeScript</li>
+                    <li>Anthropic API key (sign up at <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>)</li>
+                    <li>Supabase account (free tier works perfectly)</li>
+                    <li>Mapbox access token (free tier includes 50,000 map loads/month)</li>
+                    <li>Google Cloud account with Places API enabled (optional but recommended)</li>
+                    <li>VS Code with Cursor or similar AI-assisted IDE</li>
+                </ul>
+
+                <!-- Section: Tech Stack -->
+                <h2 id="tech-stack">Tech Stack Specification</h2>
+                <p>Here's the technology stack we'll use for this build:</p>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Layer</th>
+                            <th scope="col">Technology</th>
+                            <th scope="col">Why This Choice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frontend</td>
+                            <td>Next.js 14, Tailwind CSS, Mapbox GL</td>
+                            <td>Server components for fast loading, beautiful maps for trip visualization</td>
+                        </tr>
+                        <tr>
+                            <td>Backend</td>
+                            <td>Next.js API Routes</td>
+                            <td>Serverless functions for AI processing and API integrations</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>Supabase (PostgreSQL)</td>
+                            <td>Store trips, destinations, user preferences with real-time sync</td>
+                        </tr>
+                        <tr>
+                            <td>AI</td>
+                            <td>Claude API (Anthropic)</td>
+                            <td>Superior reasoning for itinerary generation and travel recommendations</td>
+                        </tr>
+                        <tr>
+                            <td>External APIs</td>
+                            <td>Google Places, Booking.com</td>
+                            <td>Real destination data, reviews, photos, and accommodation options</td>
+                        </tr>
+                        <tr>
+                            <td>Hosting</td>
+                            <td>Vercel</td>
+                            <td>Seamless Next.js deployment with edge functions</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Section: AI Agent Workflow -->
+                <h2 id="ai-workflow">AI Agent Workflow</h2>
+                <p>Here's how to leverage AI tools throughout this build to maximize productivity:</p>
+
+                <h3 id="ai-scaffolding">Project Scaffolding with Claude Code</h3>
+                <p>Use Claude Code to scaffold the entire project structure, including the database schema, API routes, and component architecture. Claude excels at understanding the full context of travel planning requirements.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment"># Example prompt for Claude Code</span>
+Create a Next.js 14 trip planner app with:
+- App router structure with /trips, /trips/new, /trips/[id] routes
+- Supabase integration for trips, destinations, activities tables
+- Mapbox component for displaying itinerary routes
+- Form component collecting: destination, dates, budget, interests, pace
+- API route for Claude itinerary generation
+- TypeScript types for Trip, Destination, Activity, DayPlan</code></pre>
+                </div>
+
+                <h3 id="ai-ui">UI Generation with v0.dev</h3>
+                <p>Use v0.dev to rapidly generate the trip planning UI components. The visual nature of travel apps makes v0 particularly effective for creating engaging interfaces.</p>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Pro Tip
+                    </div>
+                    <p>When prompting v0 for travel UI, include "with card-based day layout, timeline view, and map sidebar" for itinerary displays. Request "dreamy travel imagery placeholders" to set the right visual tone.</p>
+                </div>
+
+                <h3 id="ai-debugging">Development with Cursor</h3>
+                <p>Cursor's AI assistance is invaluable for implementing Mapbox integrations (which can be tricky), debugging API responses from Google Places, and optimizing the Claude prompt for better itineraries.</p>
+
+                <!-- Section: Build Steps -->
+                <h2 id="build-steps">Step-by-Step Build Guide</h2>
+
+                <h3 id="phase-1">Phase 1: Trip Preferences Input Form</h3>
+                <p>Start by creating a beautiful multi-step form that collects all the information needed to generate a personalized itinerary. This form should feel like the beginning of an adventure.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// components/TripPreferencesForm.tsx</span>
+<span class="keyword">import</span> { useState } <span class="keyword">from</span> <span class="string">'react'</span>;
+
+<span class="keyword">interface</span> <span class="function">TripPreferences</span> {
+  destination: <span class="variable">string</span>;
+  startDate: <span class="variable">string</span>;
+  endDate: <span class="variable">string</span>;
+  budget: <span class="variable">number</span>;
+  currency: <span class="variable">string</span>;
+  travelers: <span class="variable">number</span>;
+  interests: <span class="variable">string</span>[];
+  pace: <span class="string">'relaxed'</span> | <span class="string">'moderate'</span> | <span class="string">'packed'</span>;
+  accommodation: <span class="string">'budget'</span> | <span class="string">'mid-range'</span> | <span class="string">'luxury'</span>;
+}
+
+<span class="keyword">const</span> interestOptions = [
+  <span class="string">'History & Culture'</span>, <span class="string">'Food & Dining'</span>, <span class="string">'Nature & Outdoors'</span>,
+  <span class="string">'Art & Museums'</span>, <span class="string">'Nightlife'</span>, <span class="string">'Shopping'</span>,
+  <span class="string">'Adventure Sports'</span>, <span class="string">'Local Experiences'</span>, <span class="string">'Photography'</span>
+];
+
+<span class="keyword">export default function</span> <span class="function">TripPreferencesForm</span>({
+  onSubmit
+}: {
+  onSubmit: (prefs: TripPreferences) => <span class="variable">void</span>
+}) {
+  <span class="keyword">const</span> [step, setStep] = useState(<span class="variable">1</span>);
+  <span class="keyword">const</span> [preferences, setPreferences] = useState&lt;TripPreferences&gt;({
+    destination: <span class="string">''</span>,
+    startDate: <span class="string">''</span>,
+    endDate: <span class="string">''</span>,
+    budget: <span class="variable">2000</span>,
+    currency: <span class="string">'USD'</span>,
+    travelers: <span class="variable">2</span>,
+    interests: [],
+    pace: <span class="string">'moderate'</span>,
+    accommodation: <span class="string">'mid-range'</span>
+  });
+
+  <span class="comment">// Multi-step form logic...</span>
+  <span class="keyword">return</span> (
+    &lt;form className=<span class="string">"max-w-2xl mx-auto p-8"</span>&gt;
+      {step === <span class="variable">1</span> && (
+        &lt;div className=<span class="string">"space-y-6"</span>&gt;
+          &lt;h2 className=<span class="string">"text-2xl font-bold"</span>&gt;Where to?&lt;/h2&gt;
+          &lt;DestinationAutocomplete
+            value={preferences.destination}
+            onChange={(v) => setPreferences({...preferences, destination: v})}
+          /&gt;
+          &lt;DateRangePicker
+            startDate={preferences.startDate}
+            endDate={preferences.endDate}
+            onChange={(start, end) => setPreferences({
+              ...preferences,
+              startDate: start,
+              endDate: end
+            })}
+          /&gt;
+        &lt;/div&gt;
+      )}
+      {<span class="comment">/* Additional steps for budget, interests, pace */</span>}
+    &lt;/form&gt;
+  );
+}</code></pre>
+                </div>
+
+                <h3 id="phase-2">Phase 2: Destination Database with Embeddings</h3>
+                <p>Set up Supabase tables to store destinations, activities, and user trips. We'll use pgvector for semantic search of destinations based on user interests.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">-- Supabase SQL: Create tables for trip planner</span>
+
+<span class="comment">-- Enable pgvector extension for semantic search</span>
+<span class="keyword">CREATE EXTENSION IF NOT EXISTS</span> vector;
+
+<span class="comment">-- Destinations table with embeddings</span>
+<span class="keyword">CREATE TABLE</span> destinations (
+  id UUID <span class="keyword">PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  name TEXT <span class="keyword">NOT NULL</span>,
+  country TEXT <span class="keyword">NOT NULL</span>,
+  description TEXT,
+  latitude DECIMAL(<span class="variable">10</span>, <span class="variable">8</span>),
+  longitude DECIMAL(<span class="variable">11</span>, <span class="variable">8</span>),
+  image_url TEXT,
+  tags TEXT[],
+  embedding vector(<span class="variable">1536</span>), <span class="comment">-- For semantic search</span>
+  created_at TIMESTAMPTZ <span class="keyword">DEFAULT</span> now()
+);
+
+<span class="comment">-- Trips table</span>
+<span class="keyword">CREATE TABLE</span> trips (
+  id UUID <span class="keyword">PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  user_id UUID <span class="keyword">REFERENCES</span> auth.users(id),
+  destination_id UUID <span class="keyword">REFERENCES</span> destinations(id),
+  title TEXT <span class="keyword">NOT NULL</span>,
+  start_date DATE <span class="keyword">NOT NULL</span>,
+  end_date DATE <span class="keyword">NOT NULL</span>,
+  budget DECIMAL(<span class="variable">10</span>, <span class="variable">2</span>),
+  currency TEXT <span class="keyword">DEFAULT</span> <span class="string">'USD'</span>,
+  travelers INTEGER <span class="keyword">DEFAULT</span> <span class="variable">1</span>,
+  preferences JSONB,
+  itinerary JSONB, <span class="comment">-- AI-generated itinerary</span>
+  status TEXT <span class="keyword">DEFAULT</span> <span class="string">'draft'</span>,
+  created_at TIMESTAMPTZ <span class="keyword">DEFAULT</span> now()
+);
+
+<span class="comment">-- Activities table for each day</span>
+<span class="keyword">CREATE TABLE</span> activities (
+  id UUID <span class="keyword">PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  trip_id UUID <span class="keyword">REFERENCES</span> trips(id) <span class="keyword">ON DELETE CASCADE</span>,
+  day_number INTEGER <span class="keyword">NOT NULL</span>,
+  time_slot TEXT, <span class="comment">-- 'morning', 'afternoon', 'evening'</span>
+  title TEXT <span class="keyword">NOT NULL</span>,
+  description TEXT,
+  location TEXT,
+  latitude DECIMAL(<span class="variable">10</span>, <span class="variable">8</span>),
+  longitude DECIMAL(<span class="variable">11</span>, <span class="variable">8</span>),
+  duration_minutes INTEGER,
+  estimated_cost DECIMAL(<span class="variable">8</span>, <span class="variable">2</span>),
+  category TEXT,
+  booking_url TEXT,
+  created_at TIMESTAMPTZ <span class="keyword">DEFAULT</span> now()
+);</code></pre>
+                </div>
+
+                <h3 id="phase-3">Phase 3: AI Itinerary Generation</h3>
+                <p>This is the heart of the application - using Claude to generate intelligent, personalized itineraries. The key is crafting a detailed prompt that includes all user preferences and destination context.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// app/api/generate-itinerary/route.ts</span>
+<span class="keyword">import</span> Anthropic <span class="keyword">from</span> <span class="string">'@anthropic-ai/sdk'</span>;
+<span class="keyword">import</span> { NextRequest, NextResponse } <span class="keyword">from</span> <span class="string">'next/server'</span>;
+
+<span class="keyword">const</span> anthropic = <span class="keyword">new</span> Anthropic({
+  apiKey: process.env.<span class="property">ANTHROPIC_API_KEY</span>,
+});
+
+<span class="keyword">export async function</span> <span class="function">POST</span>(request: NextRequest) {
+  <span class="keyword">const</span> { preferences, destinationInfo } = <span class="keyword">await</span> request.json();
+
+  <span class="keyword">const</span> tripDays = calculateDays(preferences.startDate, preferences.endDate);
+  <span class="keyword">const</span> dailyBudget = preferences.budget / tripDays;
+
+  <span class="keyword">const</span> systemPrompt = <span class="string">`You are an expert travel planner with deep knowledge
+of destinations worldwide. You create personalized, realistic itineraries
+that balance activities with rest, respect local customs, and optimize
+for the traveler's interests and budget.
+
+Always provide:
+- Specific place names (not generic "visit a museum")
+- Realistic timing with travel time between locations
+- Local tips and cultural insights
+- Budget estimates in the specified currency
+- Latitude/longitude for each location
+- Backup options for weather-dependent activities`</span>;
+
+  <span class="keyword">const</span> userPrompt = <span class="string">`Create a detailed ${tripDays}-day itinerary for
+${preferences.travelers} traveler(s) visiting ${preferences.destination}.
+
+TRIP DETAILS:
+- Dates: ${preferences.startDate} to ${preferences.endDate}
+- Total Budget: ${preferences.budget} ${preferences.currency}
+- Daily Budget: ~${dailyBudget.toFixed(0)} ${preferences.currency}
+- Accommodation Style: ${preferences.accommodation}
+- Travel Pace: ${preferences.pace}
+- Interests: ${preferences.interests.join(', ')}
+
+DESTINATION CONTEXT:
+${destinationInfo.description}
+Popular areas: ${destinationInfo.neighborhoods?.join(', ')}
+Best time to visit attractions: ${destinationInfo.tips}
+
+Return a JSON object with this structure:
+{
+  "title": "Trip title",
+  "summary": "2-3 sentence trip overview",
+  "days": [
+    {
+      "dayNumber": 1,
+      "date": "YYYY-MM-DD",
+      "theme": "Day theme (e.g., 'Historic Center Exploration')",
+      "activities": [
+        {
+          "timeSlot": "morning|afternoon|evening",
+          "startTime": "09:00",
+          "endTime": "12:00",
+          "title": "Activity name",
+          "description": "What you'll do and why it's special",
+          "location": "Specific place name",
+          "address": "Full address",
+          "latitude": 0.000000,
+          "longitude": 0.000000,
+          "duration": 180,
+          "estimatedCost": 25,
+          "category": "culture|food|nature|adventure|shopping|nightlife",
+          "tips": "Local insider tip",
+          "bookingRequired": false,
+          "bookingUrl": null
+        }
+      ],
+      "meals": {
+        "breakfast": { "name": "Place", "cuisine": "Type", "priceRange": "$$" },
+        "lunch": { "name": "Place", "cuisine": "Type", "priceRange": "$$" },
+        "dinner": { "name": "Place", "cuisine": "Type", "priceRange": "$$" }
+      },
+      "dailyBudget": {
+        "activities": 50,
+        "food": 60,
+        "transport": 20,
+        "total": 130
+      }
+    }
+  ],
+  "budgetBreakdown": {
+    "accommodation": 800,
+    "activities": 400,
+    "food": 500,
+    "transport": 200,
+    "misc": 100,
+    "total": 2000
+  },
+  "packingTips": ["Item 1", "Item 2"],
+  "importantNotes": ["Note about local customs", "Safety tip"]
+}`</span>;
+
+  <span class="keyword">const</span> response = <span class="keyword">await</span> anthropic.messages.create({
+    model: <span class="string">'claude-sonnet-4-20250514'</span>,
+    max_tokens: <span class="variable">8000</span>,
+    messages: [
+      { role: <span class="string">'user'</span>, content: userPrompt }
+    ],
+    system: systemPrompt,
+  });
+
+  <span class="keyword">const</span> itinerary = JSON.parse(response.content[<span class="variable">0</span>].text);
+
+  <span class="keyword">return</span> NextResponse.json({ itinerary });
+}
+
+<span class="keyword">function</span> <span class="function">calculateDays</span>(start: <span class="variable">string</span>, end: <span class="variable">string</span>): <span class="variable">number</span> {
+  <span class="keyword">const</span> startDate = <span class="keyword">new</span> Date(start);
+  <span class="keyword">const</span> endDate = <span class="keyword">new</span> Date(end);
+  <span class="keyword">return</span> Math.ceil((endDate - startDate) / (<span class="variable">1000</span> * <span class="variable">60</span> * <span class="variable">60</span> * <span class="variable">24</span>)) + <span class="variable">1</span>;
+}</code></pre>
+                </div>
+
+                <div class="callout callout-info">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        Why Claude for Itineraries?
+                    </div>
+                    <p>Claude excels at travel planning because it understands context deeply - it knows that visiting the Louvre requires 3-4 hours, that you shouldn't schedule outdoor activities during Paris's rainy season, and that certain neighborhoods are better for evening dining. This contextual reasoning creates more realistic itineraries than template-based systems.</p>
+                </div>
+
+                <h3 id="phase-4">Phase 4: Day-by-Day Planning UI</h3>
+                <p>Create an intuitive interface that displays the AI-generated itinerary in a timeline format, allowing users to view, edit, and customize their plans.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// components/ItineraryTimeline.tsx</span>
+<span class="keyword">import</span> { Itinerary, DayPlan, Activity } <span class="keyword">from</span> <span class="string">'@/types/trip'</span>;
+
+<span class="keyword">interface</span> <span class="function">ItineraryTimelineProps</span> {
+  itinerary: Itinerary;
+  onActivityClick: (activity: Activity) => <span class="variable">void</span>;
+  onActivityEdit: (dayNum: <span class="variable">number</span>, activity: Activity) => <span class="variable">void</span>;
+}
+
+<span class="keyword">export default function</span> <span class="function">ItineraryTimeline</span>({
+  itinerary,
+  onActivityClick,
+  onActivityEdit
+}: ItineraryTimelineProps) {
+  <span class="keyword">return</span> (
+    &lt;div className=<span class="string">"space-y-8"</span>&gt;
+      {itinerary.days.map((day) =&gt; (
+        &lt;div key={day.dayNumber} className=<span class="string">"bg-white rounded-xl shadow-sm border p-6"</span>&gt;
+          &lt;div className=<span class="string">"flex items-center justify-between mb-6"</span>&gt;
+            &lt;div&gt;
+              &lt;span className=<span class="string">"text-sm text-cyan-600 font-medium"</span>&gt;
+                Day {day.dayNumber}
+              &lt;/span&gt;
+              &lt;h3 className=<span class="string">"text-xl font-bold text-gray-900"</span>&gt;
+                {day.theme}
+              &lt;/h3&gt;
+              &lt;p className=<span class="string">"text-gray-500"</span>&gt;{formatDate(day.date)}&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=<span class="string">"text-right"</span>&gt;
+              &lt;p className=<span class="string">"text-sm text-gray-500"</span>&gt;Daily Budget&lt;/p&gt;
+              &lt;p className=<span class="string">"text-lg font-semibold"</span>&gt;
+                ${day.dailyBudget.total}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div className=<span class="string">"relative pl-8 border-l-2 border-cyan-200"</span>&gt;
+            {day.activities.map((activity, idx) =&gt; (
+              &lt;ActivityCard
+                key={idx}
+                activity={activity}
+                onClick={() =&gt; onActivityClick(activity)}
+                onEdit={(updated) =&gt; onActivityEdit(day.dayNumber, updated)}
+              /&gt;
+            ))}
+          &lt;/div&gt;
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</code></pre>
+                </div>
+
+                <h3 id="phase-5">Phase 5: Map Visualization of Routes</h3>
+                <p>Integrate Mapbox to display the full trip route with markers for each activity. Users can see their entire journey visualized on an interactive map.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// components/TripMap.tsx</span>
+<span class="keyword">import</span> { useEffect, useRef, useState } <span class="keyword">from</span> <span class="string">'react'</span>;
+<span class="keyword">import</span> mapboxgl <span class="keyword">from</span> <span class="string">'mapbox-gl'</span>;
+<span class="keyword">import</span> <span class="string">'mapbox-gl/dist/mapbox-gl.css'</span>;
+
+mapboxgl.accessToken = process.env.<span class="property">NEXT_PUBLIC_MAPBOX_TOKEN</span>!;
+
+<span class="keyword">interface</span> <span class="function">TripMapProps</span> {
+  itinerary: Itinerary;
+  selectedDay?: <span class="variable">number</span>;
+  onMarkerClick: (activity: Activity) => <span class="variable">void</span>;
+}
+
+<span class="keyword">export default function</span> <span class="function">TripMap</span>({
+  itinerary,
+  selectedDay,
+  onMarkerClick
+}: TripMapProps) {
+  <span class="keyword">const</span> mapContainer = useRef&lt;HTMLDivElement&gt;(<span class="variable">null</span>);
+  <span class="keyword">const</span> map = useRef&lt;mapboxgl.Map&gt;(<span class="variable">null</span>);
+  <span class="keyword">const</span> [markers, setMarkers] = useState&lt;mapboxgl.Marker[]&gt;([]);
+
+  useEffect(() =&gt; {
+    <span class="keyword">if</span> (!mapContainer.current) <span class="keyword">return</span>;
+
+    map.current = <span class="keyword">new</span> mapboxgl.Map({
+      container: mapContainer.current,
+      style: <span class="string">'mapbox://styles/mapbox/streets-v12'</span>,
+      center: [itinerary.centerLongitude, itinerary.centerLatitude],
+      zoom: <span class="variable">12</span>
+    });
+
+    <span class="keyword">return</span> () =&gt; map.current?.remove();
+  }, []);
+
+  useEffect(() =&gt; {
+    <span class="keyword">if</span> (!map.current) <span class="keyword">return</span>;
+
+    <span class="comment">// Clear existing markers</span>
+    markers.forEach(m =&gt; m.remove());
+
+    <span class="comment">// Get activities for selected day or all days</span>
+    <span class="keyword">const</span> activities = selectedDay
+      ? itinerary.days.find(d =&gt; d.dayNumber === selectedDay)?.activities || []
+      : itinerary.days.flatMap(d =&gt; d.activities);
+
+    <span class="comment">// Add markers with day colors</span>
+    <span class="keyword">const</span> newMarkers = activities.map((activity, idx) =&gt; {
+      <span class="keyword">const</span> el = document.createElement(<span class="string">'div'</span>);
+      el.className = <span class="string">'custom-marker'</span>;
+      el.innerHTML = <span class="string">`&lt;span&gt;${idx + 1}&lt;/span&gt;`</span>;
+      el.style.backgroundColor = getDayColor(activity.dayNumber);
+
+      <span class="keyword">const</span> marker = <span class="keyword">new</span> mapboxgl.Marker(el)
+        .setLngLat([activity.longitude, activity.latitude])
+        .setPopup(
+          <span class="keyword">new</span> mapboxgl.Popup({ offset: <span class="variable">25</span> })
+            .setHTML(<span class="string">`
+              &lt;h3 class="font-bold"&gt;${activity.title}&lt;/h3&gt;
+              &lt;p class="text-sm"&gt;${activity.startTime} - ${activity.endTime}&lt;/p&gt;
+              &lt;p class="text-sm text-gray-600"&gt;${activity.location}&lt;/p&gt;
+            `</span>)
+        )
+        .addTo(map.current!);
+
+      el.addEventListener(<span class="string">'click'</span>, () =&gt; onMarkerClick(activity));
+      <span class="keyword">return</span> marker;
+    });
+
+    setMarkers(newMarkers);
+
+    <span class="comment">// Draw route line between activities</span>
+    <span class="keyword">if</span> (activities.length &gt; <span class="variable">1</span>) {
+      drawRoute(map.current, activities);
+    }
+  }, [itinerary, selectedDay]);
+
+  <span class="keyword">return</span> (
+    &lt;div
+      ref={mapContainer}
+      className=<span class="string">"w-full h-[500px] rounded-xl overflow-hidden"</span>
+    /&gt;
+  );
+}</code></pre>
+                </div>
+
+                <h3 id="phase-6">Phase 6: Budget Tracking Feature</h3>
+                <p>Implement a budget tracker that aggregates costs across all activities and provides visual breakdowns by category and day.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// components/BudgetTracker.tsx</span>
+<span class="keyword">import</span> { useMemo } <span class="keyword">from</span> <span class="string">'react'</span>;
+<span class="keyword">import</span> { PieChart, Pie, Cell, ResponsiveContainer } <span class="keyword">from</span> <span class="string">'recharts'</span>;
+
+<span class="keyword">interface</span> <span class="function">BudgetTrackerProps</span> {
+  itinerary: Itinerary;
+  totalBudget: <span class="variable">number</span>;
+  currency: <span class="variable">string</span>;
+}
+
+<span class="keyword">export default function</span> <span class="function">BudgetTracker</span>({
+  itinerary,
+  totalBudget,
+  currency
+}: BudgetTrackerProps) {
+  <span class="keyword">const</span> budgetData = useMemo(() =&gt; {
+    <span class="keyword">const</span> breakdown = itinerary.budgetBreakdown;
+    <span class="keyword">return</span> [
+      { name: <span class="string">'Accommodation'</span>, value: breakdown.accommodation, color: <span class="string">'#0891b2'</span> },
+      { name: <span class="string">'Activities'</span>, value: breakdown.activities, color: <span class="string">'#06b6d4'</span> },
+      { name: <span class="string">'Food & Dining'</span>, value: breakdown.food, color: <span class="string">'#22d3ee'</span> },
+      { name: <span class="string">'Transport'</span>, value: breakdown.transport, color: <span class="string">'#67e8f9'</span> },
+      { name: <span class="string">'Miscellaneous'</span>, value: breakdown.misc, color: <span class="string">'#a5f3fc'</span> },
+    ];
+  }, [itinerary]);
+
+  <span class="keyword">const</span> totalEstimated = budgetData.reduce((sum, item) =&gt; sum + item.value, <span class="variable">0</span>);
+  <span class="keyword">const</span> remaining = totalBudget - totalEstimated;
+  <span class="keyword">const</span> isOverBudget = remaining &lt; <span class="variable">0</span>;
+
+  <span class="keyword">return</span> (
+    &lt;div className=<span class="string">"bg-white rounded-xl shadow-sm border p-6"</span>&gt;
+      &lt;h3 className=<span class="string">"text-lg font-bold mb-4"</span>&gt;Budget Overview&lt;/h3&gt;
+
+      &lt;div className=<span class="string">"flex items-center gap-8"</span>&gt;
+        &lt;div className=<span class="string">"w-48 h-48"</span>&gt;
+          &lt;ResponsiveContainer&gt;
+            &lt;PieChart&gt;
+              &lt;Pie
+                data={budgetData}
+                innerRadius={<span class="variable">50</span>}
+                outerRadius={<span class="variable">80</span>}
+                paddingAngle={<span class="variable">2</span>}
+                dataKey=<span class="string">"value"</span>
+              &gt;
+                {budgetData.map((entry, idx) =&gt; (
+                  &lt;Cell key={idx} fill={entry.color} /&gt;
+                ))}
+              &lt;/Pie&gt;
+            &lt;/PieChart&gt;
+          &lt;/ResponsiveContainer&gt;
+        &lt;/div&gt;
+
+        &lt;div className=<span class="string">"flex-1 space-y-3"</span>&gt;
+          {budgetData.map((item) =&gt; (
+            &lt;div key={item.name} className=<span class="string">"flex items-center justify-between"</span>&gt;
+              &lt;div className=<span class="string">"flex items-center gap-2"</span>&gt;
+                &lt;div
+                  className=<span class="string">"w-3 h-3 rounded-full"</span>
+                  style={{ backgroundColor: item.color }}
+                /&gt;
+                &lt;span className=<span class="string">"text-sm text-gray-600"</span>&gt;{item.name}&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;span className=<span class="string">"font-medium"</span>&gt;
+                {currency} {item.value.toLocaleString()}
+              &lt;/span&gt;
+            &lt;/div&gt;
+          ))}
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div className={<span class="string">`mt-6 p-4 rounded-lg ${isOverBudget ? 'bg-red-50' : 'bg-green-50'}`</span>}&gt;
+        &lt;div className=<span class="string">"flex justify-between items-center"</span>&gt;
+          &lt;span className=<span class="string">"font-medium"</span>&gt;
+            {isOverBudget ? <span class="string">'Over Budget'</span> : <span class="string">'Remaining'</span>}
+          &lt;/span&gt;
+          &lt;span className={<span class="string">`text-xl font-bold ${isOverBudget ? 'text-red-600' : 'text-green-600'}`</span>}&gt;
+            {currency} {Math.abs(remaining).toLocaleString()}
+          &lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                </div>
+
+                <!-- Section: Common Issues -->
+                <h2 id="common-issues">Common Issues & Solutions</h2>
+                <p>Here are some common issues you might encounter and how to solve them:</p>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Claude Returns Invalid JSON
+                    </div>
+                    <p>If Claude's response isn't valid JSON, wrap the API call with error handling and request a retry. Add "Return ONLY valid JSON, no markdown or explanations" to your prompt. Consider using Claude's response_format parameter when available.</p>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Mapbox Markers Not Displaying
+                    </div>
+                    <p>Ensure Mapbox CSS is imported and the access token is set before creating the map. Check that coordinates are in [longitude, latitude] order (Mapbox uses GeoJSON format). Verify markers are added after the map's 'load' event fires.</p>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Google Places API Rate Limits
+                    </div>
+                    <p>Implement caching for place details in Supabase to reduce API calls. Use session tokens for autocomplete requests. Consider batching requests and adding debounce to search inputs.</p>
+                </div>
+
+                <p>Additional tips for smooth development:</p>
+                <ul>
+                    <li><strong>Itinerary Generation Timeout</strong> - Claude can take 10-30 seconds for complex itineraries. Show a loading state with travel tips while waiting.</li>
+                    <li><strong>Coordinate Accuracy</strong> - When Claude provides coordinates, validate them against known bounds for the destination. Major errors can place activities in the wrong city.</li>
+                    <li><strong>Budget Calculations</strong> - Always show estimates as ranges since actual costs vary. Include a 10-15% buffer recommendation.</li>
+                </ul>
+
+                <!-- Section: Next Steps -->
+                <h2 id="next-steps">Next Steps</h2>
+                <p>Once you have the core trip planner working, consider adding these enhancements to create a production-ready application:</p>
+
+                <ul>
+                    <li><strong>Booking Integration</strong> - Connect to Booking.com or Expedia APIs to allow direct hotel and activity reservations from the itinerary</li>
+                    <li><strong>Collaborative Trips</strong> - Add real-time collaboration so travel groups can edit itineraries together using Supabase Realtime</li>
+                    <li><strong>Offline Mode</strong> - Use service workers to cache itineraries and maps for offline access during travel</li>
+                    <li><strong>Flight Integration</strong> - Add Amadeus or Skyscanner API to include flight options and optimize arrival/departure timing</li>
+                    <li><strong>Weather Awareness</strong> - Integrate weather forecasts to suggest indoor alternatives or optimal activity timing</li>
+                    <li><strong>Export Options</strong> - Generate PDF itineraries and calendar exports (.ics) for travelers</li>
+                </ul>
+
+                <!-- Share Section -->
+                <div class="share-section">
+                    <span class="share-label">Share this guide:</span>
+                    <div class="share-buttons" role="group" aria-label="Share this guide">
+                        <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="email" title="Share via email" aria-label="Share via email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Related Guides -->
+                <div class="related-guides">
+                    <h3 class="related-guides-title">Related Guides</h3>
+                    <div class="related-guides-grid">
+                        <a href="/guides/hospitality-booking-assistant.html" class="related-guide-card">
+                            <h4>Build an AI Booking Assistant</h4>
+                            <p>Create a conversational booking system for hotels and activities.</p>
+                        </a>
+                        <a href="/guides/ecommerce-ai-recommender.html" class="related-guide-card">
+                            <h4>AI Product Recommender</h4>
+                            <p>Build a personalized recommendation engine using AI and vector search.</p>
+                        </a>
+                        <a href="/guides/entertainment-content-curator.html" class="related-guide-card">
+                            <h4>AI Content Curator</h4>
+                            <p>Create smart content discovery experiences with AI-powered curation.</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Follow Section -->
+                <div class="follow-section">
+                    <h3>Follow the Vibe Coding Enthusiast</h3>
+                    <p>Get more AI build guides, tool tips, and project ideas from JD.</p>
+                    <div class="social-follow-buttons">
+                        <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" class="social-follow-btn linkedin">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            Follow on LinkedIn
+                        </a>
+                        <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" class="social-follow-btn twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            Follow on X
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+        <footer class="footer">
+    <div class="container">
+        <div class="footer-simple">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                    <span>Vibe Coding Enthusiast</span>
+                </a>
+                <p>Free guides for building with AI</p>
+            </div>
+
+            <nav class="footer-nav">
+                <a href="/guides/">Guides</a>
+                <span class="footer-dot">·</span>
+                <a href="/paths/">Paths</a>
+                <span class="footer-dot">·</span>
+                <a href="/learn/">Learn</a>
+                <span class="footer-dot">·</span>
+                <a href="/tools/">Tools</a>
+                <span class="footer-dot">·</span>
+                <a href="/stacks/">Stacks</a>
+                <span class="footer-dot">·</span>
+                <a href="/#about">About</a>
+            </nav>
+
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" aria-label="Follow on LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" aria-label="Follow on X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Vibe Coding Enthusiast</p>
+            <div class="footer-legal">
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="/script.js"></script>
+
+    <!-- Guide-Specific JavaScript -->
+    <script>
+        // Reading Progress Bar
+        (function() {
+            const progressBar = document.getElementById('readingProgress');
+            const article = document.querySelector('.article-content');
+
+            if (progressBar && article) {
+                window.addEventListener('scroll', function() {
+                    const articleTop = article.offsetTop;
+                    const articleHeight = article.offsetHeight;
+                    const windowHeight = window.innerHeight;
+                    const scrollTop = window.scrollY;
+
+                    const progress = Math.min(100, Math.max(0,
+                        ((scrollTop - articleTop + windowHeight * 0.3) / articleHeight) * 100
+                    ));
+
+                    progressBar.style.width = progress + '%';
+                    progressBar.setAttribute('aria-valuenow', Math.round(progress));
+                });
+            }
+        })();
+
+        // Generate Table of Contents
+        (function() {
+            const article = document.querySelector('.article-content');
+            const tocList = document.getElementById('tocList');
+
+            if (article && tocList) {
+                const headings = article.querySelectorAll('h2, h3');
+                let tocHTML = '';
+
+                headings.forEach(function(heading) {
+                    const id = heading.getAttribute('id');
+                    const text = heading.textContent.replace(/#/g, '').trim();
+                    const level = heading.tagName.toLowerCase();
+                    const className = level === 'h3' ? 'toc-h3' : '';
+
+                    if (id) {
+                        tocHTML += '<li><a href="#' + id + '" class="' + className + '">' + text + '</a></li>';
+
+                        // Add anchor link to heading
+                        const anchor = document.createElement('a');
+                        anchor.href = '#' + id;
+                        anchor.className = 'anchor-link';
+                        anchor.setAttribute('aria-label', 'Link to ' + text);
+                        anchor.textContent = '#';
+                        heading.appendChild(anchor);
+                    }
+                });
+
+                tocList.innerHTML = tocHTML;
+
+                // Highlight active TOC item on scroll
+                const tocLinks = tocList.querySelectorAll('a');
+
+                function updateActiveTOC() {
+                    const scrollPos = window.scrollY + 120;
+
+                    headings.forEach(function(heading, index) {
+                        const id = heading.getAttribute('id');
+                        const headingTop = heading.offsetTop;
+                        const nextHeading = headings[index + 1];
+                        const nextTop = nextHeading ? nextHeading.offsetTop : document.body.scrollHeight;
+
+                        if (scrollPos >= headingTop && scrollPos < nextTop) {
+                            tocLinks.forEach(function(link) {
+                                link.classList.remove('active');
+                                if (link.getAttribute('href') === '#' + id) {
+                                    link.classList.add('active');
+                                }
+                            });
+                        }
+                    });
+                }
+
+                window.addEventListener('scroll', updateActiveTOC);
+                updateActiveTOC();
+            }
+        })();
+
+        // Copy Code Button
+        (function() {
+            const copyButtons = document.querySelectorAll('.code-copy-btn');
+
+            copyButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const codeBlock = this.closest('.code-block');
+                    const code = codeBlock.querySelector('code');
+                    const text = code.textContent;
+
+                    navigator.clipboard.writeText(text).then(function() {
+                        button.textContent = 'Copied!';
+                        button.classList.add('copied');
+
+                        setTimeout(function() {
+                            button.textContent = 'Copy';
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(function(err) {
+                        console.error('Failed to copy:', err);
+                    });
+                });
+            });
+        })();
+
+        // Share Buttons
+        (function() {
+            const shareButtons = document.querySelectorAll('.share-btn');
+            const pageTitle = document.title;
+            const pageUrl = window.location.href;
+
+            shareButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const shareType = this.getAttribute('data-share');
+                    let shareUrl = '';
+
+                    switch(shareType) {
+                        case 'twitter':
+                            shareUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(pageTitle) + '&url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'linkedin':
+                            shareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'copy':
+                            navigator.clipboard.writeText(pageUrl).then(function() {
+                                // Show feedback
+                                const originalTitle = button.getAttribute('title');
+                                button.setAttribute('title', 'Link copied!');
+                                setTimeout(function() {
+                                    button.setAttribute('title', originalTitle);
+                                }, 2000);
+                            });
+                            break;
+                        case 'email':
+                            shareUrl = 'mailto:?subject=' + encodeURIComponent(pageTitle) + '&body=' + encodeURIComponent('Check out this guide: ' + pageUrl);
+                            window.location.href = shareUrl;
+                            break;
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

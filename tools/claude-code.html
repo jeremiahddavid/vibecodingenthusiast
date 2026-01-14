@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>Claude Code Guide: Complete Tutorial for AI-Assisted Development | 2025</title>
+    <meta name="title" content="Claude Code Guide: Complete Tutorial for AI-Assisted Development | 2025">
+    <meta name="description" content="Master Claude Code, Anthropic's CLI tool for AI-assisted development. Learn installation, best prompts, workflows, pricing, and when to use it over Cursor or Copilot.">
+    <meta name="keywords" content="Claude Code, Claude Code tutorial, Anthropic CLI, AI coding assistant, Claude Code vs Cursor, Claude Code prompts, AI development workflow">
+    <meta name="author" content="Vibe Coding Enthusiast">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/tools/claude-code.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/tools/claude-code.html">
+    <meta property="og:title" content="Claude Code Guide: Complete Tutorial for AI-Assisted Development">
+    <meta property="og:description" content="Master Claude Code with our comprehensive guide. Learn installation, best prompts, and when to use it over other AI tools.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/og-image.svg">
+    <meta property="og:site_name" content="Vibe Coding Enthusiast">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vibecodingenthusiast.com/tools/claude-code.html">
+    <meta property="twitter:title" content="Claude Code Guide: Complete Tutorial for AI-Assisted Development">
+    <meta property="twitter:description" content="Master Claude Code with our comprehensive guide. Learn installation, best prompts, and when to use it over other AI tools.">
+    <meta property="twitter:image" content="https://vibecodingenthusiast.com/og-image.svg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Claude Code Guide: Complete Tutorial for AI-Assisted Development",
+        "description": "Master Claude Code, Anthropic's CLI tool for AI-assisted development. Learn installation, best prompts, workflows, and pricing.",
+        "author": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vibecodingenthusiast.com/favicon.png"
+            }
+        },
+        "datePublished": "2025-01-01",
+        "dateModified": "2025-01-14",
+        "mainEntityOfPage": "https://vibecodingenthusiast.com/tools/claude-code.html"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="readingProgress"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/paths/">Paths</a></li>
+                <li><a href="/learn/">Learn</a></li>
+                <li><a href="/tools/">Tools</a></li>
+                <li><a href="/stacks/">Stacks</a></li>
+                <li><a href="/#about">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/guides/" class="btn btn-primary">Explore Guides</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="article-container">
+                <nav class="breadcrumb">
+                    <a href="/">Home</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <a href="/tools/">AI Tools</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span>Claude Code</span>
+                </nav>
+
+                <div class="guide-meta">
+                    <span class="badge badge-intermediate">Intermediate</span>
+                    <span class="badge badge-time">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        15 min read
+                    </span>
+                </div>
+
+                <h1 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 16px;">Claude Code: The Complete Guide to AI-Assisted Development</h1>
+                <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 700px;">Everything you need to know about Anthropic's CLI tool for building software with AI. From installation to advanced workflows.</p>
+            </div>
+        </section>
+
+        <!-- Article Content -->
+        <article class="article-content" style="padding-bottom: 80px;">
+            <div class="article-container">
+
+                <!-- What is Claude Code -->
+                <section id="what-is-claude-code">
+                    <h2>What is Claude Code?</h2>
+                    <p>Claude Code is Anthropic's command-line interface (CLI) tool that brings Claude's intelligence directly into your terminal. Unlike browser-based AI assistants, Claude Code works where you work - in your development environment.</p>
+                    <p>Think of it as having a senior developer pair programming with you, but one who can:</p>
+                    <ul>
+                        <li>Read and understand your entire codebase</li>
+                        <li>Edit multiple files simultaneously</li>
+                        <li>Run terminal commands and tests</li>
+                        <li>Manage git operations</li>
+                        <li>Debug complex issues across your project</li>
+                    </ul>
+                    <p>It's particularly powerful for complex tasks that require understanding context across many files - something that chat-based AI tools struggle with.</p>
+                </section>
+
+                <!-- Installation -->
+                <section id="installation">
+                    <h2>Installation & Setup</h2>
+                    <p>Getting started with Claude Code takes just a few minutes.</p>
+
+                    <h3>Prerequisites</h3>
+                    <ul>
+                        <li>Node.js 18 or higher</li>
+                        <li>npm or yarn</li>
+                        <li>An Anthropic API key (get one at <a href="https://console.anthropic.com" target="_blank" rel="noopener" style="color: var(--primary-light);">console.anthropic.com</a>)</li>
+                    </ul>
+
+                    <h3>Install via npm</h3>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
+                    </div>
+
+                    <h3>Set your API key</h3>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Add to your shell profile (.bashrc, .zshrc, etc.)
+export ANTHROPIC_API_KEY="your-api-key-here"
+
+# Or set it inline when running
+ANTHROPIC_API_KEY="your-key" claude</code></pre>
+                    </div>
+
+                    <h3>Verify installation</h3>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>claude --version</code></pre>
+                    </div>
+                </section>
+
+                <!-- Basic Usage -->
+                <section id="basic-usage">
+                    <h2>Basic Usage</h2>
+                    <p>Once installed, using Claude Code is straightforward. Navigate to your project directory and start a session.</p>
+
+                    <h3>Start a session</h3>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Navigate to your project
+cd /path/to/your/project
+
+# Start Claude Code
+claude</code></pre>
+                    </div>
+
+                    <h3>Common commands</h3>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Start with a specific task
+claude "Add user authentication to this Express app"
+
+# Resume a previous session
+claude --resume
+
+# Start in a different directory
+claude --cwd /path/to/project</code></pre>
+                    </div>
+
+                    <h3>Interactive mode</h3>
+                    <p>Once inside a Claude Code session, you can:</p>
+                    <ul>
+                        <li>Type natural language requests</li>
+                        <li>Ask follow-up questions</li>
+                        <li>Review proposed changes before accepting</li>
+                        <li>Run commands directly</li>
+                    </ul>
+                </section>
+
+                <!-- Best Prompts -->
+                <section id="best-prompts">
+                    <h2>Best Prompts for Claude Code</h2>
+                    <p>The quality of your prompts directly affects the quality of Claude Code's output. Here are tested prompts that work well.</p>
+
+                    <h3>For starting new features</h3>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>Add a user dashboard page that shows:
+- Total orders in the last 30 days
+- A chart of revenue over time
+- List of recent notifications
+Use the existing design system and database models.</code></pre>
+                    </div>
+
+                    <h3>For refactoring</h3>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>Refactor the authentication module to:
+1. Use async/await instead of callbacks
+2. Add proper error handling with custom error classes
+3. Implement rate limiting
+Keep all existing tests passing.</code></pre>
+                    </div>
+
+                    <h3>For debugging</h3>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>The checkout flow is failing intermittently with a
+"payment_intent_unexpected_state" error.
+
+Debug this by:
+1. Finding where the error originates
+2. Adding logging to track the payment state
+3. Identifying the race condition
+4. Implementing a fix</code></pre>
+                    </div>
+
+                    <h3>For code review</h3>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>Review the recent changes in the /src/api folder for:
+- Security vulnerabilities
+- Performance issues
+- Code style inconsistencies
+- Missing error handling
+Provide specific recommendations with code examples.</code></pre>
+                    </div>
+
+                    <h3>For documentation</h3>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>Generate comprehensive JSDoc comments for all
+exported functions in /src/utils. Include:
+- Parameter descriptions
+- Return value documentation
+- Usage examples
+- Edge cases</code></pre>
+                    </div>
+                </section>
+
+                <!-- When to Use -->
+                <section id="when-to-use">
+                    <h2>When to Use Claude Code</h2>
+                    <p>Claude Code shines in specific scenarios. Understanding when to use it helps you maximize productivity.</p>
+
+                    <h3>Perfect for:</h3>
+                    <ul>
+                        <li><strong>Building new features end-to-end:</strong> Claude Code can create routes, components, database models, and tests in one session</li>
+                        <li><strong>Large-scale refactoring:</strong> Rename patterns, update APIs, or restructure code across hundreds of files</li>
+                        <li><strong>Complex debugging:</strong> When bugs span multiple files or involve race conditions</li>
+                        <li><strong>Adding tests:</strong> Generate comprehensive test suites that actually understand your code</li>
+                        <li><strong>Code migrations:</strong> Upgrade dependencies, change frameworks, or update to new patterns</li>
+                        <li><strong>Project scaffolding:</strong> Set up new projects with proper structure, configs, and tooling</li>
+                    </ul>
+                </section>
+
+                <!-- When NOT to Use -->
+                <section id="when-not-to-use">
+                    <h2>When NOT to Use Claude Code</h2>
+                    <p>Claude Code isn't always the right tool. Sometimes simpler options work better.</p>
+
+                    <h3>Use Cursor instead for:</h3>
+                    <ul>
+                        <li><strong>Quick single-file edits:</strong> Cursor's Cmd+K is faster for small changes</li>
+                        <li><strong>Real-time autocomplete:</strong> Cursor provides instant inline suggestions</li>
+                        <li><strong>Visual diffs:</strong> When you want to see changes side-by-side in an IDE</li>
+                    </ul>
+
+                    <h3>Use GitHub Copilot instead for:</h3>
+                    <ul>
+                        <li><strong>Line-by-line coding:</strong> Copilot's autocomplete is smoother for writing new code</li>
+                        <li><strong>Boilerplate generation:</strong> Quick function signatures, loops, etc.</li>
+                    </ul>
+
+                    <h3>Use v0.dev instead for:</h3>
+                    <ul>
+                        <li><strong>UI component generation:</strong> v0 is purpose-built for React/Next.js UI</li>
+                        <li><strong>Design exploration:</strong> When you need to see multiple visual options</li>
+                    </ul>
+                </section>
+
+                <!-- Tips & Tricks -->
+                <section id="tips-tricks">
+                    <h2>Tips & Tricks</h2>
+                    <p>Power user techniques to get the most out of Claude Code.</p>
+
+                    <h3>1. Provide context upfront</h3>
+                    <p>Start sessions by explaining your project structure:</p>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>This is a Next.js 14 app with:
+- App router in /app
+- Server actions in /actions
+- Drizzle ORM with PostgreSQL
+- Tailwind + shadcn/ui for styling
+
+Now, add a user settings page...</code></pre>
+                    </div>
+
+                    <h3>2. Use CLAUDE.md files</h3>
+                    <p>Create a CLAUDE.md file in your project root with persistent context:</p>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># CLAUDE.md
+
+## Project Overview
+E-commerce platform built with Next.js 14
+
+## Tech Stack
+- Frontend: Next.js 14, React 18, Tailwind CSS
+- Backend: Next.js API routes, Drizzle ORM
+- Database: PostgreSQL on Supabase
+- Auth: NextAuth.js with Google/GitHub providers
+
+## Conventions
+- Use server components by default
+- All database queries go through /lib/db
+- Use Zod for validation
+- Error handling: throw AppError classes</code></pre>
+                    </div>
+
+                    <h3>3. Review before accepting</h3>
+                    <p>Always review proposed changes. Type <code>diff</code> to see what will change before confirming.</p>
+
+                    <h3>4. Use specific file references</h3>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Instead of:
+"Update the user model"
+
+# Be specific:
+"In /src/models/user.ts, add an 'avatar' field
+and update the schema validation in /src/schemas/user.ts"</code></pre>
+                    </div>
+
+                    <h3>5. Break complex tasks into steps</h3>
+                    <p>For large features, work incrementally:</p>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Step 1: Database
+"Add the subscription tables and relations"
+
+# Step 2: Backend
+"Create the subscription API endpoints"
+
+# Step 3: Frontend
+"Build the subscription management UI"
+
+# Step 4: Integration
+"Connect everything and add Stripe webhooks"</code></pre>
+                    </div>
+
+                    <h3>6. Let it run tests</h3>
+                    <p>Claude Code can run your test suite. Use this to verify changes:</p>
+                    <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>"After making changes, run the test suite and
+fix any failures before finishing."</code></pre>
+                    </div>
+                </section>
+
+                <!-- Comparison -->
+                <section id="comparison">
+                    <h2>Claude Code vs Alternatives</h2>
+                    <p>How does Claude Code compare to other AI coding tools?</p>
+
+                    <table class="tech-stack-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Claude Code</th>
+                                <th>Cursor</th>
+                                <th>GitHub Copilot</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Multi-file editing</td>
+                                <td>Excellent</td>
+                                <td>Good</td>
+                                <td>Limited</td>
+                            </tr>
+                            <tr>
+                                <td>Project understanding</td>
+                                <td>Excellent</td>
+                                <td>Good</td>
+                                <td>Limited</td>
+                            </tr>
+                            <tr>
+                                <td>Terminal integration</td>
+                                <td>Native</td>
+                                <td>Limited</td>
+                                <td>None</td>
+                            </tr>
+                            <tr>
+                                <td>Real-time autocomplete</td>
+                                <td>No</td>
+                                <td>Excellent</td>
+                                <td>Excellent</td>
+                            </tr>
+                            <tr>
+                                <td>Git operations</td>
+                                <td>Built-in</td>
+                                <td>Manual</td>
+                                <td>Manual</td>
+                            </tr>
+                            <tr>
+                                <td>Visual interface</td>
+                                <td>CLI only</td>
+                                <td>Full IDE</td>
+                                <td>IDE extension</td>
+                            </tr>
+                            <tr>
+                                <td>Best for</td>
+                                <td>Complex projects</td>
+                                <td>Daily coding</td>
+                                <td>Autocomplete</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>The winning combo</h3>
+                    <p>Many developers use multiple tools together:</p>
+                    <ul>
+                        <li><strong>Claude Code</strong> for complex features, refactoring, and debugging</li>
+                        <li><strong>Cursor</strong> for day-to-day coding and quick edits</li>
+                        <li><strong>v0.dev</strong> for generating UI components</li>
+                    </ul>
+                </section>
+
+                <!-- Pricing -->
+                <section id="pricing">
+                    <h2>Pricing & Cost Management</h2>
+                    <p>Claude Code uses Anthropic's API, which means you pay per token used.</p>
+
+                    <h3>Current pricing (as of 2025)</h3>
+                    <table class="tech-stack-table">
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Input (per 1M tokens)</th>
+                                <th>Output (per 1M tokens)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Claude 3.5 Sonnet</td>
+                                <td>$3.00</td>
+                                <td>$15.00</td>
+                            </tr>
+                            <tr>
+                                <td>Claude 3 Opus</td>
+                                <td>$15.00</td>
+                                <td>$75.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>What does this mean in practice?</h3>
+                    <ul>
+                        <li><strong>Light session</strong> (quick edits): ~$0.10 - $0.50</li>
+                        <li><strong>Medium session</strong> (new feature): ~$1 - $5</li>
+                        <li><strong>Heavy session</strong> (large refactor): ~$5 - $20</li>
+                    </ul>
+
+                    <h3>Cost-saving tips</h3>
+                    <ul>
+                        <li>Be specific in your prompts to reduce back-and-forth</li>
+                        <li>Use CLAUDE.md files to avoid repeating context</li>
+                        <li>Break large tasks into focused sessions</li>
+                        <li>Use Claude 3.5 Sonnet for most tasks (Opus only when needed)</li>
+                        <li>Set spending limits in your Anthropic console</li>
+                    </ul>
+                </section>
+
+                <!-- Share Section -->
+                <div class="share-section">
+                    <span class="share-label">Share this guide:</span>
+                    <div class="share-buttons">
+                        <a href="https://twitter.com/intent/tweet?url=https://vibecodingenthusiast.com/tools/claude-code.html&text=The complete guide to Claude Code for AI-assisted development" target="_blank" rel="noopener" class="share-btn" aria-label="Share on Twitter">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://vibecodingenthusiast.com/tools/claude-code.html" target="_blank" rel="noopener" class="share-btn" aria-label="Share on LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <button class="share-btn" onclick="copyPageUrl()" aria-label="Copy link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Related Guides -->
+                <div class="related-guides">
+                    <h3 class="related-guides-title">Continue Learning</h3>
+                    <div class="related-guides-grid">
+                        <a href="/tools/" class="related-guide-card">
+                            <h4>AI Tools Comparison</h4>
+                            <p>Compare Claude Code with Cursor, Copilot, v0.dev, and more.</p>
+                        </a>
+                        <a href="/#services" class="related-guide-card">
+                            <h4>AI Development Services</h4>
+                            <p>Need help building with AI? JD can help you ship faster.</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Follow Section -->
+                <div class="follow-section" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border: 1px solid var(--border-primary); border-radius: var(--radius-xl); padding: 40px; text-align: center; margin-top: 4rem;">
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">Follow the Vibe Coding Enthusiast</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">Get more AI build guides, tool tips, and project ideas from JD.</p>
+                    <div class="social-follow-buttons" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: var(--radius-md); font-weight: 600; text-decoration: none; background: #0A66C2; color: white; transition: all var(--transition-fast);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            Follow on LinkedIn
+                        </a>
+                        <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: var(--radius-md); font-weight: 600; text-decoration: none; background: #000000; color: white; transition: all var(--transition-fast);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            Follow on X
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </article>
+
+        <!-- CTA Section -->
+        <section class="final-cta">
+            <div class="container">
+                <h2>Ready to Build with <span class="gradient-text">AI</span>?</h2>
+                <p>JD uses Claude Code and other AI tools to ship projects faster. Let's build something together.</p>
+                <a href="/#contact" class="btn btn-white btn-lg">Get a Free Quote</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+        <footer class="footer">
+    <div class="container">
+        <div class="footer-simple">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                    <span>Vibe Coding Enthusiast</span>
+                </a>
+                <p>Free guides for building with AI</p>
+            </div>
+
+            <nav class="footer-nav">
+                <a href="/guides/">Guides</a>
+                <span class="footer-dot">·</span>
+                <a href="/paths/">Paths</a>
+                <span class="footer-dot">·</span>
+                <a href="/learn/">Learn</a>
+                <span class="footer-dot">·</span>
+                <a href="/tools/">Tools</a>
+                <span class="footer-dot">·</span>
+                <a href="/stacks/">Stacks</a>
+                <span class="footer-dot">·</span>
+                <a href="/#about">About</a>
+            </nav>
+
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" aria-label="Follow on LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" aria-label="Follow on X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Vibe Coding Enthusiast</p>
+            <div class="footer-legal">
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="/script.js"></script>
+    <script>
+        // Reading progress bar
+        window.addEventListener('scroll', function() {
+            const article = document.querySelector('.article-content');
+            const progressBar = document.getElementById('readingProgress');
+
+            if (article && progressBar) {
+                const articleTop = article.offsetTop;
+                const articleHeight = article.offsetHeight;
+                const windowHeight = window.innerHeight;
+                const scrollTop = window.scrollY;
+
+                const progress = Math.min(100, Math.max(0,
+                    ((scrollTop - articleTop + windowHeight) / articleHeight) * 100
+                ));
+
+                progressBar.style.width = progress + '%';
+            }
+        });
+
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.parentElement.querySelector('code');
+            const text = codeBlock.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Copy page URL
+        function copyPageUrl() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Link copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>

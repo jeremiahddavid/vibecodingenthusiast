@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>Build an AI Content Curator | AI Build Guides | Vibe Coding Enthusiast</title>
+    <meta name="title" content="Build an AI Content Curator | AI Build Guides | Vibe Coding Enthusiast">
+    <meta name="description" content="Learn to build a content recommendation system using embeddings with Next.js, Supabase pgvector, and Claude AI for personalized entertainment curation.">
+    <meta name="keywords" content="content curator, recommendation system, embeddings, pgvector, vector search, OpenAI embeddings, Claude AI, personalization, ai development, vibe coding, build guide, tutorial">
+    <meta name="author" content="Vibe Coding Enthusiast">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/guides/entertainment-content-curator.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/guides/entertainment-content-curator.html">
+    <meta property="og:title" content="Build an AI Content Curator | AI Build Guides">
+    <meta property="og:description" content="Learn to build a content recommendation system using embeddings with Next.js, Supabase pgvector, and Claude AI for personalized entertainment curation.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/guides/images/entertainment-content-curator-og.png">
+    <meta property="og:site_name" content="Vibe Coding Enthusiast">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2025-01-14">
+    <meta property="article:modified_time" content="2025-01-14">
+    <meta property="article:author" content="Vibe Coding Enthusiast">
+    <meta property="article:section" content="AI Build Guides">
+    <meta property="article:tag" content="AI Recommendations">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://vibecodingenthusiast.com/guides/entertainment-content-curator.html">
+    <meta name="twitter:title" content="Build an AI Content Curator | AI Build Guides">
+    <meta name="twitter:description" content="Learn to build a content recommendation system using embeddings with Next.js, Supabase pgvector, and Claude AI for personalized entertainment curation.">
+    <meta name="twitter:image" content="https://vibecodingenthusiast.com/guides/images/entertainment-content-curator-og.png">
+    <meta name="twitter:creator" content="@vibecodingenthusiast">
+
+    <!-- Schema.org JSON-LD for TechArticle -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Build an AI Content Curator",
+        "description": "Learn to build a content recommendation system using embeddings with Next.js, Supabase pgvector, and Claude AI for personalized entertainment curation.",
+        "image": "https://vibecodingenthusiast.com/guides/images/entertainment-content-curator-og.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "url": "https://vibecodingenthusiast.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vibecodingenthusiast.com/favicon.png"
+            }
+        },
+        "datePublished": "2025-01-14",
+        "dateModified": "2025-01-14",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://vibecodingenthusiast.com/guides/entertainment-content-curator.html"
+        },
+        "articleSection": "AI Build Guides",
+        "keywords": "content curator, recommendation system, embeddings, pgvector, vector search, OpenAI embeddings, Claude AI",
+        "proficiencyLevel": "Intermediate",
+        "dependencies": "Next.js 14, Tailwind CSS, Supabase, pgvector, OpenAI API, Claude API",
+        "timeRequired": "PT180M"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <!-- Guide-Specific Styles -->
+    <style>
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-green));
+            z-index: 1001;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .breadcrumb a:hover {
+            color: var(--accent-primary);
+        }
+        .breadcrumb-separator {
+            color: var(--text-muted);
+        }
+        .breadcrumb-current {
+            color: var(--text-primary);
+        }
+
+        /* Guide Meta Badges */
+        .guide-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .badge-beginner {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .badge-intermediate {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .badge-advanced {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .badge-time {
+            background: rgba(129, 140, 248, 0.15);
+            color: var(--accent-primary);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+        }
+        .badge-time svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Article Title */
+        .article-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            max-width: 900px;
+        }
+        .article-header .lead {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 700px;
+            margin-bottom: 28px;
+        }
+
+        /* Share Buttons in Header */
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .share-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+        .share-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Article Layout - Main Content with Sidebar */
+        .article-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        @media (max-width: 1100px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+        @media (max-width: 1100px) {
+            .toc-sidebar {
+                position: static;
+                background: var(--bg-card);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-lg);
+                padding: 24px;
+            }
+        }
+        .toc-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+        .toc-list a {
+            display: block;
+            padding: 8px 12px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            transition: all 0.2s ease;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        .toc-list a:hover {
+            color: var(--text-primary);
+            background: rgba(129, 140, 248, 0.08);
+        }
+        .toc-list a.active {
+            color: var(--accent-primary);
+            border-left-color: var(--accent-primary);
+            background: rgba(129, 140, 248, 0.1);
+        }
+        .toc-list .toc-h3 {
+            padding-left: 24px;
+            font-size: 0.8125rem;
+        }
+
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+        }
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+        .article-content h2:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        .article-content h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        .article-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .article-content ul,
+        .article-content ol {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Tech Stack Table */
+        .tech-stack-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0 32px;
+            font-size: 0.9rem;
+        }
+        .tech-stack-table thead {
+            background: var(--bg-secondary);
+        }
+        .tech-stack-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+        }
+        .tech-stack-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        .tech-stack-table tbody tr:hover {
+            background: rgba(129, 140, 248, 0.04);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            position: relative;
+            margin: 24px 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: #1a1b26;
+            border: 1px solid var(--border-color);
+        }
+        .code-block pre {
+            margin: 0;
+            padding: 20px 24px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.7;
+            color: #c0caf5;
+        }
+        .code-block code {
+            font-family: inherit;
+        }
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .code-lang {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #a9b1d6;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .code-copy-btn {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-sm);
+            color: #a9b1d6;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .code-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        .code-copy-btn.copied {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.4);
+            color: #10b981;
+        }
+
+        /* Code Syntax Highlighting */
+        .code-block .keyword { color: #bb9af7; }
+        .code-block .string { color: #9ece6a; }
+        .code-block .comment { color: #565f89; font-style: italic; }
+        .code-block .function { color: #7aa2f7; }
+        .code-block .variable { color: #c0caf5; }
+        .code-block .property { color: #73daca; }
+        .code-block .number { color: #ff9e64; }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 20px 24px;
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+            border-left: 4px solid;
+        }
+        .callout-tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+        }
+        .callout-tip .callout-title { color: #10b981; }
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: #f59e0b;
+        }
+        .callout-warning .callout-title { color: #f59e0b; }
+        .callout-info {
+            background: rgba(129, 140, 248, 0.1);
+            border-color: var(--accent-primary);
+        }
+        .callout-info .callout-title { color: var(--accent-primary); }
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .callout p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Share Section at Bottom */
+        .share-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 32px 0;
+            margin-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+        .share-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Related Guides */
+        .related-guides {
+            margin-top: 64px;
+            padding-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+        .related-guides-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .related-guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .related-guide-card {
+            display: block;
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .related-guide-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .related-guide-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .related-guide-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            margin-top: 64px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(129, 140, 248, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+        .newsletter-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            margin-top: 0;
+        }
+        .newsletter-section > p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            padding: 14px 18px;
+            font-size: 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .newsletter-form input[type="email"]:focus {
+            border-color: var(--accent-primary);
+        }
+        .newsletter-form input[type="email"]::placeholder {
+            color: var(--text-muted);
+        }
+        .newsletter-form button {
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .newsletter-form button:hover {
+            background: #6366f1;
+            transform: translateY(-1px);
+        }
+        @media (max-width: 520px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .newsletter-form button {
+                width: 100%;
+            }
+        }
+
+        /* Image styling */
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Anchor links */
+        .article-content h2 .anchor-link,
+        .article-content h3 .anchor-link {
+            opacity: 0;
+            margin-left: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        .article-content h2:hover .anchor-link,
+        .article-content h3:hover .anchor-link {
+            opacity: 1;
+        }
+        .article-content h2 .anchor-link:hover,
+        .article-content h3 .anchor-link:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Feature highlight boxes */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .feature-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 20px;
+        }
+        .feature-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .feature-item p {
+            font-size: 0.875rem;
+            margin: 0;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="readingProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container" role="navigation" aria-label="Main navigation">
+            <a href="/" class="logo" aria-label="Vibe Coding Enthusiast - Home">
+                <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/paths/">Paths</a></li>
+                <li><a href="/learn/">Learn</a></li>
+                <li><a href="/tools/">Tools</a></li>
+                <li><a href="/stacks/">Stacks</a></li>
+                <li><a href="/#about">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/guides/" class="btn btn-primary">Explore Guides</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <!-- Breadcrumb Navigation -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <a href="/guides/">Guides</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <span class="breadcrumb-current" aria-current="page">AI Content Curator</span>
+                </nav>
+
+                <!-- Guide Meta Badges -->
+                <div class="guide-meta">
+                    <span class="badge badge-intermediate">Intermediate</span>
+                    <span class="badge badge-time">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        ~3 hours
+                    </span>
+                </div>
+
+                <!-- Title -->
+                <h1 class="gradient-text">Build an AI Content Curator</h1>
+
+                <!-- Description -->
+                <p class="lead">Create an intelligent content recommendation system using vector embeddings and semantic search. Learn to build personalized feeds that understand user preferences and deliver relevant entertainment content.</p>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons" role="group" aria-label="Share this guide">
+                    <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content with TOC Sidebar -->
+        <div class="article-layout">
+            <!-- Table of Contents Sidebar -->
+            <aside class="toc-sidebar" aria-label="Table of contents">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list" id="tocList">
+                    <noscript>
+                        <li><a href="#overview">What We're Building</a></li>
+                        <li><a href="#prerequisites">Prerequisites</a></li>
+                        <li><a href="#tech-stack">Tech Stack</a></li>
+                        <li><a href="#ai-workflow">AI Agent Workflow</a></li>
+                        <li><a href="#build-steps">Build Steps</a></li>
+                        <li><a href="#common-issues">Common Issues</a></li>
+                        <li><a href="#next-steps">Next Steps</a></li>
+                    </noscript>
+                </ul>
+            </aside>
+
+            <!-- Article Content -->
+            <article class="article-content">
+                <!-- Section: What We're Building -->
+                <h2 id="overview">What We're Building</h2>
+                <p>In this guide, you'll build a sophisticated content recommendation system that uses vector embeddings to understand and match content with user preferences. Unlike traditional recommendation systems that rely on simple tags or collaborative filtering alone, our AI Content Curator uses semantic understanding to find truly relevant content.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>Semantic Search</h4>
+                        <p>Find content based on meaning, not just keywords</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>User Preferences</h4>
+                        <p>Track and learn from user interactions</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>AI Summaries</h4>
+                        <p>Generate personalized content descriptions</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Real-time Feed</h4>
+                        <p>Dynamic personalized content stream</p>
+                    </div>
+                </div>
+
+                <p>The system works by converting content (articles, videos, podcasts) into vector embeddings using OpenAI's embedding model, storing them in Supabase with pgvector for efficient similarity search, and using Claude to generate personalized summaries and explanations.</p>
+
+                <!-- Section: Prerequisites -->
+                <h2 id="prerequisites">Prerequisites</h2>
+                <p>Before starting this guide, make sure you have the following:</p>
+                <ul>
+                    <li><strong>Node.js 18+</strong> installed on your machine</li>
+                    <li><strong>OpenAI API key</strong> for generating embeddings ($0.0001 per 1K tokens)</li>
+                    <li><strong>Anthropic API key</strong> for Claude-powered summaries</li>
+                    <li><strong>Supabase account</strong> (free tier works fine for development)</li>
+                    <li>Basic understanding of <strong>React and TypeScript</strong></li>
+                    <li>Familiarity with <strong>SQL and database concepts</strong></li>
+                </ul>
+
+                <!-- Section: Tech Stack -->
+                <h2 id="tech-stack">Tech Stack Specification</h2>
+                <p>Here's the technology stack we'll use for this build:</p>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Layer</th>
+                            <th scope="col">Technology</th>
+                            <th scope="col">Why This Choice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frontend</td>
+                            <td>Next.js 14, Tailwind CSS</td>
+                            <td>Fast, SEO-friendly with App Router and server components</td>
+                        </tr>
+                        <tr>
+                            <td>Backend</td>
+                            <td>Next.js API Routes</td>
+                            <td>Serverless functions with zero config deployment</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>Supabase + pgvector</td>
+                            <td>Postgres with native vector search, built-in auth</td>
+                        </tr>
+                        <tr>
+                            <td>AI</td>
+                            <td>OpenAI Embeddings + Claude</td>
+                            <td>Best-in-class embeddings for similarity, Claude for personalization</td>
+                        </tr>
+                        <tr>
+                            <td>Hosting</td>
+                            <td>Vercel</td>
+                            <td>Zero config, automatic preview deployments</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="callout callout-info">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        Why pgvector?
+                    </div>
+                    <p>pgvector enables vector similarity search directly in PostgreSQL. This means you can join vector searches with regular SQL queries, filter by metadata, and leverage existing Postgres tooling - all without managing a separate vector database.</p>
+                </div>
+
+                <!-- Section: AI Agent Workflow -->
+                <h2 id="ai-workflow">AI Agent Workflow</h2>
+                <p>Here's how to leverage AI tools throughout this build to maximize productivity:</p>
+
+                <h3 id="ai-scaffolding">Project Scaffolding with Claude Code</h3>
+                <p>Start by using Claude Code to scaffold the entire project structure. Claude can generate the database schema, API routes, and React components in one go.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Claude Code Prompt</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Prompt for Claude Code:</span>
+
+Create a Next.js 14 content recommendation system with:
+- Supabase database with pgvector for content embeddings
+- API routes for: content ingestion, embedding generation,
+  similarity search, user preference tracking
+- Components: ContentCard, PersonalizedFeed, SearchBar
+- Use TypeScript, App Router, and Tailwind CSS
+- Include database migration SQL for pgvector setup</code></pre>
+                </div>
+
+                <h3 id="ai-ui">UI Generation with v0.dev</h3>
+                <p>Use v0.dev to rapidly prototype the feed UI. Describe the Netflix-style content grid layout and let v0 generate responsive Tailwind components.</p>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Pro Tip
+                    </div>
+                    <p>When prompting v0.dev, be specific about interactive states: "Create a content card that shows a hover preview, loading skeleton state, and smooth fade-in animation when content loads."</p>
+                </div>
+
+                <h3 id="ai-debugging">Development with Cursor</h3>
+                <p>Use Cursor's AI features to write and debug the embedding pipeline. Cursor excels at understanding the OpenAI and Supabase SDK patterns, helping you write type-safe database queries and handle edge cases in the embedding process.</p>
+
+                <!-- Section: Build Steps -->
+                <h2 id="build-steps">Step-by-Step Build Guide</h2>
+
+                <h3 id="phase-1">Phase 1: Project Setup</h3>
+                <p>Initialize your Next.js project with all required dependencies for embeddings and vector search.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Terminal</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Create Next.js project</span>
+npx create-next-app@latest content-curator --typescript --tailwind --app
+
+<span class="keyword">cd</span> content-curator
+
+<span class="comment"># Install dependencies</span>
+npm install @supabase/supabase-js openai @anthropic-ai/sdk
+npm install -D @types/node
+
+<span class="comment"># Set up environment variables</span>
+<span class="keyword">cat</span> > .env.local << <span class="string">'EOF'</span>
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+OPENAI_API_KEY=your_openai_key
+ANTHROPIC_API_KEY=your_anthropic_key
+<span class="string">EOF</span></code></pre>
+                </div>
+
+                <h3 id="phase-2">Phase 2: Database Setup with Vector Column</h3>
+                <p>Set up your Supabase database with the pgvector extension and create tables for content and user preferences.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">SQL</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment">-- Enable pgvector extension (run in Supabase SQL Editor)</span>
+<span class="keyword">CREATE EXTENSION IF NOT EXISTS</span> vector;
+
+<span class="comment">-- Content table with embedding column</span>
+<span class="keyword">CREATE TABLE</span> content (
+  id UUID <span class="keyword">PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  title TEXT <span class="keyword">NOT NULL</span>,
+  description TEXT,
+  content_type TEXT <span class="keyword">CHECK</span> (content_type <span class="keyword">IN</span> (<span class="string">'article'</span>, <span class="string">'video'</span>, <span class="string">'podcast'</span>)),
+  source_url TEXT,
+  thumbnail_url TEXT,
+  metadata JSONB <span class="keyword">DEFAULT</span> <span class="string">'{}'</span>,
+  embedding vector(<span class="number">1536</span>), <span class="comment">-- OpenAI ada-002 dimension</span>
+  created_at TIMESTAMPTZ <span class="keyword">DEFAULT</span> now(),
+  updated_at TIMESTAMPTZ <span class="keyword">DEFAULT</span> now()
+);
+
+<span class="comment">-- User preferences table</span>
+<span class="keyword">CREATE TABLE</span> user_preferences (
+  id UUID <span class="keyword">PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  user_id UUID <span class="keyword">REFERENCES</span> auth.users(id) <span class="keyword">ON DELETE CASCADE</span>,
+  content_id UUID <span class="keyword">REFERENCES</span> content(id) <span class="keyword">ON DELETE CASCADE</span>,
+  interaction_type TEXT <span class="keyword">CHECK</span> (interaction_type <span class="keyword">IN</span> (<span class="string">'view'</span>, <span class="string">'like'</span>, <span class="string">'save'</span>, <span class="string">'dismiss'</span>)),
+  created_at TIMESTAMPTZ <span class="keyword">DEFAULT</span> now(),
+  <span class="keyword">UNIQUE</span>(user_id, content_id, interaction_type)
+);
+
+<span class="comment">-- Create index for fast vector similarity search</span>
+<span class="keyword">CREATE INDEX</span> content_embedding_idx <span class="keyword">ON</span> content
+  <span class="keyword">USING</span> ivfflat (embedding vector_cosine_ops)
+  <span class="keyword">WITH</span> (lists = <span class="number">100</span>);
+
+<span class="comment">-- Function for similarity search</span>
+<span class="keyword">CREATE OR REPLACE FUNCTION</span> match_content(
+  query_embedding vector(<span class="number">1536</span>),
+  match_threshold FLOAT <span class="keyword">DEFAULT</span> <span class="number">0.78</span>,
+  match_count INT <span class="keyword">DEFAULT</span> <span class="number">10</span>
+)
+<span class="keyword">RETURNS TABLE</span> (
+  id UUID,
+  title TEXT,
+  description TEXT,
+  content_type TEXT,
+  thumbnail_url TEXT,
+  similarity FLOAT
+)
+<span class="keyword">LANGUAGE</span> plpgsql
+<span class="keyword">AS</span> $$
+<span class="keyword">BEGIN</span>
+  <span class="keyword">RETURN QUERY SELECT</span>
+    content.id,
+    content.title,
+    content.description,
+    content.content_type,
+    content.thumbnail_url,
+    <span class="number">1</span> - (content.embedding <=> query_embedding) <span class="keyword">AS</span> similarity
+  <span class="keyword">FROM</span> content
+  <span class="keyword">WHERE</span> <span class="number">1</span> - (content.embedding <=> query_embedding) > match_threshold
+  <span class="keyword">ORDER BY</span> content.embedding <=> query_embedding
+  <span class="keyword">LIMIT</span> match_count;
+<span class="keyword">END</span>;
+$$;</code></pre>
+                </div>
+
+                <h3 id="phase-3">Phase 3: Content Embedding Pipeline</h3>
+                <p>Create the API route that generates embeddings for content and stores them in your database.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript - app/api/embed/route.ts</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="keyword">import</span> { NextResponse } <span class="keyword">from</span> <span class="string">'next/server'</span>;
+<span class="keyword">import</span> { createClient } <span class="keyword">from</span> <span class="string">'@supabase/supabase-js'</span>;
+<span class="keyword">import</span> OpenAI <span class="keyword">from</span> <span class="string">'openai'</span>;
+
+<span class="keyword">const</span> supabase = <span class="function">createClient</span>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
+<span class="keyword">const</span> openai = <span class="keyword">new</span> <span class="function">OpenAI</span>({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+<span class="keyword">export async function</span> <span class="function">POST</span>(request: Request) {
+  <span class="keyword">const</span> { title, description, contentType, sourceUrl, thumbnailUrl } =
+    <span class="keyword">await</span> request.<span class="function">json</span>();
+
+  <span class="comment">// Generate embedding from title + description</span>
+  <span class="keyword">const</span> textToEmbed = <span class="string">`</span>${title}<span class="string">. </span>${description}<span class="string">`</span>;
+
+  <span class="keyword">const</span> embeddingResponse = <span class="keyword">await</span> openai.embeddings.<span class="function">create</span>({
+    model: <span class="string">'text-embedding-ada-002'</span>,
+    input: textToEmbed,
+  });
+
+  <span class="keyword">const</span> embedding = embeddingResponse.data[<span class="number">0</span>].embedding;
+
+  <span class="comment">// Store content with embedding in Supabase</span>
+  <span class="keyword">const</span> { data, error } = <span class="keyword">await</span> supabase
+    .<span class="function">from</span>(<span class="string">'content'</span>)
+    .<span class="function">insert</span>({
+      title,
+      description,
+      content_type: contentType,
+      source_url: sourceUrl,
+      thumbnail_url: thumbnailUrl,
+      embedding,
+    })
+    .<span class="function">select</span>()
+    .<span class="function">single</span>();
+
+  <span class="keyword">if</span> (error) {
+    <span class="keyword">return</span> NextResponse.<span class="function">json</span>({ error: error.message }, { status: <span class="number">500</span> });
+  }
+
+  <span class="keyword">return</span> NextResponse.<span class="function">json</span>({ content: data });
+}</code></pre>
+                </div>
+
+                <h3 id="phase-4">Phase 4: Similarity-Based Recommendations</h3>
+                <p>Build the recommendation engine that finds similar content based on user interactions and query embeddings.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript - app/api/recommend/route.ts</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="keyword">import</span> { NextResponse } <span class="keyword">from</span> <span class="string">'next/server'</span>;
+<span class="keyword">import</span> { createClient } <span class="keyword">from</span> <span class="string">'@supabase/supabase-js'</span>;
+<span class="keyword">import</span> OpenAI <span class="keyword">from</span> <span class="string">'openai'</span>;
+
+<span class="keyword">const</span> supabase = <span class="function">createClient</span>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
+<span class="keyword">const</span> openai = <span class="keyword">new</span> <span class="function">OpenAI</span>({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+<span class="keyword">export async function</span> <span class="function">POST</span>(request: Request) {
+  <span class="keyword">const</span> { query, userId, limit = <span class="number">10</span> } = <span class="keyword">await</span> request.<span class="function">json</span>();
+
+  <span class="keyword">let</span> queryEmbedding: number[];
+
+  <span class="keyword">if</span> (query) {
+    <span class="comment">// Search by text query</span>
+    <span class="keyword">const</span> embeddingResponse = <span class="keyword">await</span> openai.embeddings.<span class="function">create</span>({
+      model: <span class="string">'text-embedding-ada-002'</span>,
+      input: query,
+    });
+    queryEmbedding = embeddingResponse.data[<span class="number">0</span>].embedding;
+  } <span class="keyword">else if</span> (userId) {
+    <span class="comment">// Generate embedding from user's liked content</span>
+    <span class="keyword">const</span> { data: likedContent } = <span class="keyword">await</span> supabase
+      .<span class="function">from</span>(<span class="string">'user_preferences'</span>)
+      .<span class="function">select</span>(<span class="string">'content:content_id(embedding)'</span>)
+      .<span class="function">eq</span>(<span class="string">'user_id'</span>, userId)
+      .<span class="function">eq</span>(<span class="string">'interaction_type'</span>, <span class="string">'like'</span>)
+      .<span class="function">limit</span>(<span class="number">5</span>);
+
+    <span class="keyword">if</span> (!likedContent?.length) {
+      <span class="comment">// Return trending content for new users</span>
+      <span class="keyword">const</span> { data } = <span class="keyword">await</span> supabase
+        .<span class="function">from</span>(<span class="string">'content'</span>)
+        .<span class="function">select</span>(<span class="string">'id, title, description, content_type, thumbnail_url'</span>)
+        .<span class="function">order</span>(<span class="string">'created_at'</span>, { ascending: <span class="keyword">false</span> })
+        .<span class="function">limit</span>(limit);
+      <span class="keyword">return</span> NextResponse.<span class="function">json</span>({ recommendations: data });
+    }
+
+    <span class="comment">// Average embeddings of liked content</span>
+    <span class="keyword">const</span> embeddings = likedContent.<span class="function">map</span>((c: <span class="keyword">any</span>) => c.content.embedding);
+    queryEmbedding = <span class="function">averageEmbeddings</span>(embeddings);
+  } <span class="keyword">else</span> {
+    <span class="keyword">return</span> NextResponse.<span class="function">json</span>(
+      { error: <span class="string">'Query or userId required'</span> },
+      { status: <span class="number">400</span> }
+    );
+  }
+
+  <span class="comment">// Find similar content using pgvector</span>
+  <span class="keyword">const</span> { data, error } = <span class="keyword">await</span> supabase
+    .<span class="function">rpc</span>(<span class="string">'match_content'</span>, {
+      query_embedding: queryEmbedding,
+      match_threshold: <span class="number">0.75</span>,
+      match_count: limit,
+    });
+
+  <span class="keyword">if</span> (error) {
+    <span class="keyword">return</span> NextResponse.<span class="function">json</span>({ error: error.message }, { status: <span class="number">500</span> });
+  }
+
+  <span class="keyword">return</span> NextResponse.<span class="function">json</span>({ recommendations: data });
+}
+
+<span class="keyword">function</span> <span class="function">averageEmbeddings</span>(embeddings: number[][]): number[] {
+  <span class="keyword">const</span> dims = embeddings[<span class="number">0</span>].length;
+  <span class="keyword">const</span> avg = <span class="keyword">new</span> <span class="function">Array</span>(dims).<span class="function">fill</span>(<span class="number">0</span>);
+
+  <span class="keyword">for</span> (<span class="keyword">const</span> emb <span class="keyword">of</span> embeddings) {
+    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i < dims; i++) {
+      avg[i] += emb[i];
+    }
+  }
+
+  <span class="keyword">return</span> avg.<span class="function">map</span>(v => v / embeddings.length);
+}</code></pre>
+                </div>
+
+                <h3 id="phase-5">Phase 5: AI-Powered Content Summaries</h3>
+                <p>Add Claude-powered personalized summaries that explain why content was recommended and generate engaging descriptions.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript - app/api/summarize/route.ts</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="keyword">import</span> { NextResponse } <span class="keyword">from</span> <span class="string">'next/server'</span>;
+<span class="keyword">import</span> Anthropic <span class="keyword">from</span> <span class="string">'@anthropic-ai/sdk'</span>;
+<span class="keyword">import</span> { createClient } <span class="keyword">from</span> <span class="string">'@supabase/supabase-js'</span>;
+
+<span class="keyword">const</span> anthropic = <span class="keyword">new</span> <span class="function">Anthropic</span>({
+  apiKey: process.env.ANTHROPIC_API_KEY,
+});
+
+<span class="keyword">const</span> supabase = <span class="function">createClient</span>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
+<span class="keyword">export async function</span> <span class="function">POST</span>(request: Request) {
+  <span class="keyword">const</span> { contentId, userId } = <span class="keyword">await</span> request.<span class="function">json</span>();
+
+  <span class="comment">// Get content details</span>
+  <span class="keyword">const</span> { data: content } = <span class="keyword">await</span> supabase
+    .<span class="function">from</span>(<span class="string">'content'</span>)
+    .<span class="function">select</span>(<span class="string">'title, description, content_type, metadata'</span>)
+    .<span class="function">eq</span>(<span class="string">'id'</span>, contentId)
+    .<span class="function">single</span>();
+
+  <span class="comment">// Get user's recent likes for context</span>
+  <span class="keyword">const</span> { data: userLikes } = <span class="keyword">await</span> supabase
+    .<span class="function">from</span>(<span class="string">'user_preferences'</span>)
+    .<span class="function">select</span>(<span class="string">'content:content_id(title, content_type)'</span>)
+    .<span class="function">eq</span>(<span class="string">'user_id'</span>, userId)
+    .<span class="function">eq</span>(<span class="string">'interaction_type'</span>, <span class="string">'like'</span>)
+    .<span class="function">limit</span>(<span class="number">5</span>);
+
+  <span class="keyword">const</span> likedTitles = userLikes?.<span class="function">map</span>((l: <span class="keyword">any</span>) => l.content.title) || [];
+
+  <span class="keyword">const</span> message = <span class="keyword">await</span> anthropic.messages.<span class="function">create</span>({
+    model: <span class="string">'claude-sonnet-4-20250514'</span>,
+    max_tokens: <span class="number">300</span>,
+    messages: [{
+      role: <span class="string">'user'</span>,
+      content: <span class="string">`You are a content curator. Generate a personalized 2-3 sentence summary explaining why this content would interest the user.
+
+Content:
+- Title: </span>${content.title}<span class="string">
+- Type: </span>${content.content_type}<span class="string">
+- Description: </span>${content.description}<span class="string">
+
+User has recently liked: </span>${likedTitles.<span class="function">join</span>(<span class="string">', '</span>) || <span class="string">'(new user)'</span>}<span class="string">
+
+Write in second person ("you'll love this because..."). Be specific and engaging.`</span>
+    }]
+  });
+
+  <span class="keyword">const</span> summary = message.content[<span class="number">0</span>].type === <span class="string">'text'</span>
+    ? message.content[<span class="number">0</span>].text
+    : <span class="string">''</span>;
+
+  <span class="keyword">return</span> NextResponse.<span class="function">json</span>({ summary });
+}</code></pre>
+                </div>
+
+                <h3 id="phase-6">Phase 6: Personalized Feed UI</h3>
+                <p>Build the frontend components for displaying the personalized content feed with loading states and interactions.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript - components/PersonalizedFeed.tsx</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="string">'use client'</span>;
+
+<span class="keyword">import</span> { useState, useEffect } <span class="keyword">from</span> <span class="string">'react'</span>;
+<span class="keyword">import</span> { ContentCard } <span class="keyword">from</span> <span class="string">'./ContentCard'</span>;
+
+<span class="keyword">interface</span> Content {
+  id: string;
+  title: string;
+  description: string;
+  content_type: string;
+  thumbnail_url: string;
+  similarity?: number;
+}
+
+<span class="keyword">export function</span> <span class="function">PersonalizedFeed</span>({ userId }: { userId?: string }) {
+  <span class="keyword">const</span> [content, setContent] = <span class="function">useState</span><Content[]>([]);
+  <span class="keyword">const</span> [loading, setLoading] = <span class="function">useState</span>(<span class="keyword">true</span>);
+  <span class="keyword">const</span> [searchQuery, setSearchQuery] = <span class="function">useState</span>(<span class="string">''</span>);
+
+  <span class="keyword">const</span> <span class="function">fetchRecommendations</span> = <span class="keyword">async</span> (query?: string) => {
+    <span class="function">setLoading</span>(<span class="keyword">true</span>);
+    <span class="keyword">try</span> {
+      <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="function">fetch</span>(<span class="string">'/api/recommend'</span>, {
+        method: <span class="string">'POST'</span>,
+        headers: { <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span> },
+        body: JSON.<span class="function">stringify</span>({
+          query,
+          userId,
+          limit: <span class="number">12</span>
+        }),
+      });
+      <span class="keyword">const</span> data = <span class="keyword">await</span> response.<span class="function">json</span>();
+      <span class="function">setContent</span>(data.recommendations || []);
+    } <span class="keyword">catch</span> (error) {
+      console.<span class="function">error</span>(<span class="string">'Failed to fetch recommendations:'</span>, error);
+    } <span class="keyword">finally</span> {
+      <span class="function">setLoading</span>(<span class="keyword">false</span>);
+    }
+  };
+
+  <span class="function">useEffect</span>(() => {
+    <span class="function">fetchRecommendations</span>();
+  }, [userId]);
+
+  <span class="keyword">const</span> <span class="function">handleSearch</span> = (e: React.FormEvent) => {
+    e.<span class="function">preventDefault</span>();
+    <span class="function">fetchRecommendations</span>(searchQuery);
+  };
+
+  <span class="keyword">const</span> <span class="function">handleInteraction</span> = <span class="keyword">async</span> (
+    contentId: string,
+    type: <span class="string">'like'</span> | <span class="string">'save'</span> | <span class="string">'dismiss'</span>
+  ) => {
+    <span class="keyword">await</span> <span class="function">fetch</span>(<span class="string">'/api/interaction'</span>, {
+      method: <span class="string">'POST'</span>,
+      headers: { <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span> },
+      body: JSON.<span class="function">stringify</span>({ userId, contentId, type }),
+    });
+    <span class="comment">// Refresh recommendations after interaction</span>
+    <span class="function">fetchRecommendations</span>(searchQuery || <span class="keyword">undefined</span>);
+  };
+
+  <span class="keyword">return</span> (
+    <span class="variable">&lt;div</span> className=<span class="string">"space-y-8"</span><span class="variable">&gt;</span>
+      <span class="comment">{/* Search Bar */}</span>
+      <span class="variable">&lt;form</span> onSubmit={handleSearch} className=<span class="string">"flex gap-4"</span><span class="variable">&gt;</span>
+        <span class="variable">&lt;input</span>
+          type=<span class="string">"text"</span>
+          value={searchQuery}
+          onChange={(e) => <span class="function">setSearchQuery</span>(e.target.value)}
+          placeholder=<span class="string">"Search by topic, mood, or description..."</span>
+          className=<span class="string">"flex-1 px-4 py-3 rounded-lg bg-gray-800
+                     border border-gray-700 focus:border-purple-500"</span>
+        <span class="variable">/&gt;</span>
+        <span class="variable">&lt;button</span>
+          type=<span class="string">"submit"</span>
+          className=<span class="string">"px-6 py-3 bg-purple-600 rounded-lg
+                     hover:bg-purple-700 transition-colors"</span>
+        <span class="variable">&gt;</span>
+          Search
+        <span class="variable">&lt;/button&gt;</span>
+      <span class="variable">&lt;/form&gt;</span>
+
+      <span class="comment">{/* Content Grid */}</span>
+      {loading ? (
+        <span class="variable">&lt;div</span> className=<span class="string">"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"</span><span class="variable">&gt;</span>
+          {[...Array(<span class="number">6</span>)].<span class="function">map</span>((_, i) =&gt; (
+            <span class="variable">&lt;div</span> key={i} className=<span class="string">"animate-pulse"</span><span class="variable">&gt;</span>
+              <span class="variable">&lt;div</span> className=<span class="string">"bg-gray-800 aspect-video rounded-lg"</span> <span class="variable">/&gt;</span>
+              <span class="variable">&lt;div</span> className=<span class="string">"h-4 bg-gray-800 rounded mt-4 w-3/4"</span> <span class="variable">/&gt;</span>
+              <span class="variable">&lt;div</span> className=<span class="string">"h-3 bg-gray-800 rounded mt-2 w-1/2"</span> <span class="variable">/&gt;</span>
+            <span class="variable">&lt;/div&gt;</span>
+          ))}
+        <span class="variable">&lt;/div&gt;</span>
+      ) : (
+        <span class="variable">&lt;div</span> className=<span class="string">"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"</span><span class="variable">&gt;</span>
+          {content.<span class="function">map</span>((item) =&gt; (
+            <span class="variable">&lt;ContentCard</span>
+              key={item.id}
+              content={item}
+              userId={userId}
+              onInteraction={handleInteraction}
+            <span class="variable">/&gt;</span>
+          ))}
+        <span class="variable">&lt;/div&gt;</span>
+      )}
+    <span class="variable">&lt;/div&gt;</span>
+  );
+}</code></pre>
+                </div>
+
+                <!-- Section: Common Issues -->
+                <h2 id="common-issues">Common Issues & Solutions</h2>
+                <p>Here are some common issues you might encounter and how to solve them:</p>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        pgvector Extension Not Found
+                    </div>
+                    <p>If you see "extension 'vector' does not exist", go to Supabase Dashboard > Database > Extensions and enable the "vector" extension. This is required before running the migration SQL.</p>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Embedding Dimension Mismatch
+                    </div>
+                    <p>OpenAI's text-embedding-ada-002 outputs 1536 dimensions. If you change to a different model (like text-embedding-3-small at 1536 or text-embedding-3-large at 3072), update the vector column dimension accordingly.</p>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Slow Vector Search Performance
+                    </div>
+                    <p>For larger datasets (10K+ items), ensure the IVF index is created properly. You may need to adjust the `lists` parameter - use sqrt(n) as a starting point, where n is your row count.</p>
+                </div>
+
+                <p>Other tips for a smooth build:</p>
+                <ul>
+                    <li><strong>Rate Limiting:</strong> OpenAI's embedding API has rate limits. For bulk imports, batch requests and add delays between calls.</li>
+                    <li><strong>Caching:</strong> Cache embedding API calls to avoid regenerating embeddings for the same content. Use Redis or a simple in-memory cache for development.</li>
+                    <li><strong>Cold Start:</strong> New users with no interaction history need a fallback strategy. Consider showing trending or recent content until you have preference data.</li>
+                </ul>
+
+                <!-- Section: Next Steps -->
+                <h2 id="next-steps">Next Steps</h2>
+                <p>Congratulations on building your AI Content Curator! Here are ways to extend and improve your system:</p>
+
+                <ul>
+                    <li><strong>Hybrid Recommendations:</strong> Combine vector similarity with collaborative filtering for even better results</li>
+                    <li><strong>Real-time Updates:</strong> Add Supabase Realtime to push new recommendations as users interact</li>
+                    <li><strong>A/B Testing:</strong> Implement different recommendation strategies and measure engagement metrics</li>
+                    <li><strong>Multi-modal Embeddings:</strong> Use CLIP or similar models to embed images and match visual preferences</li>
+                    <li><strong>Diversity Controls:</strong> Add logic to ensure recommendation variety and avoid filter bubbles</li>
+                </ul>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Production Tip
+                    </div>
+                    <p>For production deployments, consider using OpenAI's batch embedding API for cost efficiency, and implement a job queue (like Inngest or QStash) for processing large content libraries asynchronously.</p>
+                </div>
+
+                <!-- Share Section -->
+                <div class="share-section">
+                    <span class="share-label">Share this guide:</span>
+                    <div class="share-buttons" role="group" aria-label="Share this guide">
+                        <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="email" title="Share via email" aria-label="Share via email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Related Guides -->
+                <div class="related-guides">
+                    <h3 class="related-guides-title">Related Guides</h3>
+                    <div class="related-guides-grid">
+                        <a href="/guides/ecommerce-ai-recommender.html" class="related-guide-card">
+                            <h4>Build an AI Product Recommender</h4>
+                            <p>Similar embedding techniques for e-commerce product recommendations</p>
+                        </a>
+                        <a href="/guides/edtech-ai-tutor.html" class="related-guide-card">
+                            <h4>Build an AI Learning Companion</h4>
+                            <p>Use AI to personalize educational content delivery</p>
+                        </a>
+                        <a href="/guides/fintech-ai-dashboard.html" class="related-guide-card">
+                            <h4>Build an AI Finance Dashboard</h4>
+                            <p>Intelligent insights and data visualization with AI</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Follow Section -->
+                <div class="follow-section">
+                    <h3>Follow the Vibe Coding Enthusiast</h3>
+                    <p>Get more AI build guides, tool tips, and project ideas from JD.</p>
+                    <div class="social-follow-buttons">
+                        <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" class="social-follow-btn linkedin">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            Follow on LinkedIn
+                        </a>
+                        <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" class="social-follow-btn twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            Follow on X
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+        <footer class="footer">
+    <div class="container">
+        <div class="footer-simple">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                    <span>Vibe Coding Enthusiast</span>
+                </a>
+                <p>Free guides for building with AI</p>
+            </div>
+
+            <nav class="footer-nav">
+                <a href="/guides/">Guides</a>
+                <span class="footer-dot">·</span>
+                <a href="/paths/">Paths</a>
+                <span class="footer-dot">·</span>
+                <a href="/learn/">Learn</a>
+                <span class="footer-dot">·</span>
+                <a href="/tools/">Tools</a>
+                <span class="footer-dot">·</span>
+                <a href="/stacks/">Stacks</a>
+                <span class="footer-dot">·</span>
+                <a href="/#about">About</a>
+            </nav>
+
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" aria-label="Follow on LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" aria-label="Follow on X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Vibe Coding Enthusiast</p>
+            <div class="footer-legal">
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="/script.js"></script>
+
+    <!-- Guide-Specific JavaScript -->
+    <script>
+        // Reading Progress Bar
+        (function() {
+            const progressBar = document.getElementById('readingProgress');
+            const article = document.querySelector('.article-content');
+
+            if (progressBar && article) {
+                window.addEventListener('scroll', function() {
+                    const articleTop = article.offsetTop;
+                    const articleHeight = article.offsetHeight;
+                    const windowHeight = window.innerHeight;
+                    const scrollTop = window.scrollY;
+
+                    const progress = Math.min(100, Math.max(0,
+                        ((scrollTop - articleTop + windowHeight * 0.3) / articleHeight) * 100
+                    ));
+
+                    progressBar.style.width = progress + '%';
+                    progressBar.setAttribute('aria-valuenow', Math.round(progress));
+                });
+            }
+        })();
+
+        // Generate Table of Contents
+        (function() {
+            const article = document.querySelector('.article-content');
+            const tocList = document.getElementById('tocList');
+
+            if (article && tocList) {
+                const headings = article.querySelectorAll('h2, h3');
+                let tocHTML = '';
+
+                headings.forEach(function(heading) {
+                    const id = heading.getAttribute('id');
+                    const text = heading.textContent.replace(/#/g, '').trim();
+                    const level = heading.tagName.toLowerCase();
+                    const className = level === 'h3' ? 'toc-h3' : '';
+
+                    if (id) {
+                        tocHTML += '<li><a href="#' + id + '" class="' + className + '">' + text + '</a></li>';
+
+                        // Add anchor link to heading
+                        const anchor = document.createElement('a');
+                        anchor.href = '#' + id;
+                        anchor.className = 'anchor-link';
+                        anchor.setAttribute('aria-label', 'Link to ' + text);
+                        anchor.textContent = '#';
+                        heading.appendChild(anchor);
+                    }
+                });
+
+                tocList.innerHTML = tocHTML;
+
+                // Highlight active TOC item on scroll
+                const tocLinks = tocList.querySelectorAll('a');
+
+                function updateActiveTOC() {
+                    const scrollPos = window.scrollY + 120;
+
+                    headings.forEach(function(heading, index) {
+                        const id = heading.getAttribute('id');
+                        const headingTop = heading.offsetTop;
+                        const nextHeading = headings[index + 1];
+                        const nextTop = nextHeading ? nextHeading.offsetTop : document.body.scrollHeight;
+
+                        if (scrollPos >= headingTop && scrollPos < nextTop) {
+                            tocLinks.forEach(function(link) {
+                                link.classList.remove('active');
+                                if (link.getAttribute('href') === '#' + id) {
+                                    link.classList.add('active');
+                                }
+                            });
+                        }
+                    });
+                }
+
+                window.addEventListener('scroll', updateActiveTOC);
+                updateActiveTOC();
+            }
+        })();
+
+        // Copy Code Button
+        (function() {
+            const copyButtons = document.querySelectorAll('.code-copy-btn');
+
+            copyButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const codeBlock = this.closest('.code-block');
+                    const code = codeBlock.querySelector('code');
+                    const text = code.textContent;
+
+                    navigator.clipboard.writeText(text).then(function() {
+                        button.textContent = 'Copied!';
+                        button.classList.add('copied');
+
+                        setTimeout(function() {
+                            button.textContent = 'Copy';
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(function(err) {
+                        console.error('Failed to copy:', err);
+                    });
+                });
+            });
+        })();
+
+        // Share Buttons
+        (function() {
+            const shareButtons = document.querySelectorAll('.share-btn');
+            const pageTitle = document.title;
+            const pageUrl = window.location.href;
+
+            shareButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const shareType = this.getAttribute('data-share');
+                    let shareUrl = '';
+
+                    switch(shareType) {
+                        case 'twitter':
+                            shareUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(pageTitle) + '&url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'linkedin':
+                            shareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'copy':
+                            navigator.clipboard.writeText(pageUrl).then(function() {
+                                // Show feedback
+                                const originalTitle = button.getAttribute('title');
+                                button.setAttribute('title', 'Link copied!');
+                                setTimeout(function() {
+                                    button.setAttribute('title', originalTitle);
+                                }, 2000);
+                            });
+                            break;
+                        case 'email':
+                            shareUrl = 'mailto:?subject=' + encodeURIComponent(pageTitle) + '&body=' + encodeURIComponent('Check out this guide: ' + pageUrl);
+                            window.location.href = shareUrl;
+                            break;
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

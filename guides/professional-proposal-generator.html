@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>Build an AI Proposal Generator | AI Build Guides | Vibe Coding Enthusiast</title>
+    <meta name="title" content="Build an AI Proposal Generator | AI Build Guides | Vibe Coding Enthusiast">
+    <meta name="description" content="Learn to build an AI-powered client proposal automation tool with Next.js, Claude API, and PDF export. Complete step-by-step guide for professional services firms.">
+    <meta name="keywords" content="ai proposal generator, client proposal automation, professional services software, claude api, next.js, react-pdf, ai development, vibe coding, build guide, tutorial">
+    <meta name="author" content="Vibe Coding Enthusiast">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/guides/professional-proposal-generator.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/guides/professional-proposal-generator.html">
+    <meta property="og:title" content="Build an AI Proposal Generator | AI Build Guides">
+    <meta property="og:description" content="Learn to build an AI-powered client proposal automation tool with Next.js, Claude API, and PDF export. Complete step-by-step guide for professional services firms.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/guides/images/professional-proposal-generator-og.png">
+    <meta property="og:site_name" content="Vibe Coding Enthusiast">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2025-01-14">
+    <meta property="article:modified_time" content="2025-01-14">
+    <meta property="article:author" content="Vibe Coding Enthusiast">
+    <meta property="article:section" content="AI Build Guides">
+    <meta property="article:tag" content="Professional Services">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://vibecodingenthusiast.com/guides/professional-proposal-generator.html">
+    <meta name="twitter:title" content="Build an AI Proposal Generator | AI Build Guides">
+    <meta name="twitter:description" content="Learn to build an AI-powered client proposal automation tool with Next.js, Claude API, and PDF export. Complete step-by-step guide for professional services firms.">
+    <meta name="twitter:image" content="https://vibecodingenthusiast.com/guides/images/professional-proposal-generator-og.png">
+    <meta name="twitter:creator" content="@vibecodingenthusiast">
+
+    <!-- Schema.org JSON-LD for TechArticle -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Build an AI Proposal Generator",
+        "description": "Learn to build an AI-powered client proposal automation tool with Next.js, Claude API, and PDF export. Complete step-by-step guide for professional services firms.",
+        "image": "https://vibecodingenthusiast.com/guides/images/professional-proposal-generator-og.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "url": "https://vibecodingenthusiast.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vibecodingenthusiast.com/favicon.png"
+            }
+        },
+        "datePublished": "2025-01-14",
+        "dateModified": "2025-01-14",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://vibecodingenthusiast.com/guides/professional-proposal-generator.html"
+        },
+        "articleSection": "AI Build Guides",
+        "keywords": "ai proposal generator, client proposal automation, professional services, claude api, next.js, react-pdf",
+        "proficiencyLevel": "Beginner",
+        "dependencies": "Next.js 14, Tailwind CSS, Supabase, Claude API, React-PDF, Vercel",
+        "timeRequired": "PT180M"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <!-- Guide-Specific Styles -->
+    <style>
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-green));
+            z-index: 1001;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, rgba(129, 140, 248, 0.08) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(129, 140, 248, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .breadcrumb a:hover {
+            color: var(--accent-primary);
+        }
+        .breadcrumb-separator {
+            color: var(--text-muted);
+        }
+        .breadcrumb-current {
+            color: var(--text-primary);
+        }
+
+        /* Guide Meta Badges */
+        .guide-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .badge-beginner {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .badge-intermediate {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .badge-advanced {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .badge-time {
+            background: rgba(129, 140, 248, 0.15);
+            color: var(--accent-primary);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+        }
+        .badge-time svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Article Title */
+        .article-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            max-width: 900px;
+        }
+        .article-header .lead {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 700px;
+            margin-bottom: 28px;
+        }
+
+        /* Share Buttons in Header */
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .share-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+        .share-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Article Layout - Main Content with Sidebar */
+        .article-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        @media (max-width: 1100px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+        @media (max-width: 1100px) {
+            .toc-sidebar {
+                position: static;
+                background: var(--bg-card);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-lg);
+                padding: 24px;
+            }
+        }
+        .toc-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+        .toc-list a {
+            display: block;
+            padding: 8px 12px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            transition: all 0.2s ease;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        .toc-list a:hover {
+            color: var(--text-primary);
+            background: rgba(129, 140, 248, 0.08);
+        }
+        .toc-list a.active {
+            color: var(--accent-primary);
+            border-left-color: var(--accent-primary);
+            background: rgba(129, 140, 248, 0.1);
+        }
+        .toc-list .toc-h3 {
+            padding-left: 24px;
+            font-size: 0.8125rem;
+        }
+
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+        }
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+        .article-content h2:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        .article-content h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        .article-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .article-content ul,
+        .article-content ol {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Tech Stack Table */
+        .tech-stack-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0 32px;
+            font-size: 0.9rem;
+        }
+        .tech-stack-table thead {
+            background: var(--bg-secondary);
+        }
+        .tech-stack-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+        }
+        .tech-stack-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        .tech-stack-table tbody tr:hover {
+            background: rgba(129, 140, 248, 0.04);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            position: relative;
+            margin: 24px 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: #1a1b26;
+            border: 1px solid var(--border-color);
+        }
+        .code-block pre {
+            margin: 0;
+            padding: 20px 24px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.7;
+            color: #c0caf5;
+        }
+        .code-block code {
+            font-family: inherit;
+        }
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .code-lang {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #a9b1d6;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .code-copy-btn {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-sm);
+            color: #a9b1d6;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .code-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        .code-copy-btn.copied {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.4);
+            color: #10b981;
+        }
+
+        /* Code Syntax Highlighting */
+        .code-block .keyword { color: #bb9af7; }
+        .code-block .string { color: #9ece6a; }
+        .code-block .comment { color: #565f89; font-style: italic; }
+        .code-block .function { color: #7aa2f7; }
+        .code-block .variable { color: #c0caf5; }
+        .code-block .property { color: #73daca; }
+        .code-block .number { color: #ff9e64; }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 20px 24px;
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+            border-left: 4px solid;
+        }
+        .callout-tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+        }
+        .callout-tip .callout-title { color: #10b981; }
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: #f59e0b;
+        }
+        .callout-warning .callout-title { color: #f59e0b; }
+        .callout-info {
+            background: rgba(129, 140, 248, 0.1);
+            border-color: var(--accent-primary);
+        }
+        .callout-info .callout-title { color: var(--accent-primary); }
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .callout p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Share Section at Bottom */
+        .share-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 32px 0;
+            margin-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+        .share-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Related Guides */
+        .related-guides {
+            margin-top: 64px;
+            padding-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+        .related-guides-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .related-guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .related-guide-card {
+            display: block;
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .related-guide-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .related-guide-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .related-guide-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            margin-top: 64px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(129, 140, 248, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+        .newsletter-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            margin-top: 0;
+        }
+        .newsletter-section > p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            padding: 14px 18px;
+            font-size: 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .newsletter-form input[type="email"]:focus {
+            border-color: var(--accent-primary);
+        }
+        .newsletter-form input[type="email"]::placeholder {
+            color: var(--text-muted);
+        }
+        .newsletter-form button {
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .newsletter-form button:hover {
+            background: #6366f1;
+            transform: translateY(-1px);
+        }
+        @media (max-width: 520px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .newsletter-form button {
+                width: 100%;
+            }
+        }
+
+        /* Image styling */
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Anchor links */
+        .article-content h2 .anchor-link,
+        .article-content h3 .anchor-link {
+            opacity: 0;
+            margin-left: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        .article-content h2:hover .anchor-link,
+        .article-content h3:hover .anchor-link {
+            opacity: 1;
+        }
+        .article-content h2 .anchor-link:hover,
+        .article-content h3 .anchor-link:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Feature List */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        @media (max-width: 600px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+        }
+        .feature-item svg {
+            width: 20px;
+            height: 20px;
+            color: var(--accent-green);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .feature-item span {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="readingProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container" role="navigation" aria-label="Main navigation">
+            <a href="/" class="logo" aria-label="Vibe Coding Enthusiast - Home">
+                <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/paths/">Paths</a></li>
+                <li><a href="/learn/">Learn</a></li>
+                <li><a href="/tools/">Tools</a></li>
+                <li><a href="/stacks/">Stacks</a></li>
+                <li><a href="/#about">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/guides/" class="btn btn-primary">Explore Guides</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <!-- Breadcrumb Navigation -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <a href="/guides/">Guides</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <span class="breadcrumb-current" aria-current="page">AI Proposal Generator</span>
+                </nav>
+
+                <!-- Guide Meta Badges -->
+                <div class="guide-meta">
+                    <span class="badge badge-beginner">Beginner</span>
+                    <span class="badge badge-time">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        ~3 hours
+                    </span>
+                </div>
+
+                <!-- Title -->
+                <h1 class="gradient-text">Build an AI Proposal Generator</h1>
+
+                <!-- Description -->
+                <p class="lead">Create a professional client proposal automation tool that uses Claude AI to generate compelling, customized proposals. Perfect for consulting firms, agencies, and professional services businesses looking to streamline their sales process.</p>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons" role="group" aria-label="Share this guide">
+                    <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content with TOC Sidebar -->
+        <div class="article-layout">
+            <!-- Table of Contents Sidebar -->
+            <aside class="toc-sidebar" aria-label="Table of contents">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list" id="tocList">
+                    <noscript>
+                        <li><a href="#overview">What We're Building</a></li>
+                        <li><a href="#prerequisites">Prerequisites</a></li>
+                        <li><a href="#tech-stack">Tech Stack</a></li>
+                        <li><a href="#ai-workflow">AI Agent Workflow</a></li>
+                        <li><a href="#build-steps">Build Steps</a></li>
+                        <li><a href="#common-issues">Common Issues</a></li>
+                        <li><a href="#next-steps">Next Steps</a></li>
+                    </noscript>
+                </ul>
+            </aside>
+
+            <!-- Article Content -->
+            <article class="article-content">
+                <!-- Section: What We're Building -->
+                <h2 id="overview">What We're Building</h2>
+                <p>Professional services firms spend countless hours crafting proposals for potential clients. This AI Proposal Generator automates that process by collecting client requirements through an intake form, using Claude to generate customized proposal content, and producing polished PDF documents ready to send.</p>
+
+                <p>By the end of this guide, you'll have a full-stack application with:</p>
+
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Reusable proposal templates stored in Supabase</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Dynamic client intake forms</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>AI-powered content generation with Claude</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Section-by-section editing interface</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Professional PDF export with React-PDF</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Proposal tracking dashboard</span>
+                    </div>
+                </div>
+
+                <!-- Section: Prerequisites -->
+                <h2 id="prerequisites">Prerequisites</h2>
+                <p>Before starting this guide, make sure you have the following:</p>
+                <ul>
+                    <li><strong>Node.js 18+</strong> installed on your machine</li>
+                    <li><strong>Claude API key</strong> from Anthropic (get one at <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>)</li>
+                    <li><strong>Supabase account</strong> for database and authentication</li>
+                    <li><strong>Vercel account</strong> for deployment (free tier works)</li>
+                    <li>Basic knowledge of React and TypeScript</li>
+                </ul>
+
+                <!-- Section: Tech Stack -->
+                <h2 id="tech-stack">Tech Stack Specification</h2>
+                <p>Here's the technology stack we'll use for this build:</p>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Layer</th>
+                            <th scope="col">Technology</th>
+                            <th scope="col">Why This Choice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frontend</td>
+                            <td>Next.js 14, Tailwind CSS</td>
+                            <td>Form UI, server components, and rapid styling</td>
+                        </tr>
+                        <tr>
+                            <td>Backend</td>
+                            <td>Next.js API Routes</td>
+                            <td>Serverless processing with same-repo deployment</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>Supabase</td>
+                            <td>Store templates, proposals, and client data</td>
+                        </tr>
+                        <tr>
+                            <td>AI</td>
+                            <td>Claude API</td>
+                            <td>Best-in-class content generation quality</td>
+                        </tr>
+                        <tr>
+                            <td>PDF</td>
+                            <td>React-PDF</td>
+                            <td>React-native PDF generation with styling</td>
+                        </tr>
+                        <tr>
+                            <td>Hosting</td>
+                            <td>Vercel</td>
+                            <td>Zero-config deployment for Next.js</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Section: AI Agent Workflow -->
+                <h2 id="ai-workflow">AI Agent Workflow</h2>
+                <p>Here's how to leverage AI tools throughout this build to maximize productivity:</p>
+
+                <h3 id="ai-scaffolding">Project Scaffolding with Claude Code</h3>
+                <p>Use Claude Code to scaffold the entire project structure with a single prompt. This approach ensures consistent patterns and saves hours of boilerplate setup.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Claude Code Prompt</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Example prompt for Claude Code</span>
+Create a Next.js 14 proposal generator app with:
+- App router structure
+- Supabase client setup with types
+- API routes for Claude integration
+- Tailwind CSS with professional theme
+- TypeScript interfaces for Proposal, Template, Client
+- Form components with react-hook-form
+- PDF generation setup with @react-pdf/renderer</code></pre>
+                </div>
+
+                <h3 id="ai-ui">UI Generation with v0.dev</h3>
+                <p>Generate beautiful form components and dashboard layouts using v0.dev. The generated Tailwind components integrate seamlessly with your Next.js project.</p>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Pro Tip
+                    </div>
+                    <p>When prompting v0.dev, specify "professional services" or "consulting firm" aesthetic to get corporate-appropriate styling that clients expect from proposals.</p>
+                </div>
+
+                <h3 id="ai-debugging">Development with Cursor</h3>
+                <p>Use Cursor's AI features for real-time debugging and code completion. The inline chat is particularly useful for crafting Claude prompts and handling edge cases in PDF generation.</p>
+
+                <!-- Section: Build Steps -->
+                <h2 id="build-steps">Step-by-Step Build Guide</h2>
+
+                <h3 id="phase-1">Phase 1: Proposal Template System</h3>
+                <p>First, we'll set up the database schema and template management. Templates define the structure of your proposals with sections like Executive Summary, Scope of Work, Timeline, and Pricing.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">SQL</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment">-- Supabase SQL for templates table</span>
+<span class="keyword">CREATE TABLE</span> proposal_templates (
+  id <span class="keyword">UUID</span> <span class="keyword">DEFAULT</span> gen_random_uuid() <span class="keyword">PRIMARY KEY</span>,
+  name <span class="keyword">TEXT NOT NULL</span>,
+  description <span class="keyword">TEXT</span>,
+  sections <span class="keyword">JSONB NOT NULL DEFAULT</span> <span class="string">'[]'</span>,
+  industry <span class="keyword">TEXT</span>,
+  created_at <span class="keyword">TIMESTAMPTZ DEFAULT</span> now(),
+  updated_at <span class="keyword">TIMESTAMPTZ DEFAULT</span> now()
+);
+
+<span class="comment">-- Example section structure in JSONB</span>
+<span class="comment">-- [</span>
+<span class="comment">--   { "name": "Executive Summary", "prompt_hint": "Brief overview of proposed solution" },</span>
+<span class="comment">--   { "name": "Scope of Work", "prompt_hint": "Detailed deliverables and milestones" },</span>
+<span class="comment">--   { "name": "Timeline", "prompt_hint": "Project phases with dates" },</span>
+<span class="comment">--   { "name": "Investment", "prompt_hint": "Pricing and payment terms" }</span>
+<span class="comment">-- ]</span></code></pre>
+                </div>
+
+                <h3 id="phase-2">Phase 2: Client Intake Form</h3>
+                <p>Build a multi-step form that captures all the information Claude needs to generate a relevant proposal. Include fields for company info, project requirements, budget range, and timeline expectations.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment">// types/proposal.ts</span>
+<span class="keyword">export interface</span> ClientIntake {
+  <span class="comment">// Company Information</span>
+  companyName: <span class="variable">string</span>;
+  industry: <span class="variable">string</span>;
+  companySize: <span class="string">'startup'</span> | <span class="string">'smb'</span> | <span class="string">'enterprise'</span>;
+
+  <span class="comment">// Project Details</span>
+  projectType: <span class="variable">string</span>;
+  problemStatement: <span class="variable">string</span>;
+  desiredOutcomes: <span class="variable">string</span>[];
+
+  <span class="comment">// Constraints</span>
+  budgetRange: { min: <span class="variable">number</span>; max: <span class="variable">number</span> };
+  timelineWeeks: <span class="variable">number</span>;
+
+  <span class="comment">// Contact</span>
+  contactName: <span class="variable">string</span>;
+  contactEmail: <span class="variable">string</span>;
+}</code></pre>
+                </div>
+
+                <h3 id="phase-3">Phase 3: AI Content Generation</h3>
+                <p>This is where Claude transforms client intake data into compelling proposal content. The key is crafting prompts that produce professional, specific, and persuasive text.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment">// app/api/generate-proposal/route.ts</span>
+<span class="keyword">import</span> Anthropic <span class="keyword">from</span> <span class="string">'@anthropic-ai/sdk'</span>;
+
+<span class="keyword">const</span> anthropic = <span class="keyword">new</span> Anthropic();
+
+<span class="keyword">export async function</span> <span class="function">POST</span>(request: Request) {
+  <span class="keyword">const</span> { intake, template } = <span class="keyword">await</span> request.json();
+
+  <span class="keyword">const</span> sections = <span class="keyword">await</span> Promise.all(
+    template.sections.map(<span class="keyword">async</span> (section: Section) => {
+      <span class="keyword">const</span> response = <span class="keyword">await</span> anthropic.messages.create({
+        model: <span class="string">'claude-sonnet-4-20250514'</span>,
+        max_tokens: <span class="number">1024</span>,
+        messages: [{
+          role: <span class="string">'user'</span>,
+          content: <span class="function">buildSectionPrompt</span>(section, intake)
+        }]
+      });
+
+      <span class="keyword">return</span> {
+        name: section.name,
+        content: response.content[<span class="number">0</span>].text
+      };
+    })
+  );
+
+  <span class="keyword">return</span> Response.json({ sections });
+}</code></pre>
+                </div>
+
+                <div class="callout callout-info">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        Claude Prompt Engineering
+                    </div>
+                    <p>The prompt structure is critical for quality output. See the detailed prompt templates in the next section.</p>
+                </div>
+
+                <h3 id="phase-3-prompts">Claude Proposal Writing Prompts</h3>
+                <p>Here are the optimized prompts for each proposal section:</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment">// lib/prompts.ts</span>
+
+<span class="keyword">export const</span> PROPOSAL_PROMPTS = {
+  executiveSummary: (intake: ClientIntake) => <span class="string">`
+You are a senior business consultant writing a proposal for ${intake.companyName}.
+
+Write a compelling Executive Summary (250-350 words) that:
+1. Acknowledges their challenge: "${intake.problemStatement}"
+2. Positions our solution as the ideal fit
+3. Highlights 2-3 key benefits aligned with their goals
+4. Creates urgency without being pushy
+5. Ends with a confident value proposition
+
+Company context:
+- Industry: ${intake.industry}
+- Size: ${intake.companySize}
+- Desired outcomes: ${intake.desiredOutcomes.join(', ')}
+
+Write in a professional but warm tone. Use "we" for our firm and "you" for the client.
+Avoid jargon. Be specific, not generic.`</span>,
+
+  scopeOfWork: (intake: ClientIntake) => <span class="string">`
+You are a project manager drafting the Scope of Work for ${intake.companyName}.
+
+Create a detailed Scope of Work that includes:
+
+## Deliverables
+List 5-7 specific deliverables based on: "${intake.problemStatement}"
+Each deliverable should be measurable and tied to their outcomes.
+
+## Methodology
+Describe our approach in 3-4 phases:
+- Discovery & Planning
+- Development & Implementation
+- Testing & Refinement
+- Launch & Handoff
+
+## Out of Scope
+List 3-4 items explicitly excluded to set clear boundaries.
+
+## Success Criteria
+Define 3-5 measurable success metrics.
+
+Budget context: $${intake.budgetRange.min.toLocaleString()} - $${intake.budgetRange.max.toLocaleString()}
+Timeline: ${intake.timelineWeeks} weeks
+
+Be specific to their industry (${intake.industry}) and company size (${intake.companySize}).`</span>,
+
+  timeline: (intake: ClientIntake) => <span class="string">`
+Create a project timeline for a ${intake.timelineWeeks}-week engagement with ${intake.companyName}.
+
+Structure as phases with:
+- Phase name
+- Duration (weeks)
+- Key milestones
+- Client touchpoints/review sessions
+
+Project type: ${intake.projectType}
+Include buffer time for revisions.
+Add specific dates assuming project starts 2 weeks from today.
+
+Format as a clear, scannable timeline that builds client confidence.`</span>,
+
+  investment: (intake: ClientIntake) => <span class="string">`
+Write the Investment/Pricing section for ${intake.companyName}'s proposal.
+
+Budget range provided: $${intake.budgetRange.min.toLocaleString()} - $${intake.budgetRange.max.toLocaleString()}
+
+Include:
+1. **Investment Summary**: Total project investment with brief justification
+2. **Payment Schedule**: 3-4 milestone-based payments
+3. **What's Included**: Bullet list of everything covered
+4. **Optional Add-ons**: 2-3 upgrade options for future phases
+5. **Terms**: Standard payment terms (Net 15, etc.)
+
+Position the investment as valuable, not cheap. Connect cost to outcomes.
+Use confident language: "Your investment" not "The cost".`</span>
+};
+
+<span class="keyword">export function</span> <span class="function">buildSectionPrompt</span>(
+  section: Section,
+  intake: ClientIntake
+): <span class="variable">string</span> {
+  <span class="keyword">const</span> promptBuilder = PROPOSAL_PROMPTS[section.key];
+  <span class="keyword">if</span> (promptBuilder) {
+    <span class="keyword">return</span> promptBuilder(intake);
+  }
+
+  <span class="comment">// Fallback for custom sections</span>
+  <span class="keyword">return</span> <span class="string">`Write the "${section.name}" section for a proposal to ${intake.companyName}.
+Context: ${section.prompt_hint}
+Company: ${intake.industry} ${intake.companySize}
+Project: ${intake.problemStatement}
+Keep it professional, specific, and under 400 words.`</span>;
+}</code></pre>
+                </div>
+
+                <h3 id="phase-4">Phase 4: Section-by-Section Editing</h3>
+                <p>Build an editor interface that allows users to review and refine each AI-generated section. Include regeneration options with feedback for Claude.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment">// components/SectionEditor.tsx</span>
+<span class="string">'use client'</span>;
+
+<span class="keyword">import</span> { useState } <span class="keyword">from</span> <span class="string">'react'</span>;
+<span class="keyword">import</span> { Textarea } <span class="keyword">from</span> <span class="string">'@/components/ui/textarea'</span>;
+<span class="keyword">import</span> { Button } <span class="keyword">from</span> <span class="string">'@/components/ui/button'</span>;
+
+<span class="keyword">interface</span> SectionEditorProps {
+  section: { name: <span class="variable">string</span>; content: <span class="variable">string</span> };
+  onUpdate: (content: <span class="variable">string</span>) => <span class="keyword">void</span>;
+  onRegenerate: (feedback: <span class="variable">string</span>) => Promise&lt;<span class="variable">string</span>&gt;;
+}
+
+<span class="keyword">export function</span> <span class="function">SectionEditor</span>({
+  section,
+  onUpdate,
+  onRegenerate
+}: SectionEditorProps) {
+  <span class="keyword">const</span> [content, setContent] = useState(section.content);
+  <span class="keyword">const</span> [feedback, setFeedback] = useState(<span class="string">''</span>);
+  <span class="keyword">const</span> [isRegenerating, setIsRegenerating] = useState(<span class="keyword">false</span>);
+
+  <span class="keyword">const</span> <span class="function">handleRegenerate</span> = <span class="keyword">async</span> () => {
+    setIsRegenerating(<span class="keyword">true</span>);
+    <span class="keyword">const</span> newContent = <span class="keyword">await</span> onRegenerate(feedback);
+    setContent(newContent);
+    setFeedback(<span class="string">''</span>);
+    setIsRegenerating(<span class="keyword">false</span>);
+  };
+
+  <span class="keyword">return</span> (
+    &lt;div className=<span class="string">"space-y-4 p-6 border rounded-lg"</span>&gt;
+      &lt;h3 className=<span class="string">"text-lg font-semibold"</span>&gt;{section.name}&lt;/h3&gt;
+
+      &lt;Textarea
+        value={content}
+        onChange={(e) => {
+          setContent(e.target.value);
+          onUpdate(e.target.value);
+        }}
+        rows={<span class="number">12</span>}
+        className=<span class="string">"font-mono text-sm"</span>
+      /&gt;
+
+      &lt;div className=<span class="string">"flex gap-4"</span>&gt;
+        &lt;input
+          type=<span class="string">"text"</span>
+          placeholder=<span class="string">"Feedback for regeneration (e.g., 'Make it more concise')"</span>
+          value={feedback}
+          onChange={(e) => setFeedback(e.target.value)}
+          className=<span class="string">"flex-1 px-3 py-2 border rounded"</span>
+        /&gt;
+        &lt;Button
+          onClick={handleRegenerate}
+          disabled={isRegenerating}
+        &gt;
+          {isRegenerating ? <span class="string">'Regenerating...'</span> : <span class="string">'Regenerate'</span>}
+        &lt;/Button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                </div>
+
+                <h3 id="phase-5">Phase 5: PDF Export Functionality</h3>
+                <p>Use React-PDF to generate professional PDF documents with your branding. The library renders React components to PDF format.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">TypeScript</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment">// components/ProposalPDF.tsx</span>
+<span class="keyword">import</span> {
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet,
+  Font
+} <span class="keyword">from</span> <span class="string">'@react-pdf/renderer'</span>;
+
+<span class="comment">// Register custom fonts for professional look</span>
+Font.register({
+  family: <span class="string">'Inter'</span>,
+  src: <span class="string">'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hjp-Ek-_EeA.woff2'</span>
+});
+
+<span class="keyword">const</span> styles = StyleSheet.create({
+  page: {
+    padding: <span class="number">50</span>,
+    fontFamily: <span class="string">'Inter'</span>,
+  },
+  header: {
+    marginBottom: <span class="number">30</span>,
+    borderBottom: <span class="string">'2px solid #4F46E5'</span>,
+    paddingBottom: <span class="number">20</span>,
+  },
+  title: {
+    fontSize: <span class="number">28</span>,
+    fontWeight: <span class="string">'bold'</span>,
+    color: <span class="string">'#1F2937'</span>,
+  },
+  subtitle: {
+    fontSize: <span class="number">14</span>,
+    color: <span class="string">'#6B7280'</span>,
+    marginTop: <span class="number">8</span>,
+  },
+  section: {
+    marginBottom: <span class="number">24</span>,
+  },
+  sectionTitle: {
+    fontSize: <span class="number">18</span>,
+    fontWeight: <span class="string">'bold'</span>,
+    color: <span class="string">'#4F46E5'</span>,
+    marginBottom: <span class="number">12</span>,
+  },
+  sectionContent: {
+    fontSize: <span class="number">11</span>,
+    lineHeight: <span class="number">1.6</span>,
+    color: <span class="string">'#374151'</span>,
+  },
+  footer: {
+    position: <span class="string">'absolute'</span>,
+    bottom: <span class="number">30</span>,
+    left: <span class="number">50</span>,
+    right: <span class="number">50</span>,
+    textAlign: <span class="string">'center'</span>,
+    fontSize: <span class="number">10</span>,
+    color: <span class="string">'#9CA3AF'</span>,
+  },
+});
+
+<span class="keyword">interface</span> ProposalPDFProps {
+  proposal: {
+    clientName: <span class="variable">string</span>;
+    projectTitle: <span class="variable">string</span>;
+    date: <span class="variable">string</span>;
+    sections: Array&lt;{ name: <span class="variable">string</span>; content: <span class="variable">string</span> }&gt;;
+  };
+}
+
+<span class="keyword">export function</span> <span class="function">ProposalPDF</span>({ proposal }: ProposalPDFProps) {
+  <span class="keyword">return</span> (
+    &lt;Document&gt;
+      &lt;Page size=<span class="string">"A4"</span> style={styles.page}&gt;
+        &lt;View style={styles.header}&gt;
+          &lt;Text style={styles.title}&gt;{proposal.projectTitle}&lt;/Text&gt;
+          &lt;Text style={styles.subtitle}&gt;
+            Prepared for {proposal.clientName} | {proposal.date}
+          &lt;/Text&gt;
+        &lt;/View&gt;
+
+        {proposal.sections.map((section, index) => (
+          &lt;View key={index} style={styles.section}&gt;
+            &lt;Text style={styles.sectionTitle}&gt;{section.name}&lt;/Text&gt;
+            &lt;Text style={styles.sectionContent}&gt;{section.content}&lt;/Text&gt;
+          &lt;/View&gt;
+        ))}
+
+        &lt;Text style={styles.footer}&gt;
+          Confidential | Page 1 of 1 | Valid for 30 days
+        &lt;/Text&gt;
+      &lt;/Page&gt;
+    &lt;/Document&gt;
+  );
+}</code></pre>
+                </div>
+
+                <h3 id="phase-6">Phase 6: Proposal Tracking Dashboard</h3>
+                <p>Finally, build a dashboard to track all proposals with status indicators (Draft, Sent, Viewed, Accepted, Declined) and key metrics.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">SQL</span>
+                        <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    </div>
+                    <pre><code><span class="comment">-- Proposals table with tracking</span>
+<span class="keyword">CREATE TABLE</span> proposals (
+  id <span class="keyword">UUID</span> <span class="keyword">DEFAULT</span> gen_random_uuid() <span class="keyword">PRIMARY KEY</span>,
+  template_id <span class="keyword">UUID REFERENCES</span> proposal_templates(id),
+  client_intake <span class="keyword">JSONB NOT NULL</span>,
+  sections <span class="keyword">JSONB NOT NULL</span>,
+  status <span class="keyword">TEXT DEFAULT</span> <span class="string">'draft'</span>,
+  total_value <span class="keyword">DECIMAL</span>(<span class="number">10</span>,<span class="number">2</span>),
+  sent_at <span class="keyword">TIMESTAMPTZ</span>,
+  viewed_at <span class="keyword">TIMESTAMPTZ</span>,
+  responded_at <span class="keyword">TIMESTAMPTZ</span>,
+  created_at <span class="keyword">TIMESTAMPTZ DEFAULT</span> now(),
+  updated_at <span class="keyword">TIMESTAMPTZ DEFAULT</span> now()
+);
+
+<span class="comment">-- Track proposal views</span>
+<span class="keyword">CREATE TABLE</span> proposal_views (
+  id <span class="keyword">UUID</span> <span class="keyword">DEFAULT</span> gen_random_uuid() <span class="keyword">PRIMARY KEY</span>,
+  proposal_id <span class="keyword">UUID REFERENCES</span> proposals(id),
+  viewed_at <span class="keyword">TIMESTAMPTZ DEFAULT</span> now(),
+  ip_address <span class="keyword">INET</span>,
+  user_agent <span class="keyword">TEXT</span>
+);</code></pre>
+                </div>
+
+                <!-- Section: Common Issues -->
+                <h2 id="common-issues">Common Issues & Solutions</h2>
+                <p>Here are some common issues you might encounter and how to solve them:</p>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        React-PDF SSR Issues
+                    </div>
+                    <p>React-PDF doesn't work with Server Components. Use dynamic imports with <code>ssr: false</code> to load PDF components only on the client side.</p>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Claude Rate Limits
+                    </div>
+                    <p>When generating multiple sections, use <code>Promise.all</code> carefully. Consider adding a small delay between requests or using a queue system for production.</p>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Generic AI Output
+                    </div>
+                    <p>If Claude generates generic content, add more specific context to your prompts. Include industry-specific terminology, company size considerations, and explicit instructions to avoid cliches.</p>
+                </div>
+
+                <!-- Section: Next Steps -->
+                <h2 id="next-steps">Next Steps</h2>
+                <p>Congratulations on building your AI Proposal Generator! Here are some ways to extend the project:</p>
+
+                <ul>
+                    <li><strong>Add authentication:</strong> Use Supabase Auth to support multiple users and teams</li>
+                    <li><strong>Implement e-signatures:</strong> Integrate DocuSign or HelloSign for proposal acceptance</li>
+                    <li><strong>Build proposal analytics:</strong> Track which sections clients spend the most time reading</li>
+                    <li><strong>Create a client portal:</strong> Let clients view, comment on, and accept proposals online</li>
+                    <li><strong>Add CRM integration:</strong> Sync proposals with HubSpot or Salesforce</li>
+                </ul>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Ready to Go Further?
+                    </div>
+                    <p>Need help building a production-ready proposal system for your firm? <a href="/#contact">Contact us</a> for a free consultation on custom professional services software.</p>
+                </div>
+
+                <!-- Share Section -->
+                <div class="share-section">
+                    <span class="share-label">Share this guide:</span>
+                    <div class="share-buttons" role="group" aria-label="Share this guide">
+                        <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="email" title="Share via email" aria-label="Share via email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Related Guides -->
+                <div class="related-guides">
+                    <h3 class="related-guides-title">Related Guides</h3>
+                    <div class="related-guides-grid">
+                        <a href="/guides/legal-contract-analyzer.html" class="related-guide-card">
+                            <h4>AI Contract Analyzer</h4>
+                            <p>Build a tool that analyzes legal contracts with Claude</p>
+                        </a>
+                        <a href="/guides/saas-ai-feature-builder.html" class="related-guide-card">
+                            <h4>AI Feature Builder</h4>
+                            <p>Create AI-powered features for SaaS applications</p>
+                        </a>
+                        <a href="/guides/fintech-ai-dashboard.html" class="related-guide-card">
+                            <h4>FinTech AI Dashboard</h4>
+                            <p>Build intelligent financial dashboards</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Follow Section -->
+                <div class="follow-section">
+                    <h3>Follow the Vibe Coding Enthusiast</h3>
+                    <p>Get more AI build guides, tool tips, and project ideas from JD.</p>
+                    <div class="social-follow-buttons">
+                        <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" class="social-follow-btn linkedin">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            Follow on LinkedIn
+                        </a>
+                        <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" class="social-follow-btn twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            Follow on X
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+        <footer class="footer">
+    <div class="container">
+        <div class="footer-simple">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                    <span>Vibe Coding Enthusiast</span>
+                </a>
+                <p>Free guides for building with AI</p>
+            </div>
+
+            <nav class="footer-nav">
+                <a href="/guides/">Guides</a>
+                <span class="footer-dot">·</span>
+                <a href="/paths/">Paths</a>
+                <span class="footer-dot">·</span>
+                <a href="/learn/">Learn</a>
+                <span class="footer-dot">·</span>
+                <a href="/tools/">Tools</a>
+                <span class="footer-dot">·</span>
+                <a href="/stacks/">Stacks</a>
+                <span class="footer-dot">·</span>
+                <a href="/#about">About</a>
+            </nav>
+
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" aria-label="Follow on LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" aria-label="Follow on X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Vibe Coding Enthusiast</p>
+            <div class="footer-legal">
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="/script.js"></script>
+
+    <!-- Guide-Specific JavaScript -->
+    <script>
+        // Reading Progress Bar
+        (function() {
+            const progressBar = document.getElementById('readingProgress');
+            const article = document.querySelector('.article-content');
+
+            if (progressBar && article) {
+                window.addEventListener('scroll', function() {
+                    const articleTop = article.offsetTop;
+                    const articleHeight = article.offsetHeight;
+                    const windowHeight = window.innerHeight;
+                    const scrollTop = window.scrollY;
+
+                    const progress = Math.min(100, Math.max(0,
+                        ((scrollTop - articleTop + windowHeight * 0.3) / articleHeight) * 100
+                    ));
+
+                    progressBar.style.width = progress + '%';
+                    progressBar.setAttribute('aria-valuenow', Math.round(progress));
+                });
+            }
+        })();
+
+        // Generate Table of Contents
+        (function() {
+            const article = document.querySelector('.article-content');
+            const tocList = document.getElementById('tocList');
+
+            if (article && tocList) {
+                const headings = article.querySelectorAll('h2, h3');
+                let tocHTML = '';
+
+                headings.forEach(function(heading) {
+                    const id = heading.getAttribute('id');
+                    const text = heading.textContent.replace(/#/g, '').trim();
+                    const level = heading.tagName.toLowerCase();
+                    const className = level === 'h3' ? 'toc-h3' : '';
+
+                    if (id) {
+                        tocHTML += '<li><a href="#' + id + '" class="' + className + '">' + text + '</a></li>';
+
+                        // Add anchor link to heading
+                        const anchor = document.createElement('a');
+                        anchor.href = '#' + id;
+                        anchor.className = 'anchor-link';
+                        anchor.setAttribute('aria-label', 'Link to ' + text);
+                        anchor.textContent = '#';
+                        heading.appendChild(anchor);
+                    }
+                });
+
+                tocList.innerHTML = tocHTML;
+
+                // Highlight active TOC item on scroll
+                const tocLinks = tocList.querySelectorAll('a');
+
+                function updateActiveTOC() {
+                    const scrollPos = window.scrollY + 120;
+
+                    headings.forEach(function(heading, index) {
+                        const id = heading.getAttribute('id');
+                        const headingTop = heading.offsetTop;
+                        const nextHeading = headings[index + 1];
+                        const nextTop = nextHeading ? nextHeading.offsetTop : document.body.scrollHeight;
+
+                        if (scrollPos >= headingTop && scrollPos < nextTop) {
+                            tocLinks.forEach(function(link) {
+                                link.classList.remove('active');
+                                if (link.getAttribute('href') === '#' + id) {
+                                    link.classList.add('active');
+                                }
+                            });
+                        }
+                    });
+                }
+
+                window.addEventListener('scroll', updateActiveTOC);
+                updateActiveTOC();
+            }
+        })();
+
+        // Copy Code Button
+        (function() {
+            const copyButtons = document.querySelectorAll('.code-copy-btn');
+
+            copyButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const codeBlock = this.closest('.code-block');
+                    const code = codeBlock.querySelector('code');
+                    const text = code.textContent;
+
+                    navigator.clipboard.writeText(text).then(function() {
+                        button.textContent = 'Copied!';
+                        button.classList.add('copied');
+
+                        setTimeout(function() {
+                            button.textContent = 'Copy';
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(function(err) {
+                        console.error('Failed to copy:', err);
+                    });
+                });
+            });
+        })();
+
+        // Share Buttons
+        (function() {
+            const shareButtons = document.querySelectorAll('.share-btn');
+            const pageTitle = document.title;
+            const pageUrl = window.location.href;
+
+            shareButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const shareType = this.getAttribute('data-share');
+                    let shareUrl = '';
+
+                    switch(shareType) {
+                        case 'twitter':
+                            shareUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(pageTitle) + '&url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'linkedin':
+                            shareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'copy':
+                            navigator.clipboard.writeText(pageUrl).then(function() {
+                                // Show feedback
+                                const originalTitle = button.getAttribute('title');
+                                button.setAttribute('title', 'Link copied!');
+                                setTimeout(function() {
+                                    button.setAttribute('title', originalTitle);
+                                }, 2000);
+                            });
+                            break;
+                        case 'email':
+                            shareUrl = 'mailto:?subject=' + encodeURIComponent(pageTitle) + '&body=' + encodeURIComponent('Check out this guide: ' + pageUrl);
+                            window.location.href = shareUrl;
+                            break;
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

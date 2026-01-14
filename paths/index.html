@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>Learning Paths | Vibe Coding Enthusiast</title>
+    <meta name="title" content="Learning Paths | Vibe Coding Enthusiast">
+    <meta name="description" content="Find your path into AI coding based on where you are in life. Guides for teenagers, students, career switchers, PMs, curious minds, and experienced developers.">
+    <meta name="keywords" content="AI coding paths, learn AI coding, vibe coding for beginners, AI for teenagers, AI for students, career switch to tech, AI for product managers, AI for developers">
+    <meta name="author" content="Vibe Coding Enthusiast">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/paths/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/paths/">
+    <meta property="og:title" content="Learning Paths | Vibe Coding Enthusiast">
+    <meta property="og:description" content="Find your path into AI coding based on where you are in life. Guides for teenagers, students, career switchers, PMs, curious minds, and experienced developers.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/og-image.svg">
+    <meta property="og:site_name" content="Vibe Coding Enthusiast">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vibecodingenthusiast.com/paths/">
+    <meta property="twitter:title" content="Learning Paths | Vibe Coding Enthusiast">
+    <meta property="twitter:description" content="Find your path into AI coding based on where you are in life. Guides for teenagers, students, career switchers, PMs, curious minds, and experienced developers.">
+    <meta property="twitter:image" content="https://vibecodingenthusiast.com/og-image.svg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Learning Paths",
+        "description": "Find your path into AI coding based on where you are in life. Guides for teenagers, students, career switchers, PMs, curious minds, and experienced developers.",
+        "url": "https://vibecodingenthusiast.com/paths/",
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Teenager Path", "url": "https://vibecodingenthusiast.com/paths/teenager.html"},
+                {"@type": "ListItem", "position": 2, "name": "Student Path", "url": "https://vibecodingenthusiast.com/paths/student.html"},
+                {"@type": "ListItem", "position": 3, "name": "Career Switcher Path", "url": "https://vibecodingenthusiast.com/paths/career-switcher.html"},
+                {"@type": "ListItem", "position": 4, "name": "Product Manager Path", "url": "https://vibecodingenthusiast.com/paths/product-manager.html"},
+                {"@type": "ListItem", "position": 5, "name": "Curious Path", "url": "https://vibecodingenthusiast.com/paths/curious.html"},
+                {"@type": "ListItem", "position": 6, "name": "Experienced Developer Path", "url": "https://vibecodingenthusiast.com/paths/experienced-developer.html"}
+            ]
+        }
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <style>
+        /* Paths Grid */
+        .paths-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 64px;
+        }
+
+        @media (max-width: 1024px) {
+            .paths-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .paths-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Path Card */
+        .path-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            text-decoration: none;
+            color: inherit;
+            transition: all var(--transition-fast);
+        }
+
+        .path-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .path-card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .path-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .path-card-headline {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .path-card-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .path-card-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .path-card-arrow svg {
+            transition: transform var(--transition-fast);
+        }
+
+        .path-card:hover .path-card-arrow svg {
+            transform: translateX(4px);
+        }
+
+        /* Not Sure Section */
+        .not-sure-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            margin-bottom: 64px;
+        }
+
+        .not-sure-section h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .guidance-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 640px) {
+            .guidance-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .guidance-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-primary);
+        }
+
+        .guidance-item-arrow {
+            color: var(--primary);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .guidance-item-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .guidance-item-text strong {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/paths/">Paths</a></li>
+                <li><a href="/learn/">Learn</a></li>
+                <li><a href="/tools/">Tools</a></li>
+                <li><a href="/stacks/">Stacks</a></li>
+                <li><a href="/#about">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/guides/" class="btn btn-primary">Explore Guides</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Hero Section -->
+        <section class="section" style="padding-top: 140px; padding-bottom: 60px;">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Learning Paths</span>
+                    <h1 class="gradient-text">Start Where You Are</h1>
+                    <p>AI coding isn't just for developers. Whether you're 16 or 60, a student or a PM, there's a path designed for you. Find yours below.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Paths Grid -->
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <div class="paths-grid">
+                    <!-- 1. Teenager -->
+                    <a href="/paths/teenager.html" class="path-card">
+                        <div class="path-card-icon">🎮</div>
+                        <div class="path-card-title">I'm a Teenager with an Idea</div>
+                        <h3 class="path-card-headline">Teenager</h3>
+                        <p class="path-card-description">Build real apps without waiting for a CS degree</p>
+                        <span class="path-card-arrow">
+                            Start this path
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <!-- 2. Student -->
+                    <a href="/paths/student.html" class="path-card">
+                        <div class="path-card-icon">🎓</div>
+                        <div class="path-card-title">I'm a Student Building My Portfolio</div>
+                        <h3 class="path-card-headline">Student</h3>
+                        <p class="path-card-description">Stand out with AI-powered projects</p>
+                        <span class="path-card-arrow">
+                            Start this path
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <!-- 3. Career Switcher -->
+                    <a href="/paths/career-switcher.html" class="path-card">
+                        <div class="path-card-icon">🔄</div>
+                        <div class="path-card-title">I'm Switching Careers into Tech</div>
+                        <h3 class="path-card-headline">Career Switcher</h3>
+                        <p class="path-card-description">Your industry experience is your advantage</p>
+                        <span class="path-card-arrow">
+                            Start this path
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <!-- 4. Product Manager -->
+                    <a href="/paths/product-manager.html" class="path-card">
+                        <div class="path-card-icon">📋</div>
+                        <div class="path-card-title">I'm a PM Understanding AI</div>
+                        <h3 class="path-card-headline">Product Manager</h3>
+                        <p class="path-card-description">Spec better, ship smarter</p>
+                        <span class="path-card-arrow">
+                            Start this path
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <!-- 5. Curious -->
+                    <a href="/paths/curious.html" class="path-card">
+                        <div class="path-card-icon">🔍</div>
+                        <div class="path-card-title">I'm Curious About This AI Thing</div>
+                        <h3 class="path-card-headline">Curious</h3>
+                        <p class="path-card-description">Explore with zero pressure</p>
+                        <span class="path-card-arrow">
+                            Start this path
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <!-- 6. Experienced Developer -->
+                    <a href="/paths/experienced-developer.html" class="path-card">
+                        <div class="path-card-icon">⚡</div>
+                        <div class="path-card-title">I'm a Dev Adding AI Skills</div>
+                        <h3 class="path-card-headline">Experienced Developer</h3>
+                        <p class="path-card-description">Build 10x faster with AI assistance</p>
+                        <span class="path-card-arrow">
+                            Start this path
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Not Sure Section -->
+                <div class="not-sure-section">
+                    <h2>Not Sure Which Path?</h2>
+                    <div class="guidance-list">
+                        <div class="guidance-item">
+                            <span class="guidance-item-arrow">→</span>
+                            <div class="guidance-item-text">
+                                <strong>New to coding entirely</strong> — Start with Curious or Teenager
+                            </div>
+                        </div>
+                        <div class="guidance-item">
+                            <span class="guidance-item-arrow">→</span>
+                            <div class="guidance-item-text">
+                                <strong>Have some coding experience</strong> — Student or Career Switcher
+                            </div>
+                        </div>
+                        <div class="guidance-item">
+                            <span class="guidance-item-arrow">→</span>
+                            <div class="guidance-item-text">
+                                <strong>Already a developer</strong> — Experienced Developer
+                            </div>
+                        </div>
+                        <div class="guidance-item">
+                            <span class="guidance-item-arrow">→</span>
+                            <div class="guidance-item-text">
+                                <strong>Don't need to code, just understand</strong> — Product Manager or Curious
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Follow Section -->
+        <section class="section">
+            <div class="container">
+                <div class="follow-section" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border: 1px solid var(--border-primary); border-radius: var(--radius-xl); padding: 48px; text-align: center;">
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">Follow the Vibe Coding Enthusiast</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">Get more AI learning paths, tool tips, and project ideas from JD.</p>
+                    <div class="social-follow-buttons" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: var(--radius-md); font-weight: 600; text-decoration: none; background: #0A66C2; color: white; transition: all var(--transition-fast);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            Follow on LinkedIn
+                        </a>
+                        <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: var(--radius-md); font-weight: 600; text-decoration: none; background: #000000; color: white; transition: all var(--transition-fast);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            Follow on X
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <div class="container">
+                <h2>Ready to Build Something <span class="gradient-text">Amazing</span>?</h2>
+                <p>Get expert help bringing your AI-powered application to life.</p>
+                <a href="/#contact" class="btn btn-white btn-lg">Start Your Project</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+        <footer class="footer">
+    <div class="container">
+        <div class="footer-simple">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                    <span>Vibe Coding Enthusiast</span>
+                </a>
+                <p>Free guides for building with AI</p>
+            </div>
+
+            <nav class="footer-nav">
+                <a href="/guides/">Guides</a>
+                <span class="footer-dot">·</span>
+                <a href="/paths/">Paths</a>
+                <span class="footer-dot">·</span>
+                <a href="/learn/">Learn</a>
+                <span class="footer-dot">·</span>
+                <a href="/tools/">Tools</a>
+                <span class="footer-dot">·</span>
+                <a href="/stacks/">Stacks</a>
+                <span class="footer-dot">·</span>
+                <a href="/#about">About</a>
+            </nav>
+
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" aria-label="Follow on LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" aria-label="Follow on X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Vibe Coding Enthusiast</p>
+            <div class="footer-legal">
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Back to top button
+            const backToTopBtn = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

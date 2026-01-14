@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>Build an AI Workout Generator | AI Build Guides | Vibe Coding Enthusiast</title>
+    <meta name="title" content="Build an AI Workout Generator | AI Build Guides | Vibe Coding Enthusiast">
+    <meta name="description" content="Learn how to build a personalized AI workout generator using Next.js, Supabase, and Claude API. Create custom workout plans based on fitness level, goals, and equipment.">
+    <meta name="keywords" content="ai workout generator, fitness app development, personalized workout plans, next.js tutorial, supabase, claude api, workout tracking, ai development, vibe coding, build guide, tutorial">
+    <meta name="author" content="Vibe Coding Enthusiast">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/guides/fitness-workout-generator.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/guides/fitness-workout-generator.html">
+    <meta property="og:title" content="Build an AI Workout Generator | AI Build Guides">
+    <meta property="og:description" content="Learn how to build a personalized AI workout generator using Next.js, Supabase, and Claude API. Create custom workout plans based on fitness level, goals, and equipment.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/guides/images/fitness-workout-generator-og.png">
+    <meta property="og:site_name" content="Vibe Coding Enthusiast">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2025-01-14">
+    <meta property="article:modified_time" content="2025-01-14">
+    <meta property="article:author" content="Vibe Coding Enthusiast">
+    <meta property="article:section" content="AI Build Guides">
+    <meta property="article:tag" content="Fitness">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://vibecodingenthusiast.com/guides/fitness-workout-generator.html">
+    <meta name="twitter:title" content="Build an AI Workout Generator | AI Build Guides">
+    <meta name="twitter:description" content="Learn how to build a personalized AI workout generator using Next.js, Supabase, and Claude API. Create custom workout plans based on fitness level, goals, and equipment.">
+    <meta name="twitter:image" content="https://vibecodingenthusiast.com/guides/images/fitness-workout-generator-og.png">
+    <meta name="twitter:creator" content="@vibecodingenthusiast">
+
+    <!-- Schema.org JSON-LD for TechArticle -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Build an AI Workout Generator",
+        "description": "Learn how to build a personalized AI workout generator using Next.js, Supabase, and Claude API. Create custom workout plans based on fitness level, goals, and equipment.",
+        "image": "https://vibecodingenthusiast.com/guides/images/fitness-workout-generator-og.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "url": "https://vibecodingenthusiast.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vibecodingenthusiast.com/favicon.png"
+            }
+        },
+        "datePublished": "2025-01-14",
+        "dateModified": "2025-01-14",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://vibecodingenthusiast.com/guides/fitness-workout-generator.html"
+        },
+        "articleSection": "AI Build Guides",
+        "keywords": "ai workout generator, fitness app, personalized workouts, next.js, supabase, claude api",
+        "proficiencyLevel": "Beginner",
+        "dependencies": "Next.js 14, Tailwind CSS, Supabase, Claude API, Vercel",
+        "timeRequired": "PT180M"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <!-- Guide-Specific Styles -->
+    <style>
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #22c55e, #10b981);
+            z-index: 1001;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .breadcrumb a:hover {
+            color: #22c55e;
+        }
+        .breadcrumb-separator {
+            color: var(--text-muted);
+        }
+        .breadcrumb-current {
+            color: var(--text-primary);
+        }
+
+        /* Guide Meta Badges */
+        .guide-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .badge-beginner {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .badge-intermediate {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .badge-advanced {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .badge-time {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        .badge-time svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Article Title */
+        .article-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            max-width: 900px;
+        }
+        .article-header .lead {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 700px;
+            margin-bottom: 28px;
+        }
+
+        /* Share Buttons in Header */
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .share-btn:hover {
+            background: var(--bg-secondary);
+            color: #22c55e;
+            border-color: #22c55e;
+        }
+        .share-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Article Layout - Main Content with Sidebar */
+        .article-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        @media (max-width: 1100px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+        @media (max-width: 1100px) {
+            .toc-sidebar {
+                position: static;
+                background: var(--bg-card);
+                border: 1px solid var(--border-primary);
+                border-radius: var(--radius-lg);
+                padding: 24px;
+            }
+        }
+        .toc-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+        .toc-list a {
+            display: block;
+            padding: 8px 12px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            transition: all 0.2s ease;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        .toc-list a:hover {
+            color: var(--text-primary);
+            background: rgba(34, 197, 94, 0.08);
+        }
+        .toc-list a.active {
+            color: #22c55e;
+            border-left-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+        }
+        .toc-list .toc-h3 {
+            padding-left: 24px;
+            font-size: 0.8125rem;
+        }
+
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+        }
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-primary);
+        }
+        .article-content h2:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        .article-content h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        .article-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .article-content ul,
+        .article-content ol {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+        .article-content li {
+            margin-bottom: 8px;
+        }
+        .article-content ul {
+            list-style: disc;
+        }
+        .article-content ol {
+            list-style: decimal;
+        }
+
+        /* Tech Stack Table */
+        .tech-stack-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0 32px;
+            font-size: 0.9rem;
+        }
+        .tech-stack-table thead {
+            background: var(--bg-secondary);
+        }
+        .tech-stack-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-primary);
+        }
+        .tech-stack-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-primary);
+            color: var(--text-secondary);
+        }
+        .tech-stack-table tbody tr:hover {
+            background: rgba(34, 197, 94, 0.04);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            position: relative;
+            margin: 24px 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: #1a1b26;
+            border: 1px solid var(--border-primary);
+        }
+        .code-block-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            background: #13141c;
+            border-bottom: 1px solid var(--border-primary);
+        }
+        .code-block-filename {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #22c55e;
+        }
+        .code-block pre {
+            margin: 0;
+            padding: 20px 24px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.7;
+            color: #c0caf5;
+        }
+        .code-block code {
+            font-family: inherit;
+        }
+        .code-copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-sm);
+            color: #a9b1d6;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .code-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        .code-copy-btn.copied {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.4);
+            color: #22c55e;
+        }
+
+        /* Code Syntax Highlighting */
+        .code-block .keyword { color: #bb9af7; }
+        .code-block .string { color: #9ece6a; }
+        .code-block .comment { color: #565f89; font-style: italic; }
+        .code-block .function { color: #7aa2f7; }
+        .code-block .variable { color: #c0caf5; }
+        .code-block .property { color: #73daca; }
+        .code-block .number { color: #ff9e64; }
+        .code-block .type { color: #2ac3de; }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 20px 24px;
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+            border-left: 4px solid;
+        }
+        .callout-tip {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: #22c55e;
+        }
+        .callout-tip .callout-title { color: #22c55e; }
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: #f59e0b;
+        }
+        .callout-warning .callout-title { color: #f59e0b; }
+        .callout-info {
+            background: rgba(129, 140, 248, 0.1);
+            border-color: var(--primary);
+        }
+        .callout-info .callout-title { color: var(--primary); }
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .callout p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Share Section at Bottom */
+        .share-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 32px 0;
+            margin-top: 48px;
+            border-top: 1px solid var(--border-primary);
+        }
+        .share-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Related Guides */
+        .related-guides {
+            margin-top: 64px;
+            padding-top: 48px;
+            border-top: 1px solid var(--border-primary);
+        }
+        .related-guides-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .related-guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .related-guide-card {
+            display: block;
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .related-guide-card:hover {
+            border-color: #22c55e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .related-guide-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .related-guide-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            margin-top: 64px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+        .newsletter-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            margin-top: 0;
+        }
+        .newsletter-section > p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            padding: 14px 18px;
+            font-size: 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .newsletter-form input[type="email"]:focus {
+            border-color: #22c55e;
+        }
+        .newsletter-form input[type="email"]::placeholder {
+            color: var(--text-muted);
+        }
+        .newsletter-form button {
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: #22c55e;
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .newsletter-form button:hover {
+            background: #16a34a;
+            transform: translateY(-1px);
+        }
+        @media (max-width: 520px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .newsletter-form button {
+                width: 100%;
+            }
+        }
+
+        /* Anchor links */
+        .article-content h2 .anchor-link,
+        .article-content h3 .anchor-link {
+            opacity: 0;
+            margin-left: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        .article-content h2:hover .anchor-link,
+        .article-content h3:hover .anchor-link {
+            opacity: 1;
+        }
+        .article-content h2 .anchor-link:hover,
+        .article-content h3 .anchor-link:hover {
+            color: #22c55e;
+        }
+
+        /* Feature list styling */
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .feature-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+        }
+        .feature-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        /* Accent color for Fitness */
+        .accent-fitness {
+            color: #22c55e;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="readingProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container" role="navigation" aria-label="Main navigation">
+            <a href="/" class="logo" aria-label="Vibe Coding Enthusiast - Home">
+                <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/paths/">Paths</a></li>
+                <li><a href="/learn/">Learn</a></li>
+                <li><a href="/tools/">Tools</a></li>
+                <li><a href="/stacks/">Stacks</a></li>
+                <li><a href="/#about">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/guides/" class="btn btn-primary">Explore Guides</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <!-- Breadcrumb Navigation -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <a href="/guides/">Guides</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <span class="breadcrumb-current" aria-current="page">AI Workout Generator</span>
+                </nav>
+
+                <!-- Guide Meta Badges -->
+                <div class="guide-meta">
+                    <span class="badge badge-beginner">Beginner</span>
+                    <span class="badge badge-time">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        ~3 hours
+                    </span>
+                </div>
+
+                <!-- Title -->
+                <h1>Build an <span class="gradient-text">AI Workout Generator</span></h1>
+
+                <!-- Description -->
+                <p class="lead">Create a personalized workout generator that builds custom exercise plans based on fitness level, goals, and available equipment using Claude's AI capabilities.</p>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons" role="group" aria-label="Share this guide">
+                    <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content with TOC Sidebar -->
+        <div class="article-layout">
+            <!-- Table of Contents Sidebar -->
+            <aside class="toc-sidebar" aria-label="Table of contents">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list" id="tocList">
+                    <noscript>
+                        <li><a href="#overview">What We're Building</a></li>
+                        <li><a href="#prerequisites">Prerequisites</a></li>
+                        <li><a href="#tech-stack">Tech Stack</a></li>
+                        <li><a href="#ai-workflow">AI Agent Workflow</a></li>
+                        <li><a href="#build-steps">Build Steps</a></li>
+                        <li><a href="#common-issues">Common Issues</a></li>
+                        <li><a href="#next-steps">Next Steps</a></li>
+                    </noscript>
+                </ul>
+            </aside>
+
+            <!-- Article Content -->
+            <article class="article-content">
+                <!-- Section: What We're Building -->
+                <h2 id="overview">What We're Building</h2>
+                <p>In this guide, you will build an AI-powered workout generator that creates personalized exercise plans. Users input their fitness level, goals, and available equipment, and Claude generates tailored workouts complete with exercises, sets, reps, and rest periods.</p>
+
+                <p>By the end of this guide, you will have a fully functional fitness app with:</p>
+                <ul class="feature-list">
+                    <li>User profile form capturing fitness level, goals, and equipment</li>
+                    <li>AI-generated personalized workout plans</li>
+                    <li>Workout display with exercises, sets, reps, and instructions</li>
+                    <li>Database storage for user profiles and workout history</li>
+                    <li>Progress tracking and workout completion logging</li>
+                    <li>Favorite workouts feature for quick access</li>
+                </ul>
+
+                <p>This project demonstrates how AI can replace complex rule-based fitness algorithms with natural language understanding - creating workouts that feel like they were designed by a personal trainer rather than generated by a formula.</p>
+
+                <!-- Section: Prerequisites -->
+                <h2 id="prerequisites">Prerequisites</h2>
+                <p>Before starting this guide, make sure you have the following:</p>
+                <ul>
+                    <li><strong>Basic JavaScript/React knowledge</strong> - Understanding of components and state management</li>
+                    <li><strong>Node.js 18+ installed locally</strong> - Run <code>node -v</code> to check your version</li>
+                    <li><strong>A code editor</strong> - VS Code or Cursor recommended</li>
+                </ul>
+
+                <p>You will also need free accounts for the following services:</p>
+                <ul>
+                    <li><strong>Supabase</strong> (<a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a>) - For database and authentication</li>
+                    <li><strong>Vercel</strong> (<a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a>) - For deployment</li>
+                    <li><strong>Anthropic</strong> (<a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>) - For Claude API access</li>
+                </ul>
+
+                <!-- Section: Tech Stack -->
+                <h2 id="tech-stack">Tech Stack Specification</h2>
+                <p>Here is the technology stack we will use for this build, with reasoning for each choice:</p>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Layer</th>
+                            <th scope="col">Technology</th>
+                            <th scope="col">Why This Choice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frontend</td>
+                            <td>Next.js 14, Tailwind CSS</td>
+                            <td>Quick styling with utility classes, server components for fast initial load</td>
+                        </tr>
+                        <tr>
+                            <td>Backend</td>
+                            <td>Next.js API Routes</td>
+                            <td>Simple serverless functions, no separate backend needed, handles Claude API securely</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>Supabase PostgreSQL</td>
+                            <td>Stores user profiles, workout history, and favorites with real-time sync</td>
+                        </tr>
+                        <tr>
+                            <td>AI</td>
+                            <td>Claude API</td>
+                            <td>Excellent at generating structured workout data with proper exercise form cues</td>
+                        </tr>
+                        <tr>
+                            <td>Hosting</td>
+                            <td>Vercel</td>
+                            <td>Zero-config Next.js deployment, automatic HTTPS, easy environment variables</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Section: AI Agent Workflow -->
+                <h2 id="ai-workflow">AI Agent Workflow</h2>
+                <p>Modern AI-assisted development works best when you use the right tool for each task. Here is how to leverage different AI tools throughout this build:</p>
+
+                <h3 id="ai-claude-code">Project Scaffolding with Claude Code</h3>
+                <p>Use Claude Code (Anthropic's CLI tool) for the initial project setup and implementing the core AI workout generation logic. Claude Code understands the full context of your project.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment"># Example prompt for Claude Code:</span>
+
+Create a Next.js 14 app with Tailwind CSS for an AI workout generator.
+Include:
+- A user profile form component with fitness level, goals, and equipment
+- Supabase client setup for database operations
+- An API route that calls Claude to generate workouts
+- Types for UserProfile, Workout, and Exercise entities
+- A workout display component showing exercises with sets/reps
+
+Use the App Router and organize with /app, /components, /lib folders.</code></pre>
+                </div>
+
+                <h3 id="ai-v0">UI Generation with v0.dev</h3>
+                <p>Use v0.dev for creating polished UI components quickly. Recommended prompts for this project:</p>
+                <ul>
+                    <li>"Fitness profile form with sliders for fitness level, checkboxes for equipment"</li>
+                    <li>"Workout card showing exercise name, sets, reps, and rest time"</li>
+                    <li>"Progress tracker with completed workouts chart"</li>
+                </ul>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Pro Tip
+                    </div>
+                    <p>When building the workout display, include clear visual hierarchy - exercise names should be prominent, with sets/reps and instructions progressively less emphasized. This mimics how real workout apps guide users through their session.</p>
+                </div>
+
+                <h3 id="ai-cursor">Development with Cursor</h3>
+                <p>Use Cursor for day-to-day development. It excels at debugging issues with your workout generation prompt and refining the UI based on user feedback.</p>
+
+                <!-- Section: Build Steps -->
+                <h2 id="build-steps">Step-by-Step Build Guide</h2>
+
+                <h3 id="phase-1">Phase 1: Project Setup</h3>
+                <p>Start by creating a new Next.js project with the required dependencies:</p>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-filename">Terminal</span>
+                    </div>
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment"># Create Next.js project</span>
+npx create-next-app@latest workout-generator --typescript --tailwind --eslint --app
+
+<span class="comment"># Navigate to project</span>
+cd workout-generator
+
+<span class="comment"># Install dependencies</span>
+npm install @supabase/supabase-js @anthropic-ai/sdk</code></pre>
+                </div>
+
+                <p>Create a <code>.env.local</code> file in your project root:</p>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-filename">.env.local</span>
+                    </div>
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment"># Supabase</span>
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+<span class="comment"># Anthropic (server-side only)</span>
+ANTHROPIC_API_KEY=your_anthropic_api_key</code></pre>
+                </div>
+
+                <h3 id="phase-2">Phase 2: Database Schema</h3>
+                <p>Create the database tables in Supabase. Go to the SQL Editor and run:</p>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-filename">schema.sql</span>
+                    </div>
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">-- Enable UUID extension</span>
+<span class="keyword">CREATE EXTENSION IF NOT EXISTS</span> "uuid-ossp";
+
+<span class="comment">-- User profiles table</span>
+<span class="keyword">CREATE TABLE</span> user_profiles (
+  id <span class="type">UUID</span> <span class="keyword">DEFAULT</span> uuid_generate_v4() <span class="keyword">PRIMARY KEY</span>,
+  user_id <span class="type">UUID</span> <span class="keyword">REFERENCES</span> auth.users(id) <span class="keyword">ON DELETE CASCADE</span>,
+  fitness_level <span class="type">TEXT</span> <span class="keyword">NOT NULL CHECK</span> (fitness_level <span class="keyword">IN</span> (<span class="string">'beginner'</span>, <span class="string">'intermediate'</span>, <span class="string">'advanced'</span>)),
+  goals <span class="type">TEXT[]</span> <span class="keyword">NOT NULL</span>,
+  equipment <span class="type">TEXT[]</span> <span class="keyword">NOT NULL</span>,
+  created_at <span class="type">TIMESTAMPTZ</span> <span class="keyword">DEFAULT NOW</span>(),
+  updated_at <span class="type">TIMESTAMPTZ</span> <span class="keyword">DEFAULT NOW</span>()
+);
+
+<span class="comment">-- Workouts table</span>
+<span class="keyword">CREATE TABLE</span> workouts (
+  id <span class="type">UUID</span> <span class="keyword">DEFAULT</span> uuid_generate_v4() <span class="keyword">PRIMARY KEY</span>,
+  user_id <span class="type">UUID</span> <span class="keyword">REFERENCES</span> auth.users(id) <span class="keyword">ON DELETE CASCADE</span>,
+  name <span class="type">TEXT</span> <span class="keyword">NOT NULL</span>,
+  description <span class="type">TEXT</span>,
+  exercises <span class="type">JSONB</span> <span class="keyword">NOT NULL</span>,
+  duration_minutes <span class="type">INTEGER</span>,
+  is_favorite <span class="type">BOOLEAN</span> <span class="keyword">DEFAULT</span> <span class="keyword">false</span>,
+  completed_at <span class="type">TIMESTAMPTZ</span>,
+  created_at <span class="type">TIMESTAMPTZ</span> <span class="keyword">DEFAULT NOW</span>()
+);
+
+<span class="comment">-- Enable Row Level Security</span>
+<span class="keyword">ALTER TABLE</span> user_profiles <span class="keyword">ENABLE ROW LEVEL SECURITY</span>;
+<span class="keyword">ALTER TABLE</span> workouts <span class="keyword">ENABLE ROW LEVEL SECURITY</span>;
+
+<span class="comment">-- RLS Policies</span>
+<span class="keyword">CREATE POLICY</span> <span class="string">"Users can manage own profile"</span>
+  <span class="keyword">ON</span> user_profiles <span class="keyword">FOR ALL</span>
+  <span class="keyword">USING</span> (auth.uid() = user_id);
+
+<span class="keyword">CREATE POLICY</span> <span class="string">"Users can manage own workouts"</span>
+  <span class="keyword">ON</span> workouts <span class="keyword">FOR ALL</span>
+  <span class="keyword">USING</span> (auth.uid() = user_id);</code></pre>
+                </div>
+
+                <h3 id="phase-3">Phase 3: Claude Prompt Engineering</h3>
+                <p>This is the core of the AI workout generator. Here is the API route that generates personalized workouts:</p>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-filename">src/app/api/generate-workout/route.ts</span>
+                    </div>
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="keyword">import</span> { NextRequest, NextResponse } <span class="keyword">from</span> <span class="string">'next/server'</span>
+<span class="keyword">import</span> Anthropic <span class="keyword">from</span> <span class="string">'@anthropic-ai/sdk'</span>
+
+<span class="keyword">const</span> anthropic = <span class="keyword">new</span> Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
+})
+
+<span class="keyword">interface</span> <span class="type">UserProfile</span> {
+  fitnessLevel: <span class="string">'beginner'</span> | <span class="string">'intermediate'</span> | <span class="string">'advanced'</span>
+  goals: <span class="type">string</span>[]
+  equipment: <span class="type">string</span>[]
+}
+
+<span class="keyword">export async function</span> <span class="function">POST</span>(request: NextRequest) {
+  <span class="keyword">try</span> {
+    <span class="keyword">const</span> { profile }: { profile: <span class="type">UserProfile</span> } = <span class="keyword">await</span> request.json()
+
+    <span class="keyword">const</span> prompt = <span class="string">`You are a certified personal trainer creating a workout plan.
+
+User Profile:
+- Fitness Level: ${profile.fitnessLevel}
+- Goals: ${profile.goals.join(<span class="string">', '</span>)}
+- Available Equipment: ${profile.equipment.join(<span class="string">', '</span>) || <span class="string">'bodyweight only'</span>}
+
+Create a complete workout with 5-8 exercises. For each exercise include:
+1. Exercise name
+2. Number of sets (2-4 based on fitness level)
+3. Number of reps or duration
+4. Rest period between sets
+5. Brief form instructions (1-2 sentences)
+6. Muscle groups targeted
+
+Respond ONLY with a valid JSON object in this exact format:
+{
+  "name": "Workout name based on goals",
+  "description": "Brief description of the workout focus",
+  "duration_minutes": estimated total time,
+  "exercises": [
+    {
+      "name": "Exercise Name",
+      "sets": 3,
+      "reps": "10-12",
+      "rest_seconds": 60,
+      "instructions": "Brief form cue",
+      "muscles": ["muscle1", "muscle2"]
+    }
+  ]
+}
+
+Adjust difficulty appropriately:
+- Beginner: Focus on form, lower reps, longer rest
+- Intermediate: Moderate intensity, compound movements
+- Advanced: Higher volume, shorter rest, complex exercises`</span>
+
+    <span class="keyword">const</span> response = <span class="keyword">await</span> anthropic.messages.create({
+      model: <span class="string">'claude-3-haiku-20240307'</span>,
+      max_tokens: <span class="number">2048</span>,
+      messages: [{ role: <span class="string">'user'</span>, content: prompt }],
+    })
+
+    <span class="keyword">const</span> content = response.content[<span class="number">0</span>]
+    <span class="keyword">if</span> (content.type === <span class="string">'text'</span>) {
+      <span class="keyword">const</span> workout = JSON.parse(content.text)
+      <span class="keyword">return</span> NextResponse.json({ workout })
+    }
+
+    <span class="keyword">return</span> NextResponse.json({ error: <span class="string">'Invalid response'</span> }, { status: <span class="number">500</span> })
+  } <span class="keyword">catch</span> (error) {
+    console.error(<span class="string">'Workout generation error:'</span>, error)
+    <span class="keyword">return</span> NextResponse.json({ error: <span class="string">'Failed to generate workout'</span> }, { status: <span class="number">500</span> })
+  }
+}</code></pre>
+                </div>
+
+                <div class="callout callout-info">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                        Prompt Engineering Tips
+                    </div>
+                    <p>The key to reliable workout generation is being specific about the output format. By providing an exact JSON structure, Claude will consistently return parseable data. Include fitness level adjustments in the prompt to ensure appropriate difficulty.</p>
+                </div>
+
+                <h3 id="phase-4">Phase 4: Workout Display Component</h3>
+                <p>Create a component to display the generated workout in a user-friendly format:</p>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-filename">src/components/WorkoutDisplay.tsx</span>
+                    </div>
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="string">'use client'</span>
+
+<span class="keyword">import</span> { useState } <span class="keyword">from</span> <span class="string">'react'</span>
+
+<span class="keyword">interface</span> <span class="type">Exercise</span> {
+  name: <span class="type">string</span>
+  sets: <span class="type">number</span>
+  reps: <span class="type">string</span>
+  rest_seconds: <span class="type">number</span>
+  instructions: <span class="type">string</span>
+  muscles: <span class="type">string</span>[]
+}
+
+<span class="keyword">interface</span> <span class="type">Workout</span> {
+  name: <span class="type">string</span>
+  description: <span class="type">string</span>
+  duration_minutes: <span class="type">number</span>
+  exercises: <span class="type">Exercise</span>[]
+}
+
+<span class="keyword">export function</span> <span class="function">WorkoutDisplay</span>({ workout }: { workout: <span class="type">Workout</span> }) {
+  <span class="keyword">const</span> [completedExercises, setCompletedExercises] = useState&lt;<span class="type">Set</span>&lt;<span class="type">number</span>&gt;&gt;(<span class="keyword">new</span> Set())
+
+  <span class="keyword">const</span> <span class="function">toggleExercise</span> = (index: <span class="type">number</span>) => {
+    <span class="keyword">const</span> newCompleted = <span class="keyword">new</span> Set(completedExercises)
+    <span class="keyword">if</span> (newCompleted.has(index)) {
+      newCompleted.delete(index)
+    } <span class="keyword">else</span> {
+      newCompleted.add(index)
+    }
+    setCompletedExercises(newCompleted)
+  }
+
+  <span class="keyword">return</span> (
+    &lt;div className=<span class="string">"bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden"</span>&gt;
+      &lt;div className=<span class="string">"p-6 border-b border-zinc-800"</span>&gt;
+        &lt;h2 className=<span class="string">"text-2xl font-bold text-green-400"</span>&gt;{workout.name}&lt;/h2&gt;
+        &lt;p className=<span class="string">"text-zinc-400 mt-2"</span>&gt;{workout.description}&lt;/p&gt;
+        &lt;div className=<span class="string">"flex gap-4 mt-4 text-sm"</span>&gt;
+          &lt;span className=<span class="string">"text-zinc-500"</span>&gt;
+            {workout.duration_minutes} min
+          &lt;/span&gt;
+          &lt;span className=<span class="string">"text-zinc-500"</span>&gt;
+            {workout.exercises.length} exercises
+          &lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div className=<span class="string">"divide-y divide-zinc-800"</span>&gt;
+        {workout.exercises.map((exercise, index) => (
+          &lt;div
+            key={index}
+            className={<span class="string">`p-6 transition-colors cursor-pointer ${
+              completedExercises.has(index) ? 'bg-green-900/20' : 'hover:bg-zinc-800/50'
+            }`</span>}
+            onClick={() => toggleExercise(index)}
+          &gt;
+            &lt;div className=<span class="string">"flex justify-between items-start"</span>&gt;
+              &lt;div&gt;
+                &lt;h3 className=<span class="string">"font-semibold text-lg"</span>&gt;{exercise.name}&lt;/h3&gt;
+                &lt;p className=<span class="string">"text-green-400 mt-1"</span>&gt;
+                  {exercise.sets} sets x {exercise.reps} reps
+                &lt;/p&gt;
+                &lt;p className=<span class="string">"text-zinc-500 text-sm mt-1"</span>&gt;
+                  Rest: {exercise.rest_seconds}s
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=<span class="string">"flex flex-wrap gap-2"</span>&gt;
+                {exercise.muscles.map((muscle) => (
+                  &lt;span
+                    key={muscle}
+                    className=<span class="string">"px-2 py-1 bg-zinc-800 rounded text-xs text-zinc-400"</span>
+                  &gt;
+                    {muscle}
+                  &lt;/span&gt;
+                ))}
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;p className=<span class="string">"text-zinc-400 text-sm mt-3"</span>&gt;{exercise.instructions}&lt;/p&gt;
+          &lt;/div&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+                </div>
+
+                <h3 id="phase-5">Phase 5: Progress Tracking</h3>
+                <p>Add functionality to track completed workouts and save them to the database:</p>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-filename">src/lib/workouts.ts</span>
+                    </div>
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="keyword">import</span> { supabase } <span class="keyword">from</span> <span class="string">'./supabase/client'</span>
+
+<span class="keyword">export async function</span> <span class="function">saveWorkout</span>(workout: <span class="type">any</span>) {
+  <span class="keyword">const</span> { data, error } = <span class="keyword">await</span> supabase
+    .from(<span class="string">'workouts'</span>)
+    .insert({
+      name: workout.name,
+      description: workout.description,
+      exercises: workout.exercises,
+      duration_minutes: workout.duration_minutes,
+    })
+    .select()
+    .single()
+
+  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error
+  <span class="keyword">return</span> data
+}
+
+<span class="keyword">export async function</span> <span class="function">completeWorkout</span>(workoutId: <span class="type">string</span>) {
+  <span class="keyword">const</span> { error } = <span class="keyword">await</span> supabase
+    .from(<span class="string">'workouts'</span>)
+    .update({ completed_at: <span class="keyword">new</span> Date().toISOString() })
+    .eq(<span class="string">'id'</span>, workoutId)
+
+  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error
+}
+
+<span class="keyword">export async function</span> <span class="function">toggleFavorite</span>(workoutId: <span class="type">string</span>, isFavorite: <span class="type">boolean</span>) {
+  <span class="keyword">const</span> { error } = <span class="keyword">await</span> supabase
+    .from(<span class="string">'workouts'</span>)
+    .update({ is_favorite: isFavorite })
+    .eq(<span class="string">'id'</span>, workoutId)
+
+  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error
+}
+
+<span class="keyword">export async function</span> <span class="function">getWorkoutHistory</span>() {
+  <span class="keyword">const</span> { data, error } = <span class="keyword">await</span> supabase
+    .from(<span class="string">'workouts'</span>)
+    .select(<span class="string">'*'</span>)
+    .order(<span class="string">'created_at'</span>, { ascending: <span class="keyword">false</span> })
+    .limit(<span class="number">20</span>)
+
+  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error
+  <span class="keyword">return</span> data
+}</code></pre>
+                </div>
+
+                <h3 id="phase-6">Phase 6: Workout History and Favorites</h3>
+                <p>Create a component to display past workouts and favorites:</p>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-filename">src/components/WorkoutHistory.tsx</span>
+                    </div>
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="string">'use client'</span>
+
+<span class="keyword">import</span> { useState, useEffect } <span class="keyword">from</span> <span class="string">'react'</span>
+<span class="keyword">import</span> { getWorkoutHistory, toggleFavorite } <span class="keyword">from</span> <span class="string">'@/lib/workouts'</span>
+
+<span class="keyword">export function</span> <span class="function">WorkoutHistory</span>() {
+  <span class="keyword">const</span> [workouts, setWorkouts] = useState&lt;<span class="type">any</span>[]&gt;([])
+  <span class="keyword">const</span> [filter, setFilter] = useState&lt;<span class="string">'all'</span> | <span class="string">'favorites'</span>&gt;(<span class="string">'all'</span>)
+
+  useEffect(() => {
+    getWorkoutHistory().then(setWorkouts)
+  }, [])
+
+  <span class="keyword">const</span> filtered = filter === <span class="string">'favorites'</span>
+    ? workouts.filter(w => w.is_favorite)
+    : workouts
+
+  <span class="keyword">return</span> (
+    &lt;div className=<span class="string">"space-y-4"</span>&gt;
+      &lt;div className=<span class="string">"flex gap-2"</span>&gt;
+        &lt;button
+          onClick={() => setFilter(<span class="string">'all'</span>)}
+          className={<span class="string">`px-4 py-2 rounded-lg ${
+            filter === 'all' ? 'bg-green-600' : 'bg-zinc-800'
+          }`</span>}
+        &gt;
+          All Workouts
+        &lt;/button&gt;
+        &lt;button
+          onClick={() => setFilter(<span class="string">'favorites'</span>)}
+          className={<span class="string">`px-4 py-2 rounded-lg ${
+            filter === 'favorites' ? 'bg-green-600' : 'bg-zinc-800'
+          }`</span>}
+        &gt;
+          Favorites
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      {filtered.map((workout) => (
+        &lt;div key={workout.id} className=<span class="string">"p-4 bg-zinc-900 rounded-lg border border-zinc-800"</span>&gt;
+          &lt;div className=<span class="string">"flex justify-between items-center"</span>&gt;
+            &lt;div&gt;
+              &lt;h3 className=<span class="string">"font-semibold"</span>&gt;{workout.name}&lt;/h3&gt;
+              &lt;p className=<span class="string">"text-sm text-zinc-400"</span>&gt;
+                {<span class="keyword">new</span> Date(workout.created_at).toLocaleDateString()}
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;button
+              onClick={() => {
+                toggleFavorite(workout.id, !workout.is_favorite)
+                setWorkouts(workouts.map(w =>
+                  w.id === workout.id ? { ...w, is_favorite: !w.is_favorite } : w
+                ))
+              }}
+              className={workout.is_favorite ? <span class="string">'text-yellow-400'</span> : <span class="string">'text-zinc-600'</span>}
+            &gt;
+              &#9733;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  )
+}</code></pre>
+                </div>
+
+                <!-- Section: Common Issues -->
+                <h2 id="common-issues">Common Issues and Solutions</h2>
+                <p>Here are the most common issues developers encounter when building this project:</p>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        JSON Parsing Errors from Claude
+                    </div>
+                    <p>Sometimes Claude includes markdown formatting around JSON. Add a fallback to strip code blocks: <code>text.replace(/```json\n?|\n?```/g, '')</code> before parsing.</p>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Inconsistent Exercise Counts
+                    </div>
+                    <p>If Claude generates too few or too many exercises, be more explicit in your prompt: "Create exactly 6 exercises" rather than "5-8 exercises".</p>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Equipment Mismatch
+                    </div>
+                    <p>Ensure your prompt explicitly states to only use the listed equipment. Add: "ONLY use exercises that require the equipment listed above. If no equipment is listed, use bodyweight exercises only."</p>
+                </div>
+
+                <!-- Section: Next Steps -->
+                <h2 id="next-steps">Next Steps</h2>
+                <p>You now have a functional AI workout generator. Here are ways to extend it further:</p>
+
+                <ul>
+                    <li><strong>Add Exercise Videos</strong> - Integrate exercise demonstration videos or GIFs for each movement</li>
+                    <li><strong>Progressive Overload</strong> - Track weights used and suggest increases over time</li>
+                    <li><strong>Weekly Programming</strong> - Generate full week workout splits with proper muscle group rotation</li>
+                    <li><strong>Rest Day Suggestions</strong> - Use AI to recommend recovery based on workout intensity</li>
+                    <li><strong>Social Features</strong> - Share workouts with friends or join challenges</li>
+                </ul>
+
+                <!-- Share Section -->
+                <div class="share-section">
+                    <span class="share-label">Share this guide:</span>
+                    <div class="share-buttons" role="group" aria-label="Share this guide">
+                        <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="email" title="Share via email" aria-label="Share via email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Related Guides -->
+                <div class="related-guides">
+                    <h3 class="related-guides-title">Related Guides</h3>
+                    <div class="related-guides-grid">
+                        <a href="/guides/healthtech-patient-portal.html" class="related-guide-card">
+                            <h4>HealthTech Patient Portal</h4>
+                            <p>Build a patient portal with AI-powered symptom checking and appointment scheduling.</p>
+                        </a>
+                        <a href="/guides/ecommerce-ai-recommender.html" class="related-guide-card">
+                            <h4>E-commerce AI Recommender</h4>
+                            <p>Create personalized product recommendations using Claude and vector embeddings.</p>
+                        </a>
+                        <a href="/guides/edtech-ai-tutor.html" class="related-guide-card">
+                            <h4>EdTech AI Tutor</h4>
+                            <p>Build an adaptive learning platform with AI-powered tutoring capabilities.</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Follow Section -->
+                <div class="follow-section">
+                    <h3>Follow the Vibe Coding Enthusiast</h3>
+                    <p>Get more AI build guides, tool tips, and project ideas from JD.</p>
+                    <div class="social-follow-buttons">
+                        <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" class="social-follow-btn linkedin">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            Follow on LinkedIn
+                        </a>
+                        <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" class="social-follow-btn twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            Follow on X
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+        <footer class="footer">
+    <div class="container">
+        <div class="footer-simple">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                    <span>Vibe Coding Enthusiast</span>
+                </a>
+                <p>Free guides for building with AI</p>
+            </div>
+
+            <nav class="footer-nav">
+                <a href="/guides/">Guides</a>
+                <span class="footer-dot">·</span>
+                <a href="/paths/">Paths</a>
+                <span class="footer-dot">·</span>
+                <a href="/learn/">Learn</a>
+                <span class="footer-dot">·</span>
+                <a href="/tools/">Tools</a>
+                <span class="footer-dot">·</span>
+                <a href="/stacks/">Stacks</a>
+                <span class="footer-dot">·</span>
+                <a href="/#about">About</a>
+            </nav>
+
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" aria-label="Follow on LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" aria-label="Follow on X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Vibe Coding Enthusiast</p>
+            <div class="footer-legal">
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="/script.js"></script>
+
+    <!-- Guide-Specific JavaScript -->
+    <script>
+        // Reading Progress Bar
+        (function() {
+            const progressBar = document.getElementById('readingProgress');
+            const article = document.querySelector('.article-content');
+
+            if (progressBar && article) {
+                window.addEventListener('scroll', function() {
+                    const articleTop = article.offsetTop;
+                    const articleHeight = article.offsetHeight;
+                    const windowHeight = window.innerHeight;
+                    const scrollTop = window.scrollY;
+
+                    const progress = Math.min(100, Math.max(0,
+                        ((scrollTop - articleTop + windowHeight * 0.3) / articleHeight) * 100
+                    ));
+
+                    progressBar.style.width = progress + '%';
+                    progressBar.setAttribute('aria-valuenow', Math.round(progress));
+                });
+            }
+        })();
+
+        // Generate Table of Contents
+        (function() {
+            const article = document.querySelector('.article-content');
+            const tocList = document.getElementById('tocList');
+
+            if (article && tocList) {
+                const headings = article.querySelectorAll('h2, h3');
+                let tocHTML = '';
+
+                headings.forEach(function(heading) {
+                    const id = heading.getAttribute('id');
+                    const text = heading.textContent.replace(/#/g, '').trim();
+                    const level = heading.tagName.toLowerCase();
+                    const className = level === 'h3' ? 'toc-h3' : '';
+
+                    if (id) {
+                        tocHTML += '<li><a href="#' + id + '" class="' + className + '">' + text + '</a></li>';
+
+                        // Add anchor link to heading
+                        const anchor = document.createElement('a');
+                        anchor.href = '#' + id;
+                        anchor.className = 'anchor-link';
+                        anchor.setAttribute('aria-label', 'Link to ' + text);
+                        anchor.textContent = '#';
+                        heading.appendChild(anchor);
+                    }
+                });
+
+                tocList.innerHTML = tocHTML;
+
+                // Highlight active TOC item on scroll
+                const tocLinks = tocList.querySelectorAll('a');
+
+                function updateActiveTOC() {
+                    const scrollPos = window.scrollY + 120;
+
+                    headings.forEach(function(heading, index) {
+                        const id = heading.getAttribute('id');
+                        const headingTop = heading.offsetTop;
+                        const nextHeading = headings[index + 1];
+                        const nextTop = nextHeading ? nextHeading.offsetTop : document.body.scrollHeight;
+
+                        if (scrollPos >= headingTop && scrollPos < nextTop) {
+                            tocLinks.forEach(function(link) {
+                                link.classList.remove('active');
+                                if (link.getAttribute('href') === '#' + id) {
+                                    link.classList.add('active');
+                                }
+                            });
+                        }
+                    });
+                }
+
+                window.addEventListener('scroll', updateActiveTOC);
+                updateActiveTOC();
+            }
+        })();
+
+        // Copy Code Button
+        (function() {
+            const copyButtons = document.querySelectorAll('.code-copy-btn');
+
+            copyButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const codeBlock = this.closest('.code-block');
+                    const code = codeBlock.querySelector('code');
+                    const text = code.textContent;
+
+                    navigator.clipboard.writeText(text).then(function() {
+                        button.textContent = 'Copied!';
+                        button.classList.add('copied');
+
+                        setTimeout(function() {
+                            button.textContent = 'Copy';
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(function(err) {
+                        console.error('Failed to copy:', err);
+                    });
+                });
+            });
+        })();
+
+        // Share Buttons
+        (function() {
+            const shareButtons = document.querySelectorAll('.share-btn');
+            const pageTitle = document.title;
+            const pageUrl = window.location.href;
+
+            shareButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const shareType = this.getAttribute('data-share');
+                    let shareUrl = '';
+
+                    switch(shareType) {
+                        case 'twitter':
+                            shareUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(pageTitle) + '&url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'linkedin':
+                            shareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'copy':
+                            navigator.clipboard.writeText(pageUrl).then(function() {
+                                const originalTitle = button.getAttribute('title');
+                                button.setAttribute('title', 'Link copied!');
+                                setTimeout(function() {
+                                    button.setAttribute('title', originalTitle);
+                                }, 2000);
+                            });
+                            break;
+                        case 'email':
+                            shareUrl = 'mailto:?subject=' + encodeURIComponent(pageTitle) + '&body=' + encodeURIComponent('Check out this guide: ' + pageUrl);
+                            window.location.href = shareUrl;
+                            break;
+                    }
+                });
+            });
+        })();
+
+        // Back to Top Button
+        (function() {
+            const backToTop = document.getElementById('backToTop');
+
+            if (backToTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 500) {
+                        backToTop.classList.add('visible');
+                    } else {
+                        backToTop.classList.remove('visible');
+                    }
+                });
+
+                backToTop.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

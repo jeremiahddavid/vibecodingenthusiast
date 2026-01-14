@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>Build an AI Project Estimator | AI Build Guides | Vibe Coding Enthusiast</title>
+    <meta name="title" content="Build an AI Project Estimator | AI Build Guides | Vibe Coding Enthusiast">
+    <meta name="description" content="Learn to build an AI-powered construction cost estimation tool with Claude API, Next.js 14, and Supabase. Generate accurate project estimates with material quantities and labor costs.">
+    <meta name="keywords" content="construction estimator, AI cost estimation, Claude API, Next.js, Supabase, project management, contractor tools, ai development, vibe coding, build guide, tutorial">
+    <meta name="author" content="Vibe Coding Enthusiast">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/guides/construction-project-estimator.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/guides/construction-project-estimator.html">
+    <meta property="og:title" content="Build an AI Project Estimator | AI Build Guides">
+    <meta property="og:description" content="Learn to build an AI-powered construction cost estimation tool with Claude API, Next.js 14, and Supabase. Generate accurate project estimates with material quantities and labor costs.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/guides/images/construction-project-estimator-og.png">
+    <meta property="og:site_name" content="Vibe Coding Enthusiast">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2025-01-14">
+    <meta property="article:modified_time" content="2025-01-14">
+    <meta property="article:author" content="Vibe Coding Enthusiast">
+    <meta property="article:section" content="AI Build Guides">
+    <meta property="article:tag" content="Construction">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://vibecodingenthusiast.com/guides/construction-project-estimator.html">
+    <meta name="twitter:title" content="Build an AI Project Estimator | AI Build Guides">
+    <meta name="twitter:description" content="Learn to build an AI-powered construction cost estimation tool with Claude API, Next.js 14, and Supabase. Generate accurate project estimates with material quantities and labor costs.">
+    <meta name="twitter:image" content="https://vibecodingenthusiast.com/guides/images/construction-project-estimator-og.png">
+    <meta name="twitter:creator" content="@vibecodingenthusiast">
+
+    <!-- Schema.org JSON-LD for TechArticle -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Build an AI Project Estimator",
+        "description": "Learn to build an AI-powered construction cost estimation tool with Claude API, Next.js 14, and Supabase. Generate accurate project estimates with material quantities and labor costs.",
+        "image": "https://vibecodingenthusiast.com/guides/images/construction-project-estimator-og.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "url": "https://vibecodingenthusiast.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vibecodingenthusiast.com/favicon.png"
+            }
+        },
+        "datePublished": "2025-01-14",
+        "dateModified": "2025-01-14",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://vibecodingenthusiast.com/guides/construction-project-estimator.html"
+        },
+        "articleSection": "AI Build Guides",
+        "keywords": "construction estimator, AI cost estimation, Claude API, Next.js, Supabase",
+        "proficiencyLevel": "Intermediate",
+        "dependencies": "Next.js 14, Tailwind CSS, Supabase, Claude API, Vercel",
+        "timeRequired": "PT240M"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <!-- Guide-Specific Styles -->
+    <style>
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-green));
+            z-index: 1001;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .breadcrumb a:hover {
+            color: var(--accent-primary);
+        }
+        .breadcrumb-separator {
+            color: var(--text-muted);
+        }
+        .breadcrumb-current {
+            color: var(--text-primary);
+        }
+
+        /* Guide Meta Badges */
+        .guide-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .badge-beginner {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .badge-intermediate {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .badge-advanced {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .badge-time {
+            background: rgba(129, 140, 248, 0.15);
+            color: var(--accent-primary);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+        }
+        .badge-time svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Article Title */
+        .article-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            max-width: 900px;
+        }
+        .article-header .lead {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 700px;
+            margin-bottom: 28px;
+        }
+
+        /* Share Buttons in Header */
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .share-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+        .share-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Article Layout - Main Content with Sidebar */
+        .article-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        @media (max-width: 1100px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+        @media (max-width: 1100px) {
+            .toc-sidebar {
+                position: static;
+                background: var(--bg-card);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-lg);
+                padding: 24px;
+            }
+        }
+        .toc-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+        .toc-list a {
+            display: block;
+            padding: 8px 12px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            transition: all 0.2s ease;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        .toc-list a:hover {
+            color: var(--text-primary);
+            background: rgba(129, 140, 248, 0.08);
+        }
+        .toc-list a.active {
+            color: var(--accent-primary);
+            border-left-color: var(--accent-primary);
+            background: rgba(129, 140, 248, 0.1);
+        }
+        .toc-list .toc-h3 {
+            padding-left: 24px;
+            font-size: 0.8125rem;
+        }
+
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+        }
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+        .article-content h2:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        .article-content h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        .article-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .article-content ul,
+        .article-content ol {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Tech Stack Table */
+        .tech-stack-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0 32px;
+            font-size: 0.9rem;
+        }
+        .tech-stack-table thead {
+            background: var(--bg-secondary);
+        }
+        .tech-stack-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+        }
+        .tech-stack-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        .tech-stack-table tbody tr:hover {
+            background: rgba(129, 140, 248, 0.04);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            position: relative;
+            margin: 24px 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: #1a1b26;
+            border: 1px solid var(--border-color);
+        }
+        .code-block pre {
+            margin: 0;
+            padding: 20px 24px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.7;
+            color: #c0caf5;
+        }
+        .code-block code {
+            font-family: inherit;
+        }
+        .code-copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-sm);
+            color: #a9b1d6;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .code-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        .code-copy-btn.copied {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.4);
+            color: #10b981;
+        }
+
+        /* Code Syntax Highlighting */
+        .code-block .keyword { color: #bb9af7; }
+        .code-block .string { color: #9ece6a; }
+        .code-block .comment { color: #565f89; font-style: italic; }
+        .code-block .function { color: #7aa2f7; }
+        .code-block .variable { color: #c0caf5; }
+        .code-block .property { color: #73daca; }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 20px 24px;
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+            border-left: 4px solid;
+        }
+        .callout-tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+        }
+        .callout-tip .callout-title { color: #10b981; }
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: #f59e0b;
+        }
+        .callout-warning .callout-title { color: #f59e0b; }
+        .callout-info {
+            background: rgba(129, 140, 248, 0.1);
+            border-color: var(--accent-primary);
+        }
+        .callout-info .callout-title { color: var(--accent-primary); }
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .callout p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Share Section at Bottom */
+        .share-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 32px 0;
+            margin-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+        .share-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Related Guides */
+        .related-guides {
+            margin-top: 64px;
+            padding-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+        .related-guides-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .related-guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .related-guide-card {
+            display: block;
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .related-guide-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .related-guide-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .related-guide-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            margin-top: 64px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(129, 140, 248, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+        .newsletter-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            margin-top: 0;
+        }
+        .newsletter-section > p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            padding: 14px 18px;
+            font-size: 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .newsletter-form input[type="email"]:focus {
+            border-color: var(--accent-primary);
+        }
+        .newsletter-form input[type="email"]::placeholder {
+            color: var(--text-muted);
+        }
+        .newsletter-form button {
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .newsletter-form button:hover {
+            background: #6366f1;
+            transform: translateY(-1px);
+        }
+        @media (max-width: 520px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .newsletter-form button {
+                width: 100%;
+            }
+        }
+
+        /* Image styling */
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Anchor links */
+        .article-content h2 .anchor-link,
+        .article-content h3 .anchor-link {
+            opacity: 0;
+            margin-left: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        .article-content h2:hover .anchor-link,
+        .article-content h3:hover .anchor-link {
+            opacity: 1;
+        }
+        .article-content h2 .anchor-link:hover,
+        .article-content h3 .anchor-link:hover {
+            color: var(--accent-primary);
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="readingProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container" role="navigation" aria-label="Main navigation">
+            <a href="/" class="logo" aria-label="Vibe Coding Enthusiast - Home">
+                <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/paths/">Paths</a></li>
+                <li><a href="/learn/">Learn</a></li>
+                <li><a href="/tools/">Tools</a></li>
+                <li><a href="/stacks/">Stacks</a></li>
+                <li><a href="/#about">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/guides/" class="btn btn-primary">Explore Guides</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <!-- Breadcrumb Navigation -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <a href="/guides/">Guides</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <span class="breadcrumb-current" aria-current="page">AI Project Estimator</span>
+                </nav>
+
+                <!-- Guide Meta Badges -->
+                <div class="guide-meta">
+                    <span class="badge badge-intermediate">Intermediate</span>
+                    <span class="badge badge-time">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        ~4 hours
+                    </span>
+                </div>
+
+                <!-- Title -->
+                <h1 class="gradient-text">Build an AI Project Estimator</h1>
+
+                <!-- Description -->
+                <p class="lead">Create an AI-powered construction cost estimation tool that analyzes project scope, calculates material quantities, and generates professional PDF estimates using Claude API and modern web technologies.</p>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons" role="group" aria-label="Share this guide">
+                    <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content with TOC Sidebar -->
+        <div class="article-layout">
+            <!-- Table of Contents Sidebar -->
+            <aside class="toc-sidebar" aria-label="Table of contents">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list" id="tocList">
+                    <noscript>
+                        <li><a href="#overview">What We're Building</a></li>
+                        <li><a href="#prerequisites">Prerequisites</a></li>
+                        <li><a href="#tech-stack">Tech Stack</a></li>
+                        <li><a href="#ai-workflow">AI Agent Workflow</a></li>
+                        <li><a href="#build-steps">Build Steps</a></li>
+                        <li><a href="#common-issues">Common Issues</a></li>
+                        <li><a href="#next-steps">Next Steps</a></li>
+                    </noscript>
+                </ul>
+            </aside>
+
+            <!-- Article Content -->
+            <article class="article-content">
+                <!-- Section: What We're Building -->
+                <h2 id="overview">What We're Building</h2>
+                <p>In this guide, we'll build a complete AI-powered project estimator for construction companies. The application will allow contractors to input project details including scope, materials, and location, then leverage Claude AI to generate accurate cost estimates with material quantities and labor predictions.</p>
+
+                <p>Construction projects regularly exceed budgets by 20-30% due to inaccurate initial estimates. Our tool addresses this by combining historical cost data with AI-powered analysis to provide more reliable projections. Key features include:</p>
+
+                <ul>
+                    <li><strong>Smart project input forms</strong> - Capture scope, square footage, materials, and location</li>
+                    <li><strong>AI-powered cost analysis</strong> - Claude analyzes project parameters against industry data</li>
+                    <li><strong>Material quantity calculations</strong> - Automatic material lists with quantities and costs</li>
+                    <li><strong>Labor cost predictions</strong> - Estimate labor hours and costs by trade</li>
+                    <li><strong>PDF estimate generation</strong> - Professional estimates ready for clients</li>
+                    <li><strong>Historical cost database</strong> - Store and learn from past projects</li>
+                </ul>
+
+                <!-- Section: Prerequisites -->
+                <h2 id="prerequisites">Prerequisites</h2>
+                <p>Before starting this guide, make sure you have the following:</p>
+                <ul>
+                    <li><strong>Node.js 18+</strong> installed on your machine</li>
+                    <li><strong>Claude API key</strong> from Anthropic (sign up at console.anthropic.com)</li>
+                    <li><strong>Supabase account</strong> for the database (free tier works)</li>
+                    <li><strong>Vercel account</strong> for deployment (optional but recommended)</li>
+                    <li>Basic familiarity with React and TypeScript</li>
+                    <li>Understanding of REST APIs and async/await patterns</li>
+                </ul>
+
+                <!-- Section: Tech Stack -->
+                <h2 id="tech-stack">Tech Stack Specification</h2>
+                <p>Here's the technology stack we'll use for this build:</p>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Layer</th>
+                            <th scope="col">Technology</th>
+                            <th scope="col">Why This Choice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frontend</td>
+                            <td>Next.js 14, Tailwind CSS</td>
+                            <td>Form-heavy UI with excellent DX and built-in routing</td>
+                        </tr>
+                        <tr>
+                            <td>Backend</td>
+                            <td>Next.js API Routes</td>
+                            <td>Serverless processing, no separate backend needed</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>Supabase (PostgreSQL)</td>
+                            <td>Store cost data, projects, and materials with real-time sync</td>
+                        </tr>
+                        <tr>
+                            <td>AI/API</td>
+                            <td>Claude API (Anthropic)</td>
+                            <td>Superior reasoning for complex cost analysis</td>
+                        </tr>
+                        <tr>
+                            <td>PDF Generation</td>
+                            <td>@react-pdf/renderer</td>
+                            <td>Generate professional estimates client-side</td>
+                        </tr>
+                        <tr>
+                            <td>Deployment</td>
+                            <td>Vercel</td>
+                            <td>Zero-config Next.js deployment with edge functions</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Section: AI Agent Workflow -->
+                <h2 id="ai-workflow">AI Agent Workflow</h2>
+                <p>Here's how to leverage AI tools throughout this build to maximize productivity:</p>
+
+                <h3 id="ai-scaffolding">Project Scaffolding with Claude Code</h3>
+                <p>Use Claude Code to scaffold the entire project structure, including the database schema and API routes. This saves hours of boilerplate setup.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment"># Example prompt for Claude Code</span>
+Create a Next.js 14 app with TypeScript for construction cost estimation.
+Include:
+- Supabase client setup with types
+- API routes for /api/estimate and /api/projects
+- Form components for project input (scope, materials, location, sqft)
+- Database schema for projects, materials, and cost_history tables
+- Tailwind config with construction-themed colors (orange/amber accents)</code></pre>
+                </div>
+
+                <h3 id="ai-ui">UI Generation with v0.dev</h3>
+                <p>Generate the complex form UI and dashboard components using v0.dev. Construction estimators need professional, form-heavy interfaces that v0 excels at creating.</p>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Pro Tip
+                    </div>
+                    <p>When prompting v0.dev, specify "construction software" styling - think Procore or Buildertrend aesthetics. Ask for orange/amber accent colors and include specific form fields like "square footage", "project type dropdown", and "material checklist".</p>
+                </div>
+
+                <h3 id="ai-debugging">Development with Cursor</h3>
+                <p>Use Cursor's AI features to implement the Claude API integration and debug complex estimation logic. The inline editing is particularly useful for refining the cost calculation algorithms.</p>
+
+                <!-- Section: Build Steps -->
+                <h2 id="build-steps">Step-by-Step Build Guide</h2>
+
+                <h3 id="phase-1">Phase 1: Project Setup and Database Schema</h3>
+                <p>Start by creating the Next.js project and setting up the Supabase database with the required tables for storing projects, materials, and historical cost data.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment"># Create Next.js project</span>
+npx create-next-app@14 construction-estimator --typescript --tailwind --app
+cd construction-estimator
+
+<span class="comment"># Install dependencies</span>
+npm install @supabase/supabase-js @anthropic-ai/sdk @react-pdf/renderer
+npm install -D @types/node
+
+<span class="comment"># Create environment file</span>
+touch .env.local</code></pre>
+                </div>
+
+                <p>Add your environment variables to <code>.env.local</code>:</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code>NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+ANTHROPIC_API_KEY=your_claude_api_key</code></pre>
+                </div>
+
+                <h3 id="phase-2">Phase 2: Cost Database Schema</h3>
+                <p>Create the database schema in Supabase to store project information, material costs, and historical estimates. This data will be used by Claude to improve estimation accuracy over time.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">-- Supabase SQL: Create tables for construction estimator</span>
+
+<span class="comment">-- Materials reference table with regional pricing</span>
+<span class="keyword">CREATE TABLE</span> materials (
+  id UUID <span class="keyword">DEFAULT</span> gen_random_uuid() <span class="keyword">PRIMARY KEY</span>,
+  name <span class="keyword">TEXT NOT NULL</span>,
+  category <span class="keyword">TEXT NOT NULL</span>, <span class="comment">-- lumber, concrete, electrical, plumbing, etc.</span>
+  unit <span class="keyword">TEXT NOT NULL</span>, <span class="comment">-- sqft, linear_ft, each, cubic_yard</span>
+  base_cost <span class="keyword">DECIMAL</span>(10,2) <span class="keyword">NOT NULL</span>,
+  region <span class="keyword">TEXT DEFAULT</span> <span class="string">'national'</span>,
+  updated_at <span class="keyword">TIMESTAMP DEFAULT NOW</span>()
+);
+
+<span class="comment">-- Projects table</span>
+<span class="keyword">CREATE TABLE</span> projects (
+  id UUID <span class="keyword">DEFAULT</span> gen_random_uuid() <span class="keyword">PRIMARY KEY</span>,
+  name <span class="keyword">TEXT NOT NULL</span>,
+  project_type <span class="keyword">TEXT NOT NULL</span>, <span class="comment">-- residential, commercial, renovation</span>
+  square_footage <span class="keyword">INTEGER NOT NULL</span>,
+  location <span class="keyword">TEXT NOT NULL</span>,
+  scope <span class="keyword">TEXT</span>,
+  estimated_cost <span class="keyword">DECIMAL</span>(12,2),
+  actual_cost <span class="keyword">DECIMAL</span>(12,2),
+  status <span class="keyword">TEXT DEFAULT</span> <span class="string">'draft'</span>,
+  created_at <span class="keyword">TIMESTAMP DEFAULT NOW</span>()
+);
+
+<span class="comment">-- Cost line items for each project</span>
+<span class="keyword">CREATE TABLE</span> estimate_items (
+  id UUID <span class="keyword">DEFAULT</span> gen_random_uuid() <span class="keyword">PRIMARY KEY</span>,
+  project_id UUID <span class="keyword">REFERENCES</span> projects(id),
+  category <span class="keyword">TEXT NOT NULL</span>,
+  description <span class="keyword">TEXT NOT NULL</span>,
+  quantity <span class="keyword">DECIMAL</span>(10,2),
+  unit <span class="keyword">TEXT</span>,
+  unit_cost <span class="keyword">DECIMAL</span>(10,2),
+  total_cost <span class="keyword">DECIMAL</span>(12,2),
+  is_labor <span class="keyword">BOOLEAN DEFAULT FALSE</span>
+);
+
+<span class="comment">-- Insert sample material data</span>
+<span class="keyword">INSERT INTO</span> materials (name, category, unit, base_cost) <span class="keyword">VALUES</span>
+(<span class="string">'2x4 Lumber'</span>, <span class="string">'lumber'</span>, <span class="string">'linear_ft'</span>, 0.85),
+(<span class="string">'Concrete'</span>, <span class="string">'concrete'</span>, <span class="string">'cubic_yard'</span>, 150.00),
+(<span class="string">'Drywall 4x8'</span>, <span class="string">'drywall'</span>, <span class="string">'sheet'</span>, 15.50),
+(<span class="string">'Roofing Shingles'</span>, <span class="string">'roofing'</span>, <span class="string">'square'</span>, 95.00),
+(<span class="string">'Electrical Wire 12/2'</span>, <span class="string">'electrical'</span>, <span class="string">'linear_ft'</span>, 0.65);</code></pre>
+                </div>
+
+                <h3 id="phase-3">Phase 3: AI-Powered Cost Estimation</h3>
+                <p>Create the API route that sends project details to Claude for intelligent cost analysis. Claude will analyze the scope, compare against industry standards, and return a detailed breakdown.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// app/api/estimate/route.ts</span>
+<span class="keyword">import</span> Anthropic <span class="keyword">from</span> <span class="string">'@anthropic-ai/sdk'</span>;
+<span class="keyword">import</span> { createClient } <span class="keyword">from</span> <span class="string">'@supabase/supabase-js'</span>;
+<span class="keyword">import</span> { NextResponse } <span class="keyword">from</span> <span class="string">'next/server'</span>;
+
+<span class="keyword">const</span> anthropic = <span class="keyword">new</span> Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
+});
+
+<span class="keyword">const</span> supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
+<span class="keyword">export async function</span> <span class="function">POST</span>(request: Request) {
+  <span class="keyword">const</span> { projectType, squareFootage, location, scope, materials } =
+    <span class="keyword">await</span> request.json();
+
+  <span class="comment">// Fetch current material costs from database</span>
+  <span class="keyword">const</span> { data: materialCosts } = <span class="keyword">await</span> supabase
+    .from(<span class="string">'materials'</span>)
+    .select(<span class="string">'*'</span>);
+
+  <span class="comment">// Build the estimation prompt for Claude</span>
+  <span class="keyword">const</span> estimationPrompt = <span class="string">`You are an expert construction cost estimator.
+Analyze this project and provide a detailed cost breakdown.
+
+PROJECT DETAILS:
+- Type: ${projectType}
+- Square Footage: ${squareFootage} sq ft
+- Location: ${location}
+- Scope: ${scope}
+- Selected Materials: ${materials.join(', ')}
+
+CURRENT MATERIAL COSTS (use these as baseline):
+${JSON.stringify(materialCosts, null, 2)}
+
+Provide a JSON response with this structure:
+{
+  "summary": "Brief project summary",
+  "totalEstimate": number,
+  "confidenceLevel": "low" | "medium" | "high",
+  "materials": [
+    {
+      "item": "Material name",
+      "quantity": number,
+      "unit": "unit type",
+      "unitCost": number,
+      "totalCost": number,
+      "notes": "Any relevant notes"
+    }
+  ],
+  "labor": [
+    {
+      "trade": "Trade name (e.g., Framing, Electrical)",
+      "hours": number,
+      "hourlyRate": number,
+      "totalCost": number
+    }
+  ],
+  "additionalCosts": [
+    {
+      "item": "Permits, inspections, etc.",
+      "cost": number
+    }
+  ],
+  "recommendations": ["List of cost-saving recommendations"],
+  "risks": ["Potential cost risks to consider"]
+}`</span>;
+
+  <span class="keyword">const</span> message = <span class="keyword">await</span> anthropic.messages.create({
+    model: <span class="string">'claude-sonnet-4-20250514'</span>,
+    max_tokens: 4096,
+    messages: [
+      {
+        role: <span class="string">'user'</span>,
+        content: estimationPrompt,
+      },
+    ],
+  });
+
+  <span class="comment">// Parse Claude's response</span>
+  <span class="keyword">const</span> responseText = message.content[0].type === <span class="string">'text'</span>
+    ? message.content[0].text
+    : <span class="string">''</span>;
+
+  <span class="keyword">const</span> estimate = JSON.parse(responseText);
+
+  <span class="keyword">return</span> NextResponse.json(estimate);
+}</code></pre>
+                </div>
+
+                <h3 id="phase-4">Phase 4: Material Quantity Calculations</h3>
+                <p>Build the form component that captures project details and displays the AI-generated estimate with material quantities. The form uses controlled components for validation.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// components/EstimateForm.tsx</span>
+<span class="string">'use client'</span>;
+
+<span class="keyword">import</span> { useState } <span class="keyword">from</span> <span class="string">'react'</span>;
+
+<span class="keyword">interface</span> EstimateFormProps {
+  onEstimateGenerated: (estimate: any) => <span class="keyword">void</span>;
+}
+
+<span class="keyword">export default function</span> <span class="function">EstimateForm</span>({ onEstimateGenerated }: EstimateFormProps) {
+  <span class="keyword">const</span> [loading, setLoading] = useState(<span class="keyword">false</span>);
+  <span class="keyword">const</span> [formData, setFormData] = useState({
+    projectType: <span class="string">'residential'</span>,
+    squareFootage: <span class="string">''</span>,
+    location: <span class="string">''</span>,
+    scope: <span class="string">''</span>,
+    materials: [] <span class="keyword">as</span> string[],
+  });
+
+  <span class="keyword">const</span> projectTypes = [
+    { value: <span class="string">'residential'</span>, label: <span class="string">'Residential New Build'</span> },
+    { value: <span class="string">'commercial'</span>, label: <span class="string">'Commercial Construction'</span> },
+    { value: <span class="string">'renovation'</span>, label: <span class="string">'Renovation/Remodel'</span> },
+    { value: <span class="string">'addition'</span>, label: <span class="string">'Home Addition'</span> },
+  ];
+
+  <span class="keyword">const</span> materialOptions = [
+    <span class="string">'Standard Lumber'</span>, <span class="string">'Premium Lumber'</span>, <span class="string">'Concrete Foundation'</span>,
+    <span class="string">'Steel Framing'</span>, <span class="string">'Standard Roofing'</span>, <span class="string">'Metal Roofing'</span>,
+    <span class="string">'Basic Electrical'</span>, <span class="string">'Smart Home Wiring'</span>, <span class="string">'Standard Plumbing'</span>,
+  ];
+
+  <span class="keyword">const</span> handleSubmit = <span class="keyword">async</span> (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(<span class="keyword">true</span>);
+
+    <span class="keyword">try</span> {
+      <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'/api/estimate'</span>, {
+        method: <span class="string">'POST'</span>,
+        headers: { <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span> },
+        body: JSON.stringify(formData),
+      });
+
+      <span class="keyword">const</span> estimate = <span class="keyword">await</span> response.json();
+      onEstimateGenerated(estimate);
+    } <span class="keyword">catch</span> (error) {
+      console.error(<span class="string">'Estimation failed:'</span>, error);
+    } <span class="keyword">finally</span> {
+      setLoading(<span class="keyword">false</span>);
+    }
+  };
+
+  <span class="keyword">return</span> (
+    &lt;form onSubmit={handleSubmit} className=<span class="string">"space-y-6"</span>&gt;
+      {<span class="comment">/* Project Type */</span>}
+      &lt;div&gt;
+        &lt;label className=<span class="string">"block text-sm font-medium mb-2"</span>&gt;
+          Project Type
+        &lt;/label&gt;
+        &lt;select
+          value={formData.projectType}
+          onChange={(e) => setFormData({...formData, projectType: e.target.value})}
+          className=<span class="string">"w-full p-3 border rounded-lg bg-gray-900"</span>
+        &gt;
+          {projectTypes.map((type) => (
+            &lt;option key={type.value} value={type.value}&gt;
+              {type.label}
+            &lt;/option&gt;
+          ))}
+        &lt;/select&gt;
+      &lt;/div&gt;
+
+      {<span class="comment">/* Square Footage */</span>}
+      &lt;div&gt;
+        &lt;label className=<span class="string">"block text-sm font-medium mb-2"</span>&gt;
+          Square Footage
+        &lt;/label&gt;
+        &lt;input
+          type=<span class="string">"number"</span>
+          value={formData.squareFootage}
+          onChange={(e) => setFormData({...formData, squareFootage: e.target.value})}
+          placeholder=<span class="string">"e.g., 2500"</span>
+          className=<span class="string">"w-full p-3 border rounded-lg bg-gray-900"</span>
+          required
+        /&gt;
+      &lt;/div&gt;
+
+      {<span class="comment">/* Location */</span>}
+      &lt;div&gt;
+        &lt;label className=<span class="string">"block text-sm font-medium mb-2"</span>&gt;
+          Project Location
+        &lt;/label&gt;
+        &lt;input
+          type=<span class="string">"text"</span>
+          value={formData.location}
+          onChange={(e) => setFormData({...formData, location: e.target.value})}
+          placeholder=<span class="string">"City, State"</span>
+          className=<span class="string">"w-full p-3 border rounded-lg bg-gray-900"</span>
+          required
+        /&gt;
+      &lt;/div&gt;
+
+      {<span class="comment">/* Scope Description */</span>}
+      &lt;div&gt;
+        &lt;label className=<span class="string">"block text-sm font-medium mb-2"</span>&gt;
+          Project Scope
+        &lt;/label&gt;
+        &lt;textarea
+          value={formData.scope}
+          onChange={(e) => setFormData({...formData, scope: e.target.value})}
+          placeholder=<span class="string">"Describe the project scope, special requirements, finishes..."</span>
+          rows={4}
+          className=<span class="string">"w-full p-3 border rounded-lg bg-gray-900"</span>
+        /&gt;
+      &lt;/div&gt;
+
+      {<span class="comment">/* Material Selection */</span>}
+      &lt;div&gt;
+        &lt;label className=<span class="string">"block text-sm font-medium mb-2"</span>&gt;
+          Materials &amp; Features
+        &lt;/label&gt;
+        &lt;div className=<span class="string">"grid grid-cols-2 gap-2"</span>&gt;
+          {materialOptions.map((material) => (
+            &lt;label key={material} className=<span class="string">"flex items-center gap-2 p-2"</span>&gt;
+              &lt;input
+                type=<span class="string">"checkbox"</span>
+                checked={formData.materials.includes(material)}
+                onChange={(e) => {
+                  <span class="keyword">const</span> updated = e.target.checked
+                    ? [...formData.materials, material]
+                    : formData.materials.filter((m) => m !== material);
+                  setFormData({...formData, materials: updated});
+                }}
+              /&gt;
+              {material}
+            &lt;/label&gt;
+          ))}
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;button
+        type=<span class="string">"submit"</span>
+        disabled={loading}
+        className=<span class="string">"w-full py-3 px-6 bg-amber-500 hover:bg-amber-600
+                   text-white font-semibold rounded-lg transition-colors
+                   disabled:opacity-50 disabled:cursor-not-allowed"</span>
+      &gt;
+        {loading ? <span class="string">'Generating Estimate...'</span> : <span class="string">'Generate AI Estimate'</span>}
+      &lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+                </div>
+
+                <h3 id="phase-5">Phase 5: Labor Cost Predictions</h3>
+                <p>Enhance the Claude prompt to include detailed labor cost predictions by trade. This uses industry-standard labor rates adjusted for location.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// Enhanced labor estimation prompt addition</span>
+<span class="keyword">const</span> laborPromptSection = <span class="string">`
+LABOR ESTIMATION GUIDELINES:
+Calculate labor hours based on these industry standards:
+- Framing: 0.04 hours per sq ft
+- Electrical: 0.03 hours per sq ft
+- Plumbing: 0.025 hours per sq ft
+- Drywall: 0.02 hours per sq ft
+- Painting: 0.015 hours per sq ft
+- Roofing: 0.035 hours per sq ft
+
+Apply location multipliers:
+- High cost areas (CA, NY, MA): 1.3x
+- Medium cost areas (TX, FL, CO): 1.0x
+- Lower cost areas (OH, TN, NC): 0.85x
+
+Base hourly rates by trade:
+- General Labor: $25/hr
+- Carpenter/Framer: $35/hr
+- Electrician: $55/hr
+- Plumber: $50/hr
+- HVAC: $48/hr
+- Roofer: $40/hr
+
+Include 15% labor burden for insurance, taxes, and benefits.
+`</span>;</code></pre>
+                </div>
+
+                <h3 id="phase-6">Phase 6: PDF Estimate Generation</h3>
+                <p>Create a professional PDF export using @react-pdf/renderer. This generates client-ready estimates that contractors can share directly.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// components/EstimatePDF.tsx</span>
+<span class="keyword">import</span> { Document, Page, Text, View, StyleSheet } <span class="keyword">from</span> <span class="string">'@react-pdf/renderer'</span>;
+
+<span class="keyword">const</span> styles = StyleSheet.create({
+  page: { padding: 40, fontFamily: <span class="string">'Helvetica'</span> },
+  header: { marginBottom: 30 },
+  title: { fontSize: 24, fontWeight: <span class="string">'bold'</span>, marginBottom: 10 },
+  subtitle: { fontSize: 12, color: <span class="string">'#666'</span> },
+  section: { marginBottom: 20 },
+  sectionTitle: { fontSize: 14, fontWeight: <span class="string">'bold'</span>, marginBottom: 10,
+                  borderBottom: <span class="string">'1px solid #ddd'</span>, paddingBottom: 5 },
+  row: { flexDirection: <span class="string">'row'</span>, borderBottom: <span class="string">'1px solid #eee'</span>,
+         paddingVertical: 8 },
+  col: { flex: 1 },
+  colRight: { flex: 1, textAlign: <span class="string">'right'</span> },
+  total: { flexDirection: <span class="string">'row'</span>, marginTop: 20, paddingTop: 10,
+           borderTop: <span class="string">'2px solid #333'</span> },
+  totalLabel: { flex: 1, fontSize: 16, fontWeight: <span class="string">'bold'</span> },
+  totalValue: { flex: 1, fontSize: 16, fontWeight: <span class="string">'bold'</span>, textAlign: <span class="string">'right'</span> },
+});
+
+<span class="keyword">interface</span> EstimatePDFProps {
+  estimate: {
+    summary: string;
+    totalEstimate: number;
+    materials: Array&lt;{item: string; quantity: number; unit: string; totalCost: number}&gt;;
+    labor: Array&lt;{trade: string; hours: number; totalCost: number}&gt;;
+  };
+  projectName: string;
+}
+
+<span class="keyword">export function</span> <span class="function">EstimatePDF</span>({ estimate, projectName }: EstimatePDFProps) {
+  <span class="keyword">return</span> (
+    &lt;Document&gt;
+      &lt;Page size=<span class="string">"A4"</span> style={styles.page}&gt;
+        &lt;View style={styles.header}&gt;
+          &lt;Text style={styles.title}&gt;Project Estimate&lt;/Text&gt;
+          &lt;Text style={styles.subtitle}&gt;{projectName}&lt;/Text&gt;
+          &lt;Text style={styles.subtitle}&gt;
+            Generated: {<span class="keyword">new</span> Date().toLocaleDateString()}
+          &lt;/Text&gt;
+        &lt;/View&gt;
+
+        &lt;View style={styles.section}&gt;
+          &lt;Text style={styles.sectionTitle}&gt;Materials&lt;/Text&gt;
+          {estimate.materials.map((item, i) => (
+            &lt;View key={i} style={styles.row}&gt;
+              &lt;Text style={styles.col}&gt;{item.item}&lt;/Text&gt;
+              &lt;Text style={styles.col}&gt;{item.quantity} {item.unit}&lt;/Text&gt;
+              &lt;Text style={styles.colRight}&gt;
+                ${item.totalCost.toLocaleString()}
+              &lt;/Text&gt;
+            &lt;/View&gt;
+          ))}
+        &lt;/View&gt;
+
+        &lt;View style={styles.section}&gt;
+          &lt;Text style={styles.sectionTitle}&gt;Labor&lt;/Text&gt;
+          {estimate.labor.map((item, i) => (
+            &lt;View key={i} style={styles.row}&gt;
+              &lt;Text style={styles.col}&gt;{item.trade}&lt;/Text&gt;
+              &lt;Text style={styles.col}&gt;{item.hours} hrs&lt;/Text&gt;
+              &lt;Text style={styles.colRight}&gt;
+                ${item.totalCost.toLocaleString()}
+              &lt;/Text&gt;
+            &lt;/View&gt;
+          ))}
+        &lt;/View&gt;
+
+        &lt;View style={styles.total}&gt;
+          &lt;Text style={styles.totalLabel}&gt;Total Estimate&lt;/Text&gt;
+          &lt;Text style={styles.totalValue}&gt;
+            ${estimate.totalEstimate.toLocaleString()}
+          &lt;/Text&gt;
+        &lt;/View&gt;
+      &lt;/Page&gt;
+    &lt;/Document&gt;
+  );
+}</code></pre>
+                </div>
+
+                <!-- Section: Common Issues -->
+                <h2 id="common-issues">Common Issues & Solutions</h2>
+                <p>Here are some common issues you might encounter and how to solve them:</p>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Claude Response Parsing Errors
+                    </div>
+                    <p>If Claude returns malformed JSON, wrap the parsing in a try/catch and add instructions to your prompt like "Respond ONLY with valid JSON, no markdown code blocks". You can also use Claude's JSON mode for more reliable structured output.</p>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        PDF Generation on Server
+                    </div>
+                    <p>@react-pdf/renderer needs to run client-side. Use dynamic imports with `ssr: false` if you're having issues: `const PDFDownloadLink = dynamic(() => import('@react-pdf/renderer').then(mod => mod.PDFDownloadLink), { ssr: false })`</p>
+                </div>
+
+                <div class="callout callout-info">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        Rate Limits
+                    </div>
+                    <p>The Claude API has rate limits. Implement request queuing for production use, and consider caching estimates for similar project parameters to reduce API calls.</p>
+                </div>
+
+                <p>Other common issues include Supabase connection timeouts (increase pool size), Vercel function timeouts for complex estimates (use streaming responses), and material cost data becoming stale (implement a scheduled update job).</p>
+
+                <!-- Section: Next Steps -->
+                <h2 id="next-steps">Next Steps</h2>
+                <p>You now have a working AI-powered construction estimator. Here are some ways to extend it:</p>
+
+                <ul>
+                    <li><strong>Add user authentication</strong> - Use Supabase Auth to let contractors save and manage multiple projects</li>
+                    <li><strong>Implement estimate comparison</strong> - Show side-by-side comparisons of different material/scope options</li>
+                    <li><strong>Build a dashboard</strong> - Track estimate accuracy over time by comparing estimates to actual costs</li>
+                    <li><strong>Add subcontractor bidding</strong> - Let subs submit bids that feed into the estimation system</li>
+                    <li><strong>Integrate with accounting</strong> - Connect to QuickBooks or other accounting software for seamless project setup</li>
+                </ul>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Improve Accuracy Over Time
+                    </div>
+                    <p>The real power comes from feeding actual project costs back into the system. Build a feedback loop where completed projects update your material costs and labor multipliers, making Claude's estimates more accurate for your specific market.</p>
+                </div>
+
+                <!-- Share Section -->
+                <div class="share-section">
+                    <span class="share-label">Share this guide:</span>
+                    <div class="share-buttons" role="group" aria-label="Share this guide">
+                        <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="email" title="Share via email" aria-label="Share via email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Related Guides -->
+                <div class="related-guides">
+                    <h3 class="related-guides-title">Related Guides</h3>
+                    <div class="related-guides-grid">
+                        <a href="/guides/ai-invoice-generator.html" class="related-guide-card">
+                            <h4>Build an AI Invoice Generator</h4>
+                            <p>Generate professional invoices with AI-powered line item suggestions</p>
+                        </a>
+                        <a href="/guides/project-management-dashboard.html" class="related-guide-card">
+                            <h4>Build a Project Dashboard</h4>
+                            <p>Track project progress with real-time updates and AI insights</p>
+                        </a>
+                        <a href="/guides/document-analyzer.html" class="related-guide-card">
+                            <h4>Build a Document Analyzer</h4>
+                            <p>Extract data from PDFs and images using Claude's vision</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Follow Section -->
+                <div class="follow-section">
+                    <h3>Follow the Vibe Coding Enthusiast</h3>
+                    <p>Get more AI build guides, tool tips, and project ideas from JD.</p>
+                    <div class="social-follow-buttons">
+                        <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" class="social-follow-btn linkedin">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            Follow on LinkedIn
+                        </a>
+                        <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" class="social-follow-btn twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            Follow on X
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+        <footer class="footer">
+    <div class="container">
+        <div class="footer-simple">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                    <span>Vibe Coding Enthusiast</span>
+                </a>
+                <p>Free guides for building with AI</p>
+            </div>
+
+            <nav class="footer-nav">
+                <a href="/guides/">Guides</a>
+                <span class="footer-dot">·</span>
+                <a href="/paths/">Paths</a>
+                <span class="footer-dot">·</span>
+                <a href="/learn/">Learn</a>
+                <span class="footer-dot">·</span>
+                <a href="/tools/">Tools</a>
+                <span class="footer-dot">·</span>
+                <a href="/stacks/">Stacks</a>
+                <span class="footer-dot">·</span>
+                <a href="/#about">About</a>
+            </nav>
+
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" aria-label="Follow on LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" aria-label="Follow on X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Vibe Coding Enthusiast</p>
+            <div class="footer-legal">
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="/script.js"></script>
+
+    <!-- Guide-Specific JavaScript -->
+    <script>
+        // Reading Progress Bar
+        (function() {
+            const progressBar = document.getElementById('readingProgress');
+            const article = document.querySelector('.article-content');
+
+            if (progressBar && article) {
+                window.addEventListener('scroll', function() {
+                    const articleTop = article.offsetTop;
+                    const articleHeight = article.offsetHeight;
+                    const windowHeight = window.innerHeight;
+                    const scrollTop = window.scrollY;
+
+                    const progress = Math.min(100, Math.max(0,
+                        ((scrollTop - articleTop + windowHeight * 0.3) / articleHeight) * 100
+                    ));
+
+                    progressBar.style.width = progress + '%';
+                    progressBar.setAttribute('aria-valuenow', Math.round(progress));
+                });
+            }
+        })();
+
+        // Generate Table of Contents
+        (function() {
+            const article = document.querySelector('.article-content');
+            const tocList = document.getElementById('tocList');
+
+            if (article && tocList) {
+                const headings = article.querySelectorAll('h2, h3');
+                let tocHTML = '';
+
+                headings.forEach(function(heading) {
+                    const id = heading.getAttribute('id');
+                    const text = heading.textContent.replace(/#/g, '').trim();
+                    const level = heading.tagName.toLowerCase();
+                    const className = level === 'h3' ? 'toc-h3' : '';
+
+                    if (id) {
+                        tocHTML += '<li><a href="#' + id + '" class="' + className + '">' + text + '</a></li>';
+
+                        // Add anchor link to heading
+                        const anchor = document.createElement('a');
+                        anchor.href = '#' + id;
+                        anchor.className = 'anchor-link';
+                        anchor.setAttribute('aria-label', 'Link to ' + text);
+                        anchor.textContent = '#';
+                        heading.appendChild(anchor);
+                    }
+                });
+
+                tocList.innerHTML = tocHTML;
+
+                // Highlight active TOC item on scroll
+                const tocLinks = tocList.querySelectorAll('a');
+
+                function updateActiveTOC() {
+                    const scrollPos = window.scrollY + 120;
+
+                    headings.forEach(function(heading, index) {
+                        const id = heading.getAttribute('id');
+                        const headingTop = heading.offsetTop;
+                        const nextHeading = headings[index + 1];
+                        const nextTop = nextHeading ? nextHeading.offsetTop : document.body.scrollHeight;
+
+                        if (scrollPos >= headingTop && scrollPos < nextTop) {
+                            tocLinks.forEach(function(link) {
+                                link.classList.remove('active');
+                                if (link.getAttribute('href') === '#' + id) {
+                                    link.classList.add('active');
+                                }
+                            });
+                        }
+                    });
+                }
+
+                window.addEventListener('scroll', updateActiveTOC);
+                updateActiveTOC();
+            }
+        })();
+
+        // Copy Code Button
+        (function() {
+            const copyButtons = document.querySelectorAll('.code-copy-btn');
+
+            copyButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const codeBlock = this.closest('.code-block');
+                    const code = codeBlock.querySelector('code');
+                    const text = code.textContent;
+
+                    navigator.clipboard.writeText(text).then(function() {
+                        button.textContent = 'Copied!';
+                        button.classList.add('copied');
+
+                        setTimeout(function() {
+                            button.textContent = 'Copy';
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(function(err) {
+                        console.error('Failed to copy:', err);
+                    });
+                });
+            });
+        })();
+
+        // Share Buttons
+        (function() {
+            const shareButtons = document.querySelectorAll('.share-btn');
+            const pageTitle = document.title;
+            const pageUrl = window.location.href;
+
+            shareButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const shareType = this.getAttribute('data-share');
+                    let shareUrl = '';
+
+                    switch(shareType) {
+                        case 'twitter':
+                            shareUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(pageTitle) + '&url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'linkedin':
+                            shareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'copy':
+                            navigator.clipboard.writeText(pageUrl).then(function() {
+                                // Show feedback
+                                const originalTitle = button.getAttribute('title');
+                                button.setAttribute('title', 'Link copied!');
+                                setTimeout(function() {
+                                    button.setAttribute('title', originalTitle);
+                                }, 2000);
+                            });
+                            break;
+                        case 'email':
+                            shareUrl = 'mailto:?subject=' + encodeURIComponent(pageTitle) + '&body=' + encodeURIComponent('Check out this guide: ' + pageUrl);
+                            window.location.href = shareUrl;
+                            break;
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

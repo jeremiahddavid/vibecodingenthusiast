@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>AI Build Guides - Learn to Build Apps with AI | Vibe Coding Enthusiast</title>
+    <meta name="title" content="AI Build Guides - Learn to Build Apps with AI | Vibe Coding Enthusiast">
+    <meta name="description" content="Step-by-step guides for building production-ready applications using AI coding tools like Claude Code, Cursor, and v0.dev. Complete with tech stacks, prompts, and code examples.">
+    <meta name="keywords" content="AI build guides, Claude Code tutorial, Cursor AI, v0.dev tutorial, AI coding, build apps with AI, AI development guides">
+    <meta name="author" content="Vibe Coding Enthusiast">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/guides/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/guides/">
+    <meta property="og:title" content="AI Build Guides - Learn to Build Apps with AI | Vibe Coding Enthusiast">
+    <meta property="og:description" content="Step-by-step guides for building production-ready applications using AI coding tools. Complete with tech stacks, prompts, and code examples.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/og-image.svg">
+    <meta property="og:site_name" content="Vibe Coding Enthusiast">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vibecodingenthusiast.com/guides/">
+    <meta property="twitter:title" content="AI Build Guides - Learn to Build Apps with AI | Vibe Coding Enthusiast">
+    <meta property="twitter:description" content="Step-by-step guides for building production-ready applications using AI coding tools.">
+    <meta property="twitter:image" content="https://vibecodingenthusiast.com/og-image.svg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "AI Build Guides",
+        "description": "Step-by-step guides for building production-ready applications using AI coding tools like Claude Code, Cursor, and v0.dev.",
+        "url": "https://vibecodingenthusiast.com/guides/",
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "AI-Powered FinTech Dashboard", "url": "https://vibecodingenthusiast.com/guides/fintech-ai-dashboard.html"},
+                {"@type": "ListItem", "position": 2, "name": "AI Patient Portal", "url": "https://vibecodingenthusiast.com/guides/healthtech-patient-portal.html"},
+                {"@type": "ListItem", "position": 3, "name": "AI Product Recommender", "url": "https://vibecodingenthusiast.com/guides/ecommerce-ai-recommender.html"},
+                {"@type": "ListItem", "position": 4, "name": "AI Tutoring Platform", "url": "https://vibecodingenthusiast.com/guides/edtech-ai-tutor.html"}
+            ]
+        }
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <style>
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-full);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--border-secondary);
+            color: var(--text-primary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* Guide Card Enhancements */
+        .guide-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .guide-card.hidden {
+            display: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .filter-tabs {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/paths/">Paths</a></li>
+                <li><a href="/learn/">Learn</a></li>
+                <li><a href="/tools/">Tools</a></li>
+                <li><a href="/stacks/">Stacks</a></li>
+                <li><a href="/#about">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/guides/" class="btn btn-primary">Explore Guides</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Hero Section -->
+        <section class="section" style="padding-top: 140px; padding-bottom: 60px;">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">AI Build Guides</span>
+                    <h1 class="gradient-text">Learn to Build Real Projects with AI</h1>
+                    <p>Step-by-step guides for building production-ready applications using AI coding tools like Claude Code, Cursor, and v0.dev. Complete with tech stacks, prompts, and code examples.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="section" style="padding-top: 0; padding-bottom: 0;">
+            <div class="container">
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">All Guides</button>
+                    <button class="filter-btn" data-filter="beginner">Beginner</button>
+                    <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+                    <button class="filter-btn" data-filter="advanced">Advanced</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guides Grid -->
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <div class="guides-grid">
+                    <!-- 1. FinTech - AI-Powered FinTech Dashboard -->
+                    <a href="/guides/fintech-ai-dashboard.html" class="guide-card" data-difficulty="intermediate">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=360&fit=crop&q=80" alt="FinTech Dashboard" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-intermediate">Intermediate</span>
+                                <span class="badge badge-time">~4 hours</span>
+                            </div>
+                            <h3>Build an AI-Powered FinTech Dashboard</h3>
+                            <p>Create a personal finance dashboard with AI-driven insights, transaction categorization, and spending analysis.</p>
+                        </div>
+                    </a>
+
+                    <!-- 2. HealthTech - AI Patient Portal -->
+                    <a href="/guides/healthtech-patient-portal.html" class="guide-card" data-difficulty="advanced">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=360&fit=crop&q=80" alt="HealthTech Patient Portal" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-advanced">Advanced</span>
+                                <span class="badge badge-time">~6 hours</span>
+                            </div>
+                            <h3>Build an AI Patient Portal</h3>
+                            <p>Develop a healthcare patient portal with AI-powered symptom checking, appointment scheduling, and medical record management.</p>
+                        </div>
+                    </a>
+
+                    <!-- 3. E-commerce - AI Product Recommender -->
+                    <a href="/guides/ecommerce-ai-recommender.html" class="guide-card" data-difficulty="intermediate">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=360&fit=crop&q=80" alt="E-commerce Product Recommender" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-intermediate">Intermediate</span>
+                                <span class="badge badge-time">~4 hours</span>
+                            </div>
+                            <h3>Build an AI Product Recommender</h3>
+                            <p>Create an intelligent e-commerce recommendation engine using AI to analyze user behavior and suggest relevant products.</p>
+                        </div>
+                    </a>
+
+                    <!-- 4. EdTech - AI Tutoring Platform -->
+                    <a href="/guides/edtech-ai-tutor.html" class="guide-card" data-difficulty="intermediate">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=360&fit=crop&q=80" alt="EdTech Tutoring Platform" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-intermediate">Intermediate</span>
+                                <span class="badge badge-time">~5 hours</span>
+                            </div>
+                            <h3>Build an AI Tutoring Platform</h3>
+                            <p>Develop a personalized learning platform with AI tutors that adapt to student progress and learning styles.</p>
+                        </div>
+                    </a>
+
+                    <!-- 5. Entertainment - AI Content Curator -->
+                    <a href="/guides/entertainment-content-curator.html" class="guide-card" data-difficulty="intermediate">
+                        <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=600&h=360&fit=crop&q=80" alt="Entertainment Content Curator" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-intermediate">Intermediate</span>
+                                <span class="badge badge-time">~3 hours</span>
+                            </div>
+                            <h3>Build an AI Content Curator</h3>
+                            <p>Create a smart content recommendation system that curates movies, music, and articles based on user preferences.</p>
+                        </div>
+                    </a>
+
+                    <!-- 6. Hospitality - AI Booking Assistant -->
+                    <a href="/guides/hospitality-booking-assistant.html" class="guide-card" data-difficulty="intermediate">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=360&fit=crop&q=80" alt="Hospitality Booking Assistant" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-intermediate">Intermediate</span>
+                                <span class="badge badge-time">~4 hours</span>
+                            </div>
+                            <h3>Build an AI Booking Assistant</h3>
+                            <p>Develop a conversational booking assistant for restaurants and hotels with natural language understanding.</p>
+                        </div>
+                    </a>
+
+                    <!-- 7. Non-profit - AI Donor Dashboard -->
+                    <a href="/guides/nonprofit-donor-dashboard.html" class="guide-card" data-difficulty="beginner">
+                        <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=600&h=360&fit=crop&q=80" alt="Non-profit Donor Dashboard" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-beginner">Beginner</span>
+                                <span class="badge badge-time">~3 hours</span>
+                            </div>
+                            <h3>Build an AI Donor Dashboard</h3>
+                            <p>Create a donor management dashboard with AI-powered insights for engagement optimization and campaign analysis.</p>
+                        </div>
+                    </a>
+
+                    <!-- 8. Fitness - AI Workout Generator -->
+                    <a href="/guides/fitness-workout-generator.html" class="guide-card" data-difficulty="beginner">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=360&fit=crop&q=80" alt="Fitness Workout Generator" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-beginner">Beginner</span>
+                                <span class="badge badge-time">~3 hours</span>
+                            </div>
+                            <h3>Build an AI Workout Generator</h3>
+                            <p>Create a personalized workout plan generator that adapts to user fitness levels, goals, and available equipment.</p>
+                        </div>
+                    </a>
+
+                    <!-- 9. Legal - AI Contract Analyzer -->
+                    <a href="/guides/legal-contract-analyzer.html" class="guide-card" data-difficulty="advanced">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=360&fit=crop&q=80" alt="Legal Contract Analyzer" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-advanced">Advanced</span>
+                                <span class="badge badge-time">~5 hours</span>
+                            </div>
+                            <h3>Build an AI Contract Analyzer</h3>
+                            <p>Develop an AI-powered contract analysis tool that extracts key terms, identifies risks, and summarizes legal documents.</p>
+                        </div>
+                    </a>
+
+                    <!-- 10. Logistics - AI Route Optimizer -->
+                    <a href="/guides/logistics-route-optimizer.html" class="guide-card" data-difficulty="advanced">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=360&fit=crop&q=80" alt="Logistics Route Optimizer" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-advanced">Advanced</span>
+                                <span class="badge badge-time">~6 hours</span>
+                            </div>
+                            <h3>Build an AI Route Optimizer</h3>
+                            <p>Create an intelligent delivery route optimization system with real-time traffic analysis and fleet management.</p>
+                        </div>
+                    </a>
+
+                    <!-- 11. Real Estate - AI Property Matcher -->
+                    <a href="/guides/realestate-property-matcher.html" class="guide-card" data-difficulty="intermediate">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=360&fit=crop&q=80" alt="Real Estate Property Matcher" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-intermediate">Intermediate</span>
+                                <span class="badge badge-time">~4 hours</span>
+                            </div>
+                            <h3>Build an AI Property Matcher</h3>
+                            <p>Develop a smart property recommendation system that matches buyers with ideal homes based on preferences and behavior.</p>
+                        </div>
+                    </a>
+
+                    <!-- 12. SaaS - AI Feature Builder -->
+                    <a href="/guides/saas-ai-feature-builder.html" class="guide-card" data-difficulty="advanced">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=360&fit=crop&q=80" alt="SaaS Feature Builder" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-advanced">Advanced</span>
+                                <span class="badge badge-time">~5 hours</span>
+                            </div>
+                            <h3>Build an AI Feature Builder</h3>
+                            <p>Create an AI-powered feature prioritization and development tracking system for SaaS products.</p>
+                        </div>
+                    </a>
+
+                    <!-- 13. Construction - AI Project Estimator -->
+                    <a href="/guides/construction-project-estimator.html" class="guide-card" data-difficulty="intermediate">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=360&fit=crop&q=80" alt="Construction Project Estimator" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-intermediate">Intermediate</span>
+                                <span class="badge badge-time">~4 hours</span>
+                            </div>
+                            <h3>Build an AI Project Estimator</h3>
+                            <p>Develop an AI-powered construction cost estimator that analyzes project specs and generates accurate quotes.</p>
+                        </div>
+                    </a>
+
+                    <!-- 14. Beauty - AI Virtual Consultant -->
+                    <a href="/guides/beauty-virtual-consultant.html" class="guide-card" data-difficulty="beginner">
+                        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=360&fit=crop&q=80" alt="Beauty Virtual Consultant" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-beginner">Beginner</span>
+                                <span class="badge badge-time">~3 hours</span>
+                            </div>
+                            <h3>Build an AI Virtual Consultant</h3>
+                            <p>Create a beauty consultation chatbot that provides personalized skincare and styling recommendations.</p>
+                        </div>
+                    </a>
+
+                    <!-- 15. Travel - AI Trip Planner -->
+                    <a href="/guides/travel-ai-trip-planner.html" class="guide-card" data-difficulty="intermediate">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&h=360&fit=crop&q=80" alt="Travel Trip Planner" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-intermediate">Intermediate</span>
+                                <span class="badge badge-time">~4 hours</span>
+                            </div>
+                            <h3>Build an AI Trip Planner</h3>
+                            <p>Develop an intelligent travel planning assistant that creates personalized itineraries based on preferences and budget.</p>
+                        </div>
+                    </a>
+
+                    <!-- 16. Professional - AI Proposal Generator -->
+                    <a href="/guides/professional-proposal-generator.html" class="guide-card" data-difficulty="beginner">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=360&fit=crop&q=80" alt="Professional Proposal Generator" class="guide-card-image" loading="lazy">
+                        <div class="guide-card-content">
+                            <div class="guide-card-badges">
+                                <span class="badge badge-beginner">Beginner</span>
+                                <span class="badge badge-time">~2 hours</span>
+                            </div>
+                            <h3>Build an AI Proposal Generator</h3>
+                            <p>Create an AI-powered proposal generator for professional services that produces polished client proposals quickly.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Follow Section -->
+        <section class="section">
+            <div class="container">
+                <div class="follow-section" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border: 1px solid var(--border-primary); border-radius: var(--radius-xl); padding: 48px; text-align: center;">
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">Follow the Vibe Coding Enthusiast</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">Get more AI build guides, tool tips, and project ideas from JD.</p>
+                    <div class="social-follow-buttons" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: var(--radius-md); font-weight: 600; text-decoration: none; background: #0A66C2; color: white; transition: all var(--transition-fast);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            Follow on LinkedIn
+                        </a>
+                        <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: var(--radius-md); font-weight: 600; text-decoration: none; background: #000000; color: white; transition: all var(--transition-fast);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            Follow on X
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <div class="container">
+                <h2>Ready to Build Something <span class="gradient-text">Amazing</span>?</h2>
+                <p>Pick a guide above and start building your AI-powered project today.</p>
+                <a href="/paths/" class="btn btn-white btn-lg">Find Your Path</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-simple">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                    <span>Vibe Coding Enthusiast</span>
+                </a>
+                <p>Free guides for building with AI</p>
+            </div>
+
+            <nav class="footer-nav">
+                <a href="/guides/">Guides</a>
+                <span class="footer-dot">·</span>
+                <a href="/paths/">Paths</a>
+                <span class="footer-dot">·</span>
+                <a href="/learn/">Learn</a>
+                <span class="footer-dot">·</span>
+                <a href="/tools/">Tools</a>
+                <span class="footer-dot">·</span>
+                <a href="/stacks/">Stacks</a>
+                <span class="footer-dot">·</span>
+                <a href="/#about">About</a>
+            </nav>
+
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" aria-label="Follow on LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" aria-label="Follow on X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Vibe Coding Enthusiast</p>
+            <div class="footer-legal">
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const guideCards = document.querySelectorAll('.guide-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const filter = this.dataset.filter;
+
+                    // Update active button
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Filter cards
+                    guideCards.forEach(card => {
+                        const difficulty = card.dataset.difficulty;
+                        if (filter === 'all' || difficulty === filter) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // Back to top button
+            const backToTopBtn = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

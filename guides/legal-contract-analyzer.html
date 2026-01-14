@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>Build an AI Contract Analyzer | AI Build Guides | Vibe Coding Enthusiast</title>
+    <meta name="title" content="Build an AI Contract Analyzer | AI Build Guides | Vibe Coding Enthusiast">
+    <meta name="description" content="Build an AI-powered contract analyzer using Next.js, Claude API, and Supabase. Extract clauses, identify risks, and generate summaries from legal documents.">
+    <meta name="keywords" content="contract analyzer, legal AI, document analysis, Claude API, PDF parsing, legal tech, ai development, vibe coding, build guide, tutorial">
+    <meta name="author" content="Vibe Coding Enthusiast">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/guides/legal-contract-analyzer.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/guides/legal-contract-analyzer.html">
+    <meta property="og:title" content="Build an AI Contract Analyzer | AI Build Guides">
+    <meta property="og:description" content="Build an AI-powered contract analyzer using Next.js, Claude API, and Supabase. Extract clauses, identify risks, and generate summaries from legal documents.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/guides/images/legal-contract-analyzer-og.png">
+    <meta property="og:site_name" content="Vibe Coding Enthusiast">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2025-01-14">
+    <meta property="article:modified_time" content="2025-01-14">
+    <meta property="article:author" content="Vibe Coding Enthusiast">
+    <meta property="article:section" content="AI Build Guides">
+    <meta property="article:tag" content="Legal Tech">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://vibecodingenthusiast.com/guides/legal-contract-analyzer.html">
+    <meta name="twitter:title" content="Build an AI Contract Analyzer | AI Build Guides">
+    <meta name="twitter:description" content="Build an AI-powered contract analyzer using Next.js, Claude API, and Supabase. Extract clauses, identify risks, and generate summaries from legal documents.">
+    <meta name="twitter:image" content="https://vibecodingenthusiast.com/guides/images/legal-contract-analyzer-og.png">
+    <meta name="twitter:creator" content="@vibecodingenthusiast">
+
+    <!-- Schema.org JSON-LD for TechArticle -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Build an AI Contract Analyzer",
+        "description": "Build an AI-powered contract analyzer using Next.js, Claude API, and Supabase. Extract clauses, identify risks, and generate summaries from legal documents.",
+        "image": "https://vibecodingenthusiast.com/guides/images/legal-contract-analyzer-og.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "url": "https://vibecodingenthusiast.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Vibe Coding Enthusiast",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vibecodingenthusiast.com/favicon.png"
+            }
+        },
+        "datePublished": "2025-01-14",
+        "dateModified": "2025-01-14",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://vibecodingenthusiast.com/guides/legal-contract-analyzer.html"
+        },
+        "articleSection": "AI Build Guides",
+        "keywords": "contract analyzer, legal AI, document analysis, Claude API, PDF parsing",
+        "proficiencyLevel": "Intermediate",
+        "dependencies": "Next.js 14, Tailwind CSS, Claude API, Supabase, pdf-parse",
+        "timeRequired": "PT240M"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <!-- Guide-Specific Styles -->
+    <style>
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-green));
+            z-index: 1001;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, rgba(129, 140, 248, 0.08) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(129, 140, 248, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .breadcrumb a:hover {
+            color: var(--accent-primary);
+        }
+        .breadcrumb-separator {
+            color: var(--text-muted);
+        }
+        .breadcrumb-current {
+            color: var(--text-primary);
+        }
+
+        /* Guide Meta Badges */
+        .guide-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .badge-beginner {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .badge-intermediate {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .badge-advanced {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .badge-time {
+            background: rgba(129, 140, 248, 0.15);
+            color: var(--accent-primary);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+        }
+        .badge-time svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Article Title */
+        .article-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            max-width: 900px;
+        }
+        .article-header .lead {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 700px;
+            margin-bottom: 28px;
+        }
+
+        /* Share Buttons in Header */
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .share-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+        .share-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Article Layout - Main Content with Sidebar */
+        .article-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        @media (max-width: 1100px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+        @media (max-width: 1100px) {
+            .toc-sidebar {
+                position: static;
+                background: var(--bg-card);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-lg);
+                padding: 24px;
+            }
+        }
+        .toc-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+        .toc-list a {
+            display: block;
+            padding: 8px 12px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            transition: all 0.2s ease;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        .toc-list a:hover {
+            color: var(--text-primary);
+            background: rgba(129, 140, 248, 0.08);
+        }
+        .toc-list a.active {
+            color: var(--accent-primary);
+            border-left-color: var(--accent-primary);
+            background: rgba(129, 140, 248, 0.1);
+        }
+        .toc-list .toc-h3 {
+            padding-left: 24px;
+            font-size: 0.8125rem;
+        }
+
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+        }
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+        .article-content h2:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        .article-content h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        .article-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .article-content ul,
+        .article-content ol {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Tech Stack Table */
+        .tech-stack-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0 32px;
+            font-size: 0.9rem;
+        }
+        .tech-stack-table thead {
+            background: var(--bg-secondary);
+        }
+        .tech-stack-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+        }
+        .tech-stack-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        .tech-stack-table tbody tr:hover {
+            background: rgba(129, 140, 248, 0.04);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            position: relative;
+            margin: 24px 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: #1a1b26;
+            border: 1px solid var(--border-color);
+        }
+        .code-block pre {
+            margin: 0;
+            padding: 20px 24px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.7;
+            color: #c0caf5;
+        }
+        .code-block code {
+            font-family: inherit;
+        }
+        .code-copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-sm);
+            color: #a9b1d6;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .code-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        .code-copy-btn.copied {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.4);
+            color: #10b981;
+        }
+
+        /* Code Syntax Highlighting */
+        .code-block .keyword { color: #bb9af7; }
+        .code-block .string { color: #9ece6a; }
+        .code-block .comment { color: #565f89; font-style: italic; }
+        .code-block .function { color: #7aa2f7; }
+        .code-block .variable { color: #c0caf5; }
+        .code-block .property { color: #73daca; }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 20px 24px;
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+            border-left: 4px solid;
+        }
+        .callout-tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+        }
+        .callout-tip .callout-title { color: #10b981; }
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: #f59e0b;
+        }
+        .callout-warning .callout-title { color: #f59e0b; }
+        .callout-info {
+            background: rgba(129, 140, 248, 0.1);
+            border-color: var(--accent-primary);
+        }
+        .callout-info .callout-title { color: var(--accent-primary); }
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .callout p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Share Section at Bottom */
+        .share-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 32px 0;
+            margin-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+        .share-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Related Guides */
+        .related-guides {
+            margin-top: 64px;
+            padding-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+        .related-guides-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .related-guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .related-guide-card {
+            display: block;
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .related-guide-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .related-guide-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .related-guide-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            margin-top: 64px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(129, 140, 248, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+        .newsletter-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            margin-top: 0;
+        }
+        .newsletter-section > p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            padding: 14px 18px;
+            font-size: 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .newsletter-form input[type="email"]:focus {
+            border-color: var(--accent-primary);
+        }
+        .newsletter-form input[type="email"]::placeholder {
+            color: var(--text-muted);
+        }
+        .newsletter-form button {
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .newsletter-form button:hover {
+            background: #6366f1;
+            transform: translateY(-1px);
+        }
+        @media (max-width: 520px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .newsletter-form button {
+                width: 100%;
+            }
+        }
+
+        /* Image styling */
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Anchor links */
+        .article-content h2 .anchor-link,
+        .article-content h3 .anchor-link {
+            opacity: 0;
+            margin-left: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        .article-content h2:hover .anchor-link,
+        .article-content h3:hover .anchor-link {
+            opacity: 1;
+        }
+        .article-content h2 .anchor-link:hover,
+        .article-content h3 .anchor-link:hover {
+            color: var(--accent-primary);
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="readingProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container" role="navigation" aria-label="Main navigation">
+            <a href="/" class="logo" aria-label="Vibe Coding Enthusiast - Home">
+                <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/paths/">Paths</a></li>
+                <li><a href="/learn/">Learn</a></li>
+                <li><a href="/tools/">Tools</a></li>
+                <li><a href="/stacks/">Stacks</a></li>
+                <li><a href="/#about">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/guides/" class="btn btn-primary">Explore Guides</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <!-- Breadcrumb Navigation -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <a href="/guides/">Guides</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <span class="breadcrumb-current" aria-current="page">AI Contract Analyzer</span>
+                </nav>
+
+                <!-- Guide Meta Badges -->
+                <div class="guide-meta">
+                    <span class="badge badge-intermediate">Intermediate</span>
+                    <span class="badge badge-time">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        ~4 hours
+                    </span>
+                </div>
+
+                <!-- Title -->
+                <h1 class="gradient-text">Build an AI Contract Analyzer</h1>
+
+                <!-- Description -->
+                <p class="lead">Create a powerful document analysis tool that extracts key clauses, identifies risks, and generates comprehensive summaries from legal contracts using Claude's advanced reasoning capabilities.</p>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons" role="group" aria-label="Share this guide">
+                    <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content with TOC Sidebar -->
+        <div class="article-layout">
+            <!-- Table of Contents Sidebar -->
+            <aside class="toc-sidebar" aria-label="Table of contents">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list" id="tocList">
+                    <!-- TOC items are auto-generated by JavaScript -->
+                    <noscript>
+                        <li><a href="#overview">What We're Building</a></li>
+                        <li><a href="#prerequisites">Prerequisites</a></li>
+                        <li><a href="#tech-stack">Tech Stack</a></li>
+                        <li><a href="#ai-workflow">AI Agent Workflow</a></li>
+                        <li><a href="#build-steps">Build Steps</a></li>
+                        <li><a href="#common-issues">Common Issues</a></li>
+                        <li><a href="#next-steps">Next Steps</a></li>
+                    </noscript>
+                </ul>
+            </aside>
+
+            <!-- Article Content -->
+            <article class="article-content">
+                <!-- Section: What We're Building -->
+                <h2 id="overview">What We're Building</h2>
+                <p>In this guide, you'll build a sophisticated AI-powered contract analyzer that helps legal professionals and businesses quickly understand complex legal documents. The application will accept PDF uploads, extract text content, analyze it with Claude's powerful language understanding, and deliver actionable insights.</p>
+
+                <p>Your contract analyzer will include:</p>
+                <ul>
+                    <li><strong>Drag-and-drop file upload</strong> - Intuitive interface for uploading PDF contracts</li>
+                    <li><strong>PDF text extraction</strong> - Robust parsing that handles multi-page documents</li>
+                    <li><strong>Intelligent chunking</strong> - Smart document splitting for large contracts that exceed token limits</li>
+                    <li><strong>Clause extraction</strong> - Automatic identification of key clauses (indemnification, termination, liability, etc.)</li>
+                    <li><strong>Risk identification</strong> - AI-powered detection of potentially problematic terms</li>
+                    <li><strong>Summary reports</strong> - Clear, actionable summaries with highlighted concerns</li>
+                    <li><strong>Contract storage</strong> - Persistent storage of uploaded documents and analysis results</li>
+                </ul>
+
+                <div class="callout callout-info">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                        Why Claude for Legal Analysis?
+                    </div>
+                    <p>Claude excels at legal document analysis due to its strong reasoning capabilities, nuanced understanding of context, and ability to follow complex instructions. Claude 3 Opus is particularly well-suited for this task as it can handle lengthy documents and provide detailed, accurate analysis.</p>
+                </div>
+
+                <!-- Section: Prerequisites -->
+                <h2 id="prerequisites">Prerequisites</h2>
+                <p>Before starting this guide, make sure you have the following:</p>
+                <ul>
+                    <li><strong>Node.js 18+</strong> installed on your machine</li>
+                    <li><strong>Anthropic API key</strong> with access to Claude 3 Opus (get one at <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>)</li>
+                    <li><strong>Supabase account</strong> for database and file storage (free tier works)</li>
+                    <li><strong>Basic knowledge</strong> of React, Next.js, and TypeScript</li>
+                    <li><strong>Understanding of REST APIs</strong> and async/await patterns</li>
+                </ul>
+
+                <!-- Section: Tech Stack -->
+                <h2 id="tech-stack">Tech Stack Specification</h2>
+                <p>Here's the technology stack we'll use for this build:</p>
+                <table class="tech-stack-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Layer</th>
+                            <th scope="col">Technology</th>
+                            <th scope="col">Why This Choice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frontend</td>
+                            <td>Next.js 14, Tailwind</td>
+                            <td>Document UI with rapid styling for legal interfaces</td>
+                        </tr>
+                        <tr>
+                            <td>Backend</td>
+                            <td>Next.js API Routes</td>
+                            <td>Serverless document processing pipeline</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>Supabase</td>
+                            <td>Contract storage with full-text search capabilities</td>
+                        </tr>
+                        <tr>
+                            <td>AI</td>
+                            <td>Claude API</td>
+                            <td>Superior document analysis and legal reasoning</td>
+                        </tr>
+                        <tr>
+                            <td>PDF</td>
+                            <td>pdf-parse</td>
+                            <td>Reliable PDF text extraction for document processing</td>
+                        </tr>
+                        <tr>
+                            <td>Hosting</td>
+                            <td>Vercel</td>
+                            <td>Zero-config deployment with edge functions</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Section: AI Agent Workflow -->
+                <h2 id="ai-workflow">AI Agent Workflow</h2>
+                <p>Here's how to leverage AI tools throughout this build to maximize productivity:</p>
+
+                <h3 id="ai-scaffolding">Project Scaffolding with Claude Code</h3>
+                <p>Use Claude Code to generate the initial project structure, including the Next.js setup, Supabase configuration, and API route boilerplate. This saves hours of manual configuration.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment"># Example prompt for Claude Code</span>
+Create a Next.js 14 project with TypeScript for a contract analyzer:
+- App Router with /upload and /analysis/[id] routes
+- Supabase client configuration
+- API routes for /api/upload and /api/analyze
+- Environment variable setup for ANTHROPIC_API_KEY and SUPABASE_URL
+- Tailwind CSS with a dark theme
+- File upload component with drag-and-drop</code></pre>
+                </div>
+
+                <h3 id="ai-ui">UI Generation with v0.dev</h3>
+                <p>Generate the contract analysis dashboard UI with v0.dev. Request a professional legal-themed interface with document preview, risk indicators, and clause highlighting.</p>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Pro Tip
+                    </div>
+                    <p>When prompting v0.dev, specify "legal tech" or "document analysis" aesthetics. Ask for risk severity indicators (red/yellow/green), expandable clause sections, and a professional color scheme appropriate for legal professionals.</p>
+                </div>
+
+                <h3 id="ai-debugging">Development with Cursor</h3>
+                <p>Use Cursor's AI features for implementing the PDF parsing logic and Claude API integration. The inline code completion excels at TypeScript types for API responses and error handling patterns.</p>
+
+                <!-- Section: Build Steps -->
+                <h2 id="build-steps">Step-by-Step Build Guide</h2>
+
+                <h3 id="phase-1">Phase 1: PDF Upload and Text Extraction</h3>
+                <p>Start by creating a polished drag-and-drop upload interface with PDF text extraction. This component handles PDF validation, shows upload progress, and extracts text content for analysis.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// components/ContractUploader.tsx</span>
+<span class="keyword">import</span> { useCallback, useState } <span class="keyword">from</span> <span class="string">'react'</span>;
+<span class="keyword">import</span> { useDropzone } <span class="keyword">from</span> <span class="string">'react-dropzone'</span>;
+
+<span class="keyword">interface</span> ContractUploaderProps {
+  onUpload: (file: File) => Promise&lt;void&gt;;
+}
+
+<span class="keyword">export function</span> <span class="function">ContractUploader</span>({ onUpload }: ContractUploaderProps) {
+  <span class="keyword">const</span> [uploading, setUploading] = useState(<span class="keyword">false</span>);
+  <span class="keyword">const</span> [progress, setProgress] = useState(<span class="number">0</span>);
+
+  <span class="keyword">const</span> onDrop = useCallback(<span class="keyword">async</span> (acceptedFiles: File[]) => {
+    <span class="keyword">const</span> file = acceptedFiles[<span class="number">0</span>];
+    <span class="keyword">if</span> (!file || file.type !== <span class="string">'application/pdf'</span>) {
+      alert(<span class="string">'Please upload a PDF file'</span>);
+      <span class="keyword">return</span>;
+    }
+
+    setUploading(<span class="keyword">true</span>);
+    <span class="keyword">try</span> {
+      <span class="keyword">await</span> onUpload(file);
+    } <span class="keyword">finally</span> {
+      setUploading(<span class="keyword">false</span>);
+      setProgress(<span class="number">0</span>);
+    }
+  }, [onUpload]);
+
+  <span class="keyword">const</span> { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: { <span class="string">'application/pdf'</span>: [<span class="string">'.pdf'</span>] },
+    maxFiles: <span class="number">1</span>,
+    maxSize: <span class="number">10</span> * <span class="number">1024</span> * <span class="number">1024</span>, <span class="comment">// 10MB limit</span>
+  });
+
+  <span class="keyword">return</span> (
+    &lt;div
+      {...getRootProps()}
+      className={`
+        border-2 border-dashed rounded-xl p-12 text-center
+        transition-colors cursor-pointer
+        ${isDragActive ? <span class="string">'border-blue-500 bg-blue-500/10'</span> : <span class="string">'border-gray-600 hover:border-gray-500'</span>}
+      `}
+    &gt;
+      &lt;input {...getInputProps()} /&gt;
+      {uploading ? (
+        &lt;div className=<span class="string">"space-y-4"</span>&gt;
+          &lt;div className=<span class="string">"animate-spin w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full mx-auto"</span> /&gt;
+          &lt;p&gt;Uploading... {progress}%&lt;/p&gt;
+        &lt;/div&gt;
+      ) : (
+        &lt;div className=<span class="string">"space-y-4"</span>&gt;
+          &lt;div className=<span class="string">"text-4xl"</span>&gt;📄&lt;/div&gt;
+          &lt;p className=<span class="string">"text-lg"</span>&gt;
+            {isDragActive ? <span class="string">'Drop your contract here'</span> : <span class="string">'Drag & drop a PDF contract, or click to browse'</span>}
+          &lt;/p&gt;
+          &lt;p className=<span class="string">"text-sm text-gray-500"</span>&gt;Maximum file size: 10MB&lt;/p&gt;
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  );
+}</code></pre>
+                </div>
+
+                <h3 id="phase-2">Phase 2: Contract Parsing with Claude</h3>
+                <p>Use pdf-parse to extract text from uploaded PDFs, then send the content to Claude for intelligent parsing. This phase establishes the core document processing pipeline.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// lib/pdf-parser.ts</span>
+<span class="keyword">import</span> pdf <span class="keyword">from</span> <span class="string">'pdf-parse'</span>;
+
+<span class="keyword">export interface</span> ParsedContract {
+  text: <span class="keyword">string</span>;
+  pageCount: <span class="keyword">number</span>;
+  metadata: {
+    title?: <span class="keyword">string</span>;
+    author?: <span class="keyword">string</span>;
+    creationDate?: <span class="keyword">string</span>;
+  };
+}
+
+<span class="keyword">export async function</span> <span class="function">parseContractPDF</span>(buffer: Buffer): Promise&lt;ParsedContract&gt; {
+  <span class="keyword">const</span> data = <span class="keyword">await</span> pdf(buffer);
+
+  <span class="keyword">return</span> {
+    text: data.text,
+    pageCount: data.numpages,
+    metadata: {
+      title: data.info?.Title,
+      author: data.info?.Author,
+      creationDate: data.info?.CreationDate,
+    },
+  };
+}
+
+<span class="comment">// API Route: /api/upload/route.ts</span>
+<span class="keyword">import</span> { NextRequest, NextResponse } <span class="keyword">from</span> <span class="string">'next/server'</span>;
+<span class="keyword">import</span> { parseContractPDF } <span class="keyword">from</span> <span class="string">'@/lib/pdf-parser'</span>;
+<span class="keyword">import</span> { createClient } <span class="keyword">from</span> <span class="string">'@supabase/supabase-js'</span>;
+
+<span class="keyword">export async function</span> <span class="function">POST</span>(request: NextRequest) {
+  <span class="keyword">const</span> formData = <span class="keyword">await</span> request.formData();
+  <span class="keyword">const</span> file = formData.get(<span class="string">'file'</span>) <span class="keyword">as</span> File;
+
+  <span class="keyword">if</span> (!file) {
+    <span class="keyword">return</span> NextResponse.json({ error: <span class="string">'No file provided'</span> }, { status: <span class="number">400</span> });
+  }
+
+  <span class="keyword">const</span> buffer = Buffer.from(<span class="keyword">await</span> file.arrayBuffer());
+  <span class="keyword">const</span> parsed = <span class="keyword">await</span> parseContractPDF(buffer);
+
+  <span class="comment">// Store in Supabase</span>
+  <span class="keyword">const</span> supabase = createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_KEY!
+  );
+
+  <span class="comment">// Upload PDF to storage</span>
+  <span class="keyword">const</span> fileName = `contracts/${Date.now()}-${file.name}`;
+  <span class="keyword">await</span> supabase.storage.from(<span class="string">'contracts'</span>).upload(fileName, buffer);
+
+  <span class="comment">// Save metadata to database</span>
+  <span class="keyword">const</span> { data, error } = <span class="keyword">await</span> supabase
+    .from(<span class="string">'contracts'</span>)
+    .insert({
+      filename: file.name,
+      storage_path: fileName,
+      page_count: parsed.pageCount,
+      text_content: parsed.text,
+      status: <span class="string">'pending_analysis'</span>,
+    })
+    .select()
+    .single();
+
+  <span class="keyword">if</span> (error) {
+    <span class="keyword">return</span> NextResponse.json({ error: error.message }, { status: <span class="number">500</span> });
+  }
+
+  <span class="keyword">return</span> NextResponse.json({ contractId: data.id, pageCount: parsed.pageCount });
+}</code></pre>
+                </div>
+
+                <h3 id="phase-3">Phase 3: Key Clause Identification</h3>
+                <p>Large contracts can exceed Claude's context window. Implement smart chunking that preserves clause boundaries and enables accurate extraction of key contractual clauses.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// lib/chunker.ts</span>
+<span class="keyword">export interface</span> DocumentChunk {
+  index: <span class="keyword">number</span>;
+  content: <span class="keyword">string</span>;
+  startPage?: <span class="keyword">number</span>;
+  endPage?: <span class="keyword">number</span>;
+}
+
+<span class="keyword">const</span> MAX_CHUNK_SIZE = <span class="number">100000</span>; <span class="comment">// ~25k tokens, safe for Claude</span>
+<span class="keyword">const</span> OVERLAP_SIZE = <span class="number">500</span>; <span class="comment">// Overlap to maintain context</span>
+
+<span class="keyword">export function</span> <span class="function">chunkDocument</span>(text: <span class="keyword">string</span>): DocumentChunk[] {
+  <span class="comment">// If document fits in one chunk, return as-is</span>
+  <span class="keyword">if</span> (text.length <= MAX_CHUNK_SIZE) {
+    <span class="keyword">return</span> [{ index: <span class="number">0</span>, content: text }];
+  }
+
+  <span class="keyword">const</span> chunks: DocumentChunk[] = [];
+  <span class="keyword">let</span> currentPosition = <span class="number">0</span>;
+  <span class="keyword">let</span> chunkIndex = <span class="number">0</span>;
+
+  <span class="keyword">while</span> (currentPosition < text.length) {
+    <span class="keyword">let</span> endPosition = currentPosition + MAX_CHUNK_SIZE;
+
+    <span class="comment">// Try to break at paragraph or section boundary</span>
+    <span class="keyword">if</span> (endPosition < text.length) {
+      <span class="keyword">const</span> breakPoints = [
+        text.lastIndexOf(<span class="string">'\n\n'</span>, endPosition),  <span class="comment">// Paragraph break</span>
+        text.lastIndexOf(<span class="string">'.\n'</span>, endPosition),   <span class="comment">// Sentence + newline</span>
+        text.lastIndexOf(<span class="string">'. '</span>, endPosition),    <span class="comment">// Sentence break</span>
+      ];
+
+      <span class="keyword">const</span> bestBreak = breakPoints
+        .filter(bp => bp > currentPosition + MAX_CHUNK_SIZE * <span class="number">0.5</span>)
+        .sort((a, b) => b - a)[<span class="number">0</span>];
+
+      <span class="keyword">if</span> (bestBreak) {
+        endPosition = bestBreak + <span class="number">1</span>;
+      }
+    }
+
+    chunks.push({
+      index: chunkIndex,
+      content: text.slice(
+        Math.max(<span class="number">0</span>, currentPosition - (chunkIndex > <span class="number">0</span> ? OVERLAP_SIZE : <span class="number">0</span>)),
+        Math.min(text.length, endPosition)
+      ),
+    });
+
+    currentPosition = endPosition;
+    chunkIndex++;
+  }
+
+  <span class="keyword">return</span> chunks;
+}</code></pre>
+                </div>
+
+                <h3 id="phase-4">Phase 4: Risk Assessment Scoring</h3>
+                <p>The core of your analyzer: carefully crafted prompts that guide Claude to perform thorough risk assessment and score potential issues. This prompt structure ensures consistent, comprehensive results with actionable risk ratings.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// lib/contract-analyzer.ts</span>
+<span class="keyword">import</span> Anthropic <span class="keyword">from</span> <span class="string">'@anthropic-ai/sdk'</span>;
+<span class="keyword">import</span> { chunkDocument } <span class="keyword">from</span> <span class="string">'./chunker'</span>;
+
+<span class="keyword">const</span> anthropic = <span class="keyword">new</span> Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
+});
+
+<span class="keyword">export interface</span> ContractAnalysis {
+  summary: <span class="keyword">string</span>;
+  clauses: ExtractedClause[];
+  risks: IdentifiedRisk[];
+  recommendations: <span class="keyword">string</span>[];
+}
+
+<span class="keyword">export interface</span> ExtractedClause {
+  type: <span class="keyword">string</span>;
+  title: <span class="keyword">string</span>;
+  content: <span class="keyword">string</span>;
+  location: <span class="keyword">string</span>;
+}
+
+<span class="keyword">export interface</span> IdentifiedRisk {
+  severity: <span class="string">'high'</span> | <span class="string">'medium'</span> | <span class="string">'low'</span>;
+  title: <span class="keyword">string</span>;
+  description: <span class="keyword">string</span>;
+  clauseReference: <span class="keyword">string</span>;
+  recommendation: <span class="keyword">string</span>;
+}
+
+<span class="keyword">const</span> LEGAL_ANALYSIS_PROMPT = `You are an expert legal analyst specializing in contract review.
+Analyze the following contract text and provide a comprehensive analysis.
+
+Your analysis must include:
+
+1. **EXECUTIVE SUMMARY** (2-3 paragraphs)
+   - Contract type and parties involved
+   - Key terms and obligations
+   - Overall assessment
+
+2. **KEY CLAUSES** - Extract and categorize important clauses:
+   - Indemnification clauses
+   - Limitation of liability
+   - Termination provisions
+   - Confidentiality/NDA terms
+   - Intellectual property rights
+   - Payment terms
+   - Governing law and jurisdiction
+   - Force majeure
+   - Assignment restrictions
+   - Non-compete/non-solicitation
+
+3. **RISK ANALYSIS** - Identify potential issues with severity ratings:
+   - HIGH: Terms that could cause significant financial or legal exposure
+   - MEDIUM: Terms that are unfavorable but manageable
+   - LOW: Minor concerns or areas for negotiation
+
+4. **RECOMMENDATIONS** - Actionable suggestions for:
+   - Terms to negotiate or modify
+   - Missing protections to add
+   - Clarifications needed
+
+Respond in valid JSON format matching this structure:
+{
+  "summary": "Executive summary text...",
+  "clauses": [
+    {
+      "type": "indemnification",
+      "title": "Clause title",
+      "content": "Relevant clause text",
+      "location": "Section X.X"
+    }
+  ],
+  "risks": [
+    {
+      "severity": "high|medium|low",
+      "title": "Risk title",
+      "description": "Detailed description",
+      "clauseReference": "Section X.X",
+      "recommendation": "Suggested action"
+    }
+  ],
+  "recommendations": ["Recommendation 1", "Recommendation 2"]
+}
+
+CONTRACT TEXT:
+`;
+
+<span class="keyword">export async function</span> <span class="function">analyzeContract</span>(contractText: <span class="keyword">string</span>): Promise&lt;ContractAnalysis&gt; {
+  <span class="keyword">const</span> chunks = chunkDocument(contractText);
+
+  <span class="keyword">if</span> (chunks.length === <span class="number">1</span>) {
+    <span class="comment">// Single chunk - analyze directly</span>
+    <span class="keyword">return</span> analyzeSingleChunk(chunks[<span class="number">0</span>].content);
+  }
+
+  <span class="comment">// Multiple chunks - analyze each, then synthesize</span>
+  <span class="keyword">const</span> chunkAnalyses = <span class="keyword">await</span> Promise.all(
+    chunks.map(chunk => analyzeChunk(chunk.content, chunk.index, chunks.length))
+  );
+
+  <span class="keyword">return</span> synthesizeAnalyses(chunkAnalyses);
+}
+
+<span class="keyword">async function</span> <span class="function">analyzeSingleChunk</span>(text: <span class="keyword">string</span>): Promise&lt;ContractAnalysis&gt; {
+  <span class="keyword">const</span> response = <span class="keyword">await</span> anthropic.messages.create({
+    model: <span class="string">'claude-3-opus-20240229'</span>,
+    max_tokens: <span class="number">4096</span>,
+    messages: [{
+      role: <span class="string">'user'</span>,
+      content: LEGAL_ANALYSIS_PROMPT + text,
+    }],
+  });
+
+  <span class="keyword">const</span> content = response.content[<span class="number">0</span>];
+  <span class="keyword">if</span> (content.type !== <span class="string">'text'</span>) {
+    <span class="keyword">throw new</span> Error(<span class="string">'Unexpected response type'</span>);
+  }
+
+  <span class="comment">// Parse JSON from response</span>
+  <span class="keyword">const</span> jsonMatch = content.text.match(/\{[\s\S]*\}/);
+  <span class="keyword">if</span> (!jsonMatch) {
+    <span class="keyword">throw new</span> Error(<span class="string">'Failed to parse analysis response'</span>);
+  }
+
+  <span class="keyword">return</span> JSON.parse(jsonMatch[<span class="number">0</span>]);
+}</code></pre>
+                </div>
+
+                <h3 id="phase-5">Phase 5: Contract Comparison</h3>
+                <p>Enable side-by-side comparison of multiple contracts to identify differences, missing clauses, and variations in terms. This feature is invaluable for contract negotiations and due diligence.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// lib/contract-comparison.ts</span>
+<span class="keyword">import</span> Anthropic <span class="keyword">from</span> <span class="string">'@anthropic-ai/sdk'</span>;
+
+<span class="keyword">const</span> anthropic = <span class="keyword">new</span> Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
+});
+
+<span class="keyword">export interface</span> ContractDifference {
+  clauseType: <span class="keyword">string</span>;
+  contractA: <span class="keyword">string</span> | <span class="keyword">null</span>;
+  contractB: <span class="keyword">string</span> | <span class="keyword">null</span>;
+  significance: <span class="string">'critical'</span> | <span class="string">'important'</span> | <span class="string">'minor'</span>;
+  analysis: <span class="keyword">string</span>;
+}
+
+<span class="keyword">export interface</span> ComparisonResult {
+  summary: <span class="keyword">string</span>;
+  differences: ContractDifference[];
+  missingInA: <span class="keyword">string</span>[];
+  missingInB: <span class="keyword">string</span>[];
+  recommendation: <span class="keyword">string</span>;
+}
+
+<span class="keyword">const</span> COMPARISON_PROMPT = `You are a legal contract analyst. Compare these two contracts
+and identify all meaningful differences in terms, conditions, and protections.
+
+Focus on:
+1. Terms that differ between contracts
+2. Clauses present in one but missing in the other
+3. Variations in liability limits, indemnification, termination rights
+4. Payment terms and conditions differences
+
+Rate each difference as: critical, important, or minor.
+
+CONTRACT A:
+{contractA}
+
+CONTRACT B:
+{contractB}
+
+Respond in JSON format:
+{
+  "summary": "Brief overview of key differences",
+  "differences": [...],
+  "missingInA": ["clauses in B but not A"],
+  "missingInB": ["clauses in A but not B"],
+  "recommendation": "Which contract is more favorable and why"
+}`;
+
+<span class="keyword">export async function</span> <span class="function">compareContracts</span>(
+  contractA: <span class="keyword">string</span>,
+  contractB: <span class="keyword">string</span>
+): Promise&lt;ComparisonResult&gt; {
+  <span class="keyword">const</span> prompt = COMPARISON_PROMPT
+    .replace(<span class="string">'{contractA}'</span>, contractA)
+    .replace(<span class="string">'{contractB}'</span>, contractB);
+
+  <span class="keyword">const</span> response = <span class="keyword">await</span> anthropic.messages.create({
+    model: <span class="string">'claude-sonnet-4-20250514'</span>,
+    max_tokens: <span class="number">4096</span>,
+    messages: [{ role: <span class="string">'user'</span>, content: prompt }],
+  });
+
+  <span class="keyword">const</span> content = response.content[<span class="number">0</span>];
+  <span class="keyword">if</span> (content.type !== <span class="string">'text'</span>) {
+    <span class="keyword">throw new</span> Error(<span class="string">'Unexpected response type'</span>);
+  }
+
+  <span class="keyword">const</span> jsonMatch = content.text.match(/\{[\s\S]*\}/);
+  <span class="keyword">return</span> JSON.parse(jsonMatch![<span class="number">0</span>]);
+}</code></pre>
+                </div>
+
+                <h3 id="phase-6">Phase 6: Summary Report Generation</h3>
+                <p>Generate a professional, actionable summary report that presents the analysis in a clear, digestible format for stakeholders.</p>
+
+                <div class="code-block">
+                    <button class="code-copy-btn" aria-label="Copy code">Copy</button>
+                    <pre><code><span class="comment">// components/AnalysisReport.tsx</span>
+<span class="keyword">import</span> { ContractAnalysis, IdentifiedRisk } <span class="keyword">from</span> <span class="string">'@/lib/contract-analyzer'</span>;
+
+<span class="keyword">interface</span> AnalysisReportProps {
+  analysis: ContractAnalysis;
+  contractName: <span class="keyword">string</span>;
+}
+
+<span class="keyword">export function</span> <span class="function">AnalysisReport</span>({ analysis, contractName }: AnalysisReportProps) {
+  <span class="keyword">const</span> riskCounts = {
+    high: analysis.risks.filter(r => r.severity === <span class="string">'high'</span>).length,
+    medium: analysis.risks.filter(r => r.severity === <span class="string">'medium'</span>).length,
+    low: analysis.risks.filter(r => r.severity === <span class="string">'low'</span>).length,
+  };
+
+  <span class="keyword">return</span> (
+    &lt;div className=<span class="string">"space-y-8"</span>&gt;
+      {<span class="comment">/* Header */</span>}
+      &lt;div className=<span class="string">"border-b border-gray-700 pb-6"</span>&gt;
+        &lt;h1 className=<span class="string">"text-2xl font-bold"</span>&gt;Contract Analysis Report&lt;/h1&gt;
+        &lt;p className=<span class="string">"text-gray-400 mt-2"</span>&gt;{contractName}&lt;/p&gt;
+        &lt;p className=<span class="string">"text-sm text-gray-500"</span>&gt;Generated on {<span class="keyword">new</span> Date().toLocaleDateString()}&lt;/p&gt;
+      &lt;/div&gt;
+
+      {<span class="comment">/* Risk Overview */</span>}
+      &lt;div className=<span class="string">"grid grid-cols-3 gap-4"</span>&gt;
+        &lt;RiskBadge count={riskCounts.high} severity=<span class="string">"high"</span> /&gt;
+        &lt;RiskBadge count={riskCounts.medium} severity=<span class="string">"medium"</span> /&gt;
+        &lt;RiskBadge count={riskCounts.low} severity=<span class="string">"low"</span> /&gt;
+      &lt;/div&gt;
+
+      {<span class="comment">/* Executive Summary */</span>}
+      &lt;section&gt;
+        &lt;h2 className=<span class="string">"text-xl font-semibold mb-4"</span>&gt;Executive Summary&lt;/h2&gt;
+        &lt;div className=<span class="string">"bg-gray-800 rounded-lg p-6"</span>&gt;
+          &lt;p className=<span class="string">"text-gray-300 whitespace-pre-wrap"</span>&gt;{analysis.summary}&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      {<span class="comment">/* Identified Risks */</span>}
+      &lt;section&gt;
+        &lt;h2 className=<span class="string">"text-xl font-semibold mb-4"</span>&gt;Identified Risks&lt;/h2&gt;
+        &lt;div className=<span class="string">"space-y-4"</span>&gt;
+          {analysis.risks.map((risk, index) =&gt; (
+            &lt;RiskCard key={index} risk={risk} /&gt;
+          ))}
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      {<span class="comment">/* Key Clauses */</span>}
+      &lt;section&gt;
+        &lt;h2 className=<span class="string">"text-xl font-semibold mb-4"</span>&gt;Key Clauses&lt;/h2&gt;
+        &lt;div className=<span class="string">"space-y-4"</span>&gt;
+          {analysis.clauses.map((clause, index) =&gt; (
+            &lt;ClauseCard key={index} clause={clause} /&gt;
+          ))}
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      {<span class="comment">/* Recommendations */</span>}
+      &lt;section&gt;
+        &lt;h2 className=<span class="string">"text-xl font-semibold mb-4"</span>&gt;Recommendations&lt;/h2&gt;
+        &lt;ul className=<span class="string">"space-y-2"</span>&gt;
+          {analysis.recommendations.map((rec, index) =&gt; (
+            &lt;li key={index} className=<span class="string">"flex items-start gap-3"</span>&gt;
+              &lt;span className=<span class="string">"text-blue-400"</span>&gt;→&lt;/span&gt;
+              &lt;span className=<span class="string">"text-gray-300"</span>&gt;{rec}&lt;/span&gt;
+            &lt;/li&gt;
+          ))}
+        &lt;/ul&gt;
+      &lt;/section&gt;
+    &lt;/div&gt;
+  );
+}
+
+<span class="keyword">function</span> <span class="function">RiskBadge</span>({ count, severity }: { count: <span class="keyword">number</span>; severity: <span class="keyword">string</span> }) {
+  <span class="keyword">const</span> colors = {
+    high: <span class="string">'bg-red-500/20 text-red-400 border-red-500/30'</span>,
+    medium: <span class="string">'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'</span>,
+    low: <span class="string">'bg-green-500/20 text-green-400 border-green-500/30'</span>,
+  };
+
+  <span class="keyword">return</span> (
+    &lt;div className={`rounded-lg border p-4 text-center ${colors[severity]}`}&gt;
+      &lt;div className=<span class="string">"text-3xl font-bold"</span>&gt;{count}&lt;/div&gt;
+      &lt;div className=<span class="string">"text-sm capitalize"</span>&gt;{severity} Risk&lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+<span class="keyword">function</span> <span class="function">RiskCard</span>({ risk }: { risk: IdentifiedRisk }) {
+  <span class="keyword">const</span> severityColors = {
+    high: <span class="string">'border-l-red-500'</span>,
+    medium: <span class="string">'border-l-yellow-500'</span>,
+    low: <span class="string">'border-l-green-500'</span>,
+  };
+
+  <span class="keyword">return</span> (
+    &lt;div className={`bg-gray-800 rounded-lg p-4 border-l-4 ${severityColors[risk.severity]}`}&gt;
+      &lt;div className=<span class="string">"flex items-center justify-between mb-2"</span>&gt;
+        &lt;h3 className=<span class="string">"font-semibold"</span>&gt;{risk.title}&lt;/h3&gt;
+        &lt;span className=<span class="string">"text-xs uppercase px-2 py-1 rounded bg-gray-700"</span>&gt;
+          {risk.severity}
+        &lt;/span&gt;
+      &lt;/div&gt;
+      &lt;p className=<span class="string">"text-gray-400 text-sm mb-3"</span>&gt;{risk.description}&lt;/p&gt;
+      &lt;div className=<span class="string">"text-xs text-gray-500 mb-2"</span>&gt;{risk.clauseReference}&lt;/div&gt;
+      &lt;div className=<span class="string">"bg-blue-500/10 text-blue-400 text-sm p-2 rounded"</span>&gt;
+        <span class="string">💡</span> {risk.recommendation}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                </div>
+
+                <!-- Section: Common Issues -->
+                <h2 id="common-issues">Common Issues & Solutions</h2>
+                <p>Here are some common issues you might encounter and how to solve them:</p>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        PDF Text Extraction Issues
+                    </div>
+                    <p>Some PDFs (especially scanned documents) may not extract text properly. Consider adding OCR support with Tesseract.js for image-based PDFs, or validate that extracted text has sufficient content before analysis.</p>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Token Limit Exceeded
+                    </div>
+                    <p>If you encounter "context length exceeded" errors, adjust the MAX_CHUNK_SIZE in the chunker. Start with smaller chunks (80,000 characters) and increase if the analysis seems fragmented.</p>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        JSON Parsing Failures
+                    </div>
+                    <p>Claude occasionally outputs malformed JSON. Implement retry logic with a more explicit prompt, or use a JSON repair library like jsonrepair to fix common issues.</p>
+                </div>
+
+                <p>Additional troubleshooting tips:</p>
+                <ul>
+                    <li><strong>Rate limiting:</strong> Implement exponential backoff for API calls to handle rate limits gracefully</li>
+                    <li><strong>Timeout errors:</strong> Large documents may timeout on Vercel's free tier. Consider upgrading or using background jobs</li>
+                    <li><strong>Memory issues:</strong> pdf-parse can be memory-intensive. Use streaming for very large files</li>
+                </ul>
+
+                <!-- Section: Next Steps -->
+                <h2 id="next-steps">Next Steps</h2>
+                <p>Congratulations on building your AI contract analyzer! Here are some enhancements to consider:</p>
+
+                <ul>
+                    <li><strong>Add user authentication</strong> - Implement Supabase Auth for secure multi-user access</li>
+                    <li><strong>Contract comparison</strong> - Compare two contracts to identify differences</li>
+                    <li><strong>Custom clause templates</strong> - Let users define their own clause detection patterns</li>
+                    <li><strong>Export functionality</strong> - Generate PDF or Word reports of the analysis</li>
+                    <li><strong>Batch processing</strong> - Analyze multiple contracts simultaneously</li>
+                    <li><strong>Historical analysis</strong> - Track changes in contract terms over time</li>
+                    <li><strong>Integration with DocuSign</strong> - Connect to e-signature workflows</li>
+                </ul>
+
+                <div class="callout callout-info">
+                    <div class="callout-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                        Legal Disclaimer
+                    </div>
+                    <p>This tool is designed to assist with contract review, not replace professional legal advice. Always have important contracts reviewed by a qualified attorney before signing.</p>
+                </div>
+
+                <!-- Share Section -->
+                <div class="share-section">
+                    <span class="share-label">Share this guide:</span>
+                    <div class="share-buttons" role="group" aria-label="Share this guide">
+                        <button class="share-btn" data-share="twitter" title="Share on Twitter" aria-label="Share on Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="copy" title="Copy link" aria-label="Copy link to clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                        </button>
+                        <button class="share-btn" data-share="email" title="Share via email" aria-label="Share via email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Related Guides -->
+                <div class="related-guides">
+                    <h3 class="related-guides-title">Related Guides</h3>
+                    <div class="related-guides-grid">
+                        <a href="/guides/fintech-ai-dashboard.html" class="related-guide-card">
+                            <h4>Build an AI Financial Dashboard</h4>
+                            <p>Create intelligent financial analytics with real-time insights</p>
+                        </a>
+                        <a href="/guides/healthtech-patient-portal.html" class="related-guide-card">
+                            <h4>Build an AI Patient Portal</h4>
+                            <p>HIPAA-compliant healthcare platform with AI assistance</p>
+                        </a>
+                        <a href="/guides/ecommerce-ai-recommender.html" class="related-guide-card">
+                            <h4>Build an AI Product Recommender</h4>
+                            <p>Personalized shopping experiences powered by AI</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Follow Section -->
+                <div class="follow-section">
+                    <h3>Follow the Vibe Coding Enthusiast</h3>
+                    <p>Get more AI build guides, tool tips, and project ideas from JD.</p>
+                    <div class="social-follow-buttons">
+                        <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" class="social-follow-btn linkedin">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            Follow on LinkedIn
+                        </a>
+                        <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" class="social-follow-btn twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            Follow on X
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+        <footer class="footer">
+    <div class="container">
+        <div class="footer-simple">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                    <span>Vibe Coding Enthusiast</span>
+                </a>
+                <p>Free guides for building with AI</p>
+            </div>
+
+            <nav class="footer-nav">
+                <a href="/guides/">Guides</a>
+                <span class="footer-dot">·</span>
+                <a href="/paths/">Paths</a>
+                <span class="footer-dot">·</span>
+                <a href="/learn/">Learn</a>
+                <span class="footer-dot">·</span>
+                <a href="/tools/">Tools</a>
+                <span class="footer-dot">·</span>
+                <a href="/stacks/">Stacks</a>
+                <span class="footer-dot">·</span>
+                <a href="/#about">About</a>
+            </nav>
+
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" aria-label="Follow on LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" aria-label="Follow on X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Vibe Coding Enthusiast</p>
+            <div class="footer-legal">
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="/script.js"></script>
+
+    <!-- Guide-Specific JavaScript -->
+    <script>
+        // Reading Progress Bar
+        (function() {
+            const progressBar = document.getElementById('readingProgress');
+            const article = document.querySelector('.article-content');
+
+            if (progressBar && article) {
+                window.addEventListener('scroll', function() {
+                    const articleTop = article.offsetTop;
+                    const articleHeight = article.offsetHeight;
+                    const windowHeight = window.innerHeight;
+                    const scrollTop = window.scrollY;
+
+                    const progress = Math.min(100, Math.max(0,
+                        ((scrollTop - articleTop + windowHeight * 0.3) / articleHeight) * 100
+                    ));
+
+                    progressBar.style.width = progress + '%';
+                    progressBar.setAttribute('aria-valuenow', Math.round(progress));
+                });
+            }
+        })();
+
+        // Generate Table of Contents
+        (function() {
+            const article = document.querySelector('.article-content');
+            const tocList = document.getElementById('tocList');
+
+            if (article && tocList) {
+                const headings = article.querySelectorAll('h2, h3');
+                let tocHTML = '';
+
+                headings.forEach(function(heading) {
+                    const id = heading.getAttribute('id');
+                    const text = heading.textContent.replace(/#/g, '').trim();
+                    const level = heading.tagName.toLowerCase();
+                    const className = level === 'h3' ? 'toc-h3' : '';
+
+                    if (id) {
+                        tocHTML += '<li><a href="#' + id + '" class="' + className + '">' + text + '</a></li>';
+
+                        // Add anchor link to heading
+                        const anchor = document.createElement('a');
+                        anchor.href = '#' + id;
+                        anchor.className = 'anchor-link';
+                        anchor.setAttribute('aria-label', 'Link to ' + text);
+                        anchor.textContent = '#';
+                        heading.appendChild(anchor);
+                    }
+                });
+
+                tocList.innerHTML = tocHTML;
+
+                // Highlight active TOC item on scroll
+                const tocLinks = tocList.querySelectorAll('a');
+
+                function updateActiveTOC() {
+                    const scrollPos = window.scrollY + 120;
+
+                    headings.forEach(function(heading, index) {
+                        const id = heading.getAttribute('id');
+                        const headingTop = heading.offsetTop;
+                        const nextHeading = headings[index + 1];
+                        const nextTop = nextHeading ? nextHeading.offsetTop : document.body.scrollHeight;
+
+                        if (scrollPos >= headingTop && scrollPos < nextTop) {
+                            tocLinks.forEach(function(link) {
+                                link.classList.remove('active');
+                                if (link.getAttribute('href') === '#' + id) {
+                                    link.classList.add('active');
+                                }
+                            });
+                        }
+                    });
+                }
+
+                window.addEventListener('scroll', updateActiveTOC);
+                updateActiveTOC();
+            }
+        })();
+
+        // Copy Code Button
+        (function() {
+            const copyButtons = document.querySelectorAll('.code-copy-btn');
+
+            copyButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const codeBlock = this.closest('.code-block');
+                    const code = codeBlock.querySelector('code');
+                    const text = code.textContent;
+
+                    navigator.clipboard.writeText(text).then(function() {
+                        button.textContent = 'Copied!';
+                        button.classList.add('copied');
+
+                        setTimeout(function() {
+                            button.textContent = 'Copy';
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(function(err) {
+                        console.error('Failed to copy:', err);
+                    });
+                });
+            });
+        })();
+
+        // Share Buttons
+        (function() {
+            const shareButtons = document.querySelectorAll('.share-btn');
+            const pageTitle = document.title;
+            const pageUrl = window.location.href;
+
+            shareButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const shareType = this.getAttribute('data-share');
+                    let shareUrl = '';
+
+                    switch(shareType) {
+                        case 'twitter':
+                            shareUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(pageTitle) + '&url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'linkedin':
+                            shareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(pageUrl);
+                            window.open(shareUrl, '_blank', 'width=550,height=420');
+                            break;
+                        case 'copy':
+                            navigator.clipboard.writeText(pageUrl).then(function() {
+                                // Show feedback
+                                const originalTitle = button.getAttribute('title');
+                                button.setAttribute('title', 'Link copied!');
+                                setTimeout(function() {
+                                    button.setAttribute('title', originalTitle);
+                                }, 2000);
+                            });
+                            break;
+                        case 'email':
+                            shareUrl = 'mailto:?subject=' + encodeURIComponent(pageTitle) + '&body=' + encodeURIComponent('Check out this guide: ' + pageUrl);
+                            window.location.href = shareUrl;
+                            break;
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
