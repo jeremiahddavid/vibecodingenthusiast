@@ -232,7 +232,7 @@
             gap: 60px;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 60px 24px;
+            padding: clamp(32px, 5vw, 60px) clamp(16px, 4vw, 24px);
         }
         @media (max-width: 1100px) {
             .article-layout {
@@ -629,7 +629,7 @@
                 <li><a href="/#about">About</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="/#contact" class="btn btn-primary">Start Project</a>
+                <a href="/guides/" class="btn btn-primary">Explore Guides</a>
             </div>
             <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
                 <span></span><span></span><span></span>
@@ -969,12 +969,12 @@
                 </div>
 
                 <div class="footer-links">
-                    <h4>Company</h4>
+                    <h4>More</h4>
                     <ul>
                         <li><a href="/#about">About</a></li>
-                        <li><a href="/#services">Services</a></li>
-                        <li><a href="/#pricing">Pricing</a></li>
-                        <li><a href="/#contact">Contact</a></li>
+                        <li><a href="/paths/">Learning Paths</a></li>
+                        <li><a href="/tools/">AI Tools</a></li>
+                        <li><a href="/stacks/">Tech Stacks</a></li>
                     </ul>
                 </div>
             </div>

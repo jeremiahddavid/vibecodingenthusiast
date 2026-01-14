@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>Industry Solutions - AI-Powered Development | Vibe Coding Enthusiast</title>
+    <meta name="title" content="Industry Solutions - AI-Powered Development | Vibe Coding Enthusiast">
+    <meta name="description" content="Explore AI-powered development solutions for your industry. From FinTech and HealthTech to E-commerce and EdTech, find guides and resources tailored to your sector.">
+    <meta name="keywords" content="AI development, industry solutions, FinTech development, HealthTech, E-commerce AI, SaaS development, EdTech solutions">
+    <meta name="author" content="Vibe Coding Enthusiast">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/industries/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/industries/">
+    <meta property="og:title" content="Industry Solutions - AI-Powered Development | Vibe Coding Enthusiast">
+    <meta property="og:description" content="Explore AI-powered development solutions for your industry. Find guides and resources tailored to your sector.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/og-image.svg">
+    <meta property="og:site_name" content="Vibe Coding Enthusiast">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vibecodingenthusiast.com/industries/">
+    <meta property="twitter:title" content="Industry Solutions - AI-Powered Development | Vibe Coding Enthusiast">
+    <meta property="twitter:description" content="Explore AI-powered development solutions for your industry.">
+    <meta property="twitter:image" content="https://vibecodingenthusiast.com/og-image.svg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Industry Solutions",
+        "description": "Explore AI-powered development solutions for your industry.",
+        "url": "https://vibecodingenthusiast.com/industries/",
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "FinTech Solutions", "url": "https://vibecodingenthusiast.com/industries/fintech.html"},
+                {"@type": "ListItem", "position": 2, "name": "HealthTech Solutions", "url": "https://vibecodingenthusiast.com/industries/healthtech.html"},
+                {"@type": "ListItem", "position": 3, "name": "E-commerce Solutions", "url": "https://vibecodingenthusiast.com/industries/ecommerce.html"},
+                {"@type": "ListItem", "position": 4, "name": "SaaS Solutions", "url": "https://vibecodingenthusiast.com/industries/saas.html"}
+            ]
+        }
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <style>
+        /* Page Header */
+        .page-header {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, transparent 50%);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .page-header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Industry Grid */
+        .industries-section {
+            padding: 80px 0;
+        }
+
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .industry-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .industry-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .industry-card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .industry-card-content {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .industry-card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(129, 140, 248, 0.1);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+
+        .industry-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .industry-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .industry-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 16px;
+        }
+
+        .industry-card-link svg {
+            transition: transform 0.2s ease;
+        }
+
+        .industry-card:hover .industry-card-link svg {
+            transform: translateX(4px);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, transparent 50%);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .page-header p {
+                font-size: 1rem;
+            }
+            .industry-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/paths/">Paths</a></li>
+                <li><a href="/learn/">Learn</a></li>
+                <li><a href="/tools/">Tools</a></li>
+                <li><a href="/stacks/">Stacks</a></li>
+                <li><a href="/#about">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/guides/" class="btn btn-primary">Explore Guides</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Industry <span class="gradient-text">Solutions</span></h1>
+                <p>Explore AI-powered development resources tailored to your industry. Each page includes challenges, solutions, and links to step-by-step build guides.</p>
+            </div>
+        </section>
+
+        <!-- Industries Grid -->
+        <section class="industries-section">
+            <div class="container">
+                <div class="industry-grid">
+                    <!-- FinTech -->
+                    <a href="/industries/fintech.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80" alt="FinTech Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">💳 Finance</span>
+                            <h3>FinTech Solutions</h3>
+                            <p>Payment processing, digital banking, trading platforms, and AI-powered fraud detection solutions.</p>
+                            <span class="industry-card-link">
+                                Explore FinTech
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- HealthTech -->
+                    <a href="/industries/healthtech.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&q=80" alt="HealthTech Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">🏥 Healthcare</span>
+                            <h3>HealthTech Solutions</h3>
+                            <p>HIPAA-compliant telemedicine, patient portals, EHR systems, and AI-powered diagnostics.</p>
+                            <span class="industry-card-link">
+                                Explore HealthTech
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- E-commerce -->
+                    <a href="/industries/ecommerce.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="E-commerce Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">🛒 Retail</span>
+                            <h3>E-commerce Solutions</h3>
+                            <p>Online stores, B2B marketplaces, AI product recommendations, and inventory management.</p>
+                            <span class="industry-card-link">
+                                Explore E-commerce
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- SaaS -->
+                    <a href="/industries/saas.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="SaaS Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">☁️ Software</span>
+                            <h3>SaaS Development</h3>
+                            <p>Multi-tenant platforms, subscription billing, cloud-native apps, and enterprise scaling.</p>
+                            <span class="industry-card-link">
+                                Explore SaaS
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- EdTech -->
+                    <a href="/industries/edtech.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80" alt="EdTech Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">📚 Education</span>
+                            <h3>EdTech Solutions</h3>
+                            <p>Learning management systems, AI tutors, virtual classrooms, and course platforms.</p>
+                            <span class="industry-card-link">
+                                Explore EdTech
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Legal -->
+                    <a href="/industries/legal.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80" alt="Legal Tech Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">⚖️ Legal</span>
+                            <h3>Legal Tech Solutions</h3>
+                            <p>Contract analysis, document automation, case management, and compliance tools.</p>
+                            <span class="industry-card-link">
+                                Explore Legal Tech
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Real Estate -->
+                    <a href="/industries/realestate.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80" alt="PropTech Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">🏠 Real Estate</span>
+                            <h3>PropTech Solutions</h3>
+                            <p>Property management, real estate CRMs, AI valuations, and virtual tour platforms.</p>
+                            <span class="industry-card-link">
+                                Explore PropTech
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Logistics -->
+                    <a href="/industries/logistics.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80" alt="Logistics Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">🚚 Logistics</span>
+                            <h3>Logistics Solutions</h3>
+                            <p>Route optimization, fleet management, warehouse automation, and supply chain AI.</p>
+                            <span class="industry-card-link">
+                                Explore Logistics
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Hospitality -->
+                    <a href="/industries/hospitality.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="Hospitality Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">🏨 Hospitality</span>
+                            <h3>Hospitality Solutions</h3>
+                            <p>Hotel booking systems, restaurant management, guest experience, and AI concierge.</p>
+                            <span class="industry-card-link">
+                                Explore Hospitality
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Non-Profit -->
+                    <a href="/industries/nonprofit.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80" alt="Non-Profit Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">💝 Non-Profit</span>
+                            <h3>Non-Profit Solutions</h3>
+                            <p>Donor management, fundraising platforms, volunteer coordination, and impact tracking.</p>
+                            <span class="industry-card-link">
+                                Explore Non-Profit
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Construction -->
+                    <a href="/industries/construction.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Construction Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">🏗️ Construction</span>
+                            <h3>Construction Tech</h3>
+                            <p>Project estimation, site management, BIM integration, and workforce scheduling.</p>
+                            <span class="industry-card-link">
+                                Explore Construction
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Beauty -->
+                    <a href="/industries/beauty.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80" alt="Beauty Tech Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">💄 Beauty</span>
+                            <h3>Beauty Tech Solutions</h3>
+                            <p>Booking systems, virtual try-ons, client management, and AI beauty consultants.</p>
+                            <span class="industry-card-link">
+                                Explore Beauty Tech
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Fitness -->
+                    <a href="/industries/fitness.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="Fitness Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">💪 Fitness</span>
+                            <h3>Fitness Solutions</h3>
+                            <p>Gym management, workout generators, member portals, and AI personal training.</p>
+                            <span class="industry-card-link">
+                                Explore Fitness
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Entertainment -->
+                    <a href="/industries/entertainment.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&q=80" alt="Entertainment Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">🎬 Entertainment</span>
+                            <h3>Entertainment Tech</h3>
+                            <p>Content curation, streaming platforms, ticket systems, and AI recommendations.</p>
+                            <span class="industry-card-link">
+                                Explore Entertainment
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Travel -->
+                    <a href="/industries/travel.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=80" alt="Travel Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">✈️ Travel</span>
+                            <h3>Travel Tech Solutions</h3>
+                            <p>Trip planners, booking engines, AI itineraries, and travel management platforms.</p>
+                            <span class="industry-card-link">
+                                Explore Travel Tech
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Professional Services -->
+                    <a href="/industries/professional.html" class="industry-card">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="Professional Services Solutions" class="industry-card-image">
+                        <div class="industry-card-content">
+                            <span class="industry-card-badge">👔 Professional</span>
+                            <h3>Professional Services</h3>
+                            <p>Proposal generators, client portals, project management, and billing automation.</p>
+                            <span class="industry-card-link">
+                                Explore Solutions
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to <span class="gradient-text">Start Building</span>?</h2>
+                <p>Each industry page includes a link to a step-by-step guide. Browse our complete collection of AI-powered development tutorials.</p>
+                <a href="/guides/" class="btn btn-primary btn-lg">Browse All Guides</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-simple">
+                <div class="footer-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                        <span>Vibe Coding Enthusiast</span>
+                    </a>
+                    <p>Free guides for building with AI</p>
+                </div>
+
+                <nav class="footer-nav">
+                    <a href="/guides/">Guides</a>
+                    <span class="footer-dot">·</span>
+                    <a href="/paths/">Paths</a>
+                    <span class="footer-dot">·</span>
+                    <a href="/learn/">Learn</a>
+                    <span class="footer-dot">·</span>
+                    <a href="/tools/">Tools</a>
+                    <span class="footer-dot">·</span>
+                    <a href="/stacks/">Stacks</a>
+                    <span class="footer-dot">·</span>
+                    <a href="/#about">About</a>
+                </nav>
+
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" aria-label="Follow on LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" aria-label="Follow on X">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vibe Coding Enthusiast</p>
+                <div class="footer-legal">
+                    <a href="/privacy.html">Privacy</a>
+                    <a href="/terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
