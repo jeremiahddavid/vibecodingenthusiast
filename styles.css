@@ -1803,6 +1803,10 @@ ul, ol {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .hero-content {
+        max-width: 100%;
+    }
+
     .process-timeline {
         grid-template-columns: 1fr;
     }
