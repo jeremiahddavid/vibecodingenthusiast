@@ -3046,54 +3046,6 @@ ul, ol {
 }
 
 /* ============================================
-   RELATED GUIDES SECTION
-   ============================================ */
-.related-guides {
-  margin-top: 4rem;
-  padding-top: 3rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.related-guides-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 24px;
-}
-
-.related-guides-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-}
-
-.related-guide-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  transition: all var(--transition-base);
-}
-
-.related-guide-card:hover {
-  border-color: var(--primary);
-  transform: translateY(-2px);
-}
-
-.related-guide-card h4 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-}
-
-.related-guide-card p {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-/* ============================================
    NEWSLETTER SIGNUP
    ============================================ */
 .newsletter-section {
@@ -4119,6 +4071,9 @@ ul, ol {
     }
     .article-header .lead {
         font-size: 1rem;
+    }
+    .related-guides-grid {
+        grid-template-columns: 1fr;
     }
 }
 
