@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
     initCounterAnimations();
     initFAQAccordion();
-    initConsultationBooking();
+    // initConsultationBooking(); // Disabled - SimplyBook not configured
     initBackToTop();
     initArticleFeatures();
 });

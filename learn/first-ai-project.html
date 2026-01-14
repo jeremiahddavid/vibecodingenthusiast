@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your First AI Project | Learn | Vibe Coding Enthusiast</title>
+    <meta name="description" content="Build your first project with AI coding tools. A step-by-step guide to creating a real application using vibe coding techniques.">
+    <meta name="keywords" content="first AI project, vibe coding tutorial, AI coding beginner, build with AI, Claude Code tutorial">
+    <link rel="canonical" href="https://vibecodingenthusiast.com/learn/first-ai-project.html">
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://vibecodingenthusiast.com/learn/first-ai-project.html">
+    <meta property="og:title" content="Your First AI Project | Vibe Coding Enthusiast">
+    <meta property="og:description" content="Build your first project with AI coding tools. A step-by-step guide.">
+    <meta property="og:image" content="https://vibecodingenthusiast.com/og-image.svg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vibecodingenthusiast.com/learn/first-ai-project.html">
+    <meta property="twitter:title" content="Your First AI Project | Vibe Coding Enthusiast">
+    <meta property="twitter:description" content="Build your first project with AI coding tools.">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Your First AI Project",
+        "description": "Build your first project with AI coding tools. A step-by-step guide to creating a real application.",
+        "author": { "@type": "Organization", "name": "Vibe Coding Enthusiast" },
+        "publisher": { "@type": "Organization", "name": "Vibe Coding Enthusiast", "logo": { "@type": "ImageObject", "url": "https://vibecodingenthusiast.com/favicon.png" } },
+        "datePublished": "2025-01-14",
+        "dateModified": "2025-01-14"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .reading-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%); z-index: 1001; transition: width 0.1s ease; }
+        .article-header { padding: 140px 0 60px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, transparent 50%); }
+        .article-header-content { max-width: 800px; }
+        .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; color: var(--text-muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--text-secondary); text-decoration: none; transition: color var(--transition-fast); }
+        .breadcrumb a:hover { color: var(--primary); }
+        .breadcrumb-separator { color: var(--text-muted); }
+        .article-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
+        .article-header h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+        .article-excerpt { font-size: 1.25rem; color: var(--text-secondary); line-height: 1.7; }
+        .article-layout { display: grid; grid-template-columns: 1fr; gap: 48px; max-width: 1280px; margin: 0 auto; padding: clamp(32px, 5vw, 60px) clamp(16px, 4vw, 24px); }
+        @media (min-width: 1024px) { .article-layout { grid-template-columns: 1fr 280px; } }
+        .article-content { max-width: 720px; font-size: 1.125rem; line-height: 1.8; color: var(--text-secondary); }
+        .article-content h2 { font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-top: 3rem; margin-bottom: 1.25rem; scroll-margin-top: 100px; }
+        .article-content h3 { font-size: 1.375rem; font-weight: 600; color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem; scroll-margin-top: 100px; }
+        .article-content p { margin-bottom: 1.25rem; }
+        .article-content ul, .article-content ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .article-content li { margin-bottom: 0.75rem; }
+        .article-content strong { color: var(--text-primary); font-weight: 600; }
+        .article-content code { background: var(--bg-card); padding: 2px 8px; border-radius: var(--radius-sm); font-family: 'JetBrains Mono', monospace; font-size: 0.9em; color: var(--primary-light); }
+        .article-content pre { background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--radius-lg); padding: 20px 24px; overflow-x: auto; margin-bottom: 1.5rem; }
+        .article-content pre code { background: none; padding: 0; font-size: 0.875rem; line-height: 1.7; color: var(--text-secondary); }
+        .callout { background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border: 1px solid var(--border-primary); border-left: 4px solid var(--primary); border-radius: var(--radius-lg); padding: 20px 24px; margin: 1.5rem 0; }
+        .callout p { margin: 0; }
+        .callout.warning { border-left-color: #f59e0b; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%); }
+        .callout.success { border-left-color: #22c55e; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%); }
+
+        .step-card { background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--radius-lg); padding: 24px; margin: 1.5rem 0; position: relative; padding-left: 80px; }
+        .step-number { position: absolute; left: 20px; top: 24px; width: 44px; height: 44px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; color: white; }
+        .step-card h4 { font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+        .step-card p { margin: 0; font-size: 0.9375rem; }
+
+        .prompt-box { background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--radius-lg); margin: 1.5rem 0; overflow: hidden; }
+        .prompt-box-header { background: rgba(99, 102, 241, 0.1); padding: 12px 20px; font-size: 0.875rem; font-weight: 600; color: var(--primary-light); border-bottom: 1px solid var(--border-primary); }
+        .prompt-box-content { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; line-height: 1.7; color: var(--text-secondary); white-space: pre-wrap; }
+
+        .project-preview { background: var(--bg-card); border: 1px solid var(--border-primary); border-radius: var(--radius-lg); padding: 24px; margin: 2rem 0; text-align: center; }
+        .project-preview h4 { font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 16px; }
+        .project-preview-box { background: var(--bg-primary); border: 1px solid var(--border-secondary); border-radius: var(--radius-md); padding: 40px 20px; }
+        .project-preview-box p { color: var(--text-muted); margin: 0; font-size: 0.875rem; }
+
+        .toc-sidebar { position: sticky; top: 100px; max-height: calc(100vh - 120px); overflow-y: auto; padding: 24px; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-primary); }
+        .toc-title { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 16px; }
+        .toc-list { list-style: none; padding: 0; margin: 0; }
+        .toc-list li { margin-bottom: 8px; }
+        .toc-list a { font-size: 0.875rem; color: var(--text-secondary); text-decoration: none; transition: color var(--transition-fast); display: block; padding: 4px 0; border-left: 2px solid transparent; padding-left: 12px; margin-left: -12px; }
+        .toc-list a:hover, .toc-list a.active { color: var(--primary); border-left-color: var(--primary); }
+        .toc-list .toc-h3 { padding-left: 24px; font-size: 0.8125rem; }
+        .share-section { display: flex; align-items: center; gap: 16px; padding: 24px 0; border-top: 1px solid var(--border-primary); margin-top: 3rem; }
+        .share-label { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); }
+        .share-buttons { display: flex; gap: 8px; }
+        .share-btn { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: var(--radius-md); background: var(--bg-card); border: 1px solid var(--border-primary); color: var(--text-secondary); cursor: pointer; transition: all var(--transition-fast); text-decoration: none; }
+        .share-btn:hover { background: var(--primary); border-color: var(--primary); color: white; }
+        .share-btn svg { width: 18px; height: 18px; }
+        .follow-section { background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border: 1px solid var(--border-primary); border-radius: var(--radius-xl); padding: 40px; text-align: center; margin-top: 4rem; }
+        .follow-section h3 { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; }
+        .follow-section p { color: var(--text-secondary); margin-bottom: 24px; }
+        .social-follow-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .social-follow-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: var(--radius-md); font-weight: 600; text-decoration: none; transition: all var(--transition-fast); }
+        .social-follow-btn.linkedin { background: #0A66C2; color: white; }
+        .social-follow-btn.twitter { background: #000000; color: white; }
+        .social-follow-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+        @media (max-width: 640px) { .social-follow-buttons { flex-direction: column; align-items: center; } }
+    </style>
+</head>
+<body>
+    <div class="reading-progress" id="readingProgress"></div>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                <span class="logo-text">VibeCoding<span class="accent">Enthusiast</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/paths/">Paths</a></li>
+                <li><a href="/learn/">Learn</a></li>
+                <li><a href="/tools/">Tools</a></li>
+                <li><a href="/stacks/">Stacks</a></li>
+                <li><a href="/industries/">Industries</a></li>
+                <li><a href="/#about">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/guides/" class="btn btn-primary">Explore Guides</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <header class="article-header">
+            <div class="container">
+                <div class="article-header-content">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <a href="/">Home</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <a href="/learn/">Learn</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <span>Your First AI Project</span>
+                    </nav>
+                    <div class="article-meta">
+                        <span class="badge badge-beginner">Beginner</span>
+                        <span class="badge badge-time">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 6v6l4 2"></path>
+                            </svg>
+                            20 min read
+                        </span>
+                    </div>
+                    <h1>Your First AI Project</h1>
+                    <p class="article-excerpt">Stop reading tutorials. Build something real. This hands-on guide walks you through creating your first AI-assisted project from scratch.</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="article-layout">
+            <article class="article-content">
+                <h2 id="what-were-building">What We're Building</h2>
+                <p>We're going to build a <strong>Personal Task Manager</strong>—a simple but complete web application. By the end, you'll have:</p>
+                <ul>
+                    <li>A working web app you can actually use</li>
+                    <li>Experience with AI-assisted development workflow</li>
+                    <li>Confidence to build your next project</li>
+                </ul>
+
+                <p>Why a task manager? It's simple enough to complete in one session, but complex enough to teach real skills: state management, user interaction, and data persistence.</p>
+
+                <div class="callout">
+                    <p><strong>Time Required:</strong> About 30-60 minutes, depending on your pace. No coding experience required.</p>
+                </div>
+
+                <h2 id="prerequisites">Prerequisites</h2>
+                <p>You'll need:</p>
+                <ol>
+                    <li><strong>A browser</strong> (you already have this)</li>
+                    <li><strong>An AI tool</strong> — We'll use <a href="https://lovable.dev/?via=jeremiah-david" target="_blank" rel="noopener">Lovable</a> (free tier works fine)</li>
+                </ol>
+
+                <p>That's it. No local setup, no installations, no configuration.</p>
+
+                <h2 id="step-1">Step 1: Define What You Want</h2>
+                <p>Before touching any AI tool, spend 2 minutes thinking about what you want. This is the most important step.</p>
+
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h4>Write Down Your Requirements</h4>
+                    <p>Our task manager should: add tasks, mark tasks complete, delete tasks, and persist data between sessions. That's the minimum viable product.</p>
+                </div>
+
+                <p>Don't over-plan. Start simple. You can always add features later.</p>
+
+                <h2 id="step-2">Step 2: Create Your First Prompt</h2>
+                <p>Open <a href="https://lovable.dev/?via=jeremiah-david" target="_blank" rel="noopener">Lovable</a> and write your first prompt. Here's a good starting point:</p>
+
+                <div class="prompt-box">
+                    <div class="prompt-box-header">Your First Prompt</div>
+                    <div class="prompt-box-content">Create a personal task manager app with the following features:
+
+1. Add new tasks with a text input and button
+2. Display tasks in a list
+3. Mark tasks as complete (with visual indicator like strikethrough)
+4. Delete tasks
+5. Store tasks in localStorage so they persist between sessions
+
+Use a clean, modern design with:
+- Dark theme
+- Good spacing
+- Smooth animations when adding/completing/deleting tasks</div>
+                </div>
+
+                <p>Notice how specific this prompt is. We're telling the AI exactly what we want, including design preferences.</p>
+
+                <h2 id="step-3">Step 3: Review the Output</h2>
+                <p>The AI will generate a working application. Here's what to look for:</p>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h4>Test the Core Features</h4>
+                    <p>Try adding a task. Try completing it. Try deleting it. Refresh the page—are your tasks still there? If something doesn't work, we'll fix it in the next step.</p>
+                </div>
+
+                <h2 id="step-4">Step 4: Iterate and Improve</h2>
+                <p>Your first output probably isn't perfect. That's normal. Here's how to iterate:</p>
+
+                <h3>Example: Fixing a Bug</h3>
+                <p>If tasks aren't persisting after refresh:</p>
+                <div class="prompt-box">
+                    <div class="prompt-box-header">Bug Fix Prompt</div>
+                    <div class="prompt-box-content">The tasks aren't being saved to localStorage properly. When I refresh the page, all tasks disappear.
+
+Please fix the localStorage implementation to:
+1. Save tasks whenever they're added, completed, or deleted
+2. Load tasks from localStorage when the app starts</div>
+                </div>
+
+                <h3>Example: Adding a Feature</h3>
+                <p>Once core features work, add enhancements:</p>
+                <div class="prompt-box">
+                    <div class="prompt-box-header">Feature Addition Prompt</div>
+                    <div class="prompt-box-content">Add the ability to edit existing tasks:
+1. Double-clicking a task should make it editable
+2. Pressing Enter or clicking outside should save the edit
+3. Pressing Escape should cancel the edit</div>
+                </div>
+
+                <h3>Example: Improving Design</h3>
+                <div class="prompt-box">
+                    <div class="prompt-box-header">Design Improvement Prompt</div>
+                    <div class="prompt-box-content">Improve the visual design:
+1. Add a subtle gradient background
+2. Make completed tasks fade out slightly (opacity 0.6)
+3. Add a counter showing "3 of 5 tasks complete"
+4. Add hover effects on task items</div>
+                </div>
+
+                <h2 id="step-5">Step 5: Export and Deploy</h2>
+                <p>Once you're happy with your app, you can:</p>
+                <ol>
+                    <li><strong>Export the code</strong> — Download it to modify locally</li>
+                    <li><strong>Deploy it</strong> — Most AI tools offer one-click deployment</li>
+                    <li><strong>Share it</strong> — Send the link to friends</li>
+                </ol>
+
+                <div class="callout success">
+                    <p><strong>Congratulations!</strong> You've built a real, working web application using AI. This same process scales to much larger projects.</p>
+                </div>
+
+                <h2 id="common-issues">Common Issues and Fixes</h2>
+
+                <h3>"The AI gave me something completely different"</h3>
+                <p>Your prompt was probably too vague. Add more specific requirements. Include examples of what you want.</p>
+
+                <h3>"It generated code with errors"</h3>
+                <p>Copy the error message and send it back to the AI: "I'm getting this error: [error]. Please fix it."</p>
+
+                <h3>"The design looks bad"</h3>
+                <p>Be specific about design. Instead of "make it look better," say "use more whitespace, larger font for headings, and a blue accent color."</p>
+
+                <h3>"I want to change something but don't know how to ask"</h3>
+                <p>Describe the current behavior, then describe what you want instead. The AI will figure out the implementation.</p>
+
+                <h2 id="next-steps">Next Steps</h2>
+                <p>Now that you've built your first project:</p>
+
+                <ol>
+                    <li><strong>Build another one.</strong> Try something different—a calculator, a note-taking app, a simple game. Repetition builds skill.</li>
+                    <li><strong>Try a different tool.</strong> Use v0.dev for UI-focused projects, or Claude Code for more complex applications.</li>
+                    <li><strong>Read the code.</strong> Even if you don't fully understand it, start reading what the AI generates. You'll learn patterns.</li>
+                    <li><strong>Check out our <a href="/guides/">guides</a></strong> for more complex project walkthroughs.</li>
+                </ol>
+
+                <h2 id="key-takeaways">Key Takeaways</h2>
+                <ul>
+                    <li><strong>Start with requirements.</strong> Know what you want before you prompt.</li>
+                    <li><strong>Be specific.</strong> Vague prompts get vague results.</li>
+                    <li><strong>Iterate.</strong> Don't expect perfection on the first try.</li>
+                    <li><strong>Test as you go.</strong> Catch bugs early.</li>
+                    <li><strong>Build real things.</strong> Tutorials only get you so far.</li>
+                </ul>
+
+                <div class="share-section">
+                    <span class="share-label">Share this article</span>
+                    <div class="share-buttons">
+                        <a href="https://twitter.com/intent/tweet?url=https://vibecodingenthusiast.com/learn/first-ai-project.html&text=Your First AI Project" target="_blank" rel="noopener" class="share-btn" aria-label="Share on Twitter">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://vibecodingenthusiast.com/learn/first-ai-project.html" target="_blank" rel="noopener" class="share-btn" aria-label="Share on LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href)" aria-label="Copy link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="follow-section">
+                    <h3>Follow the Vibe Coding Enthusiast</h3>
+                    <p>Follow JD — product updates on LinkedIn, personal takes on X.</p>
+                    <div class="social-follow-buttons">
+                        <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" class="social-follow-btn linkedin">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            Follow on LinkedIn
+                        </a>
+                        <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" class="social-follow-btn twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            Follow on X
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <aside class="toc-sidebar" aria-label="Table of Contents">
+                <div class="toc-title">On This Page</div>
+                <ul class="toc-list">
+                    <li><a href="#what-were-building">What We're Building</a></li>
+                    <li><a href="#prerequisites">Prerequisites</a></li>
+                    <li><a href="#step-1">Step 1: Define Requirements</a></li>
+                    <li><a href="#step-2">Step 2: First Prompt</a></li>
+                    <li><a href="#step-3">Step 3: Review Output</a></li>
+                    <li><a href="#step-4">Step 4: Iterate</a></li>
+                    <li><a href="#step-5">Step 5: Deploy</a></li>
+                    <li><a href="#common-issues">Common Issues</a></li>
+                    <li><a href="#next-steps">Next Steps</a></li>
+                    <li><a href="#key-takeaways">Key Takeaways</a></li>
+                </ul>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-simple">
+                <div class="footer-brand">
+                    <a href="/" class="footer-logo">
+                        <img src="/favicon.png" alt="Vibe Coding Enthusiast" class="logo-icon" width="28" height="28">
+                        <span>Vibe Coding Enthusiast</span>
+                    </a>
+                    <p>Free guides for building with AI</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="/guides/">Guides</a><span class="footer-dot">·</span>
+                    <a href="/paths/">Paths</a><span class="footer-dot">·</span>
+                    <a href="/learn/">Learn</a><span class="footer-dot">·</span>
+                    <a href="/tools/">Tools</a><span class="footer-dot">·</span>
+                    <a href="/stacks/">Stacks</a><span class="footer-dot">·</span>
+                    <a href="/#about">About</a>
+                </nav>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/jeremiahddavid/" target="_blank" rel="noopener noreferrer" aria-label="Follow on LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="https://x.com/jeremiahddavid" target="_blank" rel="noopener noreferrer" aria-label="Follow on X"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Vibe Coding Enthusiast</p>
+                <div class="footer-legal"><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        function updateReadingProgress() {
+            const article = document.querySelector('.article-content');
+            if (!article) return;
+            const progress = Math.min(100, Math.max(0, ((window.scrollY - article.offsetTop + window.innerHeight * 0.3) / article.offsetHeight) * 100));
+            document.getElementById('readingProgress').style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateReadingProgress);
+        updateReadingProgress();
+
+        function updateTocActive() {
+            const headings = document.querySelectorAll('.article-content h2, .article-content h3');
+            const tocLinks = document.querySelectorAll('.toc-list a');
+            let current = '';
+            headings.forEach(heading => { if (heading.getBoundingClientRect().top < 150) current = heading.id; });
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        }
+        window.addEventListener('scroll', updateTocActive);
+        updateTocActive();
+    </script>
+</body>
+</html>
