@@ -471,18 +471,8 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // Mobile menu toggle
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const navLinks = document.querySelector('.nav-links');
-
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                    this.setAttribute('aria-expanded', !isExpanded);
-                    navLinks.classList.toggle('active');
-                });
-            }
         });
     </script>
+    <script src="/script.js"></script>
 </body>
 </html>
