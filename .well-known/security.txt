@@ -1,0 +1,10 @@
+# Security Policy for vibecodingenthusiast.com
+# https://securitytxt.org/
+
+Contact: https://www.linkedin.com/in/jeremiahddavid/
+Contact: https://x.com/jeremiahddavid
+Expires: 2027-01-15T00:00:00.000Z
+Preferred-Languages: en
+
+# This is a static educational website with no user accounts or data collection.
+# If you discover a security issue, please reach out via the contact methods above.

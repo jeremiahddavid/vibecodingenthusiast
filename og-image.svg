@@ -38,30 +38,26 @@
   <text x="445" y="280" font-family="Inter, system-ui, sans-serif" font-size="48" font-weight="700" fill="url(#textGradient)">Enthusiast</text>
 
   <!-- Tagline -->
-  <text x="100" y="360" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="600" fill="#ffffff">We Build</text>
-  <text x="295" y="360" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="700" fill="url(#accentGradient)">Software</text>
-  <text x="505" y="360" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="600" fill="#ffffff">That Powers</text>
-  <text x="100" y="420" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="600" fill="#ffffff">Your Business</text>
+  <text x="100" y="360" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="600" fill="#ffffff">Learn to</text>
+  <text x="295" y="360" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="700" fill="url(#accentGradient)">Build</text>
+  <text x="420" y="360" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="600" fill="#ffffff">with</text>
+  <text x="100" y="420" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="700" fill="url(#accentGradient)">AI Coding Tools</text>
 
-  <!-- Services badges -->
-  <rect x="100" y="470" width="120" height="36" rx="18" fill="rgba(99,102,241,0.2)" stroke="rgba(99,102,241,0.5)" stroke-width="1"/>
-  <text x="130" y="495" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#a5b4fc">Web Apps</text>
+  <!-- Topic badges -->
+  <rect x="100" y="470" width="140" height="36" rx="18" fill="rgba(99,102,241,0.2)" stroke="rgba(99,102,241,0.5)" stroke-width="1"/>
+  <text x="125" y="495" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#a5b4fc">Claude Code</text>
 
-  <rect x="235" y="470" width="130" height="36" rx="18" fill="rgba(6,182,212,0.2)" stroke="rgba(6,182,212,0.5)" stroke-width="1"/>
-  <text x="262" y="495" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#67e8f9">Mobile Apps</text>
+  <rect x="255" y="470" width="100" height="36" rx="18" fill="rgba(6,182,212,0.2)" stroke="rgba(6,182,212,0.5)" stroke-width="1"/>
+  <text x="280" y="495" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#67e8f9">Cursor</text>
 
-  <rect x="380" y="470" width="140" height="36" rx="18" fill="rgba(244,114,182,0.2)" stroke="rgba(244,114,182,0.5)" stroke-width="1"/>
-  <text x="405" y="495" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#f9a8d4">AI Solutions</text>
+  <rect x="370" y="470" width="100" height="36" rx="18" fill="rgba(244,114,182,0.2)" stroke="rgba(244,114,182,0.5)" stroke-width="1"/>
+  <text x="395" y="495" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#f9a8d4">v0.dev</text>
 
-  <rect x="535" y="470" width="120" height="36" rx="18" fill="rgba(99,102,241,0.2)" stroke="rgba(99,102,241,0.5)" stroke-width="1"/>
-  <text x="558" y="495" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#a5b4fc">Blockchain</text>
+  <rect x="485" y="470" width="130" height="36" rx="18" fill="rgba(99,102,241,0.2)" stroke="rgba(99,102,241,0.5)" stroke-width="1"/>
+  <text x="508" y="495" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#a5b4fc">Free Guides</text>
 
-  <!-- Stats -->
-  <text x="100" y="570" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600" fill="#71717a">50+ Projects</text>
-  <text x="230" y="570" font-family="Inter, system-ui, sans-serif" font-size="16" fill="#3f3f46">|</text>
-  <text x="255" y="570" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600" fill="#71717a">98% Satisfaction</text>
-  <text x="420" y="570" font-family="Inter, system-ui, sans-serif" font-size="16" fill="#3f3f46">|</text>
-  <text x="445" y="570" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600" fill="#71717a">5+ Years Experience</text>
+  <!-- Description -->
+  <text x="100" y="570" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="500" fill="#71717a">Step-by-step tutorials for building real projects with AI</text>
 
   <!-- Code window decoration -->
   <rect x="750" y="120" width="380" height="380" rx="12" fill="#18181b" stroke="rgba(63,63,70,0.5)" stroke-width="1"/>
@@ -69,41 +65,40 @@
   <circle cx="775" cy="140" r="6" fill="#ef4444"/>
   <circle cx="795" cy="140" r="6" fill="#fbbf24"/>
   <circle cx="815" cy="140" r="6" fill="#22c55e"/>
-  <text x="870" y="145" font-family="JetBrains Mono, monospace" font-size="12" fill="#71717a">your-project.ts</text>
+  <text x="870" y="145" font-family="JetBrains Mono, monospace" font-size="12" fill="#71717a">my-ai-project.ts</text>
 
   <!-- Code content -->
-  <text x="775" y="195" font-family="JetBrains Mono, monospace" font-size="14" fill="#c084fc">const</text>
-  <text x="835" y="195" font-family="JetBrains Mono, monospace" font-size="14" fill="#67e8f9">project</text>
-  <text x="905" y="195" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">= {</text>
+  <text x="775" y="195" font-family="JetBrains Mono, monospace" font-size="14" fill="#71717a">// Build with AI</text>
 
-  <text x="795" y="225" font-family="JetBrains Mono, monospace" font-size="14" fill="#a5b4fc">idea</text>
-  <text x="835" y="225" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">:</text>
-  <text x="850" y="225" font-family="JetBrains Mono, monospace" font-size="14" fill="#86efac">"Your Vision"</text>
-  <text x="975" y="225" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">,</text>
+  <text x="775" y="235" font-family="JetBrains Mono, monospace" font-size="14" fill="#c084fc">import</text>
+  <text x="840" y="235" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">{ ai }</text>
+  <text x="895" y="235" font-family="JetBrains Mono, monospace" font-size="14" fill="#c084fc">from</text>
+  <text x="940" y="235" font-family="JetBrains Mono, monospace" font-size="14" fill="#86efac">'claude'</text>
 
-  <text x="795" y="255" font-family="JetBrains Mono, monospace" font-size="14" fill="#a5b4fc">tech</text>
-  <text x="835" y="255" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">: [</text>
-  <text x="860" y="255" font-family="JetBrains Mono, monospace" font-size="14" fill="#86efac">"AI"</text>
-  <text x="900" y="255" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">,</text>
-  <text x="915" y="255" font-family="JetBrains Mono, monospace" font-size="14" fill="#86efac">"Web3"</text>
-  <text x="975" y="255" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">],</text>
+  <text x="775" y="275" font-family="JetBrains Mono, monospace" font-size="14" fill="#c084fc">const</text>
+  <text x="835" y="275" font-family="JetBrains Mono, monospace" font-size="14" fill="#67e8f9">idea</text>
+  <text x="875" y="275" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">=</text>
+  <text x="895" y="275" font-family="JetBrains Mono, monospace" font-size="14" fill="#86efac">"your vision"</text>
 
-  <text x="775" y="285" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">};</text>
+  <text x="775" y="315" font-family="JetBrains Mono, monospace" font-size="14" fill="#c084fc">const</text>
+  <text x="835" y="315" font-family="JetBrains Mono, monospace" font-size="14" fill="#67e8f9">app</text>
+  <text x="870" y="315" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">=</text>
+  <text x="890" y="315" font-family="JetBrains Mono, monospace" font-size="14" fill="#c084fc">await</text>
+  <text x="945" y="315" font-family="JetBrains Mono, monospace" font-size="14" fill="#fbbf24">ai</text>
 
-  <text x="775" y="325" font-family="JetBrains Mono, monospace" font-size="14" fill="#c084fc">const</text>
-  <text x="835" y="325" font-family="JetBrains Mono, monospace" font-size="14" fill="#67e8f9">result</text>
-  <text x="885" y="325" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">=</text>
-  <text x="900" y="325" font-family="JetBrains Mono, monospace" font-size="14" fill="#c084fc">await</text>
+  <text x="795" y="355" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">.</text>
+  <text x="805" y="355" font-family="JetBrains Mono, monospace" font-size="14" fill="#fbbf24">describe</text>
+  <text x="885" y="355" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">(idea)</text>
 
-  <text x="795" y="355" font-family="JetBrains Mono, monospace" font-size="14" fill="#67e8f9">vibeCoding</text>
-  <text x="795" y="385" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">.</text>
-  <text x="805" y="385" font-family="JetBrains Mono, monospace" font-size="14" fill="#fbbf24">build</text>
-  <text x="845" y="385" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">()</text>
-  <text x="795" y="415" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">.</text>
-  <text x="805" y="415" font-family="JetBrains Mono, monospace" font-size="14" fill="#fbbf24">deploy</text>
-  <text x="860" y="415" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">();</text>
+  <text x="795" y="395" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">.</text>
+  <text x="805" y="395" font-family="JetBrains Mono, monospace" font-size="14" fill="#fbbf24">build</text>
+  <text x="855" y="395" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">()</text>
 
-  <text x="775" y="455" font-family="JetBrains Mono, monospace" font-size="14" fill="#71717a">// Success!</text>
+  <text x="795" y="435" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">.</text>
+  <text x="805" y="435" font-family="JetBrains Mono, monospace" font-size="14" fill="#fbbf24">deploy</text>
+  <text x="865" y="435" font-family="JetBrains Mono, monospace" font-size="14" fill="#ffffff">()</text>
+
+  <text x="775" y="475" font-family="JetBrains Mono, monospace" font-size="14" fill="#22c55e">// Ship it!</text>
 
   <!-- URL -->
   <text x="1000" y="570" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#71717a">vibecodingenthusiast.com</text>
